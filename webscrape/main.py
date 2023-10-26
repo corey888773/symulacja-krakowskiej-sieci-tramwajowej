@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
-import json, os, requests, re
-import html_table_parser.parser as parser
+import json, os, re, httpx, urllib.request, urllib.parse
+from html_table_parser import HTMLTableParser
 
 strona = 'http://rozklady.mpk.krakow.pl'
 
@@ -8,55 +8,60 @@ def main():
     if not os.path.exists('./pages'):
         os.makedirs('./pages')
 
-    # try:
-    mainBody = getQuote('http://rozklady.mpk.krakow.pl/?lang=PL&akcja=index&rozklad=20200323')
-    soup = BeautifulSoup(mainBody, 'html.parser')
-    rozklad = {'lines': []}
+    try:
+        mainBody = getQuote('http://rozklady.mpk.krakow.pl/?lang=PL&akcja=index&rozklad=20200323')
+        soup = BeautifulSoup(mainBody, 'html.parser')
+        rozklad = {'lines': []}
 
-    numeryLinii = []
-    linkiLinii = []
+        numeryLinii = []
+        linkiLinii = []
 
-    for el in soup.select('.linia_table_left a'):
-        text = el.text
-        link = el['href']
-        text = text.replace(' ', '').replace('\t', '').replace('\n', '')
+        for el in soup.select('.linia_table_left a'):
+            text = el.text
+            link = el['href']
+            text = text.replace(' ', '').replace('\t', '').replace('\n', '')
 
-        if text[0].isdigit() and int(text) < 53:
-            numeryLinii.append(text)
-            linkiLinii.append(link)
+            # print(el)
 
-    for i in range(len(linkiLinii)):
-        link = linkiLinii[i]
-        numer = numeryLinii[i]
-        body = getQuote(strona + link)
-        linia = BeautifulSoup(body, 'html.parser')
+            if text[0].isdigit() and int(text) < 53:
+                numeryLinii.append(text)
+                linkiLinii.append(link)
 
-        linkiKierunkow = []
-        nazwyKierunkow = []
+        # print(linkiLinii)
 
-        linkiKierunkow[0] = strona + linkiLinii[i] + '_1'
-        linkiKierunkow[1] = strona + linkiLinii[i] + '_2'
-        # for el in linia.select('TBODY TR TD table tr td tr td a'):
-        #     linkiKierunkow.append(el['href'])
-        #     nazwyKierunkow.append(el.text)
-        #     # print(link)
+        for i in range(len(linkiLinii)):
+            link = linkiLinii[i]
+            numer = numeryLinii[i]
+            body = getQuote(strona + link)
+            print(strona + link)
+            linia = BeautifulSoup(body, 'html.parser')
 
-        kierunek1 = przetworzKierunek(linkiKierunkow[0], nazwyKierunkow[0])
-        kierunek2 = przetworzKierunek(linkiKierunkow[1], nazwyKierunkow[1])
+            linkiKierunkow = []
+            nazwyKierunkow = []
 
-        linia = {
-            'number': numer,
-            'direction1': kierunek1,
-            'direction2': kierunek2
-        }
+            i = 0   
+            for el in linia.select('td table tr td table tr td table tr TD a'):
+                linkiKierunkow.append(el['href'])
+                text = el.text.replace(' ', '').replace('\t', '').replace('\n', '')
+                nazwyKierunkow.append(text)
+                
+            kierunek1 = przetworzKierunek(strona + linkiKierunkow[0], nazwyKierunkow[0])
+            print(strona + linkiKierunkow[1])
+            kierunek2 = przetworzKierunek(strona + linkiKierunkow[1], nazwyKierunkow[1])
 
-        rozklad['lines'].append(linia)
+            linia = {
+                'number': numer,
+                'direction1': kierunek1,
+                'direction2': kierunek2
+            }
 
-    with open('./schedule.json', 'w') as f:
-        json.dump(rozklad, f)
-    print("Koniec")
-    # except Exception as e:
-    #     print(e)
+            rozklad['lines'].append(linia)
+
+        with open('./schedule.json', 'w', encoding='utf-8') as f:
+            json.dump(rozklad, f,  ensure_ascii=False, indent=True)
+        print("Koniec")
+    except Exception as e:
+        print(e)
 
 def przetworzKierunek(link, nazwa):
     try:
@@ -81,11 +86,11 @@ def przetworzKierunek(link, nazwa):
             rozkladPrzystanku = przystanek.select('tr td table')[14]
 
             tabelaHtml = str(rozkladPrzystanku)
-            parsed_table = parser.make2d(tabelaHtml)
+            parsedTable = parseTable(tabelaHtml)
 
             przystanek = {
                 'name': nazwaPrzystanku,
-                'schedule': parsed_table
+                'schedule': parsedTable
             }
 
             kierunek['stops'].append(przystanek)
@@ -95,17 +100,26 @@ def przetworzKierunek(link, nazwa):
         print(e)
         return e
 
+def parseTable(table : str):
+    p = HTMLTableParser()
+    p.feed(table)
+    return p.tables
+
 def getQuote(url):
     headers = {
-        'Host': 'rozklady.mpk.krakow.pl',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-        'Referer': 'http://rozklady.mpk.krakow.pl/',
-        'Accept-Encoding': 'gzip, deflate',
-        'Accept-Language': 'pl-PL,pl;q=0.9,en-US;q=0.8,en;q=0.7',
-        'Cookie': 'ROZKLADY_JEZYK=PL; ROZKLADY_WIDTH=2000; ROZKLADY_AB=0; __utma=174679166.140374276.1585039119.1585039119.1585039119.1; __utmc=174679166; __utmz=174679166.1585039119.1.1.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); ROZKLADY_WIZYTA=23; ROZKLADY_OSTATNIA=1585093785'
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Accept-Encoding': 'gzip, deflate',
+    'Accept-Language': 'en-GB,en;q=0.9',
+    'Connection': 'keep-alive',
+    'Cookie': 'ROZKLADY_AB=0; ROZKLADY_JEZYK=PL; ROZKLADY_OSTATNIA=1698344828; ROZKLADY_WIDTH=2000; ROZKLADY_WIZYTA=87; __utma=174679166.1548628989.1697730056.1697730056.1697730056.1; __utmz=174679166.1697730056.1.1.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided)',
+    'Host': 'rozklady.mpk.krakow.pl',
+    'Sec-Fetch-Dest': 'document',
+    'Sec-Fetch-Mode': 'navigate',
+    'Sec-Fetch-Site': 'none',
+    'Upgrade-Insecure-Requests': '1',
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15',
+    'Referer': 'https://rozklady.mpk.krakow.pl/?lang=PL&rozklad=20231026&linia=1__1__1'
     }
-
 
     url2 = url
     for c in ['\\', '//', '/', '?', '%', '*', ':', '|', '"', '<', '>']:
@@ -118,11 +132,13 @@ def getQuote(url):
                 data = f.read()
             return data
         else:
-            print("odwiedzam " + url)
-            response = requests.get(url, headers=headers)
-            with open(fsUrl, 'w') as f:
-                f.write(response.text)
-            return response.text
+            req = urllib.request.Request(url, headers=headers)
+            with urllib.request.urlopen(req) as response:
+                body = response.read().decode('utf-8')
+                with open(fsUrl, 'w') as f:
+                    print(len(body))
+                    f.write(body)
+                return body
     except Exception as e:
         print(e)
         return e
