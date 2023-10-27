@@ -1,111 +1,107 @@
 from bs4 import BeautifulSoup
-import json, os, re, httpx, urllib.request, urllib.parse
+import json, os, urllib.request, urllib.parse
 from html_table_parser import HTMLTableParser
 
-strona = 'http://rozklady.mpk.krakow.pl'
+page = 'http://rozklady.mpk.krakow.pl'
 
 def main():
     if not os.path.exists('./pages'):
         os.makedirs('./pages')
 
     try:
-        mainBody = getQuote('http://rozklady.mpk.krakow.pl/?lang=PL&akcja=index&rozklad=20200323')
+        mainBody = get_html('http://rozklady.mpk.krakow.pl/?lang=PL&akcja=index&rozklad=20200323')
         soup = BeautifulSoup(mainBody, 'html.parser')
-        rozklad = {'lines': []}
+        schedule = {'lines': []}
 
-        numeryLinii = []
-        linkiLinii = []
+        lineNumbers = []
+        lineUrls = []
 
         for el in soup.select('.linia_table_left a'):
             text = el.text
             link = el['href']
             text = text.replace(' ', '').replace('\t', '').replace('\n', '')
 
-            # print(el)
-
             if text[0].isdigit() and int(text) < 53:
-                numeryLinii.append(text)
-                linkiLinii.append(link)
+                lineNumbers.append(text)
+                lineUrls.append(link)
 
-        # print(linkiLinii)
+        for i in range(len(lineUrls)):
+            url = lineUrls[i]
+            numer = lineNumbers[i]
+            body = get_html(page + url)
+            print(page + url)
+            line = BeautifulSoup(body, 'html.parser')
 
-        for i in range(len(linkiLinii)):
-            link = linkiLinii[i]
-            numer = numeryLinii[i]
-            body = getQuote(strona + link)
-            print(strona + link)
-            linia = BeautifulSoup(body, 'html.parser')
-
-            linkiKierunkow = []
-            nazwyKierunkow = []
+            directionUrls = []
+            directionNames = []
 
             i = 0   
-            for el in linia.select('td table tr td table tr td table tr TD a'):
-                linkiKierunkow.append(el['href'])
+            for el in line.select('td table tr td table tr td table tr TD a'):
+                directionUrls.append(el['href'])
                 text = el.text.replace(' ', '').replace('\t', '').replace('\n', '')
-                nazwyKierunkow.append(text)
+                directionNames.append(text)
                 
-            kierunek1 = przetworzKierunek(strona + linkiKierunkow[0], nazwyKierunkow[0])
-            print(strona + linkiKierunkow[1])
-            kierunek2 = przetworzKierunek(strona + linkiKierunkow[1], nazwyKierunkow[1])
+            direction1 = process_direction(page + directionUrls[0], directionNames[0])
+            print(page + directionUrls[1])
+            direction2 = process_direction(page + directionUrls[1], directionNames[1])
 
-            linia = {
+            line = {
                 'number': numer,
-                'direction1': kierunek1,
-                'direction2': kierunek2
+                'direction1': direction1,
+                'direction2': direction2
             }
 
-            rozklad['lines'].append(linia)
+            schedule['lines'].append(line)
 
         with open('./schedule.json', 'w', encoding='utf-8') as f:
-            json.dump(rozklad, f,  ensure_ascii=False, indent=True)
-        print("Koniec")
+            json.dump(schedule, f,  ensure_ascii=False, indent=True)
+        print("done")
     except Exception as e:
         print(e)
 
-def przetworzKierunek(link, nazwa):
+def process_direction(url, name):
     try:
-        body = getQuote(link)
+        body = get_html(url)
         linia = BeautifulSoup(body, 'html.parser')
 
-        linkiPrzystankow = []
+        stopUrls = []
         for el in linia.select('a span'):
-            linkiPrzystankow.append(el.parent['href'])
+            stopUrls.append(el.parent['href'])
 
-        kierunek = {
-            'name': nazwa,
+        direction = {
+            'name': name,
             'stops': []
         }
 
-        for linkPrzystanku in linkiPrzystankow:
-            bodyPrzystanku = getQuote(strona + linkPrzystanku)
-            przystanek = BeautifulSoup(bodyPrzystanku, 'html.parser')
+        for stopUrl in stopUrls:
+            stopBody = get_html(page + stopUrl)
+            stop = BeautifulSoup(stopBody, 'html.parser')
 
-            nazwaPrzystanku = przystanek.select('div span')[0].text
+            stopName = stop.select('div span')[0].text
 
-            rozkladPrzystanku = przystanek.select('tr td table')[14]
+            stopSchedule = stop.select('tr td table')[14]
 
-            tabelaHtml = str(rozkladPrzystanku)
-            parsedTable = parseTable(tabelaHtml)
+            tabelaHtml = str(stopSchedule)
+            parsedTable = parse_table(tabelaHtml)
 
-            przystanek = {
-                'name': nazwaPrzystanku,
+            stop = {
+                'name': stopName,
                 'schedule': parsedTable
             }
 
-            kierunek['stops'].append(przystanek)
+            direction['stops'].append(stop)
 
-        return kierunek
+        return direction
     except Exception as e:
         print(e)
         return e
 
-def parseTable(table : str):
+def parse_table(table : str):
     p = HTMLTableParser()
     p.feed(table)
     return p.tables
 
-def getQuote(url):
+def get_html(url):
     headers = {
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
     'Accept-Encoding': 'gzip, deflate',
