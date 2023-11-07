@@ -1,4 +1,4 @@
-import json, logging
+import json, logging, os
 
 from networks import process_physical_network
 
@@ -6,13 +6,15 @@ from networks import process_physical_network
 logging.basicConfig(format='%(levelname)s - %(filename)s:%(lineno)d, message: %(message)s', level=logging.DEBUG)
 
 def main():
+    
+    curr_dir = os.path.dirname(os.path.abspath(__file__))
 
-    with open('../openstreetmap/open-street-map.json', 'r') as f:
+    with open(f'{curr_dir}/../openstreetmap/open-street-map.json', 'r') as f:
         trams_osm = json.load(f)
-    with open('../webscrape/schedule.json', 'r') as f:
+    with open(f'{curr_dir}/../webscrape/schedule.json', 'r') as f:
         trams_schedule = json.load(f)
 
-    # physcial_network = process_physical_network(trams_osm)
+    physcial_network = process_physical_network(trams_osm)
 
 if __name__ == "__main__":
     main()

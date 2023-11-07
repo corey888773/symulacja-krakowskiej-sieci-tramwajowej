@@ -2,33 +2,34 @@ import math, logging
 import dict_utils as dutils
 from physical_network import PhysicalNetwork
 
+LON0 = 19.937356 # in degrees
+LAT0 = 50.061700 
+EARTH_R = 6365828.0 # in meters
+
 def process_physical_network(trams_osm):
     pn = PhysicalNetwork()
-
-    lon0 = 19.937356
-    lat0 = 50.061700
-    earth_radius = 6365828.0
 
     stop_temps = []
     for el in trams_osm['elements']:
         if el['type'] == 'node':
-            rel_lon = el['lon'] - lon0 # in degrees
-            rel_lat = el['lat'] - lat0 
+            rel_lon = el['lon'] - LON0 # in degrees
+            rel_lat = el['lat'] - LAT0 
 
             rel_lat = rel_lat / 180.0 * math.pi # in radians
             rel_lon = rel_lon / 180.0 * math.pi
 
-            y = earth_radius * math.cos(rel_lat) * math.cos(rel_lon) # in meters
-            x = earth_radius * math.cos(el['lat'] / 180 * math.pi) * math.sin(rel_lon) 
+            y = EARTH_R * math.cos(rel_lat) * math.cos(rel_lon) # in meters
+            x = EARTH_R * math.cos(el['lat'] / 180 * math.pi) * math.sin(rel_lon) 
 
             adjacent_nodes = []
             accesible_nodes = []
 
             pn.nodes[el['id']] = {
+                'id': el['id'],
                 'x': x,
                 'y': y,
                 'adjacent_nodes': adjacent_nodes,
-                'accesible_nodes': accesible_nodes
+                'accessible_nodes': accesible_nodes
             }
 
             if dutils.contains_key(el, 'tags') and dutils.contains_key(el['tags'], 'railway'):
@@ -52,7 +53,7 @@ def process_physical_network(trams_osm):
     # pn.fix_stop_names(pn)
     pn.fix_way_directions()
     pn.fix_max_speed()
-
+    pn.fix_remove_banned_nodes()
 
     for stop in pn.stops:
         # this part is simple but looks complicated
@@ -68,8 +69,7 @@ def process_physical_network(trams_osm):
         
 
     for track in pn.tracks:
-        track['nodes'] = [id for id in pn.nodes if id in track['nodes']]
-
+        track['nodes'] = list(map(lambda id: pn.nodes.get(id), track['nodes']))
 
     pn.graph_find_adjacents()
     pn.graph_find_successors()
@@ -77,8 +77,13 @@ def process_physical_network(trams_osm):
     pn.fix_floating_islands()
 
     for node in pn.nodes.values():
+         # if node has more than 2 adjacent nodes, this means it is a junction
         if len(node['adjacent_nodes']) > 2:
             pn.joints.append(node)
             node['junction'] = None
 
-    
+    pn.track_remove_crossings()
+    pn.track_generate_opposite_edges_to_bidirectional()
+
+    pn.find_junctions()
+    pn.generate_traffic_lights()
