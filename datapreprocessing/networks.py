@@ -87,3 +87,6 @@ def process_physical_network(trams_osm):
 
     pn.find_junctions()
     pn.generate_traffic_lights()
+    pn.regenerate_tracks()
+
+    pn.export_as_visualization('physical_network.json')

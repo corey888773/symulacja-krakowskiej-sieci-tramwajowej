@@ -1,5 +1,4 @@
-import logging, math, sys
-import dict_utils as dutil
+import logging, math, sys, json
 
 class PhysicalNetwork:
     def __init__(self):
@@ -14,11 +13,15 @@ class PhysicalNetwork:
         pass
 
     def fix_way_directions(self):
+        logging.info(f'Fixing way directions')
+
         for track in self.tracks:
             if 'oneway' not in track['tags']:
                 track['tags']['oneway'] = 'no'
 
     def fix_max_speed(self):
+        logging.info(f'Fixing max speed')
+
         for track in self.tracks:
             if 'maxspeed' not in track['tags']:
                 track['tags']['maxspeed'] = '50'
@@ -26,6 +29,8 @@ class PhysicalNetwork:
             track['tags']['maxspeed'] = int(track['tags']['maxspeed'])
 
     def fix_remove_banned_nodes(self):
+        logging.info(f'Removing banned nodes')
+
         banned_nodes = [2431249451, 1578667749, 1578667767, 2375524704] 
         banned_nodes.extend([2756848363])
         for b_node_id in banned_nodes:
@@ -39,6 +44,8 @@ class PhysicalNetwork:
         del self.nodes[node_id]
 
     def fix_floating_islands(self):
+        logging.info(f'Fixing floating islands')
+
         pass
 
     def graph_find_adjacents(self):
@@ -74,6 +81,8 @@ class PhysicalNetwork:
             # outside of loop to avoid index out of range error
 
     def graph_find_successors(self):
+        logging.info(f'Finding successor nodes tracks {len(self.tracks)}')
+
         for idx, track in enumerate(self.tracks):
 
             track_nodes = track.get('nodes', None)
@@ -95,6 +104,8 @@ class PhysicalNetwork:
         pass
 
     def track_remove_crossings(self):
+        logging.info(f'Removing crossings')
+
         # we need to find junctions for each joint node 
         # we do this by finding the closest junction to each joint node
         # than we split the track between the joint node and the junction into 2 tracks
@@ -207,6 +218,8 @@ class PhysicalNetwork:
         return self.id
 
     def track_generate_opposite_edges_to_bidirectional(self):
+        logging.info(f'Generating opposite edges to bidirectional tracks')
+
         pass 
 
     def __graph_find_path(self, start, targets, limit=sys.maxsize) -> tuple[int, list]:
@@ -271,6 +284,8 @@ class PhysicalNetwork:
         return math.sqrt((n1['x'] - n2['x']) ** 2 + (n1['y'] - n2['y']) ** 2)
     
     def find_junctions(self):
+        logging.info(f'Finding junctions')
+
         for joint in self.joints:
             if joint['junction'] != None:
                 continue
@@ -299,6 +314,8 @@ class PhysicalNetwork:
                 self.__group_nearby_joints(joint, junction)
 
     def generate_traffic_lights(self):
+        logging.info(f'Generating traffic lights')
+
         for junction in self.junctions:
             for joint in junction['joints']:
                 if len(joint['accessible_nodes']) > 1:
@@ -328,3 +345,95 @@ class PhysicalNetwork:
         
         for exit in junction['exits']:
             exit['exit'] = True
+
+    def regenerate_tracks(self):
+        logging.info(f'Regenerating tracks')
+
+        special_nodes = []
+
+        for [id, node] in self.nodes.items():
+            if 'special' not in node:
+                node['special'] = False
+
+            if len(node['adjacent_nodes']) != 2 \
+                    or len(node['accessible_nodes']) != 1 \
+                    or 'tags' in node \
+                    or 'traffic_light' in node \
+                    or node.get('exit') == True\
+                    or node.get('special') == True:
+                node['special'] = True
+                special_nodes.append(node)
+
+        new_tracks, id = [], 0 
+
+        logging.warning(f'len(special_nodes): {len(special_nodes)}')
+        for first_node in special_nodes:
+            logging.warning(f'first_node: {len(first_node["accessible_nodes"])}')
+            for idx, second_node in enumerate(first_node['accessible_nodes']):
+                track = {
+                    'id' : id,
+                    'nodes': [first_node, second_node],
+                    'tags': {
+                        'maxspeed': 50,
+                    }
+                }
+
+                curr_node = second_node
+                while node['special'] == False and len(curr_node['accessible_nodes']) > 0:
+                    # logging.warning(f'curr_node: {curr_node["id"]} has {len(curr_node["accessible_nodes"])} accessible nodes and first accessible node is {curr_node["accessible_nodes"][0]["id"]}')
+                    curr_node = curr_node['accessible_nodes'][0]
+
+                    if curr_node in track['nodes']:
+                        logging.warning(f'curr_node: {curr_node["id"]} is already in track')
+                        break
+                    track['nodes'].append(curr_node)
+
+
+                length, prev_node = 0, track['nodes'][0]
+                for i in range(1, len(track['nodes'])):
+                    curr_node = track['nodes'][i]
+                    length += self.__distance_between_nodes(prev_node, curr_node)
+                    prev_node = curr_node
+                track['length'] = length
+
+                new_tracks.append(track)
+                id += 1
+
+        self.tracks = new_tracks
+
+    def export_as_visualization(self, filename):
+        network_visualization_model = {
+            'nodes': [],
+            'edges': []
+        }
+
+        for id, node in self.nodes.items():
+            export_node = {
+                'id': id,
+                'x': node['x'],
+                'y': node['y'],
+            }
+
+            if 'tags' in node:
+                export_node['stop_name'] = node['tags']['name']
+
+            if 'traffic_light' in node:
+                export_node['traffic_light'] = node['traffic_light']
+
+            network_visualization_model['nodes'].append(export_node)
+
+        for track in self.tracks:
+            head = track['nodes'][-1]
+            tail = track['nodes'][0]
+
+            export_edge = {
+                'id': track['id'],
+                'nodes': [node['id'] for node in track['nodes']],
+                'length': track['length'],
+                'maxspeed': track['tags']['maxspeed'],
+            }
+
+            network_visualization_model['edges'].append(export_edge)
+
+        with open(filename, 'w') as f:
+            json.dump(network_visualization_model, f, indent=2)
