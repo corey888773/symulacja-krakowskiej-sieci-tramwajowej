@@ -9,8 +9,10 @@ class PhysicalNetwork:
         self.joints = []
         self.junctions = []
 
+
     def fix_missing_stops(self):
         pass
+
 
     def fix_way_directions(self):
         logging.info(f'Fixing way directions')
@@ -18,6 +20,7 @@ class PhysicalNetwork:
         for track in self.tracks:
             if 'oneway' not in track['tags']:
                 track['tags']['oneway'] = 'no'
+
 
     def fix_max_speed(self):
         logging.info(f'Fixing max speed')
@@ -28,14 +31,16 @@ class PhysicalNetwork:
 
             track['tags']['maxspeed'] = int(track['tags']['maxspeed'])
 
+
     def fix_remove_banned_nodes(self):
         logging.info(f'Removing banned nodes')
 
-        banned_nodes = [2431249451, 1578667749, 1578667767, 2375524704] 
-        banned_nodes.extend([2756848363])
+        banned_nodes = [2431249451, 1578667749, 1578667767, 2375524704, 2756848363] # those are nodes near the tram depot (Łagiewniki and Nowa Huta) that are not used in the network
+
         for b_node_id in banned_nodes:
             self.__remove_node(b_node_id)
     
+
     def __remove_node(self, node_id):
         for track in reversed(self.tracks):
             if node_id in track['nodes']:
@@ -43,10 +48,12 @@ class PhysicalNetwork:
 
         del self.nodes[node_id]
 
+
     def fix_floating_islands(self):
         logging.info(f'Fixing floating islands')
 
         pass
+
 
     def graph_find_adjacents(self):
         logging.info(f'Finding adjacent nodes tracks {len(self.tracks)}')
@@ -80,6 +87,7 @@ class PhysicalNetwork:
             track_nodes[-1]['adjacent_nodes'].append(track_nodes[-2]) # last node is adjacent to second last node
             # outside of loop to avoid index out of range error
 
+
     def graph_find_successors(self):
         logging.info(f'Finding successor nodes tracks {len(self.tracks)}')
 
@@ -100,8 +108,10 @@ class PhysicalNetwork:
                 else:
                     logging.warning(f'Node already in accessible nodes of current node {idx}')
 
+
     def graph_manual_successor_nodes_adjustment(self):
         pass
+
 
     def track_remove_crossings(self):
         logging.info(f'Removing crossings')
@@ -202,6 +212,7 @@ class PhysicalNetwork:
             self.nodes.pop(joint['id'])
             self.joints.remove(joint)
 
+
     def __find_lowest_cos(self, paths):
         lowest = 0
         for i in range(1, len(paths)):
@@ -210,17 +221,72 @@ class PhysicalNetwork:
 
         return lowest
     
+
     def __find_available_node_id(self) -> int:
         self.id = 0
         while self.id in self.nodes:
             self.id += 1
 
+        # logging.info(f'Found available node id: {self.id}')
         return self.id
 
+
+    # below nodes has been removed from the the OSM data because they were caused by the rebulding of the tram depot 
     def track_generate_opposite_edges_to_bidirectional(self):
         logging.info(f'Generating opposite edges to bidirectional tracks')
 
-        pass 
+        bidirectional_tracks = []
+        # bidirectional_tracks.append({
+        #     'nodes': [213578409, *self.__graph_find_path(self.nodes.get(213578409), [1770978496])[1].reverse()],
+        #     'in1': 4556178684,
+        #     'out1': 1770978500,
+        #     'in2': 1770978502,
+        #     'out2': 4556178678
+        # })
+
+        # bidirectional_tracks.append({
+        #     'nodes': [1770978486, *self.__graph_find_path(self.nodes.get(1770978486), [213578407])[1].reverse()],
+        #     'in1': 4556178680,
+        #     'out1': 1770978488,
+        #     'in2': 1770978489,
+        #     'out2': 4556178677
+        # })
+
+        for b_track in bidirectional_tracks:
+            b_track['nodes'] = [self.nodes.get(el['id']) for el in b_track['nodes']]
+            b_track['in1'] = self.nodes.get(b_track['in1'])
+            b_track['out1'] = self.nodes.get(b_track['out1'])
+            b_track['in2'] = self.nodes.get(b_track['in2'])
+            b_track['out2'] = self.nodes.get(b_track['out2'])
+
+            b_track['in1']['accessible_nodes'] = [b_track['nodes'][0]]
+            for i in range(len(b_track['nodes']) - 1):
+                curr_node = b_track['nodes'][i]
+                next_node = b_track['nodes'][i + 1]
+                curr_node['accessible_nodes'] = [next_node]
+            b_track['nodes'][-1]['accessible_nodes'] = [b_track['out1']]
+
+            opposisite_edge = []
+            for i in range(len(b_track['nodes'])):
+                curr_node = b_track['nodes'][i]
+                opposite_node = {
+                    'id': self.__find_available_node_id(),
+                    'x': curr_node['x'],
+                    'y': curr_node['y'],
+                    'adjacent_nodes': [curr_node['adjacent_nodes']],
+                    'accessible_nodes': []
+                }
+                self.nodes[opposite_node['id']] = opposite_node
+                opposisite_edge.append(opposite_node)
+            opposisite_edge = opposisite_edge.reverse()
+                
+            b_track['in2']['accessible_nodes'] = [opposisite_edge[0]]
+            for i in range(len(opposisite_edge) - 1):
+                curr_node = opposisite_edge[i]
+                next_node = opposisite_edge[i + 1]
+                curr_node['accessible_nodes'] = [next_node]
+            opposisite_edge[-1]['accessible_nodes'] = [b_track['out2']]
+
 
     def __graph_find_path(self, start, targets, limit=sys.maxsize) -> tuple[int, list]:
         # variation of Dijkstra's algorithm for finding shortest path
@@ -280,6 +346,7 @@ class PhysicalNetwork:
 
         return found_dst, path
 
+
     def __distance_between_nodes(self, n1, n2):
         return math.sqrt((n1['x'] - n2['x']) ** 2 + (n1['y'] - n2['y']) ** 2)
     
@@ -301,6 +368,7 @@ class PhysicalNetwork:
 
             self.junctions.append(junction)
 
+
     def __group_nearby_joints(self, node : dict, junction : dict):
         searching_distance = 120
 
@@ -312,6 +380,7 @@ class PhysicalNetwork:
                 joint['junction'] = junction
                 junction['joints'].append(joint)
                 self.__group_nearby_joints(joint, junction)
+
 
     def generate_traffic_lights(self):
         logging.info(f'Generating traffic lights')
@@ -339,12 +408,14 @@ class PhysicalNetwork:
 
             self.__update_junction(junction)
 
+
     def __update_junction(self, junction):
         for traffic_light in junction['traffic_lights']:
             traffic_light['traffic_light'] = True
         
         for exit in junction['exits']:
             exit['exit'] = True
+
 
     def regenerate_tracks(self):
         logging.info(f'Regenerating tracks')
@@ -368,7 +439,7 @@ class PhysicalNetwork:
 
         logging.warning(f'len(special_nodes): {len(special_nodes)}')
         for first_node in special_nodes:
-            logging.warning(f'first_node: {len(first_node["accessible_nodes"])}')
+            # logging.warning(f'first_node: {len(first_node["accessible_nodes"])}')
             for idx, second_node in enumerate(first_node['accessible_nodes']):
                 track = {
                     'id' : id,
@@ -380,7 +451,6 @@ class PhysicalNetwork:
 
                 curr_node = second_node
                 while node['special'] == False and len(curr_node['accessible_nodes']) > 0:
-                    # logging.warning(f'curr_node: {curr_node["id"]} has {len(curr_node["accessible_nodes"])} accessible nodes and first accessible node is {curr_node["accessible_nodes"][0]["id"]}')
                     curr_node = curr_node['accessible_nodes'][0]
 
                     if curr_node in track['nodes']:
@@ -400,6 +470,7 @@ class PhysicalNetwork:
                 id += 1
 
         self.tracks = new_tracks
+
 
     def export_as_visualization(self, filename):
         network_visualization_model = {
