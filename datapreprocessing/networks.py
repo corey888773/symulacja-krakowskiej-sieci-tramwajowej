@@ -1,12 +1,13 @@
 import math, logging
-import dict_utils as dutils
+import utils as U
 from physical_network import PhysicalNetwork
+from logical_network import LogicalNetwork
 
 LON0 = 19.937356 # in degrees
 LAT0 = 50.061700 
 EARTH_R = 6365828.0 # in meters
 
-def process_physical_network(trams_osm):
+def process_physical_network(trams_osm : dict) -> PhysicalNetwork:
     pn = PhysicalNetwork()
 
     stop_temps = []
@@ -32,21 +33,18 @@ def process_physical_network(trams_osm):
                 'accessible_nodes': accesible_nodes
             }
 
-            if dutils.contains_key(el, 'tags') and dutils.contains_key(el['tags'], 'railway'):
+            if U.contains_key(el, 'tags') and U.contains_key(el['tags'], 'railway'):
                 if el['tags']['railway'] == 'tram_stop':
                     stop_temps.append(el)
             
         elif el['type'] == 'way':
-            if dutils.contains_key(el, 'nodes'):
+            if U.contains_key(el, 'nodes'):
                 pn.tracks.append(el)
 
     # pn.fix_missing_stops(pn, stop_temps)
 
     for s in stop_temps:
-        if tuple(s) not in pn.nodes:
-            continue
-
-        stop = pn.nodes[s]
+        stop = pn.nodes.get(s.get('id'))
         stop['tags'] = s['tags']
         pn.stops.append(stop)
 
@@ -58,15 +56,17 @@ def process_physical_network(trams_osm):
     for stop in pn.stops:
         # this part is simple but looks complicated
         # it basically check if a list already exists and can be appended to, if not, it creates a new list 
-        sid_tags = pn.stop_ids.get('tags') # check if stop_ids has tags key
-        curr_ids = sid_tags.get('name') # check if tags already has name key
+        stop_tags = stop.get('tags')
+        curr_ids = pn.stop_ids.get(stop_tags.get('name')) 
 
+        print(curr_ids, stop_tags.get('name'))
         if curr_ids == None: 
-            pn.stop_ids[s['tags']['name']] = [s['id']] # if not, create new list of tags with name as a key { name : [id] }
+            pn.stop_ids[stop['tags']['name']] = [stop['id']] # if not, create new list of tags with name as a key { name : [id] }
         else:
-            curr_ids.append(s['id']) # if yes, append id to the list
-            pn.stop_ids[s['tags']['name']] = curr_ids # update the list
-        
+            curr_ids.append(stop['id']) # if yes, append id to the list
+            pn.stop_ids[stop['tags']['name']] = curr_ids # update the list
+        print(pn.stop_ids[stop_tags.get('name')])
+
 
     for track in pn.tracks:
         track['nodes'] = list(map(lambda id: pn.nodes.get(id), track['nodes']))
@@ -89,4 +89,15 @@ def process_physical_network(trams_osm):
     pn.generate_traffic_lights()
     pn.regenerate_tracks()
 
-    pn.export_as_visualization('physical_network.json')
+    pn.export_as_visualization('data/physical_network.json')
+
+    return pn
+
+
+def process_logical_network(physical_network : PhysicalNetwork, schedule : dict) -> LogicalNetwork:
+    ln = LogicalNetwork(physical_network, schedule)
+
+    #ln.remove_fake_route_stops()
+    ln.validate_stop_names()
+    ln.schedule_create_routes()
+    ln.schedule_create_trips()
