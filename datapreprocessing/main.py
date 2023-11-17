@@ -1,9 +1,11 @@
 import json, logging, os
 
-from networks import process_physical_network
+from networks import process_physical_network, process_logical_network
+from schedule_utils import prettify_schedule
 
 # logger configuration
 logging.basicConfig(format='%(levelname)s - %(filename)s:%(lineno)d, message: %(message)s', level=logging.DEBUG)
+
 
 def main():
     
@@ -15,6 +17,8 @@ def main():
         trams_schedule = json.load(f)
 
     physcial_network = process_physical_network(trams_osm)
+    trams_schedule = prettify_schedule(trams_schedule)
+    logical_network = process_logical_network(trams_schedule, physcial_network)
 
 if __name__ == "__main__":
     main()

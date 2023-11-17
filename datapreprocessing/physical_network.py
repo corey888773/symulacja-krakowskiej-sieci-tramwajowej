@@ -237,7 +237,7 @@ class PhysicalNetwork:
 
         bidirectional_tracks = []
         # bidirectional_tracks.append({
-        #     'nodes': [213578409, *self.__graph_find_path(self.nodes.get(213578409), [1770978496])[1].reverse()],
+        #     'nodes': [213578409, *self.graph_find_path(self.nodes.get(213578409), [1770978496])[1].reverse()],
         #     'in1': 4556178684,
         #     'out1': 1770978500,
         #     'in2': 1770978502,
@@ -245,7 +245,7 @@ class PhysicalNetwork:
         # })
 
         # bidirectional_tracks.append({
-        #     'nodes': [1770978486, *self.__graph_find_path(self.nodes.get(1770978486), [213578407])[1].reverse()],
+        #     'nodes': [1770978486, *self.graph_find_path(self.nodes.get(1770978486), [213578407])[1].reverse()],
         #     'in1': 4556178680,
         #     'out1': 1770978488,
         #     'in2': 1770978489,
@@ -288,7 +288,7 @@ class PhysicalNetwork:
             opposisite_edge[-1]['accessible_nodes'] = [b_track['out2']]
 
 
-    def __graph_find_path(self, start, targets, limit=sys.maxsize) -> tuple[int, list]:
+    def graph_find_path(self, start : dict, targets : list, limit=sys.maxsize) -> tuple[int, list]:
         # variation of Dijkstra's algorithm for finding shortest path
         # to understand this algorithm, reach the following article:
         # https://eduinf.waw.pl/inf/alg/001_search/0138.php
@@ -296,6 +296,10 @@ class PhysicalNetwork:
         distance = {}
         previous = {}
         queue = []
+        path = []
+
+        if start == None:
+            return sys.maxsize, path
 
         distance[start['id']] = 0
         for acs in start['accessible_nodes']:
@@ -335,13 +339,12 @@ class PhysicalNetwork:
                     distance[acs['id']] = new_dst
                     previous[acs['id']] = node
 
-        path = []
         if not found:
             return sys.maxsize, path
         
         node = found_node
         while node != start:
-            path.append(node)
+            path.append(node['id'])
             node = previous[node['id']]
 
         return found_dst, path
@@ -395,14 +398,14 @@ class PhysicalNetwork:
             traffic_lights_ids = [tl['id'] for tl in junction['traffic_lights'] if 'id' in tl]
 
             for joint in junction['traffic_lights']: # remove pointless traffic lights
-                dst, path = self.__graph_find_path(joint, traffic_lights_ids, 60) 
+                dst, path = self.graph_find_path(joint, traffic_lights_ids, 60) 
                 if dst < sys.maxsize:
                     junction['traffic_lights'] = [tl for tl in junction['traffic_lights'] if tl['id'] != path[0]]
 
             exits_ids = [ex['id'] for ex in junction['exits'] if 'id' in ex]
 
             for joint in junction['exits']: # remove pointless exits
-                dst, path = self.__graph_find_path(joint, exits_ids, 60) 
+                dst, path = self.graph_find_path(joint, exits_ids, 60) 
                 if dst < sys.maxsize:
                     junction['exits'] = [ex for ex in junction['exits'] if ex['id'] != joint['id']]
 
@@ -454,7 +457,7 @@ class PhysicalNetwork:
                     curr_node = curr_node['accessible_nodes'][0]
 
                     if curr_node in track['nodes']:
-                        logging.warning(f'curr_node: {curr_node["id"]} is already in track')
+                        # logging.warning(f'curr_node: {curr_node["id"]} is already in track')
                         break
                     track['nodes'].append(curr_node)
 
@@ -472,7 +475,7 @@ class PhysicalNetwork:
         self.tracks = new_tracks
 
 
-    def export_as_visualization(self, filename):
+    def export_as_json(self, filename):
         network_visualization_model = {
             'nodes': [],
             'edges': []
@@ -507,4 +510,4 @@ class PhysicalNetwork:
             network_visualization_model['edges'].append(export_edge)
 
         with open(filename, 'w') as f:
-            json.dump(network_visualization_model, f, indent=2)
+            json.dump(network_visualization_model, f, indent=2, ensure_ascii=False)
