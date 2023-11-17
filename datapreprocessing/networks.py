@@ -1,11 +1,7 @@
-import math, logging
+import logging
 import utils as U
 from physical_network import PhysicalNetwork
 from logical_network import LogicalNetwork
-
-LON0 = 19.937356 # in degrees
-LAT0 = 50.061700 
-EARTH_R = 6365828.0 # in meters
 
 def process_physical_network(trams_osm : dict) -> PhysicalNetwork:
     pn = PhysicalNetwork()
@@ -13,14 +9,7 @@ def process_physical_network(trams_osm : dict) -> PhysicalNetwork:
     stop_temps = []
     for el in trams_osm['elements']:
         if el['type'] == 'node':
-            rel_lon = el['lon'] - LON0 # in degrees
-            rel_lat = el['lat'] - LAT0 
-
-            rel_lat = rel_lat / 180.0 * math.pi # in radians
-            rel_lon = rel_lon / 180.0 * math.pi
-
-            y = EARTH_R * math.cos(rel_lat) * math.cos(rel_lon) # in meters
-            x = EARTH_R * math.cos(el['lat'] / 180 * math.pi) * math.sin(rel_lon) 
+            x, y = U.translate_to_relative(el['lon'], el['lat'])
 
             adjacent_nodes = []
             accesible_nodes = []
@@ -89,7 +78,7 @@ def process_physical_network(trams_osm : dict) -> PhysicalNetwork:
     pn.generate_traffic_lights()
     pn.regenerate_tracks()
 
-    pn.export_as_visualization('data/physical_network.json')
+    pn.export_as_json('data/physical_network.json')
 
     return pn
 
@@ -101,3 +90,9 @@ def process_logical_network(physical_network : PhysicalNetwork, schedule : dict)
     ln.validate_stop_names()
     ln.schedule_create_routes()
     ln.schedule_create_trips()
+    ln.create_passanger_nodes()
+    ln.set_passanger_nodes_properties()
+    
+    ln.export_as_json('data/logical_network.json')
+
+    return ln

@@ -475,7 +475,7 @@ class PhysicalNetwork:
         self.tracks = new_tracks
 
 
-    def export_as_visualization(self, filename):
+    def export_as_json(self, filename):
         network_visualization_model = {
             'nodes': [],
             'edges': []
@@ -510,4 +510,4 @@ class PhysicalNetwork:
             network_visualization_model['edges'].append(export_edge)
 
         with open(filename, 'w') as f:
-            json.dump(network_visualization_model, f, indent=2)
+            json.dump(network_visualization_model, f, indent=2, ensure_ascii=False)

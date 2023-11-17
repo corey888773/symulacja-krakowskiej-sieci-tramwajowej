@@ -1,7 +1,10 @@
-import logging, math, re
+import logging, math, re, json
 import numpy as np
 from physical_network import PhysicalNetwork
 import utils as U
+import matplotlib.pyplot as plt
+
+from shapely.geometry import Point, Polygon
 
 class LogicalNetwork:
     def __init__(self, schedule : dict, physical_network : PhysicalNetwork):
@@ -10,8 +13,8 @@ class LogicalNetwork:
 
         self.routes = []
         self.trips = []
-        self.passanger_nodes = [] # stops and stations
-        self.passanger_edges = [] # edges between stops and stations
+        self.passanger_nodes = {} # stops and stations
+        self.passanger_edges = {} # edges between stops and stations
 
         self.avaialbe_id = 0
 
@@ -282,7 +285,7 @@ class LogicalNetwork:
                     t += 1
                 
                 trip['start'] = trip['time_table'][t]
-                trip['end'] = trip['time_table'][t]
+                trip['end'] = last_stop_time
                 trip['duration'] = trip['end'] - trip['start']
 
                 if -1 in trip['time_table']:
@@ -300,4 +303,254 @@ class LogicalNetwork:
 
             if error == True:
                 logging.error(f'invalid trip {route} \n\n\n')
+                
+                # TODO: fix this
+                # INFO - logical_network.py:379, message: Starowiślna 02 4
+                # ERROR - logical_network.py:380, message: generation_sum != absorption_sum 24750 != 6375
+                # INFO - logical_network.py:379, message: Starowiślna 02 5
+                # ERROR - logical_network.py:380, message: generation_sum != absorption_sum 24750 != 6375
+                # INFO - logical_network.py:379, message: Starowiślna 02 6
+                # ERROR - logical_network.py:380, message: generation_sum != absorption_sum 24750 != 6375
+                # INFO - logical_network.py:379, message: Starowiślna 02 7
+                # ERROR - logical_network.py:380, message: generation_sum != absorption_sum 99000 != 25500
+                # INFO - logical_network.py:379, message: Starowiślna 02 8
+                # ERROR - logical_network.py:380, message: generation_sum != absorption_sum 99000 != 25500
+                # INFO - logical_network.py:379, message: Starowiślna 02 16
+                # ERROR - logical_network.py:380, message: generation_sum != absorption_sum 99000 != 25500
+                # INFO - logical_network.py:379, message: Starowiślna 02 17
+                # ERROR - logical_network.py:380, message: generation_sum != absorption_sum 99000 != 25500
 
+
+    def create_passanger_nodes(self):
+        for route in self.routes:
+            for idx in range(len(route['stops']) - 1):
+                curr_stop_name = self.physical_network.nodes.get(route['stops'][idx])['tags']['name']
+                next_stop_name = self.physical_network.nodes.get(route['stops'][idx + 1])['tags']['name']
+
+                passanger_edge = self.passanger_edges.get(f"{curr_stop_name}_{next_stop_name}")
+                if passanger_edge == None:
+                    passanger_edge = {
+                        'head': next_stop_name,
+                        'tail': curr_stop_name,
+                        'lines': [],
+                    }
+                    self.passanger_edges[f"{curr_stop_name}_{next_stop_name}"] = passanger_edge
+                passanger_edge['lines'].append(route['id'])
+                
+                if self.passanger_nodes.get(curr_stop_name) == None:
+                    stops = self.physical_network.stop_ids.get(curr_stop_name)
+                    stops = [self.physical_network.nodes.get(id) for id in stops]
+
+                    passanger_node = {
+                        'name': curr_stop_name,
+                        'x': sum(node['x'] for node in stops) / len(stops),
+                        'y': sum(node['y'] for node in stops) / len(stops)
+                    }   
+                    self.passanger_nodes[curr_stop_name] = passanger_node
+                    
+    def set_passanger_nodes_properties(self):
+        residential = self.__generate_passanger_properties(
+            generation_rate=[0, 100, 400, 120, 400, 100, 0],
+			generation_time=[0, 4, 7, 9, 16, 18, 23],
+			absorption_rate=[0, 25, 100, 120, 100, 100, 0],
+			absorption_time=[0, 4, 7, 9, 16, 18, 23],
+        )
+        
+        central = self.__generate_passanger_properties(
+            generation_rate=[0, 25, 100, 120, 100, 100, 0],
+			generation_time=[0, 4, 7, 9, 16, 18, 23],
+			absorption_rate=[0, 100, 400, 120, 400, 100, 0],
+			absorption_time=[0, 4, 7, 9, 16, 18, 23],
+        )
+
+        high_interest = self.__generate_passanger_properties(
+            generation_rate=[0, 125, 500, 600, 500, 500, 0],
+			generation_time=[0, 4, 7, 9, 16, 18, 23],
+			absorption_rate=[0, 500, 2000, 600, 2000, 500, 0],
+			absorption_time=[0, 4, 7, 9, 16, 18, 23],
+        )
+
+        for node in self.passanger_nodes.values():
+            node['properties'] = residential
+
+        # TODO: find city center
+        city_center = self.__city_center_cords()
+        print(city_center)
+        for node in self.__get_passanger_nodes_inside_area(city_center):
+            print(node['name'])
+            node['properties'] = central
+
+        high_interest_nodes = [] # TODO: find high interest nodes
+        for node in high_interest_nodes:
+            node['properties'] = high_interest
+
+        # Validation if passangers are generated and absorbed equally
+        for h in range(24):
+            generation_sum, absorption_sum = 0, 0
+            for node in self.passanger_nodes.values():
+                generation_sum += node['properties']['generation_rate'][h]
+                absorption_sum += node['properties']['absorption_rate'][h]
+
+            if generation_sum != absorption_sum:
+                logging.info(f'{node["name"]} {h}')
+                logging.error(f'generation_sum != absorption_sum {generation_sum} != {absorption_sum}')
+
+
+    def __generate_passanger_properties(self, generation_rate : list, generation_time : list, absorption_rate : list, absorption_time : list) -> dict:
+        properties = {
+            'generation_rate': [],
+            'generation_distribution': [],
+            'absorption_rate': [],
+            'expected_generated_count': []
+        }
+
+        j, rate_sum, rate = 0, 0, generation_rate[0]
+
+        for h in range(24):
+            if h >= generation_time[j + 1]:
+                j += 1
+                rate = generation_rate[j]
+
+            rate_sum += rate
+            properties['generation_rate'].append(rate)
+            properties['generation_distribution'].append(rate_sum)
+
+        properties['expected_generated_count'] = rate_sum
+
+        j = 0
+        for h in range(24):
+            if h >= absorption_time[j + 1]:
+                j += 1
+                rate = absorption_rate[j]
+
+            properties['absorption_rate'].append(rate)
+
+
+        return properties
+
+
+    def __get_passanger_nodes_inside_area(self, area) -> list:
+        nodes_inside = []
+        for node in self.passanger_nodes.values():
+            point = Point(node['x'], node['y'])
+            area = Polygon(area)
+            
+            # x, y = area.exterior.xy
+            # plt.plot(x, y)
+            # plt.show()
+
+            if point.within(area):
+                nodes_inside.append(node)
+        
+        return nodes_inside
+
+
+    def __city_center_cords(self) -> list:
+        border_stops = [
+            "Uniwersytet Pedagogiczny 02",
+            "Reymana 01",
+            "Biprostal 02",
+            "Dworzec Towarowy 02"
+            # "Francesco Nullo 02", #
+            # "Cystersów 02", #
+            # "Klimeckiego 01", #
+            # "Podgórze SKA 02", #
+            # "Łagiewniki 05",
+            # "Reymana 01"
+        ]
+        cords = []
+
+        for stop in border_stops:
+            stop_id = self.physical_network.stop_ids.get(stop)
+            if stop_id == None:
+                logging.error(f'stop_id is None, {stop}')
+                continue
+            node = self.physical_network.nodes.get(stop_id[0])
+            if node == None:
+                logging.error(f'node is None, {stop}')
+                continue
+            
+            cords.append((node['x'], node['y']))
+
+        return cords
+
+    def export_as_json(self, filename : str):
+        export_network = {
+            'nodes': [],
+            'edges': [],
+            'junctions': [],
+            'routes': [],
+            'trips': [],
+            'passanger_nodes': [],
+            'passanger_edges': [],
+            'passanger_count': 0
+        }
+
+        for id, node in self.physical_network.nodes.items():
+            if node['special'] == True:
+                export_node = {
+                    'id': id,
+                    'x': node['x'],
+                    'y': node['y'],
+                }
+                if 'tags' in node:
+                    export_node['stop_name'] = node['tags']['name']
+
+                if 'traffic_light' in node:
+                    export_node['traffic_light'] = node['traffic_light']
+
+                if 'exit' in node:
+                    export_node['exit'] = node['exit']
+
+            export_network['nodes'].append(export_node)
+
+        for track in self.physical_network.tracks:
+            head = track['nodes'][0]
+            tail = track['nodes'][-1]
+
+            export_edge = {
+                'id': track['id'],
+                'head': head['id'],
+                'tail': tail['id'],
+                'length': track['length'],
+                'max_speed': track['tags']['maxspeed'],
+            }
+            export_network['edges'].append(export_edge)
+
+        for junction in self.physical_network.junctions:
+            export_junction = {
+               'traffic_lights': [traffic_light['id'] for traffic_light in junction['traffic_lights']],
+               'exits': [exit['id'] for exit in junction['exits']],
+            }
+            export_network['junctions'].append(export_junction)
+
+        for route in self.routes:
+            export_route = {
+                'id': route['id'],
+                'name': route['name'],
+                'stops': route['stops'],
+            }
+            export_network['routes'].append(export_route)
+
+        for trip in self.trips:
+            export_trip = {
+                'route': trip['route'],
+                'time_table': trip['time_table'],
+            }
+            export_network['trips'].append(export_trip)
+
+        for route_node in self.passanger_nodes.values():
+            export_passanger_node = {
+                'name': route_node['name'],
+                'generation_distribution': route_node['properties']['generation_distribution'],
+                'absorption_rate': route_node['properties']['absorption_rate'],
+                'expected_generated_count': route_node['properties']['expected_generated_count'],
+            }
+            export_network['passanger_nodes'].append(export_passanger_node)
+
+        export_network['passanger_edges'] = [*self.passanger_edges.values()]
+
+        export_network['passanger_count'] = sum(node['properties']['expected_generated_count'] for node in self.passanger_nodes.values())
+
+        with open(filename, 'w') as f:
+            json.dump(export_network, f, indent=2, ensure_ascii=False)
