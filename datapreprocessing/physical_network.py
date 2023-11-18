@@ -1,5 +1,11 @@
 import logging, math, sys, json
 
+class Junction:
+    def __init__(self):
+        self.joints = []
+        self.traffic_lights = []
+        self.exits = []
+
 class PhysicalNetwork:
     def __init__(self):
         self.nodes = {}
@@ -360,11 +366,8 @@ class PhysicalNetwork:
             if joint['junction'] != None:
                 continue
 
-            junction = {
-                'joints': [joint],
-                'traffic_lights': [],
-                'exits': []
-            }
+            junction = Junction()
+            junction.joints.append(joint)
 
             joint['junction'] = junction
             self.__group_nearby_joints(joint, junction)
@@ -372,7 +375,7 @@ class PhysicalNetwork:
             self.junctions.append(junction)
 
 
-    def __group_nearby_joints(self, node : dict, junction : dict):
+    def __group_nearby_joints(self, node : dict, junction : Junction):
         searching_distance = 120
 
         for joint in self.joints:
@@ -381,7 +384,7 @@ class PhysicalNetwork:
 
             if self.__distance_between_nodes(node, joint) < searching_distance:
                 joint['junction'] = junction
-                junction['joints'].append(joint)
+                junction.joints.append(joint)
                 self.__group_nearby_joints(joint, junction)
 
 
@@ -389,34 +392,34 @@ class PhysicalNetwork:
         logging.info(f'Generating traffic lights')
 
         for junction in self.junctions:
-            for joint in junction['joints']:
+            for joint in junction.joints:
                 if len(joint['accessible_nodes']) > 1:
-                    junction['traffic_lights'].append(joint)
+                    junction.traffic_lights.append(joint)
                 elif len(joint['adjacent_nodes']) > 2:
-                    junction['exits'].append(joint)
+                    junction.exits.append(joint)
 
-            traffic_lights_ids = [tl['id'] for tl in junction['traffic_lights'] if 'id' in tl]
+            traffic_lights_ids = [tl['id'] for tl in junction.traffic_lights if 'id' in tl]
 
-            for joint in junction['traffic_lights']: # remove pointless traffic lights
+            for joint in junction.traffic_lights: # remove pointless traffic lights
                 dst, path = self.graph_find_path(joint, traffic_lights_ids, 60) 
                 if dst < sys.maxsize:
-                    junction['traffic_lights'] = [tl for tl in junction['traffic_lights'] if tl['id'] != path[0]]
+                    junction.traffic_lights = [tl for tl in junction.traffic_lights if tl['id'] != path[0]]
 
-            exits_ids = [ex['id'] for ex in junction['exits'] if 'id' in ex]
+            exits_ids = [ex['id'] for ex in junction.exits if 'id' in ex]
 
-            for joint in junction['exits']: # remove pointless exits
+            for joint in junction.exits: # remove pointless exits
                 dst, path = self.graph_find_path(joint, exits_ids, 60) 
                 if dst < sys.maxsize:
-                    junction['exits'] = [ex for ex in junction['exits'] if ex['id'] != joint['id']]
+                    junction.exits = [ex for ex in junction.exits if ex['id'] != joint['id']]
 
             self.__update_junction(junction)
 
 
     def __update_junction(self, junction):
-        for traffic_light in junction['traffic_lights']:
+        for traffic_light in junction.traffic_lights:
             traffic_light['traffic_light'] = True
         
-        for exit in junction['exits']:
+        for exit in junction.exits:
             exit['exit'] = True
 
 

@@ -519,8 +519,8 @@ class LogicalNetwork:
 
         for junction in self.physical_network.junctions:
             export_junction = {
-               'traffic_lights': [traffic_light['id'] for traffic_light in junction['traffic_lights']],
-               'exits': [exit['id'] for exit in junction['exits']],
+               'traffic_lights': [traffic_light['id'] for traffic_light in junction.traffic_lights],
+               'exits': [exit['id'] for exit in junction.exits],
             }
             export_network['junctions'].append(export_junction)
 
