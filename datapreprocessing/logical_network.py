@@ -6,6 +6,14 @@ import matplotlib.pyplot as plt
 
 from shapely.geometry import Point, Polygon
 
+class PassangerNode:
+    def __init__(self, name : str, x : float, y : float):
+        self.name = name
+        self.x = x
+        self.y = y
+        self.properties = {}
+
+
 class LogicalNetwork:
     def __init__(self, schedule : dict, physical_network : PhysicalNetwork):
         self.schedule = schedule
@@ -338,11 +346,12 @@ class LogicalNetwork:
                     stops = self.physical_network.stop_ids.get(curr_stop_name)
                     stops = [self.physical_network.nodes.get(id) for id in stops]
 
-                    passanger_node = {
-                        'name': curr_stop_name,
-                        'x': sum(node.x for node in stops) / len(stops),
-                        'y': sum(node.y for node in stops) / len(stops)
-                    }   
+                    passanger_node = PassangerNode(
+                        curr_stop_name, 
+                        x=sum(node.x for node in stops) / len(stops),
+                        y=sum(node.y for node in stops) / len(stops)
+                    )
+
                     self.passanger_nodes[curr_stop_name] = passanger_node
                     
     def set_passanger_nodes_properties(self):
@@ -368,28 +377,27 @@ class LogicalNetwork:
         )
 
         for node in self.passanger_nodes.values():
-            node['properties'] = residential
+            node.properties = residential
 
         # TODO: find city center
         city_center = self.__city_center_cords()
         print(city_center)
         for node in self.__get_passanger_nodes_inside_area(city_center):
-            print(node['name'])
-            node['properties'] = central
+            node.properties = central
 
         high_interest_nodes = [] # TODO: find high interest nodes
         for node in high_interest_nodes:
-            node['properties'] = high_interest
+            node.properties = high_interest
 
         # Validation if passangers are generated and absorbed equally
         for h in range(24):
             generation_sum, absorption_sum = 0, 0
             for node in self.passanger_nodes.values():
-                generation_sum += node['properties']['generation_rate'][h]
-                absorption_sum += node['properties']['absorption_rate'][h]
+                generation_sum += node.properties['generation_rate'][h]
+                absorption_sum += node.properties['absorption_rate'][h]
 
             if generation_sum != absorption_sum:
-                logging.info(f'{node["name"]} {h}')
+                logging.info(f'{node.name} {h}')
                 logging.error(f'generation_sum != absorption_sum {generation_sum} != {absorption_sum}')
 
 
@@ -429,7 +437,7 @@ class LogicalNetwork:
     def __get_passanger_nodes_inside_area(self, area) -> list:
         nodes_inside = []
         for node in self.passanger_nodes.values():
-            point = Point(node['x'], node['y'])
+            point = Point(node.x, node.y)
             area = Polygon(area)
             
             # x, y = area.exterior.xy
@@ -536,18 +544,18 @@ class LogicalNetwork:
             }
             export_network['trips'].append(export_trip)
 
-        for route_node in self.passanger_nodes.values():
+        for p_node in self.passanger_nodes.values():
             export_passanger_node = {
-                'name': route_node['name'],
-                'generation_distribution': route_node['properties']['generation_distribution'],
-                'absorption_rate': route_node['properties']['absorption_rate'],
-                'expected_generated_count': route_node['properties']['expected_generated_count'],
+                'name': p_node.name,
+                'generation_distribution': p_node.properties['generation_distribution'],
+                'absorption_rate': p_node.properties['absorption_rate'],
+                'expected_generated_count': p_node.properties['expected_generated_count'],
             }
             export_network['passanger_nodes'].append(export_passanger_node)
 
         export_network['passanger_edges'] = [*self.passanger_edges.values()]
 
-        export_network['passanger_count'] = sum(node['properties']['expected_generated_count'] for node in self.passanger_nodes.values())
+        export_network['passanger_count'] = sum(node.properties['expected_generated_count'] for node in self.passanger_nodes.values())
 
         with open(filename, 'w') as f:
             json.dump(export_network, f, indent=2, ensure_ascii=False)
