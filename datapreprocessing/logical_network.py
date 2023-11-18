@@ -121,14 +121,14 @@ class LogicalNetwork:
 
         init_node = curr_stop = self.physical_network.nodes.get(start_node_id)
         
-        route['nodes'].append(init_node['id'])
-        route['stops'].append(init_node['id'])
+        route['nodes'].append(init_node.id)
+        route['stops'].append(init_node.id)
 
 
         for idx in range(1, len(direction['stops'])):
             next_stop = direction['stops'][idx]['name']
 
-            second_next_stop = self.physical_network.nodes.get(end_node_id)['tags']['name']
+            second_next_stop = self.physical_network.nodes.get(end_node_id).tags['name']
             if idx < len(direction['stops']) - 1:
                 second_next_stop = direction['stops'][idx + 1]['name']
                 
@@ -142,14 +142,14 @@ class LogicalNetwork:
             path = []
 
             while target != []:
-                # logging.info((curr_stop['id'], target))
+                # logging.info((curr_stop.id, target))
                 dist1, path1 = self.physical_network.graph_find_path(curr_stop, target)
                 intermediate_platform = self.physical_network.nodes.get(
                     U.first_or_default(path1, default_value=-1)
                 )
 
                 if intermediate_platform == None:
-                    logging.error(f'intermediate_platform is None, {curr_stop["id"]} to {target}')
+                    logging.error(f'intermediate_platform is None, {curr_stop.id} to {target}')
                     break
             
                 second_next_stop_ids = self.physical_network.stop_ids.get(second_next_stop)
@@ -164,13 +164,10 @@ class LogicalNetwork:
                 )
 
                 if end_platform == None:
-                    logging.error(f'end_platform is None, {second_next_stop_ids} to {intermediate_platform["id"]}')
+                    logging.error(f'end_platform is None, {second_next_stop_ids} to {intermediate_platform.id}')
                     break
 
-                straight_line_distance = \
-                math.sqrt(
-                    (intermediate_platform['x'] - end_platform['x']) ** 2 + (intermediate_platform['y'] - end_platform['y']) ** 2
-                )
+                straight_line_distance = intermediate_platform.distance_to(end_platform)
 
                 # logging.info((dist1, dist2, straight_line_distance))
 
@@ -194,7 +191,7 @@ class LogicalNetwork:
                 U.first_or_default(path, default_value=-1)
             )
 
-            route['stops'].append(curr_stop['id'])
+            route['stops'].append(curr_stop.id)
 
         route['stops'].append(end_node_id)
         return route
@@ -324,8 +321,8 @@ class LogicalNetwork:
     def create_passanger_nodes(self):
         for route in self.routes:
             for idx in range(len(route['stops']) - 1):
-                curr_stop_name = self.physical_network.nodes.get(route['stops'][idx])['tags']['name']
-                next_stop_name = self.physical_network.nodes.get(route['stops'][idx + 1])['tags']['name']
+                curr_stop_name = self.physical_network.nodes.get(route['stops'][idx]).tags['name']
+                next_stop_name = self.physical_network.nodes.get(route['stops'][idx + 1]).tags['name']
 
                 passanger_edge = self.passanger_edges.get(f"{curr_stop_name}_{next_stop_name}")
                 if passanger_edge == None:
@@ -343,8 +340,8 @@ class LogicalNetwork:
 
                     passanger_node = {
                         'name': curr_stop_name,
-                        'x': sum(node['x'] for node in stops) / len(stops),
-                        'y': sum(node['y'] for node in stops) / len(stops)
+                        'x': sum(node.x for node in stops) / len(stops),
+                        'y': sum(node.y for node in stops) / len(stops)
                     }   
                     self.passanger_nodes[curr_stop_name] = passanger_node
                     
@@ -470,7 +467,7 @@ class LogicalNetwork:
                 logging.error(f'node is None, {stop}')
                 continue
             
-            cords.append((node['x'], node['y']))
+            cords.append((node.x, node.y))
 
         return cords
 
@@ -487,20 +484,20 @@ class LogicalNetwork:
         }
 
         for id, node in self.physical_network.nodes.items():
-            if node['special'] == True:
+            if node.is_special == True:
                 export_node = {
                     'id': id,
-                    'x': node['x'],
-                    'y': node['y'],
+                    'x': node.x,
+                    'y': node.y,
                 }
-                if 'tags' in node:
-                    export_node['stop_name'] = node['tags']['name']
+                if node.tags != {}:
+                    export_node['stop_name'] = node.tags['name']
 
-                if 'traffic_light' in node:
-                    export_node['traffic_light'] = node['traffic_light']
+                if node.is_traffic_light:
+                    export_node['traffic_light'] = True
 
-                if 'exit' in node:
-                    export_node['exit'] = node['exit']
+                if node.is_exit:
+                    export_node['exit'] = True
 
             export_network['nodes'].append(export_node)
 
@@ -510,8 +507,8 @@ class LogicalNetwork:
 
             export_edge = {
                 'id': track.id,
-                'head': head['id'],
-                'tail': tail['id'],
+                'head': head.id,
+                'tail': tail.id,
                 'length': track.length,
                 'max_speed': track.tags['maxspeed'],
             }
@@ -519,8 +516,8 @@ class LogicalNetwork:
 
         for junction in self.physical_network.junctions:
             export_junction = {
-               'traffic_lights': [traffic_light['id'] for traffic_light in junction.traffic_lights],
-               'exits': [exit['id'] for exit in junction.exits],
+               'traffic_lights': [traffic_light.id for traffic_light in junction.traffic_lights],
+               'exits': [exit.id for exit in junction.exits],
             }
             export_network['junctions'].append(export_junction)
 

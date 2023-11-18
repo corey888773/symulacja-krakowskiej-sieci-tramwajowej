@@ -20,6 +20,24 @@ class Track:
         track.tags = d['tags']
         return track
 
+class Node:
+    def __init__(self, id : int, x : float, y : float):
+        self.id = id
+        self.x = x
+        self.y = y
+        self.adjacent_nodes = []
+        self.accessible_nodes = []
+        self.tags = {}
+
+        self.is_traffic_light = False
+        self.is_exit = False
+        self.is_special = False
+        self.is_junction = False
+
+        self.junction = None
+
+    def distance_to(self, other):
+        return math.sqrt((self.x - other.x) ** 2 + (self.y - other.y) ** 2)
 
 class PhysicalNetwork:
     def __init__(self):
@@ -40,19 +58,19 @@ class PhysicalNetwork:
     def fix_way_directions(self):
         logging.info(f'Fixing way directions')
 
-        for track in self.temp_tracks:
-            if 'oneway' not in track['tags']:
-                track['tags']['oneway'] = 'no'
+        for tmp_track in self.temp_tracks:
+            if 'oneway' not in tmp_track['tags']:
+                tmp_track['tags']['oneway'] = 'no'
 
 
     def fix_max_speed(self):
         logging.info(f'Fixing max speed')
 
-        for track in self.temp_tracks:
-            if 'maxspeed' not in track['tags']:
-                track['tags']['maxspeed'] = '50'
+        for tmp_track in self.temp_tracks:
+            if 'maxspeed' not in tmp_track['tags']:
+                tmp_track['tags']['maxspeed'] = '50'
 
-            track['tags']['maxspeed'] = int(track['tags']['maxspeed'])
+            tmp_track['tags']['maxspeed'] = int(tmp_track['tags']['maxspeed'])
 
 
     def fix_remove_banned_nodes(self):
@@ -65,9 +83,9 @@ class PhysicalNetwork:
     
 
     def __remove_node(self, node_id):
-        for track in reversed(self.temp_tracks):
-            if node_id in track['nodes']:
-                self.temp_tracks.remove(track)
+        for tmp_track in reversed(self.temp_tracks):
+            if node_id in tmp_track['nodes']:
+                self.temp_tracks.remove(tmp_track)
 
         del self.nodes[node_id]
 
@@ -87,7 +105,7 @@ class PhysicalNetwork:
                 logging.warning(f'Track {track} has no nodes or less than 2 nodes')
                 continue
 
-            track.nodes[0]['adjacent_nodes'].append(track.nodes[1]) # first node is adjacent to second node 
+            track.nodes[0].adjacent_nodes.append(track.nodes[1]) # first node is adjacent to second node 
             # outside of loop to avoid index out of range error
             
             for i in range (1, len(track.nodes) - 1):
@@ -99,18 +117,18 @@ class PhysicalNetwork:
                 print(type(curr_node))
                 print(type(prev_node))
                 print(type(next_node))
-                if prev_node not in curr_node['adjacent_nodes']:
-                    curr_node['adjacent_nodes'].append(prev_node)
+                if prev_node not in curr_node.adjacent_nodes:
+                    curr_node.adjacent_nodes.append(prev_node)
                 else:
                     logging.warning(f'Node already in adjacent nodes of current node {idx}')
             
-                if next_node not in curr_node['adjacent_nodes']:
-                    curr_node['adjacent_nodes'].append(next_node)
+                if next_node not in curr_node.adjacent_nodes:
+                    curr_node.adjacent_nodes.append(next_node)
                 else:
                     logging.warning(f'Node already in adjacent nodes of current node {idx}')
 
                 
-            track.nodes[-1]['adjacent_nodes'].append(track.nodes[-2]) # last node is adjacent to second last node
+            track.nodes[-1].adjacent_nodes.append(track.nodes[-2]) # last node is adjacent to second last node
             # outside of loop to avoid index out of range error
 
 
@@ -128,8 +146,8 @@ class PhysicalNetwork:
                 curr_node = track.nodes[i]
                 next_node = track.nodes[i + 1]
 
-                if next_node not in curr_node['accessible_nodes']:
-                    curr_node['accessible_nodes'].append(next_node)
+                if next_node not in curr_node.accessible_nodes:
+                    curr_node.accessible_nodes.append(next_node)
                 else:
                     logging.warning(f'Node already in accessible nodes of current node {idx}')
 
@@ -147,18 +165,18 @@ class PhysicalNetwork:
         for idx in range (len(self.joints) - 1, -1, -1):
             joint = self.joints[idx]
 
-            if len(joint['adjacent_nodes']) != 4: 
+            if len(joint.adjacent_nodes) != 4: 
                 # if joint has 4 adjacent nodes then we cannot split the track
                 continue
 
-            if len(joint['accessible_nodes']) == 4: 
+            if len(joint.accessible_nodes) == 4: 
                 # if joint has 4 accessible nodes then from this joint we can go to any other joint and we cannot split the track
                 continue
             
             vectors = [] # list of vectors from joint to adjacent nodes
-            for node in joint['adjacent_nodes']: # for each adjacent node
-                vec = { 'x': node['x'] - joint['x'],
-                        'y': node['y'] - joint['y'] }
+            for node in joint.adjacent_nodes: # for each adjacent node
+                vec = { 'x': node.x - joint.x,
+                        'y': node.y - joint.y }
                 vec['dist'] = math.sqrt(vec['x'] ** 2 + vec['y'] ** 2) # distance from joint to adjacent node
                 vectors.append(vec)
 
@@ -175,11 +193,11 @@ class PhysicalNetwork:
                              'accessible': 0, 
                              'cos': path_cos }
                     
-                    if joint['adjacent_nodes'][i] in joint['accessible_nodes'] and joint['adjacent_nodes'][j] not in joint['accessible_nodes']:
+                    if joint.adjacent_nodes[i] in joint.accessible_nodes and joint.adjacent_nodes[j] not in joint.accessible_nodes:
                         path['accessible'] += i
                         paths.append(path)
 
-                    elif joint['adjacent_nodes'][j] in joint['accessible_nodes'] and joint['adjacent_nodes'][i] not in joint['accessible_nodes']:
+                    elif joint.adjacent_nodes[j] in joint.accessible_nodes and joint.adjacent_nodes[i] not in joint.accessible_nodes:
                         path['accessible'] += j
                         paths.append(path)
                         
@@ -195,46 +213,39 @@ class PhysicalNetwork:
             # now we have the two most opposite paths
             # we can create two new joints and remove the old joint
             # the two new joints will have the same coordinates as the old joint
-            joint1 = {
-                'id': self.__find_available_node_id(),
-                'x': joint['x'],
-                'y': joint['y'],
-                'adjacent_nodes': [joint['adjacent_nodes'][path1['ix1']], joint['adjacent_nodes'][path1['ix2']]],
-                'accessible_nodes': [joint['adjacent_nodes'][path1['accessible']]]
-            }
-            self.nodes[joint1['id']] = joint1
+            joint1 = Node(self.__find_available_node_id(), joint.x, joint.y)
+            joint1.adjacent_nodes = [joint.adjacent_nodes[path1['ix1']], joint.adjacent_nodes[path1['ix2']]]
+            joint1.accessible_nodes = [joint.adjacent_nodes[path1['accessible']]]
+            self.nodes[joint1.id] = joint1
 
-            joint2 = {
-                'id': self.__find_available_node_id(),
-                'x': joint['x'],
-                'y': joint['y'],
-                'adjacent_nodes': [joint['adjacent_nodes'][path2['ix1']], joint['adjacent_nodes'][path2['ix2']]],
-                'accessible_nodes': [joint['adjacent_nodes'][path2['accessible']]]
-            }
-            self.nodes[joint2['id']] = joint2
+            joint2 = Node(self.__find_available_node_id(), joint.x, joint.y)
+            joint2.adjacent_nodes = [joint.adjacent_nodes[path2['ix1']], joint.adjacent_nodes[path2['ix2']]]
+            joint2.accessible_nodes = [joint.adjacent_nodes[path2['accessible']]]
+            self.nodes[joint2.id] = joint2
+
 
             # update adjacent nodes and accessible nodes of modified nodes
-            for adj in joint['adjacent_nodes']:
+            for adj in joint.adjacent_nodes:
 
-                for i in range(len(adj['accessible_nodes'])):
+                for i in range(len(adj.accessible_nodes)):
                     # adj_to_adj = adjacent node to adjacent node
-                    adj_to_adj = adj['accessible_nodes'][i]
+                    adj_to_adj = adj.accessible_nodes[i]
                     
-                    if adj not in joint1['adjacent_nodes'] and adj_to_adj == joint:
-                        adj['accessible_nodes'][i] = joint1
-                    elif adj not in joint2['adjacent_nodes'] and adj_to_adj == joint:
-                        adj['accessible_nodes'][i] = joint2
+                    if adj not in joint1.adjacent_nodes and adj_to_adj == joint:
+                        adj.accessible_nodes[i] = joint1
+                    elif adj not in joint2.adjacent_nodes and adj_to_adj == joint:
+                        adj.accessible_nodes[i] = joint2
                     
-                for i in range(len(adj['adjacent_nodes'])):
+                for i in range(len(adj.adjacent_nodes)):
                     # adj_to_adj = adjacent node to adjacent node
-                    adj_to_adj = adj['adjacent_nodes'][i]
+                    adj_to_adj = adj.adjacent_nodes[i]
                     
-                    if adj not in joint1['adjacent_nodes'] and adj_to_adj == joint:
-                        adj['adjacent_nodes'][i] = joint1
-                    elif adj not in joint2['adjacent_nodes'] and adj_to_adj == joint:
-                        adj['adjacent_nodes'][i] = joint2
+                    if adj not in joint1.adjacent_nodes and adj_to_adj == joint:
+                        adj.adjacent_nodes[i] = joint1
+                    elif adj not in joint2.adjacent_nodes and adj_to_adj == joint:
+                        adj.adjacent_nodes[i] = joint2
 
-            self.nodes.pop(joint['id'])
+            self.nodes.pop(joint.id)
             self.joints.remove(joint)
 
 
@@ -278,39 +289,35 @@ class PhysicalNetwork:
         # })
 
         for b_track in bidirectional_tracks:
-            b_track['nodes'] = [self.nodes.get(el['id']) for el in b_track['nodes']]
+            b_track['nodes'] = [self.nodes.get(el.id) for el in b_track['nodes']]
             b_track['in1'] = self.nodes.get(b_track['in1'])
             b_track['out1'] = self.nodes.get(b_track['out1'])
             b_track['in2'] = self.nodes.get(b_track['in2'])
             b_track['out2'] = self.nodes.get(b_track['out2'])
 
-            b_track['in1']['accessible_nodes'] = [b_track['nodes'][0]]
+            b_track['in1'].accessible_nodes = [b_track['nodes'][0]]
             for i in range(len(b_track['nodes']) - 1):
                 curr_node = b_track['nodes'][i]
                 next_node = b_track['nodes'][i + 1]
-                curr_node['accessible_nodes'] = [next_node]
-            b_track['nodes'][-1]['accessible_nodes'] = [b_track['out1']]
+                curr_node.accessible_nodes = [next_node]
+            b_track['nodes'][-1].accessible_nodes = [b_track['out1']]
 
             opposisite_edge = []
             for i in range(len(b_track['nodes'])):
                 curr_node = b_track['nodes'][i]
-                opposite_node = {
-                    'id': self.__find_available_node_id(),
-                    'x': curr_node['x'],
-                    'y': curr_node['y'],
-                    'adjacent_nodes': [curr_node['adjacent_nodes']],
-                    'accessible_nodes': []
-                }
-                self.nodes[opposite_node['id']] = opposite_node
+                opposisite_node = Node(self.__find_available_node_id(), curr_node.x, curr_node.y)
+                opposisite_node.adjacent_nodes = [curr_node.adjacent_nodes]
+                self.nodes[opposite_node.id] = opposite_node
+
                 opposisite_edge.append(opposite_node)
             opposisite_edge = opposisite_edge.reverse()
                 
-            b_track['in2']['accessible_nodes'] = [opposisite_edge[0]]
+            b_track['in2'].accessible_nodes = [opposisite_edge[0]]
             for i in range(len(opposisite_edge) - 1):
                 curr_node = opposisite_edge[i]
                 next_node = opposisite_edge[i + 1]
-                curr_node['accessible_nodes'] = [next_node]
-            opposisite_edge[-1]['accessible_nodes'] = [b_track['out2']]
+                curr_node.accessible_nodes = [next_node]
+            opposisite_edge[-1].accessible_nodes = [b_track['out2']]
 
 
     def graph_find_path(self, start : dict, targets : list, limit=sys.maxsize) -> tuple[int, list]:
@@ -326,12 +333,12 @@ class PhysicalNetwork:
         if start == None:
             return sys.maxsize, path
 
-        distance[start['id']] = 0
-        for acs in start['accessible_nodes']:
-            dst = self.__distance_between_nodes(start, acs)
+        distance[start.id] = 0
+        for acs in start.accessible_nodes:
+            dst = start.distance_to(acs)
 
-            distance[acs['id']] = dst
-            previous[acs['id']] = start
+            distance[acs.id] = dst
+            previous[acs.id] = start
             queue.append((dst, acs))
 
        
@@ -341,7 +348,7 @@ class PhysicalNetwork:
             if dst > limit:
                 break
 
-            if node['id'] in targets:
+            if node.id in targets:
                 if not found:
                     found = True
                     found_node = node
@@ -354,41 +361,40 @@ class PhysicalNetwork:
             if dst > found_dst:
                 break
 
-            for acs in node['accessible_nodes']:
-                acs_dst = distance.get(acs['id'], None)
+            for acs in node.accessible_nodes:
+                acs_dst = distance.get(acs.id, None)
 
                 if acs_dst == None:
-                    new_dst = dst + self.__distance_between_nodes(node, acs)
+                    new_dst = dst + node.distance_to(acs)
 
                     queue.append((new_dst, acs))
-                    distance[acs['id']] = new_dst
-                    previous[acs['id']] = node
+                    distance[acs.id] = new_dst
+                    previous[acs.id] = node
 
         if not found:
             return sys.maxsize, path
         
         node = found_node
         while node != start:
-            path.append(node['id'])
-            node = previous[node['id']]
+            path.append(node.id)
+            node = previous[node.id]
 
         return found_dst, path
 
-
-    def __distance_between_nodes(self, n1, n2):
-        return math.sqrt((n1['x'] - n2['x']) ** 2 + (n1['y'] - n2['y']) ** 2)
     
     def find_junctions(self):
         logging.info(f'Finding junctions')
 
         for joint in self.joints:
-            if joint['junction'] != None:
+            if joint.is_junction:
                 continue
 
             junction = Junction()
             junction.joints.append(joint)
 
-            joint['junction'] = junction
+            joint.junction = junction
+            joint.is_junction = True
+
             self.__group_nearby_joints(joint, junction)
 
             self.junctions.append(junction)
@@ -398,11 +404,14 @@ class PhysicalNetwork:
         searching_distance = 120
 
         for joint in self.joints:
-            if joint['junction'] != None:
+            if joint.is_junction:
                 continue
 
-            if self.__distance_between_nodes(node, joint) < searching_distance:
-                joint['junction'] = junction
+            if joint.distance_to(node) < searching_distance:
+                
+                joint.junction = junction
+                joint.is_junction = True
+
                 junction.joints.append(joint)
                 self.__group_nearby_joints(joint, junction)
 
@@ -412,34 +421,34 @@ class PhysicalNetwork:
 
         for junction in self.junctions:
             for joint in junction.joints:
-                if len(joint['accessible_nodes']) > 1:
+                if len(joint.accessible_nodes) > 1:
                     junction.traffic_lights.append(joint)
-                elif len(joint['adjacent_nodes']) > 2:
+                elif len(joint.adjacent_nodes) > 2:
                     junction.exits.append(joint)
 
-            traffic_lights_ids = [tl['id'] for tl in junction.traffic_lights if 'id' in tl]
+            traffic_lights_ids = [tl.id for tl in junction.traffic_lights]
 
             for joint in junction.traffic_lights: # remove pointless traffic lights
                 dst, path = self.graph_find_path(joint, traffic_lights_ids, 60) 
                 if dst < sys.maxsize:
-                    junction.traffic_lights = [tl for tl in junction.traffic_lights if tl['id'] != path[0]]
+                    junction.traffic_lights = [tl for tl in junction.traffic_lights if tl.id != path[0]]
 
-            exits_ids = [ex['id'] for ex in junction.exits if 'id' in ex]
+            exits_ids = [ex.id for ex in junction.exits]
 
             for joint in junction.exits: # remove pointless exits
                 dst, path = self.graph_find_path(joint, exits_ids, 60) 
                 if dst < sys.maxsize:
-                    junction.exits = [ex for ex in junction.exits if ex['id'] != joint['id']]
+                    junction.exits = [ex for ex in junction.exits if ex.id != joint.id]
 
             self.__update_junction(junction)
 
 
     def __update_junction(self, junction):
-        for traffic_light in junction.traffic_lights:
-            traffic_light['traffic_light'] = True
+        for node in junction.traffic_lights:
+            node.is_traffic_light = True
         
-        for exit in junction.exits:
-            exit['exit'] = True
+        for node in junction.exits:
+            node.is_exit = True
 
 
     def regenerate_tracks(self):
@@ -448,16 +457,13 @@ class PhysicalNetwork:
         special_nodes = []
 
         for [id, node] in self.nodes.items():
-            if 'special' not in node:
-                node['special'] = False
-
-            if len(node['adjacent_nodes']) != 2 \
-                    or len(node['accessible_nodes']) != 1 \
-                    or 'tags' in node \
-                    or 'traffic_light' in node \
-                    or node.get('exit') == True\
-                    or node.get('special') == True:
-                node['special'] = True
+            if len(node.adjacent_nodes) != 2 \
+                    or len(node.accessible_nodes) != 1 \
+                    or node.tags != {} \
+                    or node.is_traffic_light \
+                    or node.is_exit \
+                    or node.is_special:
+                node.is_special = True
                 special_nodes.append(node)
 
         new_tracks, id = [], 0 
@@ -465,7 +471,7 @@ class PhysicalNetwork:
         logging.warning(f'len(special_nodes): {len(special_nodes)}')
         for first_node in special_nodes:
             # logging.warning(f'first_node: {len(first_node["accessible_nodes"])}')
-            for idx, second_node in enumerate(first_node['accessible_nodes']):
+            for idx, second_node in enumerate(first_node.accessible_nodes):
                 track = Track()
                 track.id = id
                 track.nodes = [first_node, second_node]
@@ -474,8 +480,8 @@ class PhysicalNetwork:
                 }
 
                 curr_node = second_node
-                while node['special'] == False and len(curr_node['accessible_nodes']) > 0:
-                    curr_node = curr_node['accessible_nodes'][0]
+                while not node.is_special and len(curr_node.accessible_nodes) > 0:
+                    curr_node = curr_node.accessible_nodes[0]
 
                     if curr_node in track.nodes:
                         # logging.warning(f'curr_node: {curr_node["id"]} is already in track')
@@ -486,7 +492,7 @@ class PhysicalNetwork:
                 length, prev_node = 0, track.nodes[0]
                 for i in range(1, len(track.nodes)):
                     curr_node = track.nodes[i]
-                    length += self.__distance_between_nodes(prev_node, curr_node)
+                    length += prev_node.distance_to(curr_node)
                     prev_node = curr_node
                 track.length = length
 
@@ -497,7 +503,7 @@ class PhysicalNetwork:
 
 
     def export_as_json(self, filename):
-        network_visualization_model = {
+        export_network = {
             'nodes': [],
             'edges': []
         }
@@ -505,17 +511,17 @@ class PhysicalNetwork:
         for id, node in self.nodes.items():
             export_node = {
                 'id': id,
-                'x': node['x'],
-                'y': node['y'],
+                'x': node.x,
+                'y': node.y,
             }
 
-            if 'tags' in node:
-                export_node['stop_name'] = node['tags']['name']
+            if node.tags != {}:
+                export_node['stop_name'] = node.tags['name']
 
-            if 'traffic_light' in node:
-                export_node['traffic_light'] = node['traffic_light']
+            if node.is_traffic_light:
+                export_node['traffic_light'] = True
 
-            network_visualization_model['nodes'].append(export_node)
+            export_network['nodes'].append(export_node)
 
         for track in self.tracks:
             head = track.nodes[-1]
@@ -523,12 +529,12 @@ class PhysicalNetwork:
 
             export_edge = {
                 'id': track.id,
-                'nodes': [node['id'] for node in track.nodes],
+                'nodes': [node.id for node in track.nodes],
                 'length': track.length,
                 'maxspeed': track.tags['maxspeed'],
             }
 
-            network_visualization_model['edges'].append(export_edge)
+            export_network['edges'].append(export_edge)
 
         with open(filename, 'w') as f:
-            json.dump(network_visualization_model, f, indent=2, ensure_ascii=False)
+            json.dump(export_network, f, indent=2, ensure_ascii=False)
