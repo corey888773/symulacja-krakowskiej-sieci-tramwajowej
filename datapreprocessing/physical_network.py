@@ -6,8 +6,25 @@ class Junction:
         self.traffic_lights = []
         self.exits = []
 
+class Track:
+    def __init__(self):
+        self.id = None
+        self.nodes = []
+        self.tags = {}
+        self.length = None
+
+    def from_dict(d : dict, pn):
+        track = Track()
+        track.id = d['id']
+        track.nodes = [pn.nodes[id] for id in d['nodes']]
+        track.tags = d['tags']
+        return track
+
+
 class PhysicalNetwork:
     def __init__(self):
+        self.temp_tracks = []
+
         self.nodes = {}
         self.stops = []
         self.stop_ids = {}
@@ -23,7 +40,7 @@ class PhysicalNetwork:
     def fix_way_directions(self):
         logging.info(f'Fixing way directions')
 
-        for track in self.tracks:
+        for track in self.temp_tracks:
             if 'oneway' not in track['tags']:
                 track['tags']['oneway'] = 'no'
 
@@ -31,7 +48,7 @@ class PhysicalNetwork:
     def fix_max_speed(self):
         logging.info(f'Fixing max speed')
 
-        for track in self.tracks:
+        for track in self.temp_tracks:
             if 'maxspeed' not in track['tags']:
                 track['tags']['maxspeed'] = '50'
 
@@ -48,9 +65,9 @@ class PhysicalNetwork:
     
 
     def __remove_node(self, node_id):
-        for track in reversed(self.tracks):
+        for track in reversed(self.temp_tracks):
             if node_id in track['nodes']:
-                self.tracks.remove(track)
+                self.temp_tracks.remove(track)
 
         del self.nodes[node_id]
 
@@ -65,20 +82,23 @@ class PhysicalNetwork:
         logging.info(f'Finding adjacent nodes tracks {len(self.tracks)}')
 
         for idx, track in enumerate(self.tracks):
-            track_nodes = track.get('nodes', None)
-            if track_nodes == None or len(track_nodes) < 2:
+            if len(track.nodes) < 2:
                 # if track has no nodes or less than 2 nodes then it is not a valid track
                 logging.warning(f'Track {track} has no nodes or less than 2 nodes')
                 continue
 
-            track_nodes[0]['adjacent_nodes'].append(track_nodes[1]) # first node is adjacent to second node 
+            track.nodes[0]['adjacent_nodes'].append(track.nodes[1]) # first node is adjacent to second node 
             # outside of loop to avoid index out of range error
             
-            for i in range (1, len(track_nodes) - 1):
-                prev_node = track_nodes[i - 1]
-                curr_node = track_nodes[i]
-                next_node = track_nodes[i + 1]
+            for i in range (1, len(track.nodes) - 1):
+                print(len(track.nodes))
+                prev_node = track.nodes[i - 1]
+                curr_node = track.nodes[i]
+                next_node = track.nodes[i + 1]
 
+                print(type(curr_node))
+                print(type(prev_node))
+                print(type(next_node))
                 if prev_node not in curr_node['adjacent_nodes']:
                     curr_node['adjacent_nodes'].append(prev_node)
                 else:
@@ -90,7 +110,7 @@ class PhysicalNetwork:
                     logging.warning(f'Node already in adjacent nodes of current node {idx}')
 
                 
-            track_nodes[-1]['adjacent_nodes'].append(track_nodes[-2]) # last node is adjacent to second last node
+            track.nodes[-1]['adjacent_nodes'].append(track.nodes[-2]) # last node is adjacent to second last node
             # outside of loop to avoid index out of range error
 
 
@@ -99,15 +119,14 @@ class PhysicalNetwork:
 
         for idx, track in enumerate(self.tracks):
 
-            track_nodes = track.get('nodes', None)
-            if track_nodes == None or len(track_nodes) < 2:
+            if len(track.nodes) < 2:
                 # if track has no nodes or less than 2 nodes then it is not a valid track
                 logging.warning(f'Track {track} has no nodes or less than 2 nodes')
                 continue
 
-            for i in range(len(track_nodes) - 1):
-                curr_node = track_nodes[i]
-                next_node = track_nodes[i + 1]
+            for i in range(len(track.nodes) - 1):
+                curr_node = track.nodes[i]
+                next_node = track.nodes[i + 1]
 
                 if next_node not in curr_node['accessible_nodes']:
                     curr_node['accessible_nodes'].append(next_node)
@@ -447,30 +466,29 @@ class PhysicalNetwork:
         for first_node in special_nodes:
             # logging.warning(f'first_node: {len(first_node["accessible_nodes"])}')
             for idx, second_node in enumerate(first_node['accessible_nodes']):
-                track = {
-                    'id' : id,
-                    'nodes': [first_node, second_node],
-                    'tags': {
-                        'maxspeed': 50,
-                    }
+                track = Track()
+                track.id = id
+                track.nodes = [first_node, second_node]
+                track.tags = {
+                    'maxspeed': 50,
                 }
 
                 curr_node = second_node
                 while node['special'] == False and len(curr_node['accessible_nodes']) > 0:
                     curr_node = curr_node['accessible_nodes'][0]
 
-                    if curr_node in track['nodes']:
+                    if curr_node in track.nodes:
                         # logging.warning(f'curr_node: {curr_node["id"]} is already in track')
                         break
-                    track['nodes'].append(curr_node)
+                    track.nodes.append(curr_node)
 
 
-                length, prev_node = 0, track['nodes'][0]
-                for i in range(1, len(track['nodes'])):
-                    curr_node = track['nodes'][i]
+                length, prev_node = 0, track.nodes[0]
+                for i in range(1, len(track.nodes)):
+                    curr_node = track.nodes[i]
                     length += self.__distance_between_nodes(prev_node, curr_node)
                     prev_node = curr_node
-                track['length'] = length
+                track.length = length
 
                 new_tracks.append(track)
                 id += 1
@@ -500,14 +518,14 @@ class PhysicalNetwork:
             network_visualization_model['nodes'].append(export_node)
 
         for track in self.tracks:
-            head = track['nodes'][-1]
-            tail = track['nodes'][0]
+            head = track.nodes[-1]
+            tail = track.nodes[0]
 
             export_edge = {
-                'id': track['id'],
-                'nodes': [node['id'] for node in track['nodes']],
-                'length': track['length'],
-                'maxspeed': track['tags']['maxspeed'],
+                'id': track.id,
+                'nodes': [node['id'] for node in track.nodes],
+                'length': track.length,
+                'maxspeed': track.tags['maxspeed'],
             }
 
             network_visualization_model['edges'].append(export_edge)

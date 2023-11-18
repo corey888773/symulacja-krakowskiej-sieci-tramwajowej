@@ -1,12 +1,14 @@
 import logging
 import utils as U
-from physical_network import PhysicalNetwork
+from physical_network import PhysicalNetwork, Track
 from logical_network import LogicalNetwork
 
 def process_physical_network(trams_osm : dict) -> PhysicalNetwork:
     pn = PhysicalNetwork()
 
     stop_temps = []
+    temp_tracks = []
+
     for el in trams_osm['elements']:
         if el['type'] == 'node':
             x, y = U.translate_to_relative(el['lon'], el['lat'])
@@ -28,7 +30,7 @@ def process_physical_network(trams_osm : dict) -> PhysicalNetwork:
             
         elif el['type'] == 'way':
             if U.contains_key(el, 'nodes'):
-                pn.tracks.append(el)
+                pn.temp_tracks.append(el)
 
     # pn.fix_missing_stops(pn, stop_temps)
 
@@ -38,6 +40,7 @@ def process_physical_network(trams_osm : dict) -> PhysicalNetwork:
         pn.stops.append(stop)
 
     # pn.fix_stop_names(pn)
+    
     pn.fix_way_directions()
     pn.fix_max_speed()
     pn.fix_remove_banned_nodes()
@@ -57,8 +60,9 @@ def process_physical_network(trams_osm : dict) -> PhysicalNetwork:
         print(pn.stop_ids[stop_tags.get('name')])
 
 
-    for track in pn.tracks:
-        track['nodes'] = list(map(lambda id: pn.nodes.get(id), track['nodes']))
+    for temp_track in pn.temp_tracks:
+        track = Track.from_dict(temp_track, pn)
+        pn.tracks.append(track)
 
     pn.graph_find_adjacents()
     pn.graph_find_successors()

@@ -505,15 +505,15 @@ class LogicalNetwork:
             export_network['nodes'].append(export_node)
 
         for track in self.physical_network.tracks:
-            head = track['nodes'][0]
-            tail = track['nodes'][-1]
+            head = track.nodes[0]
+            tail = track.nodes[-1]
 
             export_edge = {
-                'id': track['id'],
+                'id': track.id,
                 'head': head['id'],
                 'tail': tail['id'],
-                'length': track['length'],
-                'max_speed': track['tags']['maxspeed'],
+                'length': track.length,
+                'max_speed': track.tags['maxspeed'],
             }
             export_network['edges'].append(export_edge)
 
