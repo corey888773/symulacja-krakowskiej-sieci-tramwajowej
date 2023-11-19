@@ -13,6 +13,28 @@ class PassangerNode:
         self.y = y
         self.properties = {}
 
+class PassangerEdge:
+    def __init__(self, head : str, tail : str):
+        self.head = head
+        self.tail = tail
+        self.lines = []
+
+    def to_json(self):
+        return {
+            'head': self.head,
+            'tail': self.tail,
+            'lines': self.lines
+        }
+
+
+class Route:
+    def __init__(self, id : int, name : str, schedule_route : dict):
+        self.id = id
+        self.name = name
+        self.schedule_route = schedule_route
+        self.nodes = []
+        self.stops = []
+
 
 class LogicalNetwork:
     def __init__(self, schedule : dict, physical_network : PhysicalNetwork):
@@ -119,18 +141,11 @@ class LogicalNetwork:
 
 
     def process_route(self, direction : dict, start_node_id : int, end_node_id : int):
-        route = {
-            'id': self.__get_next_available_id(),
-            'name': direction['name'],
-            'nodes': [],
-            'stops': [],
-            'schedule_route': direction
-            }
-
+        route = Route(self.__get_next_available_id(), name=direction['name'], schedule_route=direction)
         init_node = curr_stop = self.physical_network.nodes.get(start_node_id)
         
-        route['nodes'].append(init_node.id)
-        route['stops'].append(init_node.id)
+        route.nodes.append(init_node.id)
+        route.stops.append(init_node.id)
 
 
         for idx in range(1, len(direction['stops'])):
@@ -193,15 +208,15 @@ class LogicalNetwork:
             if len(path) == 0:
                 continue
 
-            route['nodes'].extend(path)
+            route.nodes.extend(path)
             path.append(curr_stop)
             curr_stop = self.physical_network.nodes.get(
                 U.first_or_default(path, default_value=-1)
             )
 
-            route['stops'].append(curr_stop.id)
+            route.stops.append(curr_stop.id)
 
-        route['stops'].append(end_node_id)
+        route.stops.append(end_node_id)
         return route
 
 
@@ -217,8 +232,8 @@ class LogicalNetwork:
             # firstly we want to combine all the schedules into one big schedule, 
             # each stop will have a list of times in minutes
             time_table = []
-            for i in range(len(route['schedule_route']['stops'])):
-                stop = route['schedule_route']['stops'][i]
+            for i in range(len(route.schedule_route['stops'])):
+                stop = route.schedule_route['stops'][i]
                 
                 time_table.append([])
                 for j in range(len(stop['schedule'])):
@@ -258,8 +273,8 @@ class LogicalNetwork:
 
             for i in range(trip_count):
                 trip = {
-                    'route' : route['id'],
-                    'route_name' : route['name'],
+                    'route' : route.id,
+                    'route_name' : route.name,
                     'time_table' : [],
                     'start': 0,
                     'end': 0,
@@ -328,19 +343,16 @@ class LogicalNetwork:
 
     def create_passanger_nodes(self):
         for route in self.routes:
-            for idx in range(len(route['stops']) - 1):
-                curr_stop_name = self.physical_network.nodes.get(route['stops'][idx]).tags['name']
-                next_stop_name = self.physical_network.nodes.get(route['stops'][idx + 1]).tags['name']
+            for idx in range(len(route.stops) - 1):
+                curr_stop_name = self.physical_network.nodes.get(route.stops[idx]).tags['name']
+                next_stop_name = self.physical_network.nodes.get(route.stops[idx + 1]).tags['name']
 
                 passanger_edge = self.passanger_edges.get(f"{curr_stop_name}_{next_stop_name}")
                 if passanger_edge == None:
-                    passanger_edge = {
-                        'head': next_stop_name,
-                        'tail': curr_stop_name,
-                        'lines': [],
-                    }
+                    passanger_edge = PassangerEdge(next_stop_name, curr_stop_name)
                     self.passanger_edges[f"{curr_stop_name}_{next_stop_name}"] = passanger_edge
-                passanger_edge['lines'].append(route['id'])
+
+                passanger_edge.lines.append(route.id)
                 
                 if self.passanger_nodes.get(curr_stop_name) == None:
                     stops = self.physical_network.stop_ids.get(curr_stop_name)
@@ -531,9 +543,9 @@ class LogicalNetwork:
 
         for route in self.routes:
             export_route = {
-                'id': route['id'],
-                'name': route['name'],
-                'stops': route['stops'],
+                'id': route.id,
+                'name': route.name,
+                'stops': route.stops,
             }
             export_network['routes'].append(export_route)
 
@@ -553,7 +565,8 @@ class LogicalNetwork:
             }
             export_network['passanger_nodes'].append(export_passanger_node)
 
-        export_network['passanger_edges'] = [*self.passanger_edges.values()]
+        for p_edge in self.passanger_edges.values():
+            export_network['passanger_edges'].append(p_edge.to_json())
 
         export_network['passanger_count'] = sum(node.properties['expected_generated_count'] for node in self.passanger_nodes.values())
 
