@@ -16,9 +16,9 @@ def main():
     with open(f'{curr_dir}/../webscrape/schedule.json', 'r') as f:
         trams_schedule = json.load(f)
 
-    physcial_network = process_physical_network(trams_osm)
+    physcial_network = process_physical_network(trams_osm, curr_dir)
     trams_schedule = prettify_schedule(trams_schedule)
-    logical_network = process_logical_network(trams_schedule, physcial_network)
+    logical_network = process_logical_network(trams_schedule, physcial_network, curr_dir)
 
 if __name__ == "__main__":
     main()

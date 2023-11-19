@@ -6,6 +6,12 @@ class Junction:
         self.traffic_lights = []
         self.exits = []
 
+    def to_json(self) -> dict:
+        return {
+            'traffic_lights': [traffic_light.id for traffic_light in self.traffic_lights],
+            'exits': [exit.id for exit in self.exits],
+        }
+
 class Track:
     def __init__(self):
         self.id = None
@@ -19,6 +25,21 @@ class Track:
         track.nodes = [pn.nodes[id] for id in d['nodes']]
         track.tags = d['tags']
         return track
+
+    def to_json(self, detailed : bool=False) -> dict:
+        export_track = {
+                'id': self.id,
+                'length': self.length,
+                'max_speed': self.tags['maxspeed'],
+            }
+
+        if detailed:
+            export_track['nodes'] = [node.id for node in self.nodes]
+            return export_track
+
+        export_track['head'] = self.nodes[0].id
+        export_track['tail'] = self.nodes[-1].id
+        return export_track
 
 class Node:
     def __init__(self, id : int, x : float, y : float):
@@ -38,6 +59,24 @@ class Node:
 
     def distance_to(self, other):
         return math.sqrt((self.x - other.x) ** 2 + (self.y - other.y) ** 2)
+
+    def to_json(self) -> dict:
+        export_node = {
+                'id': self.id,
+                'x': self.x,
+                'y': self.y,
+            }
+
+        if self.tags != {}:
+                export_node['stop_name'] = self.tags['name']
+
+        if self.is_traffic_light:
+                export_node['traffic_light'] = True
+
+        if self.is_exit:
+                export_node['exit'] = True
+
+        return export_node
 
 class PhysicalNetwork:
     def __init__(self):
@@ -508,33 +547,11 @@ class PhysicalNetwork:
             'edges': []
         }
 
-        for id, node in self.nodes.items():
-            export_node = {
-                'id': id,
-                'x': node.x,
-                'y': node.y,
-            }
-
-            if node.tags != {}:
-                export_node['stop_name'] = node.tags['name']
-
-            if node.is_traffic_light:
-                export_node['traffic_light'] = True
-
-            export_network['nodes'].append(export_node)
+        for node in self.nodes.values():
+            export_network['nodes'].append(node.to_json())
 
         for track in self.tracks:
-            head = track.nodes[-1]
-            tail = track.nodes[0]
-
-            export_edge = {
-                'id': track.id,
-                'nodes': [node.id for node in track.nodes],
-                'length': track.length,
-                'maxspeed': track.tags['maxspeed'],
-            }
-
-            export_network['edges'].append(export_edge)
+            export_network['edges'].append(track.to_json(detailed=True))
 
         with open(filename, 'w') as f:
             json.dump(export_network, f, indent=2, ensure_ascii=False)

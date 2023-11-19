@@ -13,6 +13,14 @@ class PassangerNode:
         self.y = y
         self.properties = {}
 
+    def to_json(self):
+        return {
+            'name': self.name,
+            'generation_distribution': self.properties['generation_distribution'],
+            'absorption_rate': self.properties['absorption_rate'],
+            'expected_generated_count': self.properties['expected_generated_count'],
+        }
+
 class PassangerEdge:
     def __init__(self, head : str, tail : str):
         self.head = head
@@ -35,6 +43,28 @@ class Route:
         self.nodes = []
         self.stops = []
 
+    def to_json(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'stops': self.stops,
+        }
+
+
+class Trip:
+    def __init__(self, route : int, route_name : str):
+        self.route = route
+        self.route_name = route_name
+        self.time_table = []
+        self.start = 0
+        self.end = 0
+        self.duration = 0
+
+    def to_json(self):
+        return {
+            'route': self.route,
+            'time_table': self.time_table,
+        }
 
 class LogicalNetwork:
     def __init__(self, schedule : dict, physical_network : PhysicalNetwork):
@@ -272,14 +302,7 @@ class LogicalNetwork:
             stop_count = len(time_table) # how many stops are on this route
 
             for i in range(trip_count):
-                trip = {
-                    'route' : route.id,
-                    'route_name' : route.name,
-                    'time_table' : [],
-                    'start': 0,
-                    'end': 0,
-                    'duration': 0
-                }
+                trip = Trip(route.id, route.name)
 
                 last_stop_time = -1
                 for j in range(stop_count):
@@ -292,23 +315,23 @@ class LogicalNetwork:
                         k += 1
                     
                     if k < len(time_table[j]):
-                        trip['time_table'].append(time_table[j][k])
-                        last_stop_time = trip['time_table'][j]
+                        trip.time_table.append(time_table[j][k])
+                        last_stop_time = trip.time_table[j]
 
                         time_table[j][k] = -1 # mark as used 
                     else :
-                        trip['time_table'].append(-1)
+                        trip.time_table.append(-1)
                     
                     
                 t = 0
-                while trip['time_table'][t] == -1:
+                while trip.time_table[t] == -1:
                     t += 1
                 
-                trip['start'] = trip['time_table'][t]
-                trip['end'] = last_stop_time
-                trip['duration'] = trip['end'] - trip['start']
+                trip.start = trip.time_table[t]
+                trip.end = last_stop_time
+                trip.duration = trip.end - trip.start
 
-                if -1 in trip['time_table']:
+                if -1 in trip.time_table:
                     continue
 
                 self.trips.append(trip)
@@ -503,67 +526,24 @@ class LogicalNetwork:
             'passanger_count': 0
         }
 
-        for id, node in self.physical_network.nodes.items():
-            if node.is_special == True:
-                export_node = {
-                    'id': id,
-                    'x': node.x,
-                    'y': node.y,
-                }
-                if node.tags != {}:
-                    export_node['stop_name'] = node.tags['name']
-
-                if node.is_traffic_light:
-                    export_node['traffic_light'] = True
-
-                if node.is_exit:
-                    export_node['exit'] = True
-
-            export_network['nodes'].append(export_node)
+        for node in self.physical_network.nodes.values():
+            if node.is_special:
+                export_network['nodes'].append(node.to_json())
 
         for track in self.physical_network.tracks:
-            head = track.nodes[0]
-            tail = track.nodes[-1]
-
-            export_edge = {
-                'id': track.id,
-                'head': head.id,
-                'tail': tail.id,
-                'length': track.length,
-                'max_speed': track.tags['maxspeed'],
-            }
-            export_network['edges'].append(export_edge)
+            export_network['edges'].append(track.to_json())
 
         for junction in self.physical_network.junctions:
-            export_junction = {
-               'traffic_lights': [traffic_light.id for traffic_light in junction.traffic_lights],
-               'exits': [exit.id for exit in junction.exits],
-            }
-            export_network['junctions'].append(export_junction)
+            export_network['junctions'].append(junction.to_json())
 
         for route in self.routes:
-            export_route = {
-                'id': route.id,
-                'name': route.name,
-                'stops': route.stops,
-            }
-            export_network['routes'].append(export_route)
+            export_network['routes'].append(route.to_json())
 
         for trip in self.trips:
-            export_trip = {
-                'route': trip['route'],
-                'time_table': trip['time_table'],
-            }
-            export_network['trips'].append(export_trip)
+            export_network['trips'].append(trip.to_json())
 
         for p_node in self.passanger_nodes.values():
-            export_passanger_node = {
-                'name': p_node.name,
-                'generation_distribution': p_node.properties['generation_distribution'],
-                'absorption_rate': p_node.properties['absorption_rate'],
-                'expected_generated_count': p_node.properties['expected_generated_count'],
-            }
-            export_network['passanger_nodes'].append(export_passanger_node)
+            export_network['passanger_nodes'].append(p_node.to_json())
 
         for p_edge in self.passanger_edges.values():
             export_network['passanger_edges'].append(p_edge.to_json())
