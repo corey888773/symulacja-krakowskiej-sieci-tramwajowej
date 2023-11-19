@@ -3,18 +3,19 @@ import json, os, urllib.request, urllib.parse
 from html_table_parser import HTMLTableParser
 
 page = 'http://rozklady.mpk.krakow.pl'
+curr_dir = os.path.dirname(os.path.abspath(__file__))
 
 def main():
-    if not os.path.exists('./pages'):
-        os.makedirs('./pages')
+    if not os.path.exists(f'{curr_dir}/pages'):
+        os.makedirs(f'{curr_dir}/pages')
 
     try:
-        mainBody = get_html('http://rozklady.mpk.krakow.pl/?lang=PL&akcja=index&rozklad=20200323')
-        soup = BeautifulSoup(mainBody, 'html.parser')
+        main_body = get_html('http://rozklady.mpk.krakow.pl/?lang=PL&akcja=index&rozklad=20200323')
+        soup = BeautifulSoup(main_body, 'html.parser')
         schedule = {'lines': []}
 
-        lineNumbers = []
-        lineUrls = []
+        line_numbers = []
+        line_urls = []
 
         for el in soup.select('.linia_table_left a'):
             text = el.text
@@ -22,12 +23,12 @@ def main():
             text = text.replace(' ', '').replace('\t', '').replace('\n', '')
 
             if text[0].isdigit() and int(text) < 53:
-                lineNumbers.append(text)
-                lineUrls.append(link)
+                line_numbers.append(text)
+                line_urls.append(link)
 
-        for i in range(len(lineUrls)):
-            url = lineUrls[i]
-            numer = lineNumbers[i]
+        for i in range(len(line_urls)):
+            url = line_urls[i]
+            number = line_numbers[i]
             body = get_html(page + url)
             print(page + url)
             line = BeautifulSoup(body, 'html.parser')
@@ -46,16 +47,16 @@ def main():
             direction2 = process_direction(page + directionUrls[1], directionNames[1])
 
             line = {
-                'number': numer,
+                'number': number,
                 'direction1': direction1,
                 'direction2': direction2
             }
 
             schedule['lines'].append(line)
 
-        with open('./schedule.json', 'w', encoding='utf-8') as f:
+        with open(f'{curr_dir}/schedule.json', 'w', encoding='utf-8') as f:
             json.dump(schedule, f,  ensure_ascii=False, indent=True)
-        print("done")
+
     except Exception as e:
         print(e)
 
@@ -120,18 +121,18 @@ def get_html(url):
     url2 = url
     for c in ['\\', '//', '/', '?', '%', '*', ':', '|', '"', '<', '>']:
         url2 = url2.replace(c, '-')
-    fsUrl = './pages/' + url2
+    fs_url = curr_dir + '/pages/' + url2
 
     try:
-        if os.path.exists(fsUrl):
-            with open(fsUrl, 'r') as f:
+        if os.path.exists(fs_url):
+            with open(fs_url, 'r') as f:
                 data = f.read()
             return data
         else:
             req = urllib.request.Request(url, headers=headers)
             with urllib.request.urlopen(req) as response:
                 body = response.read().decode('utf-8')
-                with open(fsUrl, 'w') as f:
+                with open(fs_url, 'w') as f:
                     print(len(body))
                     f.write(body)
                 return body

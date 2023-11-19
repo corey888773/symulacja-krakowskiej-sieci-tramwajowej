@@ -72,14 +72,10 @@ class PhysicalNetwork:
             # outside of loop to avoid index out of range error
             
             for i in range (1, len(track.nodes) - 1):
-                print(len(track.nodes))
                 prev_node = track.nodes[i - 1]
                 curr_node = track.nodes[i]
                 next_node = track.nodes[i + 1]
 
-                print(type(curr_node))
-                print(type(prev_node))
-                print(type(next_node))
                 if prev_node not in curr_node.adjacent_nodes:
                     curr_node.adjacent_nodes.append(prev_node)
                 else:

@@ -28,13 +28,13 @@ class LogicalNetwork:
             for stop in line.direction1.stops:
                 node_ids = self.physical_network.stop_ids.get(stop.name)
                 if node_ids == None:
-                    logging.error(f'stop {stop.name}, {node_ids}, {type(stop.name)}')
+                    logging.error(f'stop {stop.name} not found')
                     continue
 
             for stop in line.direction2.stops:
                 node_ids = self.physical_network.stop_ids.get(stop.name)
                 if node_ids == None:
-                    logging.error(f'stop {stop.name}, {node_ids}, {type(stop.name)}')
+                    logging.error(f'stop {stop.name} not found')
                     continue
             
             # TODO EXAMINE THIS NODES, BECAUSE THEY CAUSE PROBLEMS ALSO IN PROCESS_ROUTE
@@ -358,8 +358,9 @@ class LogicalNetwork:
 
         # TODO: find city center
         city_center = self.__city_center_cords()
-        print(city_center)
+        # print(city_center)
         for node in self.__get_passanger_nodes_inside_area(city_center):
+            logging.info(node.name)
             node.properties = central
 
         high_interest_nodes = [] # TODO: find high interest nodes
@@ -374,11 +375,11 @@ class LogicalNetwork:
                 absorption_sum += node.properties['absorption_rate'][h]
 
             if generation_sum != absorption_sum:
-                logging.info(f'{node.name} {h}')
-                logging.error(f'generation_sum != absorption_sum {generation_sum} != {absorption_sum}')
+                logging.error(f'{node.name} - {h}: generation_sum != absorption_sum {generation_sum} != {absorption_sum}')
 
 
-    def __generate_passanger_properties(self, generation_rate : list, generation_time : list, absorption_rate : list, absorption_time : list) -> dict:
+    def __generate_passanger_properties(self, generation_rate : list, generation_time : list,
+                                         absorption_rate : list, absorption_time : list) -> dict:
         properties = {
             'generation_rate': [],
             'generation_distribution': [],
@@ -407,11 +408,10 @@ class LogicalNetwork:
 
             properties['absorption_rate'].append(rate)
 
-
         return properties
 
 
-    def __get_passanger_nodes_inside_area(self, area) -> list:
+    def __get_passanger_nodes_inside_area(self, area : list) -> list:
         nodes_inside = []
         for node in self.passanger_nodes.values():
             point = Point(node.x, node.y)
@@ -432,13 +432,11 @@ class LogicalNetwork:
             "Uniwersytet Pedagogiczny 02",
             "Reymana 01",
             "Biprostal 02",
-            "Dworzec Towarowy 02"
-            # "Francesco Nullo 02", #
-            # "Cystersów 02", #
-            # "Klimeckiego 01", #
-            # "Podgórze SKA 02", #
-            # "Łagiewniki 05",
-            # "Reymana 01"
+            "Cystersów 02", #
+            "Klimeckiego 01", #
+            "Podgórze SKA 02", #
+            "Łagiewniki 05",
+            "Reymana 01"
         ]
         cords = []
 
