@@ -3,7 +3,7 @@ import utils as U
 from physical_network import PhysicalNetwork, Track, Node
 from logical_network import LogicalNetwork
 
-def process_physical_network(trams_osm : dict, main_dir : str) -> PhysicalNetwork:
+def process_physical_network(trams_osm : dict) -> PhysicalNetwork:
     pn = PhysicalNetwork()
 
     stop_temps = []
@@ -71,12 +71,10 @@ def process_physical_network(trams_osm : dict, main_dir : str) -> PhysicalNetwor
     pn.generate_traffic_lights()
     pn.regenerate_tracks()
 
-    pn.export_as_json(f'{main_dir}/data/physical_network.json')
-
     return pn
 
 
-def process_logical_network(physical_network : PhysicalNetwork, schedule : dict, main_dir : str) -> LogicalNetwork:
+def process_logical_network(physical_network : PhysicalNetwork, schedule : dict) -> LogicalNetwork:
     ln = LogicalNetwork(physical_network, schedule)
 
     #ln.remove_fake_route_stops()
@@ -85,7 +83,4 @@ def process_logical_network(physical_network : PhysicalNetwork, schedule : dict,
     ln.schedule_create_trips()
     ln.create_passanger_nodes()
     ln.set_passanger_nodes_properties()
-    
-    ln.export_as_json(f'{main_dir}/data/logical_network.json')
-
     return ln

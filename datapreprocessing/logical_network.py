@@ -514,41 +514,16 @@ class LogicalNetwork:
 
         return cords
 
-    def export_as_json(self, filename : str):
+    def to_json(self) -> dict:
         export_network = {
-            'nodes': [],
-            'edges': [],
-            'junctions': [],
-            'routes': [],
-            'trips': [],
-            'passanger_nodes': [],
-            'passanger_edges': [],
-            'passanger_count': 0
+            'nodes': [node.to_json() for node in self.physical_network.nodes.values() if node.is_special],
+            'edges': [edge.to_json() for edge in self.physical_network.tracks],
+            'junctions': [junction.to_json() for junction in self.physical_network.junctions],
+            'routes': [route.to_json() for route in self.routes],
+            'trips': [trip.to_json() for trip in self.trips],
+            'passanger_nodes': [p_node.to_json() for p_node in self.passanger_nodes.values()],
+            'passanger_edges': [p_edge.to_json() for p_edge in self.passanger_edges.values()],
+            'passanger_count': sum(node.properties['expected_generated_count'] for node in self.passanger_nodes.values())
         }
 
-        for node in self.physical_network.nodes.values():
-            if node.is_special:
-                export_network['nodes'].append(node.to_json())
-
-        for track in self.physical_network.tracks:
-            export_network['edges'].append(track.to_json())
-
-        for junction in self.physical_network.junctions:
-            export_network['junctions'].append(junction.to_json())
-
-        for route in self.routes:
-            export_network['routes'].append(route.to_json())
-
-        for trip in self.trips:
-            export_network['trips'].append(trip.to_json())
-
-        for p_node in self.passanger_nodes.values():
-            export_network['passanger_nodes'].append(p_node.to_json())
-
-        for p_edge in self.passanger_edges.values():
-            export_network['passanger_edges'].append(p_edge.to_json())
-
-        export_network['passanger_count'] = sum(node.properties['expected_generated_count'] for node in self.passanger_nodes.values())
-
-        with open(filename, 'w') as f:
-            json.dump(export_network, f, indent=2, ensure_ascii=False)
+        return export_network

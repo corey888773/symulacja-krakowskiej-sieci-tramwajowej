@@ -541,17 +541,10 @@ class PhysicalNetwork:
         self.tracks = new_tracks
 
 
-    def export_as_json(self, filename):
+    def to_json(self) -> dict:
         export_network = {
-            'nodes': [],
-            'edges': []
+            'nodes': [node.to_json() for node in self.nodes.values()],
+            'edges': [edge.to_json(detailed=True) for edge in self.tracks]
         }
 
-        for node in self.nodes.values():
-            export_network['nodes'].append(node.to_json())
-
-        for track in self.tracks:
-            export_network['edges'].append(track.to_json(detailed=True))
-
-        with open(filename, 'w') as f:
-            json.dump(export_network, f, indent=2, ensure_ascii=False)
+        return export_network
