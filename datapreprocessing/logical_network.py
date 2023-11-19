@@ -1,6 +1,7 @@
 import logging, math, re, json
 import numpy as np
 from physical_network import PhysicalNetwork
+from schedule_utils import Schedule
 import utils as U
 import matplotlib.pyplot as plt
 
@@ -67,7 +68,7 @@ class Trip:
         }
 
 class LogicalNetwork:
-    def __init__(self, schedule : dict, physical_network : PhysicalNetwork):
+    def __init__(self, schedule : Schedule, physical_network : PhysicalNetwork):
         self.schedule = schedule
         self.physical_network = physical_network
 
@@ -83,16 +84,16 @@ class LogicalNetwork:
 
     def validate_stop_names(self):
         for line in self.schedule.lines:
-            for stop in line['direction1'].get('stops'):
-                node_ids = self.physical_network.stop_ids.get(stop['name'])
+            for stop in line.direction1.stops:
+                node_ids = self.physical_network.stop_ids.get(stop.name)
                 if node_ids == None:
-                    logging.error(f'stop {stop["name"]}, {node_ids}, {type(stop["name"])}')
+                    logging.error(f'stop {stop.name}, {node_ids}, {type(stop.name)}')
                     continue
 
-            for stop in line['direction2'].get('stops'):
-                node_ids = self.physical_network.stop_ids.get(stop['name'])
+            for stop in line.direction2.stops:
+                node_ids = self.physical_network.stop_ids.get(stop.name)
                 if node_ids == None:
-                    logging.error(f'stop {stop["name"]}, {node_ids}, {type(stop["name"])}')
+                    logging.error(f'stop {stop.name}, {node_ids}, {type(stop.name)}')
                     continue
             
             # TODO EXAMINE THIS NODES, BECAUSE THEY CAUSE PROBLEMS ALSO IN PROCESS_ROUTE
@@ -132,8 +133,8 @@ class LogicalNetwork:
         route_starting_from_stop = []
 
         for line in self.schedule.lines:
-            start_name = line['direction1']['stops'][0]['name']
-            end_name = line['direction2']['stops'][-1]['name']
+            start_name = line.direction1.stops[0].name
+            end_name = line.direction2.stops[-1].name
 
             start_id = int(np.squeeze(self.physical_network.stop_ids.get(start_name)[0])) #TODO: temp workaround wit [0]
             end_id = int(np.squeeze(self.physical_network.stop_ids.get(end_name)[0]))
@@ -143,16 +144,16 @@ class LogicalNetwork:
                 continue
 
             line_data = {
-                "number": line['number'],
+                "number": line.number,
                 "direction1": {
-                    "name": line['direction1']['name'],
+                    "name": line.direction1.name,
                     "start_id": start_id,
                     "start_name": start_name,
                     "end_id": end_id,
                     "end_name": end_name,
                 },
                 "direction2": {
-                    "name": line['direction2']['name'],
+                    "name": line.direction2.name,
                     "start_id": end_id,
                     "start_name": end_name,
                     "end_id": start_id,
@@ -161,8 +162,8 @@ class LogicalNetwork:
             }
             route_starting_from_stop.append(line_data)
 
-            route1 = self.process_route(line['direction1'], start_id, end_id)
-            route2 = self.process_route(line['direction2'], end_id, start_id)
+            route1 = self.process_route(line.direction1, start_id, end_id)
+            route2 = self.process_route(line.direction2, end_id, start_id)
 
             if route1 != None:
                 self.routes.append(route1)
@@ -171,19 +172,19 @@ class LogicalNetwork:
 
 
     def process_route(self, direction : dict, start_node_id : int, end_node_id : int):
-        route = Route(self.__get_next_available_id(), name=direction['name'], schedule_route=direction)
+        route = Route(self.__get_next_available_id(), name=direction.name, schedule_route=direction)
         init_node = curr_stop = self.physical_network.nodes.get(start_node_id)
         
         route.nodes.append(init_node.id)
         route.stops.append(init_node.id)
 
 
-        for idx in range(1, len(direction['stops'])):
-            next_stop = direction['stops'][idx]['name']
+        for idx in range(1, len(direction.stops)):
+            next_stop = direction.stops[idx].name
 
             second_next_stop = self.physical_network.nodes.get(end_node_id).tags['name']
-            if idx < len(direction['stops']) - 1:
-                second_next_stop = direction['stops'][idx + 1]['name']
+            if idx < len(direction.stops) - 1:
+                second_next_stop = direction.stops[idx + 1].name
                 
 
             next_stop_ids = self.physical_network.stop_ids.get(next_stop)
@@ -262,19 +263,19 @@ class LogicalNetwork:
             # firstly we want to combine all the schedules into one big schedule, 
             # each stop will have a list of times in minutes
             time_table = []
-            for i in range(len(route.schedule_route['stops'])):
-                stop = route.schedule_route['stops'][i]
+            for i in range(len(route.schedule_route.stops)):
+                stop = route.schedule_route.stops[i]
                 
                 time_table.append([])
-                for j in range(len(stop['schedule'])):
-                    hour = int(stop['schedule'][j][0]) # Godzina
+                for j in range(len(stop.schedule)):
+                    hour = int(stop.schedule[j][0]) # Godzina
                     if hour == '' or hour == None:
                         continue
 
                     if hour < 2: # the schedule is weird and puts the 0 and 1 after 23 instead of at the beggining
                         hour += 24
                     
-                    minutes = stop['schedule'][j][1] # Minuty
+                    minutes = stop.schedule[j][1] # Minuty
                     if minutes == '' or minutes == None:
                         continue
 
