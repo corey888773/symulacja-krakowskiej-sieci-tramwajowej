@@ -82,7 +82,7 @@ class LogicalNetwork:
         pass
 
     def validate_stop_names(self):
-        for line in self.schedule['lines']:
+        for line in self.schedule.lines:
             for stop in line['direction1'].get('stops'):
                 node_ids = self.physical_network.stop_ids.get(stop['name'])
                 if node_ids == None:
@@ -131,7 +131,7 @@ class LogicalNetwork:
         line_info = []
         route_starting_from_stop = []
 
-        for line in self.schedule['lines']:
+        for line in self.schedule.lines:
             start_name = line['direction1']['stops'][0]['name']
             end_name = line['direction2']['stops'][-1]['name']
 

@@ -2,6 +2,7 @@ import logging
 import utils as U
 from physical_network import PhysicalNetwork, Track, Node
 from logical_network import LogicalNetwork
+from schedule_utils import Schedule
 
 def process_physical_network(trams_osm : dict) -> PhysicalNetwork:
     pn = PhysicalNetwork()
@@ -74,8 +75,10 @@ def process_physical_network(trams_osm : dict) -> PhysicalNetwork:
     return pn
 
 
-def process_logical_network(physical_network : PhysicalNetwork, schedule : dict) -> LogicalNetwork:
-    ln = LogicalNetwork(physical_network, schedule)
+def process_logical_network(raw_schedule : dict, physical_network : PhysicalNetwork) -> LogicalNetwork:
+    schedule = Schedule(raw_schedule)
+
+    ln = LogicalNetwork(physical_network=physical_network, schedule=schedule)
 
     #ln.remove_fake_route_stops()
     ln.validate_stop_names()
