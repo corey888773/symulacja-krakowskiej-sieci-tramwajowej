@@ -12,6 +12,7 @@ class Stop:
 
         return raw_schedule[1:last_hour_idx]
 
+
 class Direction:
     def __init__(self, raw_direction : dict):
         self.name = raw_direction['name'].strip()

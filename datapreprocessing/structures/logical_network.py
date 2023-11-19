@@ -1,71 +1,12 @@
 import logging, math, re, json
 import numpy as np
-from physical_network import PhysicalNetwork
-from schedule_utils import Schedule
 import utils as U
 import matplotlib.pyplot as plt
-
 from shapely.geometry import Point, Polygon
 
-class PassangerNode:
-    def __init__(self, name : str, x : float, y : float):
-        self.name = name
-        self.x = x
-        self.y = y
-        self.properties = {}
-
-    def to_json(self):
-        return {
-            'name': self.name,
-            'generation_distribution': self.properties['generation_distribution'],
-            'absorption_rate': self.properties['absorption_rate'],
-            'expected_generated_count': self.properties['expected_generated_count'],
-        }
-
-class PassangerEdge:
-    def __init__(self, head : str, tail : str):
-        self.head = head
-        self.tail = tail
-        self.lines = []
-
-    def to_json(self):
-        return {
-            'head': self.head,
-            'tail': self.tail,
-            'lines': self.lines
-        }
-
-
-class Route:
-    def __init__(self, id : int, name : str, schedule_route : dict):
-        self.id = id
-        self.name = name
-        self.schedule_route = schedule_route
-        self.nodes = []
-        self.stops = []
-
-    def to_json(self):
-        return {
-            'id': self.id,
-            'name': self.name,
-            'stops': self.stops,
-        }
-
-
-class Trip:
-    def __init__(self, route : int, route_name : str):
-        self.route = route
-        self.route_name = route_name
-        self.time_table = []
-        self.start = 0
-        self.end = 0
-        self.duration = 0
-
-    def to_json(self):
-        return {
-            'route': self.route,
-            'time_table': self.time_table,
-        }
+from .physical_network import PhysicalNetwork
+from .common import Node, Track, Junction, Trip, Route, PassangerNode, PassangerEdge
+from .schedule import Schedule, Line, Direction, Stop
 
 class LogicalNetwork:
     def __init__(self, schedule : Schedule, physical_network : PhysicalNetwork):

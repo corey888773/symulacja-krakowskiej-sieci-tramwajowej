@@ -1,8 +1,7 @@
 import logging
 import utils as U
-from physical_network import PhysicalNetwork, Track, Node
-from logical_network import LogicalNetwork
-from schedule_utils import Schedule
+
+from structures import *
 
 def process_physical_network(trams_osm : dict) -> PhysicalNetwork:
     pn = PhysicalNetwork()
