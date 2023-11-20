@@ -29,7 +29,7 @@ def translate_to_relative(lon : float, lat : float) -> tuple:
     rel_lat = rel_lat / 180.0 * math.pi # in radians
     rel_lon = rel_lon / 180.0 * math.pi
 
-    y = EARTH_R * math.cos(rel_lat) * math.cos(rel_lon) # in meters
+    y = EARTH_R * math.tan(rel_lat) # in meters
     x = EARTH_R * math.cos(lat / 180 * math.pi) * math.sin(rel_lon) 
 
     return x, y
