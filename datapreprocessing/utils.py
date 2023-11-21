@@ -22,7 +22,7 @@ LON0 = 19.937356 # in degrees
 LAT0 = 50.061700 
 EARTH_R = 6365828.0 # in meters
 
-def translate_to_relative(lon : float, lat : float) -> tuple:
+def translate_to_relative(lon : float, lat : float) -> tuple[float, float]:
     rel_lon = lon - LON0 # in degrees
     rel_lat = lat - LAT0 
 

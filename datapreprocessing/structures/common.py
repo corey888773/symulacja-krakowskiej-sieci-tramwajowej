@@ -62,6 +62,12 @@ class Node:
     def distance_to(self, other) -> float:
         return math.sqrt((self.x - other.x) ** 2 + (self.y - other.y) ** 2)
 
+    def add_tags(self, tags : dict):
+        self.tags = tags
+
+        if 'name' in tags:
+            self.tags['name'] = tags['name'].strip().replace(' ', '')
+
     def to_json(self) -> dict:
         export_node = {
                 'id': self.id,
