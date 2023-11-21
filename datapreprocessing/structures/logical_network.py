@@ -8,6 +8,10 @@ from .physical_network import PhysicalNetwork
 from .common import Node, Track, Junction, Trip, Route, PassangerNode, PassangerEdge
 from .schedule import Schedule, Line, Direction, Stop
 
+REMOVED_STOPS = [
+    'KrowodrzaGórkaP+R03'
+]
+
 class LogicalNetwork:
     def __init__(self, schedule : Schedule, physical_network : PhysicalNetwork):
         self.schedule = schedule
@@ -26,58 +30,30 @@ class LogicalNetwork:
     def validate_stop_names(self):
         for line in self.schedule.lines:
             for stop in line.direction1.stops:
+                if stop.name in REMOVED_STOPS:
+                    continue
                 node_ids = self.physical_network.stop_ids.get(stop.name)
                 if node_ids == None:
                     logging.error(f'stop {stop.name} not found')
                     continue
 
             for stop in line.direction2.stops:
+                if stop.name in REMOVED_STOPS:
+                    continue
                 node_ids = self.physical_network.stop_ids.get(stop.name)
                 if node_ids == None:
                     logging.error(f'stop {stop.name} not found')
                     continue
-            
-            # TODO EXAMINE THIS NODES, BECAUSE THEY CAUSE PROBLEMS ALSO IN PROCESS_ROUTE
-            # ERROR - logical_network.py:22, message: stop Plac Bohaterów Getta 02 , None, <class 'str'>
-            # ERROR - logical_network.py:28, message: stop Krowodrza Górka P+R 03 , None, <class 'str'>
-            # ERROR - logical_network.py:28, message: stop Plac Bohaterów Getta 01 , None, <class 'str'>
-            # ERROR - logical_network.py:22, message: stop Plac Centralny im. R.Reagana 01 , None, <class 'str'>
-            # ERROR - logical_network.py:28, message: stop Urzędnicza 02 , None, <class 'str'>
-            # ERROR - logical_network.py:28, message: stop Plac Centralny im. R.Reagana 03 , None, <class 'str'>
-            # ERROR - logical_network.py:28, message: stop Krowodrza Górka P+R 03 , None, <class 'str'>
-            # ERROR - logical_network.py:28, message: stop Urzędnicza 02 , None, <class 'str'>
-            # ERROR - logical_network.py:22, message: stop Plac Centralny im. R.Reagana 01 , None, <class 'str'>
-            # ERROR - logical_network.py:28, message: stop Plac Centralny im. R.Reagana 04 , None, <class 'str'>
-            # ERROR - logical_network.py:28, message: stop Urzędnicza 02 , None, <class 'str'>
-            # ERROR - logical_network.py:28, message: stop Urzędnicza 02 , None, <class 'str'>
-            # ERROR - logical_network.py:22, message: stop Plac Centralny im. R.Reagana 04 , None, <class 'str'>
-            # ERROR - logical_network.py:28, message: stop Plac Centralny im. R.Reagana 02 , None, <class 'str'>
-            # ERROR - logical_network.py:22, message: stop Plac Bohaterów Getta 02 , None, <class 'str'>
-            # ERROR - logical_network.py:28, message: stop Plac Bohaterów Getta 01 , None, <class 'str'>
-            # ERROR - logical_network.py:28, message: stop Stary Kleparz 03 , None, <class 'str'>
-            # ERROR - logical_network.py:22, message: stop Plac Bohaterów Getta 02 , None, <class 'str'>
-            # ERROR - logical_network.py:28, message: stop Krowodrza Górka P+R 03 , None, <class 'str'>
-            # ERROR - logical_network.py:28, message: stop Plac Bohaterów Getta 01 , None, <class 'str'>
-            # ERROR - logical_network.py:22, message: stop Plac Centralny im. R.Reagana 02 , None, <class 'str'>
-            # ERROR - logical_network.py:28, message: stop Plac Centralny im. R.Reagana 03 , None, <class 'str'>
-            # ERROR - logical_network.py:22, message: stop Plac Centralny im. R.Reagana 03 , None, <class 'str'>
-            # ERROR - logical_network.py:28, message: stop Plac Centralny im. R.Reagana 01 , None, <class 'str'>
-            # ERROR - logical_network.py:22, message: stop Plac Bohaterów Getta 02 , None, <class 'str'>
-            # ERROR - logical_network.py:28, message: stop Urzędnicza 02 , None, <class 'str'>
-            # ERROR - logical_network.py:28, message: stop Plac Bohaterów Getta 01 , None, <class 'str'>
-            # ERROR - logical_network.py:22, message: stop Plac Centralny im. R.Reagana 01 , None, <class 'str'>
-            # ERROR - logical_network.py:28, message: stop Stary Kleparz 03 , None, <class 'str'>
-            # ERROR - logical_network.py:28, message: stop Plac Centralny im. R.Reagana 03 , None, <class 'str'>
+
 
     def schedule_create_routes(self):
-        line_info = []
-        route_starting_from_stop = []
-
         for line in self.schedule.lines:
             start_name = line.direction1.stops[0].name
-            end_name = line.direction2.stops[-1].name
+            end_name = line.direction2.stops[0].name
 
-            start_id = int(np.squeeze(self.physical_network.stop_ids.get(start_name)[0])) #TODO: temp workaround wit [0]
+            logging.info(f'{line.number} {start_name} {end_name}')
+
+            start_id = int(np.squeeze(self.physical_network.stop_ids.get(start_name)[0]))
             end_id = int(np.squeeze(self.physical_network.stop_ids.get(end_name)[0]))
 
             if start_id == None or end_id == None:
@@ -112,7 +88,7 @@ class LogicalNetwork:
                 self.routes.append(route2)
 
 
-    def process_route(self, direction : dict, start_node_id : int, end_node_id : int):
+    def process_route(self, direction : Direction, start_node_id : int, end_node_id : int):
         route = Route(self.__get_next_available_id(), name=direction.name, schedule_route=direction)
         init_node = curr_stop = self.physical_network.nodes.get(start_node_id)
         
@@ -129,10 +105,6 @@ class LogicalNetwork:
                 
 
             next_stop_ids = self.physical_network.stop_ids.get(next_stop)
-            if next_stop_ids == None:
-                logging.error(f'next_stop_ids is None, {next_stop}')
-                continue
-
             target = [*next_stop_ids]
             path = []
 
@@ -144,14 +116,10 @@ class LogicalNetwork:
                 )
 
                 if intermediate_platform == None:
-                    logging.error(f'intermediate_platform is None, {curr_stop.id} to {target}')
+                    # logging.error(f'intermediate_platform is None, {curr_stop.id} to {target}')
                     break
             
                 second_next_stop_ids = self.physical_network.stop_ids.get(second_next_stop)
-                if second_next_stop_ids == None:
-                    logging.error(f'second_next_stop_ids is None, {second_next_stop}')
-                    break
-
                 dist2, path2 = self.physical_network.graph_find_path(intermediate_platform, [*second_next_stop_ids])
 
                 end_platform = self.physical_network.nodes.get(
@@ -159,7 +127,7 @@ class LogicalNetwork:
                 )
 
                 if end_platform == None:
-                    logging.error(f'end_platform is None, {second_next_stop_ids} to {intermediate_platform.id}')
+                    # logging.error(f'end_platform is None, {second_next_stop_ids} to {intermediate_platform.id}')
                     break
 
                 straight_line_distance = intermediate_platform.distance_to(end_platform)
@@ -167,7 +135,6 @@ class LogicalNetwork:
                 # logging.info((dist1, dist2, straight_line_distance))
 
                 if dist2 <  2 * straight_line_distance:
-                    # logging.info(len(path1))
                     path = path1
                     break
                 else:
@@ -176,12 +143,8 @@ class LogicalNetwork:
                         if n == path1[0]:
                             target.pop(i)
 
-            
-            if len(path) == 0:
-                continue
-
             route.nodes.extend(path)
-            path.append(curr_stop)
+            path.append(curr_stop.id)
             curr_stop = self.physical_network.nodes.get(
                 U.first_or_default(path, default_value=-1)
             )
@@ -356,11 +319,8 @@ class LogicalNetwork:
         for node in self.passanger_nodes.values():
             node.properties = residential
 
-        # TODO: find city center
         city_center = self.__city_center_cords()
-        # print(city_center)
         for node in self.__get_passanger_nodes_inside_area(city_center):
-            logging.info(node.name)
             node.properties = central
 
         high_interest_nodes = [] # TODO: find high interest nodes
@@ -416,27 +376,32 @@ class LogicalNetwork:
         for node in self.passanger_nodes.values():
             point = Point(node.x, node.y)
             area = Polygon(area)
-            
-            # x, y = area.exterior.xy
-            # plt.plot(x, y)
-            # plt.show()
-
             if point.within(area):
                 nodes_inside.append(node)
-        
+
+
+        #     x, y = area.exterior.xy
+        #     plt.plot(x, y)
+        # for node in self.physical_network.nodes.values():
+        #     plt.plot(node.x, node.y, 'ro')
+        # plt.show()
+
         return nodes_inside
 
 
     def __city_center_cords(self) -> list:
         border_stops = [
-            "Uniwersytet Pedagogiczny 02",
-            "Reymana 01",
-            "Biprostal 02",
-            "Cystersów 02", #
-            "Klimeckiego 01", #
-            "Podgórze SKA 02", #
-            "Łagiewniki 05",
-            "Reymana 01"
+            "Reymana01", #
+            "UniwersytetPedagogiczny02",
+            "Biprostal02", #
+            "Bratysławska01", #
+            "CmentarzRakowicki01", #
+            "Białucha01", #
+            "Dąbie01", #
+            "Klimeckiego01", #
+            "PodgórzeSKA02", #
+            "Łagiewniki05", #
+            "Kobierzyńska01"
         ]
         cords = []
 

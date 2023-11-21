@@ -28,8 +28,9 @@ def process_physical_network(trams_osm : dict) -> PhysicalNetwork:
 
     for s in stop_temps:
         stop_node = pn.nodes.get(s.get('id'))
-        stop_node.tags = s['tags']
+        stop_node.add_tags(s['tags'])
         pn.stops.append(stop_node)
+    pn.resolve_ambiguous_stops()
 
     # pn.fix_stop_names(pn)
     

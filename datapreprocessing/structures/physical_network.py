@@ -52,6 +52,16 @@ class PhysicalNetwork:
 
         del self.nodes[node_id]
 
+    AMBIGOUS_STOPS = {
+        2419064240 : "PlacBohaterówGetta01",
+        2419064241 : "PlacBohaterówGetta02",
+        2419986546 : "Urzędnicza02",
+        2420153433 : "StaryKleparz03",
+    }
+
+    def resolve_ambiguous_stops(self):
+        for node in [self.nodes.get(id) for id in self.AMBIGOUS_STOPS.keys()]:
+            node.tags['name'] = self.AMBIGOUS_STOPS[node.id]
 
     def fix_floating_islands(self):
         logging.info(f'Fixing floating islands')
@@ -313,10 +323,9 @@ class PhysicalNetwork:
                     found_node = node
                     found_dst = dst
                 else:
-                    if dst >= found_dst:
-                        continue
-                    found_dst = dst
-                    found_node = node
+                    if dst < found_dst:
+                        found_dst = dst
+                        found_node = node
             if dst > found_dst:
                 break
 
