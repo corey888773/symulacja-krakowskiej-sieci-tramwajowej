@@ -14,4 +14,4 @@ all:
 	make scrape osm data
 
 .PHONY:
-	requirements scrape osm data
+	requirements scrape osm data all

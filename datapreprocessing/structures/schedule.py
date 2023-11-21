@@ -26,7 +26,7 @@ class Direction:
         self.name = raw_direction['name'].strip().replace(' ', '')
 
         temp_stops = [Stop(raw_stop) for raw_stop in raw_direction['stops']]
-        self.stops = [stop for stop in temp_stops if stop.is_removed == False]
+        self.stops = [stop for stop in temp_stops if not stop.is_removed]
 
 
 class Line:

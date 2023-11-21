@@ -323,10 +323,9 @@ class PhysicalNetwork:
                     found_node = node
                     found_dst = dst
                 else:
-                    if dst >= found_dst:
-                        continue
-                    found_dst = dst
-                    found_node = node
+                    if dst < found_dst:
+                        found_dst = dst
+                        found_node = node
             if dst > found_dst:
                 break
 

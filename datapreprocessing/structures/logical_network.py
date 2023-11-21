@@ -88,7 +88,7 @@ class LogicalNetwork:
                 self.routes.append(route2)
 
 
-    def process_route(self, direction : dict, start_node_id : int, end_node_id : int):
+    def process_route(self, direction : Direction, start_node_id : int, end_node_id : int):
         route = Route(self.__get_next_available_id(), name=direction.name, schedule_route=direction)
         init_node = curr_stop = self.physical_network.nodes.get(start_node_id)
         
@@ -105,10 +105,6 @@ class LogicalNetwork:
                 
 
             next_stop_ids = self.physical_network.stop_ids.get(next_stop)
-            if next_stop_ids == None:
-                logging.error(f'next_stop_ids is None, {next_stop}')
-                continue
-
             target = [*next_stop_ids]
             path = []
 
@@ -120,14 +116,10 @@ class LogicalNetwork:
                 )
 
                 if intermediate_platform == None:
-                    logging.error(f'intermediate_platform is None, {curr_stop.id} to {target}')
+                    # logging.error(f'intermediate_platform is None, {curr_stop.id} to {target}')
                     break
             
                 second_next_stop_ids = self.physical_network.stop_ids.get(second_next_stop)
-                if second_next_stop_ids == None:
-                    logging.error(f'second_next_stop_ids is None, {second_next_stop}')
-                    break
-
                 dist2, path2 = self.physical_network.graph_find_path(intermediate_platform, [*second_next_stop_ids])
 
                 end_platform = self.physical_network.nodes.get(
@@ -135,7 +127,7 @@ class LogicalNetwork:
                 )
 
                 if end_platform == None:
-                    logging.error(f'end_platform is None, {second_next_stop_ids} to {intermediate_platform.id}')
+                    # logging.error(f'end_platform is None, {second_next_stop_ids} to {intermediate_platform.id}')
                     break
 
                 straight_line_distance = intermediate_platform.distance_to(end_platform)
@@ -143,7 +135,6 @@ class LogicalNetwork:
                 # logging.info((dist1, dist2, straight_line_distance))
 
                 if dist2 <  2 * straight_line_distance:
-                    # logging.info(len(path1))
                     path = path1
                     break
                 else:
@@ -152,12 +143,8 @@ class LogicalNetwork:
                         if n == path1[0]:
                             target.pop(i)
 
-            
-            if len(path) == 0:
-                continue
-
             route.nodes.extend(path)
-            path.append(curr_stop)
+            path.append(curr_stop.id)
             curr_stop = self.physical_network.nodes.get(
                 U.first_or_default(path, default_value=-1)
             )
@@ -332,11 +319,8 @@ class LogicalNetwork:
         for node in self.passanger_nodes.values():
             node.properties = residential
 
-        # TODO: find city center
         city_center = self.__city_center_cords()
-        # print(city_center)
         for node in self.__get_passanger_nodes_inside_area(city_center):
-            logging.info(node.name)
             node.properties = central
 
         high_interest_nodes = [] # TODO: find high interest nodes
