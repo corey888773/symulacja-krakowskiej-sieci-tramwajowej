@@ -77,7 +77,6 @@ class LogicalNetwork:
                     "end_name": start_name,
                 }
             }
-            route_starting_from_stop.append(line_data)
 
             route1 = self.process_route(line.direction1, start_id, end_id)
             route2 = self.process_route(line.direction2, end_id, start_id)
