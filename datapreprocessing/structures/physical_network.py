@@ -146,7 +146,7 @@ class PhysicalNetwork:
             for node in joint.adjacent_nodes: # for each adjacent node
                 vec = { 'x': node.x - joint.x,
                         'y': node.y - joint.y }
-                vec['dist'] = math.sqrt(vec['x'] ** 2 + vec['y'] ** 2) # distance from joint to adjacent node
+                vec['mag'] = math.sqrt(vec['x'] ** 2 + vec['y'] ** 2) # distance from joint to adjacent node
                 vectors.append(vec)
 
             # this loop creates a list of paths between adjacent nodes
@@ -154,20 +154,20 @@ class PhysicalNetwork:
             # the cosine is used to determine which paths are the most opposite to each other
             # the most opposite paths are the ones that are most likely to be the crossing paths
             paths = []
-            for i in range(4):
+            for i in range(3):
                 for j in range(i + 1, 4):
-                    path_cos = (vectors[i]['x'] * vectors[j]['x'] + vectors[i]['y'] * vectors[j]['y']) / (vectors[i]['dist'] * vectors[j]['dist'])
+                    path_cos = (vectors[i]['x'] * vectors[j]['x'] + vectors[i]['y'] * vectors[j]['y']) / (vectors[i]['mag'] * vectors[j]['mag'])
                     path = { 'ix1': i, # index of first adjacent node
                              'ix2': j, # index of second adjacent node
                              'accessible': 0, 
                              'cos': path_cos }
                     
                     if joint.adjacent_nodes[i] in joint.accessible_nodes and joint.adjacent_nodes[j] not in joint.accessible_nodes:
-                        path['accessible'] += i
+                        path['accessible'] = i
                         paths.append(path)
 
                     elif joint.adjacent_nodes[j] in joint.accessible_nodes and joint.adjacent_nodes[i] not in joint.accessible_nodes:
-                        path['accessible'] += j
+                        path['accessible'] = j
                         paths.append(path)
                         
             # find first lowest cosine which is the most opposite path
@@ -195,23 +195,22 @@ class PhysicalNetwork:
 
             # update adjacent nodes and accessible nodes of modified nodes
             for adj in joint.adjacent_nodes:
-
                 for i in range(len(adj.accessible_nodes)):
                     # adj_to_adj = adjacent node to adjacent node
                     adj_to_adj = adj.accessible_nodes[i]
                     
-                    if adj not in joint1.adjacent_nodes and adj_to_adj == joint:
+                    if adj in joint1.adjacent_nodes and adj_to_adj == joint:
                         adj.accessible_nodes[i] = joint1
-                    elif adj not in joint2.adjacent_nodes and adj_to_adj == joint:
+                    elif adj_to_adj == joint:
                         adj.accessible_nodes[i] = joint2
                     
                 for i in range(len(adj.adjacent_nodes)):
                     # adj_to_adj = adjacent node to adjacent node
                     adj_to_adj = adj.adjacent_nodes[i]
                     
-                    if adj not in joint1.adjacent_nodes and adj_to_adj == joint:
+                    if adj in joint1.adjacent_nodes and adj_to_adj == joint:
                         adj.adjacent_nodes[i] = joint1
-                    elif adj not in joint2.adjacent_nodes and adj_to_adj == joint:
+                    elif adj_to_adj == joint: 
                         adj.adjacent_nodes[i] = joint2
 
             self.nodes.pop(joint.id)
