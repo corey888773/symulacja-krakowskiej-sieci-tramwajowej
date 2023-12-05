@@ -1,225 +1,232 @@
 {
     "1": [
-        "55 TramStop(id=213593828, x=443.98134173507975, y=448.0343478640945, stop_name=FrancescoNullo02)",
-        "56 TramStop(id=3623688655, x=554.585491566836, y=408.22136672970424, stop_name=TAURONArenaKrakówal.Pokoju02)",
-        "57 TramStop(id=213585881, x=730.205081015252, y=271.89672817136113, stop_name=RondoKocmyrzowskieim.Ks.Gorzelanego02)",
-        "58 TramStop(id=213585855, x=788.4180879453105, y=212.73475562098292, stop_name=Cienista01)",
-        "53 TramStop(id=1316407565, x=219.1277774340453, y=451.3028770763468, stop_name=Oleandry01)",
-        "54 TramStop(id=2419768565, x=303.4092096164973, y=457.8007467448045, stop_name=PlacWszystkichŚwiętych01)"
+        "5 TramStop(id=213592007, x=351.0742994409985, y=360.46058862979027, stop_name=TeatrVariété02)",
+        "7 TramStop(id=213585855, x=655.6497248243869, y=169.57734053569948, stop_name=Cienista01)",
+        "4 TramStop(id=2419831875, x=146.281827175746, y=342.4324397833008, stop_name=Reymana01)",
+        "6 TramStop(id=3629965037, x=569.9501769060256, y=260.1528269397757, stop_name=RondoCzyżyńskie04)"
     ],
     "2": [
-        "59 TramStop(id=2420263459, x=341.00084341289823, y=474.7844090038462, stop_name=Starowiślna03)",
-        "57 TramStop(id=1811875207, x=628.0394535193074, y=380.9553201724975, stop_name=Rondo308.Dywizjonu01)",
-        "56 TramStop(id=1769087965, x=757.0128164103862, y=245.6141302105675, stop_name=TeatrLudowy02)",
-        "58 TramStop(id=2426058890, x=501.1862767150438, y=442.9304783854337, stop_name=Dąbie01)",
-        "60 TramStop(id=2419367401, x=277.86920092358446, y=457.32674935920323, stop_name=Filharmonia03)",
-        "61 TramStop(id=2028510897, x=202.64840721843433, y=446.62448556367065, stop_name=ParkJordana02)"
+        "8 TramStop(id=2424088455, x=297.0711663707658, y=361.7166452377441, stop_name=HalaTargowa01)",
+        "6 TramStop(id=2426068335, x=583.6052528438014, y=239.5658570038775, stop_name=Bieńczycka02)",
+        "7 TramStop(id=3623688656, x=457.1181968329892, y=322.0761311038401, stop_name=TAURONArenaKrakówal.Pokoju01)",
+        "9 TramStop(id=2419768564, x=251.46623056117866, y=358.36380763402263, stop_name=PlacWszystkichŚwiętych02)",
+        "10 TramStop(id=2028510897, x=171.75303205001097, y=349.69931646857395, stop_name=ParkJordana02)"
     ],
     "3": [
-        "56 TramStop(id=1310458632, x=603.1007187874343, y=873.5749297718296, stop_name=ProkocimSzpital02)",
-        "54 TramStop(id=1310458632, x=603.1007187874343, y=873.5749297718296, stop_name=ProkocimSzpital02)",
-        "57 TramStop(id=1310458632, x=603.1007187874343, y=873.5749297718296, stop_name=ProkocimSzpital02)",
-        "55 TramStop(id=1310458632, x=603.1007187874343, y=873.5749297718296, stop_name=ProkocimSzpital02)",
-        "58 TramStop(id=1310458642, x=640.7661589743085, y=855.529427072549, stop_name=Teligi02)"
+        "6 TramStop(id=622594619, x=410.44640699368387, y=591.5247354755958, stop_name=Kabel02)",
+        "4 TramStop(id=2420286330, x=262.402801684073, y=237.04080941978964, stop_name=DworzecTowarowy01)",
+        "5 TramStop(id=2423056677, x=306.0820156251504, y=415.89306925562533, stop_name=św.Wawrzyńca02)",
+        "7 TramStop(id=1310458632, x=502.56146334614135, y=678.5002332725585, stop_name=ProkocimSzpital02)"
     ],
     "4": [
-        "56 TramStop(id=623520640, x=596.564240521051, y=874.5947712931571, stop_name=ProkocimSzpital01)",
-        "59 TramStop(id=2420153434, x=337.2215301172828, y=376.65668636525606, stop_name=DworzecGłównyZachód01)",
-        "57 TramStop(id=1890503312, x=457.9139395693603, y=697.1853093953328, stop_name=Dworcowa01)",
-        "58 TramStop(id=2419106062, x=350.457717746584, y=506.2511176333658, stop_name=Miodowa01)",
-        "60 TramStop(id=652730396, x=280.22360713351725, y=219.22236263358445, stop_name=Bratysławska02)"
+        "6 TramStop(id=1890503305, x=407.61613272679807, y=587.009972006467, stop_name=Kabel01)",
+        "7 TramStop(id=2419064240, x=321.60242685339443, y=447.70119537880646, stop_name=PlacBohaterówGetta01)",
+        "8 TramStop(id=1518864572, x=271.20170416456745, y=353.37766530400046, stop_name=PocztaGłówna01)",
+        "9 TramStop(id=2420286329, x=263.2579032976685, y=237.69326906947413, stop_name=DworzecTowarowy02)",
+        "5 TramStop(id=623520694, x=529.3099324369337, y=663.566946513574, stop_name=Teligi01)"
     ],
     "5": [
-        "33 TramStop(id=1770194212, x=920.8453610384502, y=264.6673342971196, stop_name=Kombinat02)",
-        "31 TramStop(id=470643346, x=279.22243780323606, y=414.1304719309489, stop_name=TeatrBagatela02)",
-        "32 TramStop(id=4068126775, x=555.6093275445915, y=323.2722630319173, stop_name=MuzeumLotnictwaPolskiego02)"
+        "5 TramStop(id=6751743712, x=128.67005680307523, y=241.63389540094755, stop_name=Głowackiego01)",
+        "6 TramStop(id=1995730500, x=340.12191606414615, y=310.57473403271075, stop_name=RondoMogilskie01)",
+        "7 TramStop(id=213602155, x=615.8846326182412, y=263.24913592390004, stop_name=Os.Kolorowe02)"
     ],
     "6": [
-        "29 TramStop(id=639603957, x=495.0100691722665, y=376.72293403195204, stop_name=Białucha01)",
-        "28 TramStop(id=321437262, x=790.0343691602093, y=332.42657114863937, stop_name=PlacCentralnyim.R.Reagana03)",
-        "30 TramStop(id=2419959767, x=242.97900874598292, y=360.1432890437452, stop_name=PlacInwalidów02)"
+        "4 TramStop(id=2420200261, x=305.95233539371696, y=315.7512968575065, stop_name=Lubicz02)",
+        "3 TramStop(id=3629965036, x=577.0650720128698, y=256.46369944499855, stop_name=RondoCzyżyńskie01)",
+        "5 TramStop(id=2419986542, x=124.85014468775289, y=237.85782111758482, stop_name=Głowackiego02)"
     ],
     "7": [
-        "28 TramStop(id=1768224656, x=452.55595511600467, y=388.68856890639995, stop_name=Cystersów02)",
-        "29 TramStop(id=213585881, x=730.205081015252, y=271.89672817136113, stop_name=RondoKocmyrzowskieim.Ks.Gorzelanego02)"
+        "2 TramStop(id=10180183264, x=232.5435951270798, y=145.0346507335547, stop_name=KrowodrzaGórkaP+R02)",
+        "3 TramStop(id=639603980, x=432.8709922762814, y=272.5323142826231, stop_name=TAURONArenaKrakówWieczysta02)",
+        "4 TramStop(id=777395555, x=691.4878107403036, y=158.24121203846164, stop_name=Wańkowicza01)"
     ],
     "8": [
-        "31 TramStop(id=652730396, x=280.22360713351725, y=219.22236263358445, stop_name=Bratysławska02)",
-        "30 TramStop(id=2163355802, x=597.00042776564, y=319.2526157416222, stop_name=AWF01)"
+        "6 TramStop(id=652730395, x=253.0291477892713, y=203.6230900796545, stop_name=SzpitalNarutowicza02)",
+        "5 TramStop(id=2163355802, x=497.5220925020504, y=251.60833626078954, stop_name=AWF01)",
+        "4 TramStop(id=1769087965, x=629.7062396433624, y=194.8982382081382, stop_name=TeatrLudowy02)"
     ],
     "9": [
-        "59 TramStop(id=2419959763, x=259.8125970575427, y=387.8226839140523, stop_name=Batorego01)",
-        "60 TramStop(id=2992273250, x=309.48057924981214, y=501.4066403435236, stop_name=Wawel01)",
-        "61 TramStop(id=2419790522, x=327.0457126314935, y=620.9528935218293, stop_name=Smolki02)",
-        "62 TramStop(id=3150646518, x=275.3996075424293, y=803.2683875604479, stop_name=ŁagiewnikiSKA02)",
-        "58 TramStop(id=2419959774, x=107.17661439159552, y=273.7721904341191, stop_name=Wesele01)"
+        "7 TramStop(id=2419959774, x=92.8850292800137, y=216.58318113891931, stop_name=Wesele01)",
+        "9 TramStop(id=2419768565, x=254.9902166397152, y=358.306322205769, stop_name=PlacWszystkichŚwiętych01)",
+        "11 TramStop(id=3150646518, x=231.85184970896333, y=624.3561145580461, stop_name=ŁagiewnikiSKA02)",
+        "8 TramStop(id=2419986545, x=181.57998354030488, y=267.44126090739513, stop_name=Urzędnicza01)",
+        "10 TramStop(id=2065560164, x=287.7243398769506, y=470.4805167606047, stop_name=Korona01)"
     ],
     "10": [
-        "54 TramStop(id=2419790521, x=326.26399017478985, y=622.9393906810449, stop_name=Smolki01)",
-        "56 TramStop(id=2427903882, x=257.29228186989695, y=384.07455889569394, stop_name=Batorego02)",
-        "53 TramStop(id=3661984748, x=281.8478615130353, y=780.1694022934489, stop_name=ŁagiewnikiZUS01)",
-        "55 TramStop(id=2418766215, x=308.3093639849067, y=502.71386543540046, stop_name=Wawel02)",
-        "57 TramStop(id=2419986542, x=145.87122777991138, y=301.3974692123862, stop_name=Głowackiego02)"
-    ],
-    "11": [
-        "30 TramStop(id=2431520653, x=445.40294574557447, y=552.8876098654539, stop_name=Klimeckiego01)",
-        "29 TramStop(id=623520640, x=596.564240521051, y=874.5947712931571, stop_name=ProkocimSzpital01)",
-        "31 TramStop(id=213585922, x=624.4019946817733, y=316.2070890952897, stop_name=Stella-Sawickiego02)",
-        "32 TramStop(id=1696191638, x=623.6845107964127, y=135.5496749748379, stop_name=Os.ZłotegoWieku02)"
+        "4 TramStop(id=2418596862, x=266.3273562669593, y=409.0249975158937, stop_name=Stradom02)",
+        "2 TramStop(id=629106146, x=221.05173126755776, y=662.3669374620961, stop_name=Solvay01)",
+        "3 TramStop(id=629106157, x=256.31236659784577, y=541.469283696158, stop_name=Rzemieślnicza01)",
+        "5 TramStop(id=2419367401, x=233.891948589048, y=357.9412897363979, stop_name=Filharmonia03)",
+        "6 TramStop(id=2419986539, x=161.6538075500933, y=257.9238293782964, stop_name=Biprostal02)",
+        "7 TramStop(id=2419986540, x=29.159783782540636, y=195.31644474942914, stop_name=BronowiceMałe01)"
     ],
     "12": [
-        "30 TramStop(id=1310458632, x=603.1007187874343, y=873.5749297718296, stop_name=ProkocimSzpital02)",
-        "29 TramStop(id=1310458632, x=603.1007187874343, y=873.5749297718296, stop_name=ProkocimSzpital02)",
-        "31 TramStop(id=1310458632, x=603.1007187874343, y=873.5749297718296, stop_name=ProkocimSzpital02)"
+        "5 TramStop(id=1418989418, x=358.5973764537523, y=424.3577988700773, stop_name=Zabłocie02)",
+        "3 TramStop(id=213648409, x=518.78300542959, y=109.50074241073344, stop_name=Os.ZłotegoWieku01)",
+        "4 TramStop(id=2163355809, x=520.1895829142434, y=249.5216151216498, stop_name=Stella-Sawickiego01)",
+        "6 TramStop(id=1310458614, x=465.5153687657249, y=656.1204233677392, stop_name=Prokocim02)"
     ],
     "13": [
-        "27 TramStop(id=5446809570, x=277.9274698345522, y=813.5377138929807, stop_name=ŁagiewnikiSKA03)",
-        "28 TramStop(id=2418766215, x=308.3093639849067, y=502.71386543540046, stop_name=Wawel02)",
-        "29 TramStop(id=1768224703, x=491.9878449550805, y=378.4537709575517, stop_name=Białucha02)",
-        "30 TramStop(id=773635866, x=858.5545819348787, y=370.4303387514, stop_name=Klasztorna02)"
+        "4 TramStop(id=213602155, x=615.8846326182412, y=263.24913592390004, stop_name=Os.Kolorowe02)",
+        "2 TramStop(id=2419790520, x=264.65910234842124, y=517.7019283798735, stop_name=RondoMatecznego01)",
+        "3 TramStop(id=2420200262, x=310.52870398245096, y=314.7941644757485, stop_name=Lubicz01)",
+        "5 TramStop(id=1764757754, x=883.5954919240118, y=280.9201570117779, stop_name=Meksyk02)"
     ],
     "14": [
-        "28 TramStop(id=2163355809, x=624.4400214225052, y=316.54299276990344, stop_name=Stella-Sawickiego01)",
-        "30 TramStop(id=2421547630, x=303.3653536420273, y=702.5196474250579, stop_name=Rzemieślnicza02)",
-        "27 TramStop(id=1764757654, x=1010.3205424552124, y=406.5073250019623, stop_name=Giedroycia01)",
-        "29 TramStop(id=2420216111, x=335.45559794379665, y=410.53443664886476, stop_name=TeatrSłowackiego03)"
-    ],
-    "17": [
-        "39 TramStop(id=1310458632, x=603.1007187874343, y=873.5749297718296, stop_name=ProkocimSzpital02)",
-        "38 TramStop(id=1310458632, x=603.1007187874343, y=873.5749297718296, stop_name=ProkocimSzpital02)",
-        "40 TramStop(id=287586332, x=715.0668315987735, y=862.9426388952401, stop_name=NowyBieżanówP+R01)"
-    ],
-    "18": [
-        "39 TramStop(id=1890503287, x=543.7879947873056, y=828.1625936204327, stop_name=Wlotowa01)",
-        "40 TramStop(id=2419768562, x=327.92299974000457, y=561.2161549051978, stop_name=PlacWolnica01)",
-        "41 TramStop(id=2419986546, x=210.78696463448327, y=338.03056404008, stop_name=Urzędnicza02)"
-    ],
-    "19": [
-        "29 TramStop(id=2419959766, x=247.41464872079624, y=367.12075460155404, stop_name=PlacInwalidów01)",
-        "30 TramStop(id=213592007, x=419.7215203759456, y=460.5980777730112, stop_name=TeatrVariété02)",
-        "31 TramStop(id=213585881, x=730.205081015252, y=271.89672817136113, stop_name=RondoKocmyrzowskieim.Ks.Gorzelanego02)"
-    ],
-    "20": [
-        "29 TramStop(id=2420200261, x=365.10019547660477, y=402.54272875526954, stop_name=Lubicz02)",
-        "27 TramStop(id=3629965034, x=689.2233570809138, y=317.31837041839697, stop_name=RondoCzyżyńskie03)",
-        "28 TramStop(id=1811875207, x=628.0394535193074, y=380.9553201724975, stop_name=Rondo308.Dywizjonu01)",
-        "30 TramStop(id=6527877110, x=126.17924215303913, y=289.9627480775697, stop_name=Bronowice01)"
-    ],
-    "21": [
-        "26 TramStop(id=1770978364, x=705.0095430215604, y=170.29238657781218, stop_name=RondoHipokratesa02)"
-    ],
-    "22": [
-        "27 TramStop(id=655410587, x=777.958111139109, y=328.7055049274385, stop_name=PlacCentralnyim.R.Reagana02)"
-    ],
-    "23": [
-        "29 TramStop(id=2420263459, x=341.00084341289823, y=474.7844090038462, stop_name=Starowiślna03)",
-        "30 TramStop(id=2419790519, x=312.6877333593817, y=674.8803684431567, stop_name=RondoMatecznego02)",
-        "31 TramStop(id=2017952988, x=107.83814114341286, y=815.7696082226287, stop_name=Chmieleniec02)"
-    ],
-    "24": [
-        "30 TramStop(id=2424198631, x=334.7442661834551, y=349.4372927639728, stop_name=Politechnika04)",
-        "28 TramStop(id=2421261471, x=176.66869395726403, y=731.3028667664896, stop_name=Norymberska01)",
-        "29 TramStop(id=2419064240, x=384.04504303305646, y=573.8806566859129, stop_name=PlacBohaterówGetta01)"
-    ],
-    "25": [
-        "55 TramStop(id=2420286330, x=312.38233888071994, y=300.336573425697, stop_name=DworzecTowarowy01)",
-        "56 TramStop(id=2419894822, x=275.4362621675467, y=421.12286642644597, stop_name=TeatrBagatela01)",
-        "54 TramStop(id=10684101872, x=319.1766553946152, y=113.65434751494911, stop_name=Górnickiego02)",
-        "57 TramStop(id=2992273250, x=309.48057924981214, y=501.4066403435236, stop_name=Wawel01)",
-        "58 TramStop(id=2418596863, x=241.48940475672097, y=573.0129055091711, stop_name=Szwedzka02)",
-        "59 TramStop(id=2846212107, x=219.8383926642381, y=714.5645959576837, stop_name=Grota-Roweckiego02)"
-    ],
-    "26": [
-        "55 TramStop(id=2052183689, x=243.1011762561591, y=688.4508791605448, stop_name=Kobierzyńska01)",
-        "57 TramStop(id=2419768564, x=299.14333173195314, y=457.87539200238757, stop_name=PlacWszystkichŚwiętych02)",
-        "58 TramStop(id=2423789750, x=299.2623603975618, y=359.7961885901708, stop_name=Pędzichów02)",
-        "54 TramStop(id=2017955951, x=64.44754545553633, y=841.6174088451838, stop_name=CzerwoneMakiP+R01)",
-        "56 TramStop(id=2422656435, x=267.48257670953575, y=556.2130562532907, stop_name=RondoGrunwaldzkie01)",
-        "59 TramStop(id=652730395, x=301.03528416596, y=256.9434154765663, stop_name=SzpitalNarutowicza02)",
-        "60 TramStop(id=11170816323, x=347.85571737261284, y=113.40708501103359, stop_name=SiewnaWiadukt02)"
-    ],
-    "29": [
-        "58 TramStop(id=1889519517, x=609.4349422594713, y=635.6748063668822, stop_name=MałyPłaszówP+R01)",
-        "59 TramStop(id=1889519517, x=609.4349422594713, y=635.6748063668822, stop_name=MałyPłaszówP+R01)",
-        "56 TramStop(id=1889519517, x=609.4349422594713, y=635.6748063668822, stop_name=MałyPłaszówP+R01)",
-        "57 TramStop(id=1889519517, x=609.4349422594713, y=635.6748063668822, stop_name=MałyPłaszówP+R01)"
-    ],
-    "30": [
-        "54 TramStop(id=2420069703, x=304.63999648579215, y=391.48496688124555, stop_name=StaryKleparz02)",
-        "52 TramStop(id=1889519517, x=609.4349422594713, y=635.6748063668822, stop_name=MałyPłaszówP+R01)",
-        "53 TramStop(id=2431520653, x=445.40294574557447, y=552.8876098654539, stop_name=Klimeckiego01)",
-        "55 TramStop(id=1316407578, x=234.99169188753524, y=455.6602939842755, stop_name=MuzeumNarodowe02)"
-    ],
-    "31": [
-        "24 TramStop(id=655410587, x=777.958111139109, y=328.7055049274385, stop_name=PlacCentralnyim.R.Reagana02)"
-    ],
-    "32": [
-        "25 TramStop(id=1764757751, x=1060.6952705854023, y=358.0382927434197, stop_name=Meksyk01)"
-    ],
-    "34": [
-        "25 TramStop(id=638606093, x=663.8017159711904, y=361.70804028156806, stop_name=Centralna02)",
-        "23 TramStop(id=2421481610, x=255.56450599435524, y=724.8161919310711, stop_name=Borsucza01)",
-        "24 TramStop(id=2424088456, x=354.06484586236826, y=461.9566214616419, stop_name=HalaTargowa02)",
-        "26 TramStop(id=2426893478, x=926.779613621486, y=359.3641791545092, stop_name=KopiecWandy02)"
-    ],
-    "35": [
-        "32 TramStop(id=2134334913, x=493.5577826222739, y=837.7181249631116, stop_name=Dauna02)",
-        "30 TramStop(id=2419986538, x=195.31687839981575, y=329.6385706809051, stop_name=Biprostal01)",
-        "31 TramStop(id=2423056677, x=365.25717680939255, y=532.5775675408867, stop_name=św.Wawrzyńca02)"
-    ],
-    "36": [
-        "29 TramStop(id=2420069703, x=304.63999648579215, y=391.48496688124555, stop_name=StaryKleparz02)",
-        "30 TramStop(id=2427984132, x=62.339478159904694, y=248.8406718555376, stop_name=BronowiceSKA02)",
-        "28 TramStop(id=1890503312, x=457.9139395693603, y=697.1853093953328, stop_name=Dworcowa01)"
-    ],
-    "41": [
-        "30 TramStop(id=3723474951, x=519.5737715614298, y=638.0084040636307, stop_name=Lipska03)",
-        "31 TramStop(id=652730396, x=280.22360713351725, y=219.22236263358445, stop_name=Bratysławska02)",
-        "29 TramStop(id=9955186239, x=348.5030863442495, y=877.3314549154934, stop_name=KurdwanówP+R10)",
-        "32 TramStop(id=11155917976, x=395.1604685626181, y=61.09473352196983, stop_name=PapierniPrądnickich02)"
-    ],
-    "42": [
-        "30 TramStop(id=622594619, x=491.5930189923542, y=760.6365968115945, stop_name=Kabel02)",
-        "29 TramStop(id=651848336, x=401.8380375518828, y=393.3538975251615, stop_name=RondoMogilskie05)",
-        "31 TramStop(id=9944270972, x=293.20414676470944, y=843.6057730525606, stop_name=SanktuariumBożegoMiłosierdzia01)",
-        "28 TramStop(id=7832518761, x=380.201073018184, y=122.33932624655426, stop_name=Bociana01)"
-    ],
-    "43": [
-        "54 TramStop(id=3629965034, x=689.2233570809138, y=317.31837041839697, stop_name=RondoCzyżyńskie03)",
-        "55 TramStop(id=2163355809, x=624.4400214225052, y=316.54299276990344, stop_name=Stella-Sawickiego01)",
-        "57 TramStop(id=2420216111, x=335.45559794379665, y=410.53443664886476, stop_name=TeatrSłowackiego03)",
-        "59 TramStop(id=2052183690, x=243.31619427485842, y=686.3654768120173, stop_name=Kobierzyńska02)",
-        "56 TramStop(id=1768224723, x=523.5707004300236, y=339.8052550911574, stop_name=TAURONArenaKrakówWieczysta01)",
-        "58 TramStop(id=630945156, x=301.59032314102507, y=538.2730008880562, stop_name=Orzeszkowej02)",
-        "60 TramStop(id=2421242341, x=146.6488647475287, y=755.1688296957124, stop_name=Ruczaj02)"
-    ],
-    "44": [
-        "56 TramStop(id=2052183693, x=234.1647782719485, y=623.00377222359, stop_name=Słomiana01)",
-        "57 TramStop(id=2422680047, x=306.1893943682443, y=536.7119818835426, stop_name=Orzeszkowej01)",
-        "59 TramStop(id=1768224703, x=491.9878449550805, y=378.4537709575517, stop_name=Białucha02)",
-        "55 TramStop(id=2420979790, x=124.53100824283491, y=785.1043889761279, stop_name=KampusUJ01)",
-        "58 TramStop(id=1768224656, x=452.55595511600467, y=388.68856890639995, stop_name=Cystersów02)",
-        "60 TramStop(id=3629965035, x=679.8679336916596, y=323.0119376854492, stop_name=RondoCzyżyńskie02)",
-        "61 TramStop(id=1770978365, x=701.7468862248409, y=221.38147704879043, stop_name=DHWanda02)"
+        "2 TramStop(id=2386355259, x=682.9233342484504, y=281.35560913868534, stop_name=Os.NaSkarpie01)",
+        "3 TramStop(id=4068126774, x=463.3548099121536, y=254.9568625972816, stop_name=MuzeumLotnictwaPolskiego01)",
+        "4 TramStop(id=2419768567, x=271.13743001034845, y=417.7311658843886, stop_name=Stradom04)",
+        "5 TramStop(id=9944270973, x=246.77507909519, y=655.3350282434574, stop_name=SanktuariumBożegoMiłosierdzia02)"
     ],
     "15": [
-        "30 TramStop(id=1889519517, x=609.4349422594713, y=635.6748063668822, stop_name=MałyPłaszówP+R01)",
-        "29 TramStop(id=1889519517, x=609.4349422594713, y=635.6748063668822, stop_name=MałyPłaszówP+R01)"
+        "5 TramStop(id=1889519517, x=507.79408273608493, y=495.2897934089783, stop_name=MałyPłaszówP+R01)",
+        "3 TramStop(id=2421242332, x=122.09111895847592, y=589.6284342116992, stop_name=Ruczaj01)",
+        "4 TramStop(id=289685340, x=303.3229619341429, y=685.4444777869546, stop_name=KurdwanówP+R08)"
     ],
     "16": [
-        "30 TramStop(id=2418723932, x=181.137251727118, y=728.2200166900441, stop_name=Norymberska02)",
-        "28 TramStop(id=1611745699, x=566.4837659451533, y=632.1926046201064, stop_name=Rzebika01)",
-        "29 TramStop(id=2424655425, x=387.8920643272261, y=893.4697710877501, stop_name=Witosa02)"
+        "3 TramStop(id=622594619, x=410.44640699368387, y=591.5247354755958, stop_name=Kabel02)",
+        "4 TramStop(id=3661984748, x=237.17866820642047, y=606.567240846679, stop_name=ŁagiewnikiZUS01)"
     ],
-    "33": [
-        "27 TramStop(id=3629965036, x=693.2892976997897, y=325.5573410703713, stop_name=RondoCzyżyńskie01)",
-        "28 TramStop(id=2426058893, x=420.46763461066337, y=460.3050951368599, stop_name=TeatrVariété01)",
-        "29 TramStop(id=2052183688, x=224.1450190611062, y=588.9645982306847, stop_name=Kapelanka02)"
+    "17": [
+        "3 TramStop(id=6751743712, x=128.67005680307523, y=241.63389540094755, stop_name=Głowackiego01)",
+        "4 TramStop(id=2419959763, x=218.97562365623088, y=304.415170370592, stop_name=Batorego01)",
+        "5 TramStop(id=2992273250, x=260.0056959020187, y=391.88787244846066, stop_name=Wawel01)",
+        "6 TramStop(id=288916414, x=347.27098011077607, y=482.55389513541706, stop_name=PodgórzeSKA02)",
+        "7 TramStop(id=622594608, x=453.53934390063824, y=643.1610448237257, stop_name=Wlotowa02)"
+    ],
+    "18": [
+        "4 TramStop(id=1345322499, x=288.1559042924151, y=466.1389293782108, stop_name=Korona03)",
+        "3 TramStop(id=1890503305, x=407.61613272679807, y=587.009972006467, stop_name=Kabel01)",
+        "5 TramStop(id=2418766215, x=259.03817024840123, y=392.8945860249636, stop_name=Wawel02)",
+        "6 TramStop(id=2427903882, x=216.89362415339312, y=301.52868328748843, stop_name=Batorego02)"
+    ],
+    "19": [
+        "4 TramStop(id=2420200262, x=310.52870398245096, y=314.7941644757485, stop_name=Lubicz01)",
+        "5 TramStop(id=2426058896, x=486.80342699187133, y=312.5163043769043, stop_name=M1al.Pokoju02)",
+        "6 TramStop(id=1770978367, x=563.7777244553299, y=118.71422217360032, stop_name=Dunikowskiego02)"
+    ],
+    "20": [
+        "4 TramStop(id=2427903882, x=216.89362415339312, y=301.52868328748843, stop_name=Batorego02)",
+        "2 TramStop(id=213645106, x=587.2012446700862, y=135.8836869972498, stop_name=RondoHipokratesa01)",
+        "3 TramStop(id=2426058890, x=418.3712720689492, y=346.8545063428052, stop_name=Dąbie01)"
+    ],
+    "23": [
+        "4 TramStop(id=2419106061, x=297.13525094951945, y=400.85200656686527, stop_name=Miodowa02)",
+        "5 TramStop(id=2421481610, x=215.4663310388152, y=563.9389064296754, stop_name=Borsucza01)"
+    ],
+    "24": [
+        "3 TramStop(id=1882247981, x=228.34312561220673, y=563.8454925813259, stop_name=Brożka02)",
+        "4 TramStop(id=2423003234, x=285.64392336201394, y=371.7291697254641, stop_name=Starowiślna04)"
+    ],
+    "25": [
+        "8 TramStop(id=2418723932, x=153.9829470789236, y=566.5602427383097, stop_name=Norymberska02)",
+        "4 TramStop(id=11155917993, x=293.0008600590645, y=93.76122691912383, stop_name=SiewnaWiadukt01)",
+        "5 TramStop(id=2420069703, x=256.0069536186978, y=307.235549207396, stop_name=StaryKleparz02)",
+        "6 TramStop(id=2419768586, x=265.0672380045713, y=363.1386910204087, stop_name=św.Gertrudy01)",
+        "7 TramStop(id=2418596863, x=203.83907349468254, y=447.0329272312008, stop_name=Szwedzka02)"
+    ],
+    "26": [
+        "7 TramStop(id=2423789750, x=251.5645585892902, y=282.8315475349591, stop_name=Pędzichów02)",
+        "8 TramStop(id=652730395, x=253.0291477892713, y=203.6230900796545, stop_name=SzpitalNarutowicza02)",
+        "3 TramStop(id=2017955951, x=57.58710276761696, y=653.8892688807737, stop_name=CzerwoneMakiP+R01)",
+        "4 TramStop(id=2421317351, x=200.3385869204582, y=561.8284720299316, stop_name=Lipińskiego01)",
+        "5 TramStop(id=2422656435, x=225.31169380352955, y=434.095112287017, stop_name=RondoGrunwaldzkie01)",
+        "6 TramStop(id=2422880689, x=264.91993398441474, y=363.08407986348556, stop_name=św.Gertrudy02)",
+        "9 TramStop(id=11155917998, x=266.94321370283393, y=93.64338174934892, stop_name=Górnickiego01)"
     ],
     "27": [
-        "14 TramStop(id=2422538507, x=252.27318181767015, y=873.635579084579, stop_name=BorekFałęckiI02)"
+        "2 TramStop(id=2431530708, x=338.4851859447489, y=363.17318227739185, stop_name=RondoGrzegórzeckie03)",
+        "3 TramStop(id=2419790519, x=262.65508407948926, y=525.4825825941552, stop_name=RondoMatecznego02)"
     ],
     "28": [
-        "14 TramStop(id=652730396, x=280.22360713351725, y=219.22236263358445, stop_name=Bratysławska02)"
+        "3 TramStop(id=1888516300, x=292.46933850550425, y=293.07904382995093, stop_name=DworzecGłównyTunel01)",
+        "2 TramStop(id=2067123479, x=291.5605315370497, y=466.6333041068554, stop_name=Korona02)"
+    ],
+    "29": [
+        "8 TramStop(id=1418995540, x=413.3546889104876, y=491.0229369141124, stop_name=Gromadzka02)",
+        "6 TramStop(id=470643346, x=235.00983992441243, y=324.6751910272825, stop_name=TeatrBagatela02)",
+        "7 TramStop(id=1887802514, x=338.9583517054369, y=316.3038755372173, stop_name=RondoMogilskie04)"
+    ],
+    "30": [
+        "4 TramStop(id=2420069703, x=256.0069536186978, y=307.235549207396, stop_name=StaryKleparz02)",
+        "5 TramStop(id=2419831874, x=114.92097857311819, y=330.9217013668607, stop_name=CichyKącik01)"
+    ],
+    "32": [
+        "6 TramStop(id=213578731, x=761.8051293568778, y=214.5287954639981, stop_name=Kombinat01)",
+        "7 TramStop(id=1770978364, x=586.7470138004194, y=136.89183793923462, stop_name=RondoHipokratesa02)"
+    ],
+    "33": [
+        "2 TramStop(id=1811875207, x=523.1630268202974, y=299.1265109374406, stop_name=Rondo308.Dywizjonu01)",
+        "3 TramStop(id=2424088455, x=297.0711663707658, y=361.7166452377441, stop_name=HalaTargowa01)",
+        "4 TramStop(id=2421481611, x=217.8333680951017, y=563.6830961988016, stop_name=Borsucza02)"
+    ],
+    "35": [
+        "5 TramStop(id=2419959763, x=218.97562365623088, y=304.415170370592, stop_name=Batorego01)",
+        "6 TramStop(id=622594630, x=361.2507042156274, y=505.17728854882046, stop_name=CmentarzPodgórski02)"
+    ],
+    "36": [
+        "4 TramStop(id=2419986546, x=178.47618817631226, y=266.06951483546385, stop_name=Urzędnicza02)",
+        "2 TramStop(id=624406882, x=360.41476918231155, y=686.3362211209037, stop_name=Nowosądecka01)",
+        "3 TramStop(id=2419106073, x=305.806159614076, y=415.74719997680717, stop_name=św.Wawrzyńca01)"
+    ],
+    "41": [
+        "4 TramStop(id=624406882, x=360.41476918231155, y=686.3362211209037, stop_name=Nowosądecka01)",
+        "5 TramStop(id=1418995562, x=396.05527786377996, y=463.78130803923796, stop_name=Kuklińskiego01)",
+        "6 TramStop(id=652730395, x=253.0291477892713, y=203.6230900796545, stop_name=SzpitalNarutowicza02)"
+    ],
+    "42": [
+        "4 TramStop(id=1418989418, x=358.5973764537523, y=424.3577988700773, stop_name=Zabłocie02)",
+        "5 TramStop(id=2134334913, x=412.0694726010089, y=650.8863720980285, stop_name=Dauna02)",
+        "3 TramStop(id=11155918004, x=241.8720844752662, y=101.5253552423901, stop_name=Białoprądnicka02)",
+        "6 TramStop(id=321429867, x=209.51495963239103, y=689.1170806924483, stop_name=BorekFałęcki01)"
+    ],
+    "43": [
+        "5 TramStop(id=2163355804, x=547.8997933124062, y=251.62270761849624, stop_name=Czyżyny01)",
+        "6 TramStop(id=639603957, x=413.2691875770897, y=295.867087128055, stop_name=Białucha01)",
+        "7 TramStop(id=2419768568, x=266.86119149011506, y=413.2559251532511, stop_name=Stradom01)",
+        "4 TramStop(id=840467680, x=565.3507827314836, y=120.34393452762333, stop_name=Dunikowskiego01)",
+        "8 TramStop(id=2052183691, x=199.61156448749347, y=489.8193356016202, stop_name=Słomiana02)",
+        "9 TramStop(id=2421242341, x=125.49254044361066, y=587.3139263173877, stop_name=Ruczaj02)"
+    ],
+    "44": [
+        "5 TramStop(id=2052183689, x=205.1705369072619, y=535.933435675362, stop_name=Kobierzyńska01)",
+        "8 TramStop(id=1768224703, x=410.77256757158824, y=297.2000305075398, stop_name=Białucha02)",
+        "6 TramStop(id=2422680047, x=257.286890999854, y=419.0770435195099, stop_name=Orzeszkowej01)",
+        "7 TramStop(id=2420200260, x=284.0316948310981, y=318.8504800108277, stop_name=TeatrSłowackiego01)",
+        "9 TramStop(id=2163355803, x=546.7657899348276, y=251.17144698685405, stop_name=Czyżyny02)",
+        "10 TramStop(id=1770978365, x=584.0517755770425, y=176.23630991113748, stop_name=DHWanda02)",
+        "11 TramStop(id=213646624, x=549.5974480182365, y=50.3144404875311, stop_name=Os.Piastów01)"
+    ],
+    "11": [
+        "6 TramStop(id=1770978365, x=584.0517755770425, y=176.23630991113748, stop_name=DHWanda02)",
+        "4 TramStop(id=622594610, x=466.2588064714092, y=657.2342041974628, stop_name=Prokocim01)",
+        "5 TramStop(id=1887802513, x=338.68510785952753, y=316.7278305710306, stop_name=RondoMogilskie03)"
+    ],
+    "22": [
+        "1 TramStop(id=840467680, x=565.3507827314836, y=120.34393452762333, stop_name=Dunikowskiego01)",
+        "2 TramStop(id=10757365409, x=741.2394930477228, y=298.09321035649106, stop_name=SucheStawy02)"
+    ],
+    "31": [
+        "4 TramStop(id=213644494, x=607.7617564726223, y=206.43340924855738, stop_name=RondoKocmyrzowskieim.Ks.Gorzelanego01)",
+        "5 TramStop(id=2194801612, x=803.2754132071153, y=317.1381328156174, stop_name=Bramanr402)"
+    ],
+    "34": [
+        "1 TramStop(id=2163355810, x=691.6419590943492, y=244.97020611933988, stop_name=Struga02)",
+        "0 TramStop(id=2421493335, x=245.23569936958685, y=571.1964439521327, stop_name=Łagiewniki04)"
+    ],
+    "38": [
+        "1 TramStop(id=2423804378, x=260.2334979654123, y=244.53475397806193, stop_name=DworzecTowarowy03)",
+        "0 TramStop(id=1768224723, x=436.86275252914993, y=267.43623093227063, stop_name=TAURONArenaKrakówWieczysta01)"
+    ],
+    "39": [
+        "2 TramStop(id=3723474949, x=409.9736919290624, y=542.6930050428243, stop_name=DworzecPłaszówEstakada01)",
+        "1 TramStop(id=1768224650, x=383.891413023064, y=305.18547511306116, stop_name=Cystersów01)",
+        "3 TramStop(id=287586332, x=595.0552087120303, y=670.3121471951848, stop_name=NowyBieżanówP+R01)"
+    ],
+    "21": [
+        "1 TramStop(id=213648443, x=486.82856205318143, y=100.31384943669525, stop_name=Mistrzejowice01)"
+    ],
+    "40": [
+        "0 TramStop(id=4069652993, x=442.39334713932135, y=265.11166385811487, stop_name=TAURONArenaKrakówWieczysta03)"
     ]
 }

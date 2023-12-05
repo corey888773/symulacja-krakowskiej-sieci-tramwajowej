@@ -28,5 +28,6 @@ class Color(Enum):
     LIGHT_CYAN = (224, 255, 255)
     LIGHT_BROWN = (222, 184, 135)
     LIGHT_GOLD = (250, 250, 210)
+    LIGHT_GRAY_2 = (220, 220, 220)
 
 print(list(Color)[0].value)
