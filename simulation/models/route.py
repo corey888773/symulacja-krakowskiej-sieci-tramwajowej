@@ -1,9 +1,9 @@
 class Route:
-    def __init__(self, route_id: int, start: str, stop: str, route_stops: list[int]) -> None:
-        self.id = route_id
+    def __init__(self, id: int, start: str, stop: str, stops: list[int]) -> None:
+        self.id = id
         self.start = start
         self.stop = stop 
-        self.stops = route_stops
+        self.stops = stops
 
     def to_json(self) -> dict:
         return {
