@@ -33,7 +33,6 @@ class Simulation:
 
         self.edges_list: list[Edge] = []
 
-
         self.result: dict[int, list[list[tuple[int, int]]]] = {}
         """
         {
@@ -60,7 +59,6 @@ class Simulation:
 
         self.current_stops = defaultdict(list)
         self.current_stops_trams = defaultdict(list)
-        
 
         self.pgc = PyGameConfig()
 
@@ -297,7 +295,7 @@ class Simulation:
 
             if (simulation_running or update_trams) and current_time != previous_time:
                 # self.use_result(current_time)
-                self.use_result_trams(current_time)
+                previous_time = self.use_result_trams(current_time)
                 
 
             self.display_routes_with_color(WINDOW, selected_route_ids)
@@ -546,6 +544,8 @@ class Simulation:
                         del self.current_stops_trams[route_id][index_to_delete]
             
             previous_time = current_time
+
+        return previous_time
 
     def normalize_coords(self, nodes_to_normalize: list[Node]) -> list[Node]:
         max_x = max(self.nodes_list, key=lambda node: node.x).x
