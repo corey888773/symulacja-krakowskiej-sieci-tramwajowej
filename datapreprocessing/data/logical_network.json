@@ -124457,6 +124457,9 @@
   "passanger_nodes": [
     {
       "name": "Wańkowicza01",
+      "ids": [
+        777395555
+      ],
       "generation_distribution": [
         0,
         0,
@@ -124513,6 +124516,9 @@
     },
     {
       "name": "Cienista01",
+      "ids": [
+        213585855
+      ],
       "generation_distribution": [
         0,
         0,
@@ -124569,6 +124575,9 @@
     },
     {
       "name": "TeatrLudowy01",
+      "ids": [
+        213585864
+      ],
       "generation_distribution": [
         0,
         0,
@@ -124625,6 +124634,9 @@
     },
     {
       "name": "RondoKocmyrzowskieim.Ks.Gorzelanego02",
+      "ids": [
+        213585881
+      ],
       "generation_distribution": [
         0,
         0,
@@ -124681,6 +124693,9 @@
     },
     {
       "name": "Bieńczycka01",
+      "ids": [
+        213585893
+      ],
       "generation_distribution": [
         0,
         0,
@@ -124737,6 +124752,9 @@
     },
     {
       "name": "RondoCzyżyńskie04",
+      "ids": [
+        3629965037
+      ],
       "generation_distribution": [
         0,
         0,
@@ -124793,6 +124811,9 @@
     },
     {
       "name": "Centralna02",
+      "ids": [
+        638606093
+      ],
       "generation_distribution": [
         0,
         0,
@@ -124849,6 +124870,9 @@
     },
     {
       "name": "Rondo308.Dywizjonu02",
+      "ids": [
+        213597071
+      ],
       "generation_distribution": [
         0,
         0,
@@ -124905,6 +124929,9 @@
     },
     {
       "name": "M1al.Pokoju02",
+      "ids": [
+        2426058896
+      ],
       "generation_distribution": [
         0,
         0,
@@ -124961,6 +124988,9 @@
     },
     {
       "name": "TAURONArenaKrakówal.Pokoju02",
+      "ids": [
+        3623688655
+      ],
       "generation_distribution": [
         0,
         0,
@@ -125017,6 +125047,9 @@
     },
     {
       "name": "Dąbie02",
+      "ids": [
+        638606061
+      ],
       "generation_distribution": [
         0,
         0,
@@ -125073,6 +125106,9 @@
     },
     {
       "name": "OfiarDąbia02",
+      "ids": [
+        213593804
+      ],
       "generation_distribution": [
         0,
         0,
@@ -125129,6 +125165,9 @@
     },
     {
       "name": "Fabryczna02",
+      "ids": [
+        638606056
+      ],
       "generation_distribution": [
         0,
         0,
@@ -125185,6 +125224,9 @@
     },
     {
       "name": "FrancescoNullo02",
+      "ids": [
+        213593828
+      ],
       "generation_distribution": [
         0,
         0,
@@ -125241,6 +125283,9 @@
     },
     {
       "name": "TeatrVariété02",
+      "ids": [
+        213592007
+      ],
       "generation_distribution": [
         0,
         0,
@@ -125297,6 +125342,9 @@
     },
     {
       "name": "RondoGrzegórzeckie02",
+      "ids": [
+        2420246141
+      ],
       "generation_distribution": [
         0,
         0,
@@ -125353,6 +125401,9 @@
     },
     {
       "name": "HalaTargowa02",
+      "ids": [
+        2424088456
+      ],
       "generation_distribution": [
         0,
         0,
@@ -125409,6 +125460,9 @@
     },
     {
       "name": "Starowiślna04",
+      "ids": [
+        2423003234
+      ],
       "generation_distribution": [
         0,
         0,
@@ -125465,6 +125519,9 @@
     },
     {
       "name": "PocztaGłówna02",
+      "ids": [
+        2424015724
+      ],
       "generation_distribution": [
         0,
         0,
@@ -125521,6 +125578,9 @@
     },
     {
       "name": "PlacWszystkichŚwiętych01",
+      "ids": [
+        2419768565
+      ],
       "generation_distribution": [
         0,
         0,
@@ -125577,6 +125637,9 @@
     },
     {
       "name": "Filharmonia01",
+      "ids": [
+        2419768561
+      ],
       "generation_distribution": [
         0,
         0,
@@ -125633,6 +125696,9 @@
     },
     {
       "name": "UJ/AST01",
+      "ids": [
+        2419821166
+      ],
       "generation_distribution": [
         0,
         0,
@@ -125689,6 +125755,9 @@
     },
     {
       "name": "MuzeumNarodowe01",
+      "ids": [
+        2419821165
+      ],
       "generation_distribution": [
         0,
         0,
@@ -125745,6 +125814,9 @@
     },
     {
       "name": "Oleandry01",
+      "ids": [
+        1316407565
+      ],
       "generation_distribution": [
         0,
         0,
@@ -125801,6 +125873,9 @@
     },
     {
       "name": "ParkJordana01",
+      "ids": [
+        2028510896
+      ],
       "generation_distribution": [
         0,
         0,
@@ -125857,62 +125932,9 @@
     },
     {
       "name": "Reymana01",
-      "generation_distribution": [
-        0,
-        0,
-        0,
-        0,
-        100,
-        200,
-        300,
-        700,
-        1100,
-        1220,
-        1340,
-        1460,
-        1580,
-        1700,
-        1820,
-        1940,
-        2340,
-        2740,
-        2840,
-        2940,
-        3040,
-        3140,
-        3240,
-        3240
+      "ids": [
+        2419831875
       ],
-      "absorption_rate": [
-        0,
-        0,
-        0,
-        0,
-        25,
-        25,
-        25,
-        100,
-        100,
-        120,
-        120,
-        120,
-        120,
-        120,
-        120,
-        120,
-        100,
-        100,
-        100,
-        100,
-        100,
-        100,
-        100,
-        0
-      ],
-      "expected_generated_count": 3240
-    },
-    {
-      "name": "CichyKącik01",
       "generation_distribution": [
         0,
         0,
@@ -125969,6 +125991,9 @@
     },
     {
       "name": "Reymana02",
+      "ids": [
+        632417956
+      ],
       "generation_distribution": [
         0,
         0,
@@ -126025,6 +126050,9 @@
     },
     {
       "name": "ParkJordana02",
+      "ids": [
+        2028510897
+      ],
       "generation_distribution": [
         0,
         0,
@@ -126081,6 +126109,9 @@
     },
     {
       "name": "Oleandry02",
+      "ids": [
+        1316407567
+      ],
       "generation_distribution": [
         0,
         0,
@@ -126137,6 +126168,9 @@
     },
     {
       "name": "MuzeumNarodowe02",
+      "ids": [
+        1316407578
+      ],
       "generation_distribution": [
         0,
         0,
@@ -126193,6 +126227,9 @@
     },
     {
       "name": "UJ/AST02",
+      "ids": [
+        11271425380
+      ],
       "generation_distribution": [
         0,
         0,
@@ -126249,6 +126286,9 @@
     },
     {
       "name": "Filharmonia03",
+      "ids": [
+        2419367401
+      ],
       "generation_distribution": [
         0,
         0,
@@ -126305,6 +126345,9 @@
     },
     {
       "name": "PlacWszystkichŚwiętych02",
+      "ids": [
+        2419768564
+      ],
       "generation_distribution": [
         0,
         0,
@@ -126361,6 +126404,9 @@
     },
     {
       "name": "Starowiślna03",
+      "ids": [
+        2420263459
+      ],
       "generation_distribution": [
         0,
         0,
@@ -126417,6 +126463,9 @@
     },
     {
       "name": "HalaTargowa01",
+      "ids": [
+        2424088455
+      ],
       "generation_distribution": [
         0,
         0,
@@ -126473,6 +126522,9 @@
     },
     {
       "name": "RondoGrzegórzeckie01",
+      "ids": [
+        2424076384
+      ],
       "generation_distribution": [
         0,
         0,
@@ -126529,6 +126581,9 @@
     },
     {
       "name": "TeatrVariété01",
+      "ids": [
+        2426058893
+      ],
       "generation_distribution": [
         0,
         0,
@@ -126585,6 +126640,9 @@
     },
     {
       "name": "FrancescoNullo01",
+      "ids": [
+        2426058892
+      ],
       "generation_distribution": [
         0,
         0,
@@ -126641,6 +126699,9 @@
     },
     {
       "name": "Fabryczna01",
+      "ids": [
+        1764579350
+      ],
       "generation_distribution": [
         0,
         0,
@@ -126697,6 +126758,9 @@
     },
     {
       "name": "OfiarDąbia01",
+      "ids": [
+        2426058898
+      ],
       "generation_distribution": [
         0,
         0,
@@ -126753,6 +126817,9 @@
     },
     {
       "name": "Dąbie01",
+      "ids": [
+        2426058890
+      ],
       "generation_distribution": [
         0,
         0,
@@ -126809,6 +126876,9 @@
     },
     {
       "name": "TAURONArenaKrakówal.Pokoju01",
+      "ids": [
+        3623688656
+      ],
       "generation_distribution": [
         0,
         0,
@@ -126865,6 +126935,9 @@
     },
     {
       "name": "M1al.Pokoju01",
+      "ids": [
+        2426058897
+      ],
       "generation_distribution": [
         0,
         0,
@@ -126921,6 +126994,9 @@
     },
     {
       "name": "Rondo308.Dywizjonu01",
+      "ids": [
+        1811875207
+      ],
       "generation_distribution": [
         0,
         0,
@@ -126977,6 +127053,9 @@
     },
     {
       "name": "Centralna01",
+      "ids": [
+        2426068337
+      ],
       "generation_distribution": [
         0,
         0,
@@ -127033,6 +127112,9 @@
     },
     {
       "name": "RondoCzyżyńskie03",
+      "ids": [
+        3629965034
+      ],
       "generation_distribution": [
         0,
         0,
@@ -127089,6 +127171,9 @@
     },
     {
       "name": "Bieńczycka02",
+      "ids": [
+        2426068335
+      ],
       "generation_distribution": [
         0,
         0,
@@ -127145,6 +127230,9 @@
     },
     {
       "name": "RondoKocmyrzowskieim.Ks.Gorzelanego03",
+      "ids": [
+        2386355261
+      ],
       "generation_distribution": [
         0,
         0,
@@ -127201,62 +127289,9 @@
     },
     {
       "name": "TeatrLudowy02",
-      "generation_distribution": [
-        0,
-        0,
-        0,
-        0,
-        100,
-        200,
-        300,
-        700,
-        1100,
-        1220,
-        1340,
-        1460,
-        1580,
-        1700,
-        1820,
-        1940,
-        2340,
-        2740,
-        2840,
-        2940,
-        3040,
-        3140,
-        3240,
-        3240
+      "ids": [
+        1769087965
       ],
-      "absorption_rate": [
-        0,
-        0,
-        0,
-        0,
-        25,
-        25,
-        25,
-        100,
-        100,
-        120,
-        120,
-        120,
-        120,
-        120,
-        120,
-        120,
-        100,
-        100,
-        100,
-        100,
-        100,
-        100,
-        100,
-        0
-      ],
-      "expected_generated_count": 3240
-    },
-    {
-      "name": "NowyBieżanówP+R01",
       "generation_distribution": [
         0,
         0,
@@ -127313,6 +127348,9 @@
     },
     {
       "name": "Ćwiklińskiej02",
+      "ids": [
+        1951264400
+      ],
       "generation_distribution": [
         0,
         0,
@@ -127369,6 +127407,9 @@
     },
     {
       "name": "NowyProkocim02",
+      "ids": [
+        1310458610
+      ],
       "generation_distribution": [
         0,
         0,
@@ -127425,6 +127466,9 @@
     },
     {
       "name": "Teligi02",
+      "ids": [
+        1310458642
+      ],
       "generation_distribution": [
         0,
         0,
@@ -127481,6 +127525,9 @@
     },
     {
       "name": "ProkocimSzpital02",
+      "ids": [
+        1310458632
+      ],
       "generation_distribution": [
         0,
         0,
@@ -127537,6 +127584,9 @@
     },
     {
       "name": "Prokocim02",
+      "ids": [
+        1310458614
+      ],
       "generation_distribution": [
         0,
         0,
@@ -127593,6 +127643,9 @@
     },
     {
       "name": "Wlotowa02",
+      "ids": [
+        622594608
+      ],
       "generation_distribution": [
         0,
         0,
@@ -127649,6 +127702,9 @@
     },
     {
       "name": "Bieżanowska02",
+      "ids": [
+        622594618
+      ],
       "generation_distribution": [
         0,
         0,
@@ -127705,6 +127761,9 @@
     },
     {
       "name": "Kabel02",
+      "ids": [
+        622594619
+      ],
       "generation_distribution": [
         0,
         0,
@@ -127761,6 +127820,9 @@
     },
     {
       "name": "Dworcowa02",
+      "ids": [
+        3204607912
+      ],
       "generation_distribution": [
         0,
         0,
@@ -127817,6 +127879,9 @@
     },
     {
       "name": "CmentarzPodgórski02",
+      "ids": [
+        622594630
+      ],
       "generation_distribution": [
         0,
         0,
@@ -127873,6 +127938,9 @@
     },
     {
       "name": "PodgórzeSKA02",
+      "ids": [
+        288916414
+      ],
       "generation_distribution": [
         0,
         0,
@@ -127929,6 +127997,9 @@
     },
     {
       "name": "PlacBohaterówGetta02",
+      "ids": [
+        2419064241
+      ],
       "generation_distribution": [
         0,
         0,
@@ -127985,6 +128056,9 @@
     },
     {
       "name": "św.Wawrzyńca02",
+      "ids": [
+        2423056677
+      ],
       "generation_distribution": [
         0,
         0,
@@ -128041,6 +128115,9 @@
     },
     {
       "name": "Miodowa02",
+      "ids": [
+        2419106061
+      ],
       "generation_distribution": [
         0,
         0,
@@ -128097,6 +128174,9 @@
     },
     {
       "name": "Starowiślna01",
+      "ids": [
+        2423003235
+      ],
       "generation_distribution": [
         0,
         0,
@@ -128153,6 +128233,9 @@
     },
     {
       "name": "TeatrSłowackiego03",
+      "ids": [
+        2420216111
+      ],
       "generation_distribution": [
         0,
         0,
@@ -128209,6 +128292,9 @@
     },
     {
       "name": "DworzecGłównyZachód02",
+      "ids": [
+        2424803961
+      ],
       "generation_distribution": [
         0,
         0,
@@ -128265,6 +128351,9 @@
     },
     {
       "name": "Politechnika01",
+      "ids": [
+        5018097188
+      ],
       "generation_distribution": [
         0,
         0,
@@ -128321,6 +128410,9 @@
     },
     {
       "name": "DworzecTowarowy01",
+      "ids": [
+        2420286330
+      ],
       "generation_distribution": [
         0,
         0,
@@ -128377,6 +128469,9 @@
     },
     {
       "name": "SzpitalNarutowicza01",
+      "ids": [
+        1951264398
+      ],
       "generation_distribution": [
         0,
         0,
@@ -128433,6 +128528,9 @@
     },
     {
       "name": "KrowodrzaGórkaP+R02",
+      "ids": [
+        10180183264
+      ],
       "generation_distribution": [
         0,
         0,
@@ -128489,6 +128587,9 @@
     },
     {
       "name": "Bratysławska02",
+      "ids": [
+        652730396
+      ],
       "generation_distribution": [
         0,
         0,
@@ -128545,6 +128646,9 @@
     },
     {
       "name": "SzpitalNarutowicza02",
+      "ids": [
+        652730395
+      ],
       "generation_distribution": [
         0,
         0,
@@ -128601,6 +128705,9 @@
     },
     {
       "name": "DworzecTowarowy02",
+      "ids": [
+        2420286329
+      ],
       "generation_distribution": [
         0,
         0,
@@ -128657,6 +128764,9 @@
     },
     {
       "name": "Politechnika02",
+      "ids": [
+        2429438683
+      ],
       "generation_distribution": [
         0,
         0,
@@ -128713,6 +128823,9 @@
     },
     {
       "name": "DworzecGłównyZachód01",
+      "ids": [
+        2420153434
+      ],
       "generation_distribution": [
         0,
         0,
@@ -128769,6 +128882,9 @@
     },
     {
       "name": "TeatrSłowackiego04",
+      "ids": [
+        2423481568
+      ],
       "generation_distribution": [
         0,
         0,
@@ -128825,6 +128941,9 @@
     },
     {
       "name": "PocztaGłówna01",
+      "ids": [
+        1518864572
+      ],
       "generation_distribution": [
         0,
         0,
@@ -128881,6 +129000,9 @@
     },
     {
       "name": "Starowiślna02",
+      "ids": [
+        2419039772
+      ],
       "generation_distribution": [
         0,
         0,
@@ -128937,6 +129059,9 @@
     },
     {
       "name": "Miodowa01",
+      "ids": [
+        2419106062
+      ],
       "generation_distribution": [
         0,
         0,
@@ -128993,6 +129118,9 @@
     },
     {
       "name": "św.Wawrzyńca01",
+      "ids": [
+        2419106073
+      ],
       "generation_distribution": [
         0,
         0,
@@ -129049,6 +129177,9 @@
     },
     {
       "name": "PlacBohaterówGetta01",
+      "ids": [
+        2419064240
+      ],
       "generation_distribution": [
         0,
         0,
@@ -129105,6 +129236,9 @@
     },
     {
       "name": "PodgórzeSKA01",
+      "ids": [
+        2419775591
+      ],
       "generation_distribution": [
         0,
         0,
@@ -129161,6 +129295,9 @@
     },
     {
       "name": "CmentarzPodgórski01",
+      "ids": [
+        1890503349
+      ],
       "generation_distribution": [
         0,
         0,
@@ -129217,6 +129354,9 @@
     },
     {
       "name": "Dworcowa01",
+      "ids": [
+        1890503312
+      ],
       "generation_distribution": [
         0,
         0,
@@ -129273,6 +129413,9 @@
     },
     {
       "name": "Kabel01",
+      "ids": [
+        1890503305
+      ],
       "generation_distribution": [
         0,
         0,
@@ -129329,6 +129472,9 @@
     },
     {
       "name": "Bieżanowska01",
+      "ids": [
+        1890503289
+      ],
       "generation_distribution": [
         0,
         0,
@@ -129385,6 +129531,9 @@
     },
     {
       "name": "Wlotowa01",
+      "ids": [
+        1890503287
+      ],
       "generation_distribution": [
         0,
         0,
@@ -129441,6 +129590,9 @@
     },
     {
       "name": "Prokocim01",
+      "ids": [
+        622594610
+      ],
       "generation_distribution": [
         0,
         0,
@@ -129497,6 +129649,9 @@
     },
     {
       "name": "ProkocimSzpital01",
+      "ids": [
+        623520640
+      ],
       "generation_distribution": [
         0,
         0,
@@ -129553,6 +129708,9 @@
     },
     {
       "name": "Teligi01",
+      "ids": [
+        623520694
+      ],
       "generation_distribution": [
         0,
         0,
@@ -129609,6 +129767,9 @@
     },
     {
       "name": "NowyProkocim01",
+      "ids": [
+        623520704
+      ],
       "generation_distribution": [
         0,
         0,
@@ -129665,6 +129826,9 @@
     },
     {
       "name": "Ćwiklińskiej01",
+      "ids": [
+        623562103
+      ],
       "generation_distribution": [
         0,
         0,
@@ -129721,6 +129885,9 @@
     },
     {
       "name": "ZajezdniaNowaHuta01",
+      "ids": [
+        2163355813
+      ],
       "generation_distribution": [
         0,
         0,
@@ -129777,6 +129944,9 @@
     },
     {
       "name": "Kombinat02",
+      "ids": [
+        1770194212
+      ],
       "generation_distribution": [
         0,
         0,
@@ -129833,6 +130003,9 @@
     },
     {
       "name": "Struga02",
+      "ids": [
+        2163355810
+      ],
       "generation_distribution": [
         0,
         0,
@@ -129889,6 +130062,9 @@
     },
     {
       "name": "PlacCentralnyim.R.Reagana01",
+      "ids": [
+        321437391
+      ],
       "generation_distribution": [
         0,
         0,
@@ -129945,6 +130121,9 @@
     },
     {
       "name": "Os.Kolorowe02",
+      "ids": [
+        213602155
+      ],
       "generation_distribution": [
         0,
         0,
@@ -130001,6 +130180,9 @@
     },
     {
       "name": "RondoCzyżyńskie02",
+      "ids": [
+        3629965035
+      ],
       "generation_distribution": [
         0,
         0,
@@ -130057,6 +130239,9 @@
     },
     {
       "name": "Czyżyny02",
+      "ids": [
+        2163355803
+      ],
       "generation_distribution": [
         0,
         0,
@@ -130113,6 +130298,9 @@
     },
     {
       "name": "Stella-Sawickiego02",
+      "ids": [
+        213585922
+      ],
       "generation_distribution": [
         0,
         0,
@@ -130169,6 +130357,9 @@
     },
     {
       "name": "AWF02",
+      "ids": [
+        213585931
+      ],
       "generation_distribution": [
         0,
         0,
@@ -130225,6 +130416,9 @@
     },
     {
       "name": "MuzeumLotnictwaPolskiego02",
+      "ids": [
+        4068126775
+      ],
       "generation_distribution": [
         0,
         0,
@@ -130281,6 +130475,9 @@
     },
     {
       "name": "TAURONArenaKrakówWieczysta02",
+      "ids": [
+        639603980
+      ],
       "generation_distribution": [
         0,
         0,
@@ -130337,6 +130534,9 @@
     },
     {
       "name": "Białucha02",
+      "ids": [
+        1768224703
+      ],
       "generation_distribution": [
         0,
         0,
@@ -130393,6 +130593,9 @@
     },
     {
       "name": "Cystersów02",
+      "ids": [
+        1768224656
+      ],
       "generation_distribution": [
         0,
         0,
@@ -130449,6 +130652,9 @@
     },
     {
       "name": "RondoMogilskie01",
+      "ids": [
+        1995730500
+      ],
       "generation_distribution": [
         0,
         0,
@@ -130505,6 +130711,9 @@
     },
     {
       "name": "Lubicz01",
+      "ids": [
+        2420200262
+      ],
       "generation_distribution": [
         0,
         0,
@@ -130561,6 +130770,9 @@
     },
     {
       "name": "TeatrSłowackiego01",
+      "ids": [
+        2420200260
+      ],
       "generation_distribution": [
         0,
         0,
@@ -130617,6 +130829,9 @@
     },
     {
       "name": "StaryKleparz01",
+      "ids": [
+        2420153432
+      ],
       "generation_distribution": [
         0,
         0,
@@ -130673,6 +130888,9 @@
     },
     {
       "name": "TeatrBagatela02",
+      "ids": [
+        470643346
+      ],
       "generation_distribution": [
         0,
         0,
@@ -130729,6 +130947,9 @@
     },
     {
       "name": "Batorego01",
+      "ids": [
+        2419959763
+      ],
       "generation_distribution": [
         0,
         0,
@@ -130785,6 +131006,9 @@
     },
     {
       "name": "PlacInwalidów01",
+      "ids": [
+        2419959766
+      ],
       "generation_distribution": [
         0,
         0,
@@ -130841,6 +131065,9 @@
     },
     {
       "name": "Urzędnicza01",
+      "ids": [
+        2419986545
+      ],
       "generation_distribution": [
         0,
         0,
@@ -130897,6 +131124,9 @@
     },
     {
       "name": "Biprostal01",
+      "ids": [
+        2419986538
+      ],
       "generation_distribution": [
         0,
         0,
@@ -130953,6 +131183,9 @@
     },
     {
       "name": "UniwersytetPedagogiczny01",
+      "ids": [
+        2419986543
+      ],
       "generation_distribution": [
         0,
         0,
@@ -131009,6 +131242,9 @@
     },
     {
       "name": "Głowackiego01",
+      "ids": [
+        6751743712
+      ],
       "generation_distribution": [
         0,
         0,
@@ -131065,6 +131301,9 @@
     },
     {
       "name": "Bronowice03",
+      "ids": [
+        2419959765
+      ],
       "generation_distribution": [
         0,
         0,
@@ -131121,6 +131360,9 @@
     },
     {
       "name": "Wesele01",
+      "ids": [
+        2419959774
+      ],
       "generation_distribution": [
         0,
         0,
@@ -131177,6 +131419,9 @@
     },
     {
       "name": "BronowiceSKA01",
+      "ids": [
+        2419986537
+      ],
       "generation_distribution": [
         0,
         0,
@@ -131233,6 +131478,9 @@
     },
     {
       "name": "BronowiceMałe01",
+      "ids": [
+        2419986540
+      ],
       "generation_distribution": [
         0,
         0,
@@ -131289,6 +131537,9 @@
     },
     {
       "name": "BronowiceSKA02",
+      "ids": [
+        2427984132
+      ],
       "generation_distribution": [
         0,
         0,
@@ -131345,6 +131596,9 @@
     },
     {
       "name": "Wesele02",
+      "ids": [
+        2419959874
+      ],
       "generation_distribution": [
         0,
         0,
@@ -131401,6 +131655,9 @@
     },
     {
       "name": "Bronowice02",
+      "ids": [
+        2428077846
+      ],
       "generation_distribution": [
         0,
         0,
@@ -131457,6 +131714,9 @@
     },
     {
       "name": "Głowackiego02",
+      "ids": [
+        2419986542
+      ],
       "generation_distribution": [
         0,
         0,
@@ -131513,6 +131773,9 @@
     },
     {
       "name": "UniwersytetPedagogiczny02",
+      "ids": [
+        2419986544
+      ],
       "generation_distribution": [
         0,
         0,
@@ -131569,6 +131832,9 @@
     },
     {
       "name": "Biprostal02",
+      "ids": [
+        2419986539
+      ],
       "generation_distribution": [
         0,
         0,
@@ -131625,6 +131891,9 @@
     },
     {
       "name": "Urzędnicza02",
+      "ids": [
+        2419986546
+      ],
       "generation_distribution": [
         0,
         0,
@@ -131681,6 +131950,9 @@
     },
     {
       "name": "PlacInwalidów02",
+      "ids": [
+        2419959767
+      ],
       "generation_distribution": [
         0,
         0,
@@ -131737,6 +132009,9 @@
     },
     {
       "name": "Batorego02",
+      "ids": [
+        2427903882
+      ],
       "generation_distribution": [
         0,
         0,
@@ -131793,6 +132068,9 @@
     },
     {
       "name": "TeatrBagatela03",
+      "ids": [
+        2419959769
+      ],
       "generation_distribution": [
         0,
         0,
@@ -131849,6 +132127,9 @@
     },
     {
       "name": "StaryKleparz02",
+      "ids": [
+        2420069703
+      ],
       "generation_distribution": [
         0,
         0,
@@ -131905,6 +132186,9 @@
     },
     {
       "name": "TeatrSłowackiego02",
+      "ids": [
+        1027047776
+      ],
       "generation_distribution": [
         0,
         0,
@@ -131961,6 +132245,9 @@
     },
     {
       "name": "Lubicz02",
+      "ids": [
+        2420200261
+      ],
       "generation_distribution": [
         0,
         0,
@@ -132017,6 +132304,9 @@
     },
     {
       "name": "RondoMogilskie02",
+      "ids": [
+        1887812661
+      ],
       "generation_distribution": [
         0,
         0,
@@ -132073,6 +132363,9 @@
     },
     {
       "name": "Cystersów01",
+      "ids": [
+        1768224650
+      ],
       "generation_distribution": [
         0,
         0,
@@ -132129,6 +132422,9 @@
     },
     {
       "name": "Białucha01",
+      "ids": [
+        639603957
+      ],
       "generation_distribution": [
         0,
         0,
@@ -132185,6 +132481,9 @@
     },
     {
       "name": "TAURONArenaKrakówWieczysta01",
+      "ids": [
+        1768224723
+      ],
       "generation_distribution": [
         0,
         0,
@@ -132241,6 +132540,9 @@
     },
     {
       "name": "MuzeumLotnictwaPolskiego01",
+      "ids": [
+        4068126774
+      ],
       "generation_distribution": [
         0,
         0,
@@ -132297,6 +132599,9 @@
     },
     {
       "name": "AWF01",
+      "ids": [
+        2163355802
+      ],
       "generation_distribution": [
         0,
         0,
@@ -132353,6 +132658,9 @@
     },
     {
       "name": "Stella-Sawickiego01",
+      "ids": [
+        2163355809
+      ],
       "generation_distribution": [
         0,
         0,
@@ -132409,6 +132717,9 @@
     },
     {
       "name": "Czyżyny01",
+      "ids": [
+        2163355804
+      ],
       "generation_distribution": [
         0,
         0,
@@ -132465,6 +132776,9 @@
     },
     {
       "name": "RondoCzyżyńskie01",
+      "ids": [
+        3629965036
+      ],
       "generation_distribution": [
         0,
         0,
@@ -132521,6 +132835,9 @@
     },
     {
       "name": "Os.Kolorowe01",
+      "ids": [
+        2163355807
+      ],
       "generation_distribution": [
         0,
         0,
@@ -132577,6 +132894,9 @@
     },
     {
       "name": "PlacCentralnyim.R.Reagana03",
+      "ids": [
+        321437262
+      ],
       "generation_distribution": [
         0,
         0,
@@ -132633,6 +132953,9 @@
     },
     {
       "name": "Struga01",
+      "ids": [
+        213605085
+      ],
       "generation_distribution": [
         0,
         0,
@@ -132689,6 +133012,9 @@
     },
     {
       "name": "RondoMogilskie05",
+      "ids": [
+        651848336
+      ],
       "generation_distribution": [
         0,
         0,
@@ -132745,6 +133071,9 @@
     },
     {
       "name": "DworzecGłównyTunel02",
+      "ids": [
+        276679066
+      ],
       "generation_distribution": [
         0,
         0,
@@ -132801,6 +133130,9 @@
     },
     {
       "name": "Politechnika03",
+      "ids": [
+        2420153435
+      ],
       "generation_distribution": [
         0,
         0,
@@ -132857,6 +133189,9 @@
     },
     {
       "name": "Politechnika04",
+      "ids": [
+        2424198631
+      ],
       "generation_distribution": [
         0,
         0,
@@ -132913,6 +133248,9 @@
     },
     {
       "name": "DworzecGłównyTunel01",
+      "ids": [
+        1888516300
+      ],
       "generation_distribution": [
         0,
         0,
@@ -132969,6 +133307,9 @@
     },
     {
       "name": "BorekFałęcki01",
+      "ids": [
+        321429867
+      ],
       "generation_distribution": [
         0,
         0,
@@ -133025,6 +133366,9 @@
     },
     {
       "name": "BorekFałęckiI02",
+      "ids": [
+        2422538507
+      ],
       "generation_distribution": [
         0,
         0,
@@ -133081,6 +133425,9 @@
     },
     {
       "name": "Solvay02",
+      "ids": [
+        2422550518
+      ],
       "generation_distribution": [
         0,
         0,
@@ -133137,6 +133484,9 @@
     },
     {
       "name": "ŁagiewnikiSKA02",
+      "ids": [
+        3150646518
+      ],
       "generation_distribution": [
         0,
         0,
@@ -133193,6 +133543,9 @@
     },
     {
       "name": "Łagiewniki02",
+      "ids": [
+        2421489794
+      ],
       "generation_distribution": [
         0,
         0,
@@ -133249,6 +133602,9 @@
     },
     {
       "name": "Rzemieślnicza02",
+      "ids": [
+        2421547630
+      ],
       "generation_distribution": [
         0,
         0,
@@ -133305,6 +133661,9 @@
     },
     {
       "name": "RondoMatecznego02",
+      "ids": [
+        2419790519
+      ],
       "generation_distribution": [
         0,
         0,
@@ -133361,6 +133720,9 @@
     },
     {
       "name": "Smolki02",
+      "ids": [
+        2419790522
+      ],
       "generation_distribution": [
         0,
         0,
@@ -133417,6 +133779,9 @@
     },
     {
       "name": "Korona01",
+      "ids": [
+        2065560164
+      ],
       "generation_distribution": [
         0,
         0,
@@ -133473,6 +133838,9 @@
     },
     {
       "name": "PlacWolnica02",
+      "ids": [
+        2419768563
+      ],
       "generation_distribution": [
         0,
         0,
@@ -133529,6 +133897,9 @@
     },
     {
       "name": "Stradom04",
+      "ids": [
+        2419768567
+      ],
       "generation_distribution": [
         0,
         0,
@@ -133585,6 +133956,9 @@
     },
     {
       "name": "Wawel01",
+      "ids": [
+        2992273250
+      ],
       "generation_distribution": [
         0,
         0,
@@ -133641,6 +134015,9 @@
     },
     {
       "name": "św.Gertrudy01",
+      "ids": [
+        2419768586
+      ],
       "generation_distribution": [
         0,
         0,
@@ -133697,6 +134074,9 @@
     },
     {
       "name": "TeatrBagatela01",
+      "ids": [
+        2419894822
+      ],
       "generation_distribution": [
         0,
         0,
@@ -133753,6 +134133,9 @@
     },
     {
       "name": "św.Gertrudy02",
+      "ids": [
+        2422880689
+      ],
       "generation_distribution": [
         0,
         0,
@@ -133809,6 +134192,9 @@
     },
     {
       "name": "Wawel02",
+      "ids": [
+        2418766215
+      ],
       "generation_distribution": [
         0,
         0,
@@ -133865,6 +134251,9 @@
     },
     {
       "name": "Stradom02",
+      "ids": [
+        2418596862
+      ],
       "generation_distribution": [
         0,
         0,
@@ -133921,6 +134310,9 @@
     },
     {
       "name": "PlacWolnica01",
+      "ids": [
+        2419768562
+      ],
       "generation_distribution": [
         0,
         0,
@@ -133977,6 +134369,9 @@
     },
     {
       "name": "Korona03",
+      "ids": [
+        1345322499
+      ],
       "generation_distribution": [
         0,
         0,
@@ -134033,6 +134428,9 @@
     },
     {
       "name": "Smolki01",
+      "ids": [
+        2419790521
+      ],
       "generation_distribution": [
         0,
         0,
@@ -134089,6 +134487,9 @@
     },
     {
       "name": "RondoMatecznego01",
+      "ids": [
+        2419790520
+      ],
       "generation_distribution": [
         0,
         0,
@@ -134145,6 +134546,9 @@
     },
     {
       "name": "Rzemieślnicza01",
+      "ids": [
+        629106157
+      ],
       "generation_distribution": [
         0,
         0,
@@ -134201,6 +134605,9 @@
     },
     {
       "name": "Łagiewniki01",
+      "ids": [
+        2419790544
+      ],
       "generation_distribution": [
         0,
         0,
@@ -134257,6 +134664,9 @@
     },
     {
       "name": "ŁagiewnikiZUS01",
+      "ids": [
+        3661984748
+      ],
       "generation_distribution": [
         0,
         0,
@@ -134313,6 +134723,9 @@
     },
     {
       "name": "ŁagiewnikiSKA05",
+      "ids": [
+        9961675623
+      ],
       "generation_distribution": [
         0,
         0,
@@ -134369,6 +134782,9 @@
     },
     {
       "name": "Solvay01",
+      "ids": [
+        629106146
+      ],
       "generation_distribution": [
         0,
         0,
@@ -134425,6 +134841,9 @@
     },
     {
       "name": "Mistrzejowice01",
+      "ids": [
+        213648443
+      ],
       "generation_distribution": [
         0,
         0,
@@ -134481,6 +134900,9 @@
     },
     {
       "name": "Miśnieńska02",
+      "ids": [
+        2427246149
+      ],
       "generation_distribution": [
         0,
         0,
@@ -134537,6 +134959,9 @@
     },
     {
       "name": "Os.ZłotegoWieku02",
+      "ids": [
+        1696191638
+      ],
       "generation_distribution": [
         0,
         0,
@@ -134593,6 +135018,9 @@
     },
     {
       "name": "RondoPiastowskie02",
+      "ids": [
+        1301798253
+      ],
       "generation_distribution": [
         0,
         0,
@@ -134649,6 +135077,9 @@
     },
     {
       "name": "Dunikowskiego02",
+      "ids": [
+        1770978367
+      ],
       "generation_distribution": [
         0,
         0,
@@ -134705,6 +135136,9 @@
     },
     {
       "name": "RondoHipokratesa02",
+      "ids": [
+        1770978364
+      ],
       "generation_distribution": [
         0,
         0,
@@ -134761,6 +135195,9 @@
     },
     {
       "name": "DHWanda02",
+      "ids": [
+        1770978365
+      ],
       "generation_distribution": [
         0,
         0,
@@ -134817,6 +135254,9 @@
     },
     {
       "name": "RondoMogilskie03",
+      "ids": [
+        1887802513
+      ],
       "generation_distribution": [
         0,
         0,
@@ -134873,6 +135313,9 @@
     },
     {
       "name": "RondoGrzegórzeckie04",
+      "ids": [
+        2424076383
+      ],
       "generation_distribution": [
         0,
         0,
@@ -134929,6 +135372,9 @@
     },
     {
       "name": "Zabłocie01",
+      "ids": [
+        2431520663
+      ],
       "generation_distribution": [
         0,
         0,
@@ -134985,6 +135431,9 @@
     },
     {
       "name": "Klimeckiego01",
+      "ids": [
+        2431520653
+      ],
       "generation_distribution": [
         0,
         0,
@@ -135041,6 +135490,9 @@
     },
     {
       "name": "Kuklińskiego01",
+      "ids": [
+        1418995562
+      ],
       "generation_distribution": [
         0,
         0,
@@ -135097,6 +135549,9 @@
     },
     {
       "name": "Gromadzka01",
+      "ids": [
+        2255627362
+      ],
       "generation_distribution": [
         0,
         0,
@@ -135153,6 +135608,9 @@
     },
     {
       "name": "Lipska03",
+      "ids": [
+        3723474951
+      ],
       "generation_distribution": [
         0,
         0,
@@ -135209,6 +135667,9 @@
     },
     {
       "name": "DworzecPłaszówEstakada02",
+      "ids": [
+        3723474950
+      ],
       "generation_distribution": [
         0,
         0,
@@ -135265,6 +135726,9 @@
     },
     {
       "name": "DworzecPłaszówEstakada01",
+      "ids": [
+        3723474949
+      ],
       "generation_distribution": [
         0,
         0,
@@ -135321,6 +135785,9 @@
     },
     {
       "name": "Lipska02",
+      "ids": [
+        1611745642
+      ],
       "generation_distribution": [
         0,
         0,
@@ -135377,6 +135844,9 @@
     },
     {
       "name": "Gromadzka02",
+      "ids": [
+        1418995540
+      ],
       "generation_distribution": [
         0,
         0,
@@ -135433,6 +135903,9 @@
     },
     {
       "name": "Kuklińskiego02",
+      "ids": [
+        1418995542
+      ],
       "generation_distribution": [
         0,
         0,
@@ -135489,6 +135962,9 @@
     },
     {
       "name": "Klimeckiego02",
+      "ids": [
+        1418989432
+      ],
       "generation_distribution": [
         0,
         0,
@@ -135545,6 +136021,9 @@
     },
     {
       "name": "Zabłocie02",
+      "ids": [
+        1418989418
+      ],
       "generation_distribution": [
         0,
         0,
@@ -135601,6 +136080,9 @@
     },
     {
       "name": "RondoGrzegórzeckie03",
+      "ids": [
+        2431530708
+      ],
       "generation_distribution": [
         0,
         0,
@@ -135657,6 +136139,9 @@
     },
     {
       "name": "RondoKocmyrzowskieim.Ks.Gorzelanego01",
+      "ids": [
+        213644494
+      ],
       "generation_distribution": [
         0,
         0,
@@ -135713,6 +136198,9 @@
     },
     {
       "name": "DHWanda01",
+      "ids": [
+        213643707
+      ],
       "generation_distribution": [
         0,
         0,
@@ -135769,6 +136257,9 @@
     },
     {
       "name": "RondoHipokratesa01",
+      "ids": [
+        213645106
+      ],
       "generation_distribution": [
         0,
         0,
@@ -135825,6 +136316,9 @@
     },
     {
       "name": "Dunikowskiego01",
+      "ids": [
+        840467680
+      ],
       "generation_distribution": [
         0,
         0,
@@ -135881,6 +136375,9 @@
     },
     {
       "name": "RondoPiastowskie01",
+      "ids": [
+        213645256
+      ],
       "generation_distribution": [
         0,
         0,
@@ -135937,6 +136434,9 @@
     },
     {
       "name": "Os.ZłotegoWieku01",
+      "ids": [
+        213648409
+      ],
       "generation_distribution": [
         0,
         0,
@@ -135993,6 +136493,9 @@
     },
     {
       "name": "Miśnieńska01",
+      "ids": [
+        213648418
+      ],
       "generation_distribution": [
         0,
         0,
@@ -136049,6 +136552,9 @@
     },
     {
       "name": "Pleszów01",
+      "ids": [
+        1764757832
+      ],
       "generation_distribution": [
         0,
         0,
@@ -136105,6 +136611,9 @@
     },
     {
       "name": "Koksochemia02",
+      "ids": [
+        2194801621
+      ],
       "generation_distribution": [
         0,
         0,
@@ -136161,6 +136670,9 @@
     },
     {
       "name": "Meksyk02",
+      "ids": [
+        1764757754
+      ],
       "generation_distribution": [
         0,
         0,
@@ -136217,6 +136729,9 @@
     },
     {
       "name": "Bramanr502",
+      "ids": [
+        8551881277
+      ],
       "generation_distribution": [
         0,
         0,
@@ -136273,6 +136788,9 @@
     },
     {
       "name": "Giedroycia02",
+      "ids": [
+        1764757662
+      ],
       "generation_distribution": [
         0,
         0,
@@ -136329,6 +136847,9 @@
     },
     {
       "name": "Bramanr402",
+      "ids": [
+        2194801612
+      ],
       "generation_distribution": [
         0,
         0,
@@ -136385,6 +136906,9 @@
     },
     {
       "name": "FortMogiła02",
+      "ids": [
+        1764757687
+      ],
       "generation_distribution": [
         0,
         0,
@@ -136441,6 +136965,9 @@
     },
     {
       "name": "Bardosa02",
+      "ids": [
+        773635753
+      ],
       "generation_distribution": [
         0,
         0,
@@ -136497,6 +137024,9 @@
     },
     {
       "name": "SucheStawy02",
+      "ids": [
+        10757365409
+      ],
       "generation_distribution": [
         0,
         0,
@@ -136553,6 +137083,9 @@
     },
     {
       "name": "Klasztorna02",
+      "ids": [
+        773635866
+      ],
       "generation_distribution": [
         0,
         0,
@@ -136609,6 +137142,9 @@
     },
     {
       "name": "Os.NaSkarpie02",
+      "ids": [
+        773635778
+      ],
       "generation_distribution": [
         0,
         0,
@@ -136665,6 +137201,9 @@
     },
     {
       "name": "ŁagiewnikiSKA03",
+      "ids": [
+        5446809570
+      ],
       "generation_distribution": [
         0,
         0,
@@ -136721,6 +137260,9 @@
     },
     {
       "name": "SanktuariumBożegoMiłosierdzia01",
+      "ids": [
+        9944270972
+      ],
       "generation_distribution": [
         0,
         0,
@@ -136777,6 +137319,9 @@
     },
     {
       "name": "KurdwanówP+R10",
+      "ids": [
+        9955186239
+      ],
       "generation_distribution": [
         0,
         0,
@@ -136833,6 +137378,9 @@
     },
     {
       "name": "Turowicza02",
+      "ids": [
+        9955186236
+      ],
       "generation_distribution": [
         0,
         0,
@@ -136889,6 +137437,9 @@
     },
     {
       "name": "SanktuariumBożegoMiłosierdzia02",
+      "ids": [
+        9944270973
+      ],
       "generation_distribution": [
         0,
         0,
@@ -136945,6 +137496,9 @@
     },
     {
       "name": "PocztaGłówna03",
+      "ids": [
+        2419768566
+      ],
       "generation_distribution": [
         0,
         0,
@@ -137001,6 +137555,9 @@
     },
     {
       "name": "PlacCentralnyim.R.Reagana04",
+      "ids": [
+        2428234771
+      ],
       "generation_distribution": [
         0,
         0,
@@ -137057,6 +137614,9 @@
     },
     {
       "name": "Os.NaSkarpie01",
+      "ids": [
+        2386355259
+      ],
       "generation_distribution": [
         0,
         0,
@@ -137113,6 +137673,9 @@
     },
     {
       "name": "Klasztorna01",
+      "ids": [
+        2428299807
+      ],
       "generation_distribution": [
         0,
         0,
@@ -137169,6 +137732,9 @@
     },
     {
       "name": "SucheStawy01",
+      "ids": [
+        10757365408
+      ],
       "generation_distribution": [
         0,
         0,
@@ -137225,6 +137791,9 @@
     },
     {
       "name": "Bardosa01",
+      "ids": [
+        2194801607
+      ],
       "generation_distribution": [
         0,
         0,
@@ -137281,6 +137850,9 @@
     },
     {
       "name": "FortMogiła01",
+      "ids": [
+        2194801619
+      ],
       "generation_distribution": [
         0,
         0,
@@ -137337,6 +137909,9 @@
     },
     {
       "name": "Bramanr401",
+      "ids": [
+        2194801616
+      ],
       "generation_distribution": [
         0,
         0,
@@ -137393,6 +137968,9 @@
     },
     {
       "name": "Giedroycia01",
+      "ids": [
+        1764757654
+      ],
       "generation_distribution": [
         0,
         0,
@@ -137449,6 +138027,9 @@
     },
     {
       "name": "Bramanr501",
+      "ids": [
+        321436944
+      ],
       "generation_distribution": [
         0,
         0,
@@ -137505,6 +138086,9 @@
     },
     {
       "name": "Meksyk01",
+      "ids": [
+        1764757751
+      ],
       "generation_distribution": [
         0,
         0,
@@ -137561,6 +138145,9 @@
     },
     {
       "name": "Koksochemia01",
+      "ids": [
+        321436933
+      ],
       "generation_distribution": [
         0,
         0,
@@ -137617,6 +138204,9 @@
     },
     {
       "name": "MałyPłaszówP+R01",
+      "ids": [
+        1889519517
+      ],
       "generation_distribution": [
         0,
         0,
@@ -137673,6 +138263,9 @@
     },
     {
       "name": "Rzebika02",
+      "ids": [
+        1611745646
+      ],
       "generation_distribution": [
         0,
         0,
@@ -137729,6 +138322,9 @@
     },
     {
       "name": "Bieżanowska03",
+      "ids": [
+        2134334911
+      ],
       "generation_distribution": [
         0,
         0,
@@ -137785,6 +138381,9 @@
     },
     {
       "name": "Dauna01",
+      "ids": [
+        2134334912
+      ],
       "generation_distribution": [
         0,
         0,
@@ -137841,6 +138440,9 @@
     },
     {
       "name": "PiaskiNowe01",
+      "ids": [
+        2134334915
+      ],
       "generation_distribution": [
         0,
         0,
@@ -137897,6 +138499,9 @@
     },
     {
       "name": "Nowosądecka01",
+      "ids": [
+        624406882
+      ],
       "generation_distribution": [
         0,
         0,
@@ -137953,6 +138558,9 @@
     },
     {
       "name": "Witosa01",
+      "ids": [
+        289685344
+      ],
       "generation_distribution": [
         0,
         0,
@@ -138009,6 +138617,9 @@
     },
     {
       "name": "KurdwanówP+R08",
+      "ids": [
+        289685340
+      ],
       "generation_distribution": [
         0,
         0,
@@ -138065,6 +138676,9 @@
     },
     {
       "name": "Łagiewniki05",
+      "ids": [
+        629106151
+      ],
       "generation_distribution": [
         0,
         0,
@@ -138121,6 +138735,9 @@
     },
     {
       "name": "Brożka02",
+      "ids": [
+        1882247981
+      ],
       "generation_distribution": [
         0,
         0,
@@ -138177,6 +138794,9 @@
     },
     {
       "name": "Borsucza02",
+      "ids": [
+        2421481611
+      ],
       "generation_distribution": [
         0,
         0,
@@ -138233,6 +138853,9 @@
     },
     {
       "name": "Lipińskiego01",
+      "ids": [
+        2421317351
+      ],
       "generation_distribution": [
         0,
         0,
@@ -138289,6 +138912,9 @@
     },
     {
       "name": "Grota-Roweckiego01",
+      "ids": [
+        2846212108
+      ],
       "generation_distribution": [
         0,
         0,
@@ -138345,6 +138971,9 @@
     },
     {
       "name": "Norymberska01",
+      "ids": [
+        2421261471
+      ],
       "generation_distribution": [
         0,
         0,
@@ -138401,6 +139030,9 @@
     },
     {
       "name": "Ruczaj01",
+      "ids": [
+        2421242332
+      ],
       "generation_distribution": [
         0,
         0,
@@ -138457,6 +139089,9 @@
     },
     {
       "name": "KampusUJ01",
+      "ids": [
+        2420979790
+      ],
       "generation_distribution": [
         0,
         0,
@@ -138513,6 +139148,9 @@
     },
     {
       "name": "Chmieleniec01",
+      "ids": [
+        2017952992
+      ],
       "generation_distribution": [
         0,
         0,
@@ -138569,6 +139207,9 @@
     },
     {
       "name": "CzerwoneMakiP+R01",
+      "ids": [
+        2017955951
+      ],
       "generation_distribution": [
         0,
         0,
@@ -138625,6 +139266,9 @@
     },
     {
       "name": "Chmieleniec02",
+      "ids": [
+        2017952988
+      ],
       "generation_distribution": [
         0,
         0,
@@ -138681,6 +139325,9 @@
     },
     {
       "name": "KampusUJ02",
+      "ids": [
+        2420979795
+      ],
       "generation_distribution": [
         0,
         0,
@@ -138737,6 +139384,9 @@
     },
     {
       "name": "Ruczaj02",
+      "ids": [
+        2421242341
+      ],
       "generation_distribution": [
         0,
         0,
@@ -138793,6 +139443,9 @@
     },
     {
       "name": "Norymberska02",
+      "ids": [
+        2418723932
+      ],
       "generation_distribution": [
         0,
         0,
@@ -138849,6 +139502,9 @@
     },
     {
       "name": "Grota-Roweckiego02",
+      "ids": [
+        2846212107
+      ],
       "generation_distribution": [
         0,
         0,
@@ -138905,6 +139561,9 @@
     },
     {
       "name": "Lipińskiego02",
+      "ids": [
+        2421317346
+      ],
       "generation_distribution": [
         0,
         0,
@@ -138961,6 +139620,9 @@
     },
     {
       "name": "Borsucza01",
+      "ids": [
+        2421481610
+      ],
       "generation_distribution": [
         0,
         0,
@@ -139017,6 +139679,9 @@
     },
     {
       "name": "Brożka01",
+      "ids": [
+        2421485635
+      ],
       "generation_distribution": [
         0,
         0,
@@ -139073,6 +139738,9 @@
     },
     {
       "name": "Łagiewniki04",
+      "ids": [
+        2421493335
+      ],
       "generation_distribution": [
         0,
         0,
@@ -139129,6 +139797,9 @@
     },
     {
       "name": "Turowicza01",
+      "ids": [
+        9955186237
+      ],
       "generation_distribution": [
         0,
         0,
@@ -139185,6 +139856,9 @@
     },
     {
       "name": "KurdwanówP+R03",
+      "ids": [
+        9955186238
+      ],
       "generation_distribution": [
         0,
         0,
@@ -139241,6 +139915,9 @@
     },
     {
       "name": "KurdwanówP+R01",
+      "ids": [
+        5728702340
+      ],
       "generation_distribution": [
         0,
         0,
@@ -139297,6 +139974,9 @@
     },
     {
       "name": "Witosa02",
+      "ids": [
+        2424655425
+      ],
       "generation_distribution": [
         0,
         0,
@@ -139353,6 +140033,9 @@
     },
     {
       "name": "Nowosądecka02",
+      "ids": [
+        2424534762
+      ],
       "generation_distribution": [
         0,
         0,
@@ -139409,6 +140092,9 @@
     },
     {
       "name": "PiaskiNowe02",
+      "ids": [
+        2134334914
+      ],
       "generation_distribution": [
         0,
         0,
@@ -139465,6 +140151,9 @@
     },
     {
       "name": "Dauna02",
+      "ids": [
+        2134334913
+      ],
       "generation_distribution": [
         0,
         0,
@@ -139521,6 +140210,9 @@
     },
     {
       "name": "Bieżanowska04",
+      "ids": [
+        2421888488
+      ],
       "generation_distribution": [
         0,
         0,
@@ -139577,6 +140269,9 @@
     },
     {
       "name": "Lipska01",
+      "ids": [
+        1611745640
+      ],
       "generation_distribution": [
         0,
         0,
@@ -139633,6 +140328,9 @@
     },
     {
       "name": "Rzebika01",
+      "ids": [
+        1611745699
+      ],
       "generation_distribution": [
         0,
         0,
@@ -139689,6 +140387,9 @@
     },
     {
       "name": "Limanowskiego02",
+      "ids": [
+        602156574
+      ],
       "generation_distribution": [
         0,
         0,
@@ -139745,6 +140446,9 @@
     },
     {
       "name": "Korona02",
+      "ids": [
+        2067123479
+      ],
       "generation_distribution": [
         0,
         0,
@@ -139801,6 +140505,9 @@
     },
     {
       "name": "Bronowice01",
+      "ids": [
+        6527877110
+      ],
       "generation_distribution": [
         0,
         0,
@@ -139857,6 +140564,9 @@
     },
     {
       "name": "Limanowskiego01",
+      "ids": [
+        602156572
+      ],
       "generation_distribution": [
         0,
         0,
@@ -139913,6 +140623,9 @@
     },
     {
       "name": "RondoMogilskie04",
+      "ids": [
+        1887802514
+      ],
       "generation_distribution": [
         0,
         0,
@@ -139969,6 +140682,9 @@
     },
     {
       "name": "RondoKocmyrzowskieim.Ks.Gorzelanego04",
+      "ids": [
+        2386355260
+      ],
       "generation_distribution": [
         0,
         0,
@@ -140025,6 +140741,9 @@
     },
     {
       "name": "Os.Zgody01",
+      "ids": [
+        1961123173
+      ],
       "generation_distribution": [
         0,
         0,
@@ -140081,6 +140800,9 @@
     },
     {
       "name": "PlacCentralnyim.R.Reagana02",
+      "ids": [
+        655410587
+      ],
       "generation_distribution": [
         0,
         0,
@@ -140137,6 +140859,9 @@
     },
     {
       "name": "Os.Zgody02",
+      "ids": [
+        1769087828
+      ],
       "generation_distribution": [
         0,
         0,
@@ -140193,6 +140918,9 @@
     },
     {
       "name": "Kobierzyńska02",
+      "ids": [
+        2052183690
+      ],
       "generation_distribution": [
         0,
         0,
@@ -140249,6 +140977,9 @@
     },
     {
       "name": "Słomiana02",
+      "ids": [
+        2052183691
+      ],
       "generation_distribution": [
         0,
         0,
@@ -140305,6 +141036,9 @@
     },
     {
       "name": "Kapelanka02",
+      "ids": [
+        2052183688
+      ],
       "generation_distribution": [
         0,
         0,
@@ -140361,6 +141095,9 @@
     },
     {
       "name": "Szwedzka02",
+      "ids": [
+        2418596863
+      ],
       "generation_distribution": [
         0,
         0,
@@ -140417,6 +141154,9 @@
     },
     {
       "name": "RondoGrunwaldzkie02",
+      "ids": [
+        630945148
+      ],
       "generation_distribution": [
         0,
         0,
@@ -140473,6 +141213,9 @@
     },
     {
       "name": "Orzeszkowej02",
+      "ids": [
+        630945156
+      ],
       "generation_distribution": [
         0,
         0,
@@ -140529,6 +141272,9 @@
     },
     {
       "name": "Stradom01",
+      "ids": [
+        2419768568
+      ],
       "generation_distribution": [
         0,
         0,
@@ -140585,6 +141331,9 @@
     },
     {
       "name": "Pędzichów01",
+      "ids": [
+        2423789754
+      ],
       "generation_distribution": [
         0,
         0,
@@ -140641,6 +141390,9 @@
     },
     {
       "name": "NowyKleparz01",
+      "ids": [
+        2423804379
+      ],
       "generation_distribution": [
         0,
         0,
@@ -140697,6 +141449,9 @@
     },
     {
       "name": "Bratysławska01",
+      "ids": [
+        10172286936
+      ],
       "generation_distribution": [
         0,
         0,
@@ -140753,6 +141508,9 @@
     },
     {
       "name": "KrowodrzaGórkaP+R01",
+      "ids": [
+        10180183263
+      ],
       "generation_distribution": [
         0,
         0,
@@ -140809,6 +141567,9 @@
     },
     {
       "name": "PachońskiegoP+R01",
+      "ids": [
+        11155961809
+      ],
       "generation_distribution": [
         0,
         0,
@@ -140865,6 +141626,9 @@
     },
     {
       "name": "Białoprądnicka02",
+      "ids": [
+        11155918004
+      ],
       "generation_distribution": [
         0,
         0,
@@ -140921,6 +141685,9 @@
     },
     {
       "name": "Górnickiego02",
+      "ids": [
+        10684101872
+      ],
       "generation_distribution": [
         0,
         0,
@@ -140977,6 +141744,9 @@
     },
     {
       "name": "SiewnaWiadukt01",
+      "ids": [
+        11155917993
+      ],
       "generation_distribution": [
         0,
         0,
@@ -141033,6 +141803,9 @@
     },
     {
       "name": "Bociana01",
+      "ids": [
+        7832518761
+      ],
       "generation_distribution": [
         0,
         0,
@@ -141089,6 +141862,9 @@
     },
     {
       "name": "PapierniPrądnickich02",
+      "ids": [
+        11155917976
+      ],
       "generation_distribution": [
         0,
         0,
@@ -141145,6 +141921,9 @@
     },
     {
       "name": "KuźnicyKołłątajowskiej02",
+      "ids": [
+        11155917981
+      ],
       "generation_distribution": [
         0,
         0,
@@ -141201,6 +141980,9 @@
     },
     {
       "name": "Bociana02",
+      "ids": [
+        11155917987
+      ],
       "generation_distribution": [
         0,
         0,
@@ -141257,6 +142039,9 @@
     },
     {
       "name": "SiewnaWiadukt02",
+      "ids": [
+        11170816323
+      ],
       "generation_distribution": [
         0,
         0,
@@ -141313,6 +142098,9 @@
     },
     {
       "name": "Górnickiego01",
+      "ids": [
+        11155917998
+      ],
       "generation_distribution": [
         0,
         0,
@@ -141369,6 +142157,9 @@
     },
     {
       "name": "Białoprądnicka01",
+      "ids": [
+        11155918003
+      ],
       "generation_distribution": [
         0,
         0,
@@ -141425,6 +142216,9 @@
     },
     {
       "name": "PachońskiegoP+R02",
+      "ids": [
+        11155961810
+      ],
       "generation_distribution": [
         0,
         0,
@@ -141481,6 +142275,9 @@
     },
     {
       "name": "DworzecTowarowy03",
+      "ids": [
+        2423804378
+      ],
       "generation_distribution": [
         0,
         0,
@@ -141537,6 +142334,9 @@
     },
     {
       "name": "NowyKleparz02",
+      "ids": [
+        2420286331
+      ],
       "generation_distribution": [
         0,
         0,
@@ -141593,6 +142393,9 @@
     },
     {
       "name": "Pędzichów02",
+      "ids": [
+        2423789750
+      ],
       "generation_distribution": [
         0,
         0,
@@ -141649,6 +142452,9 @@
     },
     {
       "name": "StaryKleparz03",
+      "ids": [
+        2420153433
+      ],
       "generation_distribution": [
         0,
         0,
@@ -141705,6 +142511,9 @@
     },
     {
       "name": "Orzeszkowej01",
+      "ids": [
+        2422680047
+      ],
       "generation_distribution": [
         0,
         0,
@@ -141761,6 +142570,9 @@
     },
     {
       "name": "RondoGrunwaldzkie01",
+      "ids": [
+        2422656435
+      ],
       "generation_distribution": [
         0,
         0,
@@ -141817,6 +142629,9 @@
     },
     {
       "name": "Szwedzka01",
+      "ids": [
+        957085219
+      ],
       "generation_distribution": [
         0,
         0,
@@ -141873,6 +142688,9 @@
     },
     {
       "name": "Kapelanka01",
+      "ids": [
+        2422272345
+      ],
       "generation_distribution": [
         0,
         0,
@@ -141929,6 +142747,9 @@
     },
     {
       "name": "Słomiana01",
+      "ids": [
+        2052183693
+      ],
       "generation_distribution": [
         0,
         0,
@@ -141985,6 +142806,9 @@
     },
     {
       "name": "Kobierzyńska01",
+      "ids": [
+        2052183689
+      ],
       "generation_distribution": [
         0,
         0,
@@ -142041,6 +142865,9 @@
     },
     {
       "name": "KopiecWandy02",
+      "ids": [
+        2426893478
+      ],
       "generation_distribution": [
         0,
         0,
@@ -142097,6 +142924,9 @@
     },
     {
       "name": "Kombinat03",
+      "ids": [
+        2163355806
+      ],
       "generation_distribution": [
         0,
         0,
@@ -142153,6 +142983,9 @@
     },
     {
       "name": "Kleeberga01",
+      "ids": [
+        840467685
+      ],
       "generation_distribution": [
         0,
         0,
@@ -142209,6 +143042,9 @@
     },
     {
       "name": "PiastaKołodzieja01",
+      "ids": [
+        213646585
+      ],
       "generation_distribution": [
         0,
         0,
@@ -142265,6 +143101,9 @@
     },
     {
       "name": "Os.Piastów01",
+      "ids": [
+        213646624
+      ],
       "generation_distribution": [
         0,
         0,
@@ -142321,6 +143160,9 @@
     },
     {
       "name": "PiastaKołodzieja02",
+      "ids": [
+        2427215149
+      ],
       "generation_distribution": [
         0,
         0,
@@ -142377,6 +143219,9 @@
     },
     {
       "name": "Kleeberga02",
+      "ids": [
+        2427200899
+      ],
       "generation_distribution": [
         0,
         0,
@@ -142433,6 +143278,9 @@
     },
     {
       "name": "Kombinat01",
+      "ids": [
+        213578731
+      ],
       "generation_distribution": [
         0,
         0,
@@ -142489,6 +143337,9 @@
     },
     {
       "name": "KopiecWandy01",
+      "ids": [
+        1318766524
+      ],
       "generation_distribution": [
         0,
         0,
@@ -142545,6 +143396,9 @@
     },
     {
       "name": "Stradom03",
+      "ids": [
+        2418610054
+      ],
       "generation_distribution": [
         0,
         0,
@@ -142601,6 +143455,9 @@
     },
     {
       "name": "TAURONArenaKrakówWieczysta03",
+      "ids": [
+        4069652993
+      ],
       "generation_distribution": [
         0,
         0,
@@ -142657,6 +143514,9 @@
     },
     {
       "name": "ŁagiewnikiSKA01",
+      "ids": [
+        9740014630
+      ],
       "generation_distribution": [
         0,
         0,
@@ -146315,5 +147175,5 @@
       ]
     }
   ],
-  "passanger_count": 882390
+  "passanger_count": 875910
 }

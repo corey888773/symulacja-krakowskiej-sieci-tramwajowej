@@ -88,8 +88,9 @@ class Node:
 
 
 class PassangerNode:
-    def __init__(self, name : str, x : float, y : float):
+    def __init__(self, ids : int, name : str, x : float, y : float):
         self.name = name
+        self.ids = ids
         self.x = x
         self.y = y
         self.properties = {}
@@ -97,6 +98,7 @@ class PassangerNode:
     def to_json(self):
         return {
             'name': self.name,
+            'ids': self.ids,
             'generation_distribution': self.properties['generation_distribution'],
             'absorption_rate': self.properties['absorption_rate'],
             'expected_generated_count': self.properties['expected_generated_count'],

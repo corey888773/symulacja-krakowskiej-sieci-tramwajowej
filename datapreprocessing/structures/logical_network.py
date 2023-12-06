@@ -283,14 +283,18 @@ class LogicalNetwork:
                 
                 if self.passanger_nodes.get(curr_stop_name) == None:
                     stops = self.physical_network.stop_ids.get(curr_stop_name)
-                    stops = [self.physical_network.nodes.get(id) for id in stops]
+                    stop_nodes = [self.physical_network.nodes.get(id) for id in stops]
+
+                    if len(stops) != 1:
+                        logging.error(f'len(stops) != 1, {curr_stop_name}')
+                        continue
 
                     passanger_node = PassangerNode(
-                        curr_stop_name, 
-                        x=sum(node.x for node in stops) / len(stops),
-                        y=sum(node.y for node in stops) / len(stops)
+                        name=curr_stop_name, 
+                        ids=stops,
+                        x=sum(node.x for node in stop_nodes) / len(stop_nodes),
+                        y=sum(node.y for node in stop_nodes) / len(stop_nodes)
                     )
-
                     self.passanger_nodes[curr_stop_name] = passanger_node
                     
     def set_passanger_nodes_properties(self):
