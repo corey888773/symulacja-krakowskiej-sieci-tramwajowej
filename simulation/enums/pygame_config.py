@@ -8,13 +8,14 @@ pygame.init()
 
 class PyGameConfig():
     # Window settings
-    WIDTH = 1000
-    HEIGHT = 800
+    WIDTH = 1200
+    HEIGHT = 1000
     WINDOW_TITLE = "Tram Simulation"
 
     # Text settings
     FONT_SIZE = int(HEIGHT * 0.032)
     FONT = pygame.font.Font(None, 24)
+    FONT_SMALL = pygame.font.Font(None, 18)
     TEXT_COLOR = Color.BLACK.value
     
     # Slider settings
@@ -39,8 +40,8 @@ class PyGameConfig():
     BUTTON_HEIGHT = HEIGHT * 0.02
     BUTTON_SPACING = WIDTH * 0.00833
     BUTTON_COLS = 8
-    BUTTON_BASE_X = WIDTH * 0.66667
-    BUTTON_BASE_Y = HEIGHT * 0.5
+    BUTTON_BASE_X = WIDTH * 0.7
+    BUTTON_BASE_Y = HEIGHT * 0.43
 
     # Tram image settings
     TRAM_IMAGE_PATH = './resources/Train.png'

@@ -17,3 +17,8 @@ class Tram:
     
     def __str__(self) -> str:
         return f"Tram(id={self.id}, current_stop={self.current_stop}, stops={self.stops}, time_table={self.time_table})"
+    
+    def __eq__(self, other: object) -> bool:
+        if isinstance(other, Tram):
+            return self.id == other.id
+        return False
