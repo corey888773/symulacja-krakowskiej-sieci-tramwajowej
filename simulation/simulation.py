@@ -173,8 +173,6 @@ class Simulation:
         WINDOW = pygame.display.set_mode((self.pgc.WIDTH, self.pgc.HEIGHT))
         pygame.display.set_caption(self.pgc.WINDOW_TITLE)
 
-        
-
         # SLIDER
         slider_x = self.pgc.SLIDER_X
         slider_y = self.pgc.SLIDER_Y
@@ -198,7 +196,6 @@ class Simulation:
         # SIMULATION
         simulation_running = False
         
-
         # TRAM
         tram_image = pygame.image.load(self.pgc.TRAM_IMAGE_PATH)
         tram_image = pygame.transform.scale(tram_image, self.pgc.TRAM_IMAGE_SIZE)
@@ -327,7 +324,7 @@ class Simulation:
             if clicked_tram_stop is not None:
                 self.show_tram_stop_name(WINDOW, clicked_tram_stop)
 
-            if not simulation_running and clicked_tram is not None:
+            if clicked_tram is not None:
                 self.show_time_table(WINDOW, clicked_tram, scroll_y, content_height, panel_height)
 
             if simulation_running and not dragging:
