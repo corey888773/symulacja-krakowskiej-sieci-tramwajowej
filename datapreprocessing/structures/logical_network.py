@@ -326,7 +326,7 @@ class LogicalNetwork:
         for node in self.__get_passanger_nodes_inside_area(city_center):
             node.properties = central
 
-        high_interest_nodes = [] # TODO: find high interest nodes
+        high_interest_nodes = self.__get_high_interest_nodes() # TODO: find high interest nodes
         for node in high_interest_nodes:
             node.properties = high_interest
 
@@ -421,6 +421,38 @@ class LogicalNetwork:
             cords.append((node.x, node.y))
 
         return cords
+
+    def __get_high_interest_nodes(self) -> list:
+        stops = [
+            "TeatrSłowackiego01",
+            "TeatrSłowackiego02",
+            "TeatrBagatela01",
+            "TeatrBagatela02",
+            "PlacWszystkichŚwiętych01",
+            "PlacWszystkichŚwiętych02",
+            "RondoGrzegórzeckie01",
+            "RondoGrzegórzeckie02",
+            "RondoMogilskie01",
+            "RondoMogilskie02",
+            "RondoMatecznego01",
+            "RondoMatecznego02",
+            "Norymberska01",
+            "Norymberska02",
+            "CzerwoneMakiP+R01",
+            "Politechnika01",
+            "Politechnika02",
+            "Politechnika03",
+        ]
+
+        high_interest_nodes = []
+        for stop_name in stops:
+            passanger_node = self.passanger_nodes.get(stop_name)
+            if passanger_node == None:
+                logging.error(f'passanger_node is None, {stop_name}')
+                continue
+            high_interest_nodes.append(passanger_node)
+
+        return high_interest_nodes
 
     def to_json(self) -> dict:
         export_network = {

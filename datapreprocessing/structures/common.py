@@ -99,7 +99,7 @@ class PassangerNode:
         return {
             'name': self.name,
             'ids': self.ids,
-            'generation_distribution': self.properties['generation_distribution'],
+            'generation_rate': self.properties['generation_rate'],
             'absorption_rate': self.properties['absorption_rate'],
             'expected_generated_count': self.properties['expected_generated_count'],
         }
