@@ -57,6 +57,19 @@ class Simulation:
         }
         """
 
+        self.passenger_nodes = {node["ids"][0]: node for node in self.network_model_logical["passanger_nodes"]}
+        """
+        {
+            node_id: {
+                "name": name,
+                "ids": [node_id],
+                "generation_rate": list[int],
+                "absorption_rate": list[int]
+            },  
+            ...
+        }
+        """
+
         self.current_stops = defaultdict(list)
         self.current_stops_trams = defaultdict(list)
 
@@ -69,7 +82,9 @@ class Simulation:
                 id=node["id"], 
                 x=node["x"], 
                 y=node["y"], 
-                stop_name=node["stop_name"]
+                stop_name=node["stop_name"],
+                generation_rate=self.passenger_nodes.get(node["id"], {}).get("generation_rate", []), #FIXME: this is a temporary solution
+                absorption_rate=self.passenger_nodes.get(node["id"], {}).get("absorption_rate", [])  #FIXME: this is a temporary solution
             ) 
             for node in self.network_model_logical["nodes"] if "stop_name" in node
         ]
@@ -197,6 +212,8 @@ class Simulation:
         # TRAM
         tram_image = pygame.image.load(self.pgc.TRAM_IMAGE_PATH)
         tram_image = pygame.transform.scale(tram_image, self.pgc.TRAM_IMAGE_SIZE)
+        tram_image_red = pygame.image.load("./resources/g2.png")
+        tram_image_red = pygame.transform.scale(tram_image_red, self.pgc.TRAM_IMAGE_SIZE)
 
         # BUTTONS
         buttons = self.create_buttons()
@@ -299,7 +316,7 @@ class Simulation:
                 
 
             self.display_routes_with_color(WINDOW, selected_route_ids)
-            self.display_trams(WINDOW, selected_route_ids, tram_image)
+            self.display_trams(WINDOW, selected_route_ids, tram_image, tram_image_red, clicked_tram)
 
             if current_time > end_time:
                 current_time = start_time
@@ -322,8 +339,16 @@ class Simulation:
             if clicked_tram_stop is not None:
                 self.show_tram_stop_name(WINDOW, clicked_tram_stop)
 
+            skip = False
             if clicked_tram is not None:
-                self.show_time_table(WINDOW, clicked_tram, scroll_y, content_height, panel_height)
+                try:
+                    idx = self.current_stops_trams[clicked_tram.route_id].index(clicked_tram)
+                    clicked_tram = self.current_stops_trams[clicked_tram.route_id][idx]
+                except ValueError:
+                    skip = True
+
+                if not skip:
+                    self.show_time_table(WINDOW, clicked_tram, scroll_y, content_height, panel_height)
 
             if simulation_running and not dragging:
                 handle_x += 1 / 60
@@ -495,6 +520,8 @@ class Simulation:
             
             previous_time = current_time
 
+        return previous_time
+
     def use_result_trams(self, current_time: int) -> None:
         # Go through all the routes
         for route_id in range(1, 45):
@@ -505,7 +532,7 @@ class Simulation:
                 # Go through all the stops and time of the current tram trip
                 for stop_id, time in zip(tram.stops, tram.time_table):
 
-                    if int(current_time) == time:
+                    if int(current_time) - tram.delay == time:
                         tram_stop = self.tram_stops_dict[stop_id]
 
                         # Remove the tram from the previous stop
@@ -524,7 +551,8 @@ class Simulation:
                                 id=i, 
                                 current_stop=tram_stop, 
                                 stops=self.routes_dict[route_id].stops, 
-                                time_table=self.trips_dict[route_id][i].time_table
+                                time_table=self.trips_dict[route_id][i].time_table,
+                                route_id=route_id
                             )
                         )
 
@@ -590,11 +618,14 @@ class Simulation:
                 tram_stop = self.tram_stops_dict[stop]
                 pygame.draw.circle(WINDOW, Color.GREEN.value, (tram_stop.x, tram_stop.y), 4)
 
-    def display_trams(self, WINDOW: pygame.Surface, selected_route_ids: list[int], tram_image: pygame.Surface) -> None:
-        for route_id, stops in self.current_stops.items():
+    def display_trams(self, WINDOW: pygame.Surface, selected_route_ids: list[int], tram_image: pygame.Surface, tram_image_clicked: pygame.Surface, clicked_tram: Tram) -> None:
+        for route_id, trams in self.current_stops_trams.items():
             if route_id in selected_route_ids or None in selected_route_ids:
-                for id, stop in stops:
-                    WINDOW.blit(tram_image, (stop.x - 10, stop.y - 10))
+                for tram in trams:
+                    if tram == clicked_tram and tram.current_stop == clicked_tram.current_stop:
+                        WINDOW.blit(tram_image_clicked, (tram.current_stop.x - 10, tram.current_stop.y - 10))
+                    else:
+                        WINDOW.blit(tram_image, (tram.current_stop.x - 10, tram.current_stop.y - 10))
 
     def show_tram_stop_name(self, WINDOW: pygame.Surface, tram_stop: TramStop) -> None:
         text_surface = self.pgc.FONT.render(tram_stop.stop_name, True, self.pgc.TEXT_COLOR, self.pgc.WIDGET_BACKGROUND_COLOR)
@@ -604,27 +635,31 @@ class Simulation:
         start = self.tram_stops_dict[tram.stops[0]].stop_name
         end = self.tram_stops_dict[tram.stops[-1]].stop_name
         length = len(start) + len(end)
-        content_surface = pygame.Surface((length * 20, content_height), pygame.SRCALPHA)
+        content_surface = pygame.Surface((length * 15, content_height), pygame.SRCALPHA)
 
         lines = []
+        current_stop_index = tram.stops.index(tram.current_stop.id)
         for i, stop in enumerate(tram.stops):
             stop_name = self.tram_stops_dict[stop].stop_name
             hours, minutes = self._from_minutes_to_hours_and_minutes(tram.time_table[i])
-            lines.append(f"{stop_name}: {hours}:{minutes:02}")
+            if i >= current_stop_index and tram.delay != 0:
+                lines.append(f"{stop_name}: {hours}:{minutes:02} (+{tram.delay})")
+            else:
+                lines.append(f"{stop_name}: {hours}:{minutes:02}")
 
         content_surface.fill(self.pgc.WIDGET_BACKGROUND_COLOR)
         t = self.pgc.FONT.render(f"Tram {tram.id} - {start} -> {end}", True, self.pgc.TEXT_COLOR, self.pgc.WIDGET_BACKGROUND_COLOR)
         content_surface.blit(t, (10, 10))
         for i, line in enumerate(lines):
             if line[0:len(tram.current_stop.stop_name)] == tram.current_stop.stop_name:
-                text = self.pgc.FONT.render(line, True, Color.RED.value, self.pgc.WIDGET_BACKGROUND_COLOR)
+                text = self.pgc.FONT_SMALL.render(line, True, Color.RED.value, self.pgc.WIDGET_BACKGROUND_COLOR)
             else:
                 text = self.pgc.FONT_SMALL.render(line, True, self.pgc.TEXT_COLOR, self.pgc.WIDGET_BACKGROUND_COLOR)
             content_surface.blit(text, (10, 40 + i * 20))
 
         panel = pygame.Surface((length * 20, panel_height), pygame.SRCALPHA)
         panel.blit(content_surface, (0, 0), (0, scroll_y, length * 20, scroll_y + panel_height))
-        WINDOW.blit(panel, (self.pgc.BUTTON_BASE_X - (3 * self.pgc.BUTTON_SPACING), self.pgc.BUTTON_BASE_Y + (6.5 * (self.pgc.BUTTON_HEIGHT + self.pgc.BUTTON_SPACING))))
+        WINDOW.blit(panel, (self.pgc.BUTTON_BASE_X - (10 * self.pgc.BUTTON_SPACING), self.pgc.BUTTON_BASE_Y + (6.5 * (self.pgc.BUTTON_HEIGHT + self.pgc.BUTTON_SPACING))))
 
 
 
