@@ -216,6 +216,9 @@ class Simulation:
         self._history = defaultdict(list)
         self._history_2 = {route_id: defaultdict(list) for route_id in range(1, 45)}
 
+        for edge in self.network_model_physical["edges"]:
+            
+
 
 
     def run(self) -> None:
@@ -359,7 +362,7 @@ class Simulation:
                 
 
             self.display_routes_with_color(WINDOW, selected_route_ids)
-            self.display_trams(WINDOW, selected_route_ids, tram_image, tram_image_green, clicked_tram)
+            self.display_trams(WINDOW, selected_route_ids, tram_images, tram_image, clicked_tram)
 
             if current_time > end_time:
                 current_time = start_time
@@ -384,6 +387,8 @@ class Simulation:
 
             skip = False
             if clicked_tram is not None:
+                WINDOW.blit(tram_image, (clicked_tram.current_stop.x - 10, clicked_tram.current_stop.y - 10))
+
                 try:
                     idx = self.current_stops_trams[clicked_tram.route_id].index(clicked_tram)
                     clicked_tram = self.current_stops_trams[clicked_tram.route_id][idx]
@@ -587,13 +592,13 @@ class Simulation:
                         if len(self._history_2[route_id][tram.id]) == 0 or not (self._history_2[route_id] and self._history_2[route_id][tram.id][-1]["tram_id"] == tram.id and self._history_2[route_id][tram.id][-1]["stop_id"] == stop_id and self._history_2[route_id][tram.id][-1]["time"] == f"{hours}:{minutes:02}"):
                             people_out = self.people_rate[route_id][stop_id][hours]["out"] // self.people_rate[route_id][stop_id][hours]["trams_per_hour"]
                             people_in = self.people_rate[route_id][stop_id][hours]["in"] // self.people_rate[route_id][stop_id][hours]["trams_per_hour"]
-                            tram.passengers -= people_out
-
-                            if tram.passengers < 0:
-                                tram.passengers = 0
-
+                            
                             people_in += random.randint(1, 10)
                             people_out += random.randint(1, 10)
+
+                            tram.passengers -= people_out
+                            if tram.passengers < 0:
+                                tram.passengers = 0
 
                             if tram.passengers + people_in < tram.max_passengers:
                                 tram.passengers += people_in
@@ -706,14 +711,35 @@ class Simulation:
                 tram_stop = self.tram_stops_dict[stop]
                 pygame.draw.circle(WINDOW, Color.GREEN.value, (tram_stop.x, tram_stop.y), 4)
 
-    def display_trams(self, WINDOW: pygame.Surface, selected_route_ids: list[int], tram_image: pygame.Surface, tram_image_clicked: pygame.Surface, clicked_tram: Tram) -> None:
+    def display_trams(self, WINDOW: pygame.Surface, selected_route_ids: list[int], tram_images: list[pygame.Surface], tram_image_clicked: pygame.Surface, clicked_tram: Tram) -> None:
         for route_id, trams in self.current_stops_trams.items():
             if route_id in selected_route_ids or None in selected_route_ids:
                 for tram in trams:
                     if tram == clicked_tram and tram.current_stop == clicked_tram.current_stop:
                         WINDOW.blit(tram_image_clicked, (tram.current_stop.x - 10, tram.current_stop.y - 10))
                     else:
-                        WINDOW.blit(tram_image, (tram.current_stop.x - 10, tram.current_stop.y - 10))
+                        passengers = tram.passengers
+                        if 0 <= passengers <= 15:
+                            WINDOW.blit(tram_images[9], (tram.current_stop.x - 10, tram.current_stop.y - 10))
+                        elif 16 <= passengers <= 50:
+                            WINDOW.blit(tram_images[8], (tram.current_stop.x - 10, tram.current_stop.y - 10))
+                        elif 51 <= passengers <= 90:
+                            WINDOW.blit(tram_images[7], (tram.current_stop.x - 10, tram.current_stop.y - 10))
+                        elif 91 <= passengers <= 120:
+                            WINDOW.blit(tram_images[6], (tram.current_stop.x - 10, tram.current_stop.y - 10))
+                        elif 121 <= passengers <= 150:
+                            WINDOW.blit(tram_images[5], (tram.current_stop.x - 10, tram.current_stop.y - 10))
+                        elif 151 <= passengers <= 180:
+                            WINDOW.blit(tram_images[4], (tram.current_stop.x - 10, tram.current_stop.y - 10))
+                        elif 181 <= passengers <= 210:
+                            WINDOW.blit(tram_images[3], (tram.current_stop.x - 10, tram.current_stop.y - 10))
+                        elif 211 <= passengers <= 240:
+                            WINDOW.blit(tram_images[2], (tram.current_stop.x - 10, tram.current_stop.y - 10))
+                        elif 241 <= passengers <= 270:
+                            WINDOW.blit(tram_images[1], (tram.current_stop.x - 10, tram.current_stop.y - 10))
+                        elif 271 <= passengers <= 300:
+                            WINDOW.blit(tram_images[0], (tram.current_stop.x - 10, tram.current_stop.y - 10))
+                        # WINDOW.blit(tram_image, (tram.current_stop.x - 10, tram.current_stop.y - 10))
 
     def show_tram_stop_name(self, WINDOW: pygame.Surface, tram_stop: TramStop) -> None:
         text_surface = self.pgc.FONT.render(tram_stop.stop_name, True, self.pgc.TEXT_COLOR, self.pgc.WIDGET_BACKGROUND_COLOR)
@@ -736,7 +762,9 @@ class Simulation:
                 lines.append(f"{stop_name}: {hours}:{minutes:02}")
 
         content_surface.fill(self.pgc.WIDGET_BACKGROUND_COLOR)
-        t = self.pgc.FONT.render(f"Tram {tram.id} - {start} -> {end}", True, self.pgc.TEXT_COLOR, self.pgc.WIDGET_BACKGROUND_COLOR)
+        directions = f"Tram {tram.id} - {start} -> {end}, ({tram.passengers})"
+        directions_length = self.pgc.FONT.size(directions)[0]
+        t = self.pgc.FONT.render(directions, True, self.pgc.TEXT_COLOR, self.pgc.WIDGET_BACKGROUND_COLOR)
         content_surface.blit(t, (10, 10))
         for i, line in enumerate(lines):
             if line[0:len(tram.current_stop.stop_name)] == tram.current_stop.stop_name:
@@ -745,9 +773,9 @@ class Simulation:
                 text = self.pgc.FONT_SMALL.render(line, True, self.pgc.TEXT_COLOR, self.pgc.WIDGET_BACKGROUND_COLOR)
             content_surface.blit(text, (10, 40 + i * 20))
 
-        panel = pygame.Surface((length * 20, panel_height), pygame.SRCALPHA)
+        panel = pygame.Surface((directions_length + 20, panel_height), pygame.SRCALPHA)
         panel.blit(content_surface, (0, 0), (0, scroll_y, length * 20, scroll_y + panel_height))
-        WINDOW.blit(panel, (self.pgc.BUTTON_BASE_X - (10 * self.pgc.BUTTON_SPACING), self.pgc.BUTTON_BASE_Y + (6.5 * (self.pgc.BUTTON_HEIGHT + self.pgc.BUTTON_SPACING))))
+        WINDOW.blit(panel, (self.pgc.WIDTH - directions_length - 50, self.pgc.BUTTON_BASE_Y + (6.5 * (self.pgc.BUTTON_HEIGHT + self.pgc.BUTTON_SPACING))))
 
 
 
@@ -916,3 +944,11 @@ class Simulation:
 
         with open('./data/usable/history2.json', 'w', encoding='utf8') as f:
             json.dump(history2_copy, f, ensure_ascii=False, indent=4)
+
+    def _routes_and_edges_to_json(self) -> None:
+        routes_and_edges = {}
+        for route_id, edges in self.routes_and_edges.items():
+            routes_and_edges[route_id] = [str(edge) for edge in edges]
+
+        with open('./data/usable/routes_and_edges.json', 'w', encoding='utf8') as f:
+            json.dump(routes_and_edges, f, ensure_ascii=False, indent=4)
