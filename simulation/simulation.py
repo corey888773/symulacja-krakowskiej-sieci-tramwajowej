@@ -11,6 +11,7 @@ from enums.pygame_config import PyGameConfig
 
 from collections import defaultdict
 
+import random
 import pygame
 import json
 
@@ -180,6 +181,42 @@ class Simulation:
         self._result_to_json()
         self._result_trams_to_json()
 
+        #FIXME: temporary solution
+        self._tram_counts = {}
+        for route_id, trams in self.result_trams.items():
+
+            if route_id not in self._tram_counts:
+                self._tram_counts[route_id] = {}
+
+            for tram in trams:
+
+                for stop_id, time in zip(tram.stops, tram.time_table):
+                    hour = time // 60
+
+                    if stop_id not in self._tram_counts[route_id]:
+                        self._tram_counts[route_id][stop_id] = {}
+                    if hour not in self._tram_counts[route_id][stop_id]:
+                        self._tram_counts[route_id][stop_id][hour] = 0
+
+                    self._tram_counts[route_id][stop_id][hour] += 1
+
+        #FIXME: temporary solution
+        self.people_rate: dict[int, dict[int, dict[str]]] = {}
+        for route_id in range(1, 45):
+            self.people_rate[route_id] = {}
+            for stop_id in self.routes_dict[route_id].stops:
+                self.people_rate[route_id][stop_id] = {}
+                for hour in range(4, 24):
+                    self.people_rate[route_id][stop_id][hour] = {
+                        "in": self.tram_stops_dict[stop_id].generation_rate[hour] if len(self.tram_stops_dict[stop_id].generation_rate) > 0 else 0,
+                        "out": self.tram_stops_dict[stop_id].absorption_rate[hour] if len(self.tram_stops_dict[stop_id].absorption_rate) > 0 else 0,
+                        "trams_per_hour": sum([self._tram_counts[route_id].get(stop_id, {}).get(hour, 0) for route_id in range(1, 45)])
+                    }
+
+        self._history = defaultdict(list)
+        self._history_2 = {route_id: defaultdict(list) for route_id in range(1, 45)}
+
+
 
     def run(self) -> None:
         pygame.init()
@@ -210,10 +247,16 @@ class Simulation:
         simulation_running = False
         
         # TRAM
+        tram_images = []
+        for path in self.pgc.TRAM_IMAGE_PATHS:
+            tram_image = pygame.image.load(path)
+            tram_image = pygame.transform.scale(tram_image, self.pgc.TRAM_IMAGE_SIZE)
+            tram_images.append(tram_image)
+            
         tram_image = pygame.image.load(self.pgc.TRAM_IMAGE_PATH)
         tram_image = pygame.transform.scale(tram_image, self.pgc.TRAM_IMAGE_SIZE)
-        tram_image_red = pygame.image.load("./resources/g2.png")
-        tram_image_red = pygame.transform.scale(tram_image_red, self.pgc.TRAM_IMAGE_SIZE)
+        tram_image_green = pygame.image.load("./resources/g2.png")
+        tram_image_green = pygame.transform.scale(tram_image_green, self.pgc.TRAM_IMAGE_SIZE)
 
         # BUTTONS
         buttons = self.create_buttons()
@@ -316,7 +359,7 @@ class Simulation:
                 
 
             self.display_routes_with_color(WINDOW, selected_route_ids)
-            self.display_trams(WINDOW, selected_route_ids, tram_image, tram_image_red, clicked_tram)
+            self.display_trams(WINDOW, selected_route_ids, tram_image, tram_image_green, clicked_tram)
 
             if current_time > end_time:
                 current_time = start_time
@@ -358,6 +401,10 @@ class Simulation:
 
         self._current_stops_to_json()
         self._current_stops_trams_to_json()
+        self._tram_counts_to_json()
+        self._people_rate_to_json()
+        self._history_to_json()        
+        self._history2_to_json()
 
         pygame.quit()
 
@@ -525,15 +572,55 @@ class Simulation:
     def use_result_trams(self, current_time: int) -> None:
         # Go through all the routes
         for route_id in range(1, 45):
+        # route_id = 1
 
-            # Go through all the trips of the current route
+            # Go through all the trips/trams of the current route
             for i, tram in enumerate(self.result_trams[route_id]):
 
                 # Go through all the stops and time of the current tram trip
                 for stop_id, time in zip(tram.stops, tram.time_table):
 
                     if int(current_time) - tram.delay == time:
+                        hours, minutes = self._from_minutes_to_hours_and_minutes(time)
                         tram_stop = self.tram_stops_dict[stop_id]
+
+                        if len(self._history_2[route_id][tram.id]) == 0 or not (self._history_2[route_id] and self._history_2[route_id][tram.id][-1]["tram_id"] == tram.id and self._history_2[route_id][tram.id][-1]["stop_id"] == stop_id and self._history_2[route_id][tram.id][-1]["time"] == f"{hours}:{minutes:02}"):
+                            people_out = self.people_rate[route_id][stop_id][hours]["out"] // self.people_rate[route_id][stop_id][hours]["trams_per_hour"]
+                            people_in = self.people_rate[route_id][stop_id][hours]["in"] // self.people_rate[route_id][stop_id][hours]["trams_per_hour"]
+                            tram.passengers -= people_out
+
+                            if tram.passengers < 0:
+                                tram.passengers = 0
+
+                            people_in += random.randint(1, 10)
+                            people_out += random.randint(1, 10)
+
+                            if tram.passengers + people_in < tram.max_passengers:
+                                tram.passengers += people_in
+                            else:
+                                tram.passengers = tram.max_passengers    
+                        
+
+                            self._history[route_id].append({
+                                "tram_id": tram.id,
+                                "stop_id": stop_id,
+                                "time": f"{hours}:{minutes:02}",
+                                "people_in": people_in,
+                                "people_out": people_out,
+                                "passengers_added": people_in - people_out,
+                                "passengers": tram.passengers
+                            })
+
+                            self._history_2[route_id][tram.id].append({
+                                "tram_id": tram.id,
+                                "stop_id": stop_id,
+                                "time": f"{hours}:{minutes:02}",
+                                "people_in": people_in,
+                                "people_out": people_out,
+                                "passengers_added": people_in - people_out,
+                                "passengers": tram.passengers
+                            })
+
 
                         # Remove the tram from the previous stop
                         try:
@@ -552,7 +639,8 @@ class Simulation:
                                 current_stop=tram_stop, 
                                 stops=self.routes_dict[route_id].stops, 
                                 time_table=self.trips_dict[route_id][i].time_table,
-                                route_id=route_id
+                                route_id=route_id,
+                                passengers=tram.passengers,
                             )
                         )
 
@@ -808,3 +896,23 @@ class Simulation:
                     
         with open(f'data/usable/current_stops_trams.json', 'w', encoding='utf8') as f:
             json.dump(dict(current_stops_copy), f, ensure_ascii=False, indent=4)
+
+    def _tram_counts_to_json(self) -> None:
+        with open('./data/usable/tram_counts.json', 'w', encoding='utf8') as f:
+            json.dump(self._tram_counts, f, ensure_ascii=False, indent=4)
+
+    def _people_rate_to_json(self) -> None:
+        with open('./data/usable/people_rate.json', 'w', encoding='utf8') as f:
+            json.dump(self.people_rate, f, ensure_ascii=False, indent=4)
+
+    def _history_to_json(self) -> None:
+        with open('./data/usable/history.json', 'w', encoding='utf8') as f:
+            json.dump(self._history, f, ensure_ascii=False, indent=4)
+
+    def _history2_to_json(self) -> None:
+        history2_copy = {}
+        for route_id, trams in self._history_2.items():
+            history2_copy[route_id] = {tram_id: [str(tram) for tram in trams] for tram_id, trams in trams.items()}
+
+        with open('./data/usable/history2.json', 'w', encoding='utf8') as f:
+            json.dump(history2_copy, f, ensure_ascii=False, indent=4)
