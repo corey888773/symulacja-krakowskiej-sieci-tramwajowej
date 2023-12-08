@@ -8,8 +8,8 @@ pygame.init()
 
 class PyGameConfig():
     # Window settings
-    WIDTH = 1000
-    HEIGHT = 1000
+    WIDTH = 1200
+    HEIGHT = 900
     WINDOW_TITLE = "Tram Simulation"
 
     # Text settings
