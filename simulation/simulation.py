@@ -216,7 +216,14 @@ class Simulation:
         self._history = defaultdict(list)
         self._history_2 = {route_id: defaultdict(list) for route_id in range(1, 45)}
 
-        for edge in self.network_model_physical["edges"]:
+        self.route_and_nodes = defaultdict(list)
+        route = self.routes_list[0]
+        for stop in route.stops:
+
+            for edge in self.network_model_physical["edges"]:
+                if stop in edge["nodes"]:
+                    self.route_and_nodes[route.id] += edge["nodes"]
+
             
 
 
@@ -387,7 +394,7 @@ class Simulation:
 
             skip = False
             if clicked_tram is not None:
-                WINDOW.blit(tram_image, (clicked_tram.current_stop.x - 10, clicked_tram.current_stop.y - 10))
+                # WINDOW.blit(tram_image, (clicked_tram.current_stop.x - 10, clicked_tram.current_stop.y - 10))
 
                 try:
                     idx = self.current_stops_trams[clicked_tram.route_id].index(clicked_tram)
@@ -410,6 +417,7 @@ class Simulation:
         self._people_rate_to_json()
         self._history_to_json()        
         self._history2_to_json()
+        # self._route_and_nodes_to_json()
 
         pygame.quit()
 
@@ -711,35 +719,77 @@ class Simulation:
                 tram_stop = self.tram_stops_dict[stop]
                 pygame.draw.circle(WINDOW, Color.GREEN.value, (tram_stop.x, tram_stop.y), 4)
 
+            route = self.routes_dict[route_id]
+            for i in range(len(route.stops) - 1):
+                head_node_id = route.stops[i]
+                tail_node_id = route.stops[i + 1]
+                head_node = self.tram_stops_dict.get(head_node_id, None)
+                tail_node = self.tram_stops_dict.get(tail_node_id, None)
+
+                if None not in [head_node, tail_node]:
+                    pygame.draw.line(WINDOW, Color.GREEN.value, (head_node.x, head_node.y), (tail_node.x, tail_node.y), 3)
+
+        # edges = self.edges_list[:10]
+        # for edge in edges:
+        #     for i in range(len(self.network_model_physical["edges"][edge.id]["nodes"]) - 1):
+        #         head_node_id = self.network_model_physical["edges"][edge.id]["nodes"][i]
+        #         tail_node_id = self.network_model_physical["edges"][edge.id]["nodes"][i + 1]
+        #         head_node = self.nodes_dict.get(head_node_id, None)
+        #         tail_node = self.nodes_dict.get(tail_node_id, None)
+
+        #         if None not in [head_node, tail_node]:
+        #             pygame.draw.line(WINDOW, Color.GREEN.value, (head_node.x, head_node.y), (tail_node.x, tail_node.y), 3)
+
+        # for route_id in selected_route_ids:
+        #     if route_id is None:
+        #         continue
+        #     for i, node in enumerate(self.route_and_nodes[1]):
+        #         if i < len(self.route_and_nodes[1]) - 1:
+        #             head_node_id = self.route_and_nodes[1][i]
+        #             tail_node_id = self.route_and_nodes[1][i + 1]
+        #             head_node = self.nodes_dict.get(head_node_id, None)
+        #             tail_node = self.nodes_dict.get(tail_node_id, None)
+
+        #             if None not in [head_node, tail_node]:
+        #                 pygame.draw.line(WINDOW, Color.GREEN.value, (head_node.x, head_node.y), (tail_node.x, tail_node.y), 3)
+
+
     def display_trams(self, WINDOW: pygame.Surface, selected_route_ids: list[int], tram_images: list[pygame.Surface], tram_image_clicked: pygame.Surface, clicked_tram: Tram) -> None:
+
+        def _get_tram_image(tram: Tram) -> pygame.Surface:
+            passengers = tram.passengers
+            if 0 <= passengers <= 15:
+                return tram_images[9]
+            elif 16 <= passengers <= 50:
+                return tram_images[8]
+            elif 51 <= passengers <= 90:
+                return tram_images[7]
+            elif 91 <= passengers <= 120:
+                return tram_images[6]
+            elif 121 <= passengers <= 150:
+                return tram_images[5]
+            elif 151 <= passengers <= 180:
+                return tram_images[4]
+            elif 181 <= passengers <= 210:
+                return tram_images[3]
+            elif 211 <= passengers <= 240:
+                return tram_images[2]
+            elif 241 <= passengers <= 270:
+                return tram_images[1]
+            elif 271 <= passengers <= 300:
+                return tram_images[0]
+
         for route_id, trams in self.current_stops_trams.items():
             if route_id in selected_route_ids or None in selected_route_ids:
                 for tram in trams:
+                    # if tram == clicked_tram and tram.current_stop == clicked_tram.current_stop:
+                    #     WINDOW.blit(tram_image_clicked, (tram.current_stop.x - 10, tram.current_stop.y - 10))
+                    # else:
+                    tram_image = _get_tram_image(tram)
                     if tram == clicked_tram and tram.current_stop == clicked_tram.current_stop:
-                        WINDOW.blit(tram_image_clicked, (tram.current_stop.x - 10, tram.current_stop.y - 10))
+                        WINDOW.blit(pygame.transform.scale(tram_image, (30, 30)), (tram.current_stop.x - 10, tram.current_stop.y - 10))
                     else:
-                        passengers = tram.passengers
-                        if 0 <= passengers <= 15:
-                            WINDOW.blit(tram_images[9], (tram.current_stop.x - 10, tram.current_stop.y - 10))
-                        elif 16 <= passengers <= 50:
-                            WINDOW.blit(tram_images[8], (tram.current_stop.x - 10, tram.current_stop.y - 10))
-                        elif 51 <= passengers <= 90:
-                            WINDOW.blit(tram_images[7], (tram.current_stop.x - 10, tram.current_stop.y - 10))
-                        elif 91 <= passengers <= 120:
-                            WINDOW.blit(tram_images[6], (tram.current_stop.x - 10, tram.current_stop.y - 10))
-                        elif 121 <= passengers <= 150:
-                            WINDOW.blit(tram_images[5], (tram.current_stop.x - 10, tram.current_stop.y - 10))
-                        elif 151 <= passengers <= 180:
-                            WINDOW.blit(tram_images[4], (tram.current_stop.x - 10, tram.current_stop.y - 10))
-                        elif 181 <= passengers <= 210:
-                            WINDOW.blit(tram_images[3], (tram.current_stop.x - 10, tram.current_stop.y - 10))
-                        elif 211 <= passengers <= 240:
-                            WINDOW.blit(tram_images[2], (tram.current_stop.x - 10, tram.current_stop.y - 10))
-                        elif 241 <= passengers <= 270:
-                            WINDOW.blit(tram_images[1], (tram.current_stop.x - 10, tram.current_stop.y - 10))
-                        elif 271 <= passengers <= 300:
-                            WINDOW.blit(tram_images[0], (tram.current_stop.x - 10, tram.current_stop.y - 10))
-                        # WINDOW.blit(tram_image, (tram.current_stop.x - 10, tram.current_stop.y - 10))
+                        WINDOW.blit(tram_image, (tram.current_stop.x - 5, tram.current_stop.y - 5))
 
     def show_tram_stop_name(self, WINDOW: pygame.Surface, tram_stop: TramStop) -> None:
         text_surface = self.pgc.FONT.render(tram_stop.stop_name, True, self.pgc.TEXT_COLOR, self.pgc.WIDGET_BACKGROUND_COLOR)
@@ -782,6 +832,10 @@ class Simulation:
     def draw_current_time(self, WINDOW: pygame.Surface, slider_x: int, slider_y: int, slider_width: int, hours: int, minutes: int) -> None:
         time_surface = self.pgc.FONT.render(f"{hours}:{minutes:02}", True, self.pgc.TEXT_COLOR, self.pgc.WIDGET_BACKGROUND_COLOR)
         WINDOW.blit(time_surface, (slider_x + slider_width + 10, slider_y))
+
+        if hours == 4 and minutes == 0:
+            self.current_stops.clear()
+            self.current_stops_trams.clear()
 
     def draw_slider(self, WINDOW: pygame.Surface, slider_x: int, slider_y: int, slider_width: int, slider_height: int, handle_x: int, handle_width: int) -> None:
         pygame.draw.rect(WINDOW, (0, 0, 0), (slider_x, slider_y, slider_width, slider_height))
@@ -945,10 +999,6 @@ class Simulation:
         with open('./data/usable/history2.json', 'w', encoding='utf8') as f:
             json.dump(history2_copy, f, ensure_ascii=False, indent=4)
 
-    def _routes_and_edges_to_json(self) -> None:
-        routes_and_edges = {}
-        for route_id, edges in self.routes_and_edges.items():
-            routes_and_edges[route_id] = [str(edge) for edge in edges]
-
-        with open('./data/usable/routes_and_edges.json', 'w', encoding='utf8') as f:
-            json.dump(routes_and_edges, f, ensure_ascii=False, indent=4)
+    def _route_and_nodes_to_json(self) -> None:
+        with open('./data/usable/route_and_nodes.json', 'w', encoding='utf8') as f:
+            json.dump(self.route_and_nodes, f, ensure_ascii=False, indent=4)
