@@ -9,7 +9,7 @@ pygame.init()
 class PyGameConfig():
     # Window settings
     WIDTH = 1200
-    HEIGHT = 1000
+    HEIGHT = 900
     WINDOW_TITLE = "Tram Simulation"
 
     # Text settings
@@ -45,6 +45,7 @@ class PyGameConfig():
 
     # Tram image settings
     TRAM_IMAGE_PATH = './resources/Train.png'
+    TRAM_IMAGE_PATHS = ['./resources/l1.png', './resources/l2.png', './resources/l3.png', './resources/l4.png', './resources/l5.png', './resources/l6.png', './resources/l7.png', './resources/l8.png', './resources/l9.png', './resources/l10.png']
     TRAM_IMAGE_SIZE = (20, 20)  # This might not need scaling
 
     # Node and tram stop scaling factors
