@@ -1,4 +1,5 @@
 import logging, math, sys, json
+import matplotlib.pyplot as plt
 
 from .common import Track, Node, Junction
 
@@ -438,7 +439,7 @@ class PhysicalNetwork:
         logging.warning(f'len(special_nodes): {len(special_nodes)}')
         for first_node in special_nodes:
             # logging.warning(f'first_node: {len(first_node["accessible_nodes"])}')
-            for idx, second_node in enumerate(first_node.accessible_nodes):
+            for second_node in first_node.accessible_nodes:
                 track = Track()
                 track.id = id
                 track.nodes = [first_node, second_node]
@@ -447,7 +448,7 @@ class PhysicalNetwork:
                 }
 
                 curr_node = second_node
-                while not node.is_special and len(curr_node.accessible_nodes) > 0:
+                while not curr_node.is_special and len(curr_node.accessible_nodes) > 0:
                     curr_node = curr_node.accessible_nodes[0]
 
                     if curr_node in track.nodes:
