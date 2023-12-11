@@ -48,15 +48,22 @@ class LogicalNetwork:
 
     def schedule_create_routes(self):
         for line in self.schedule.lines:
-            start_name = line.direction1.stops[0].name
-            end_name = line.direction2.stops[0].name
+            dir1_start_name = line.direction1.stops[0].name
+            dir1_end_name = line.direction1.stops[-1].name
 
-            logging.info(f'{line.number} {start_name} {end_name}')
+            dir2_start_name = line.direction2.stops[0].name
+            dir2_end_name = line.direction2.stops[-1].name
 
-            start_id = int(np.squeeze(self.physical_network.stop_ids.get(start_name)[0]))
-            end_id = int(np.squeeze(self.physical_network.stop_ids.get(end_name)[0]))
+            logging.info(f'{line.number} {dir1_start_name}-{dir1_end_name} / {dir2_start_name}-{dir2_end_name}')
 
-            if start_id == None or end_id == None:
+
+            dir1_start_id = int(np.squeeze(self.physical_network.stop_ids.get(dir1_start_name)[0]))
+            dir1_end_id = int(np.squeeze(self.physical_network.stop_ids.get(dir1_end_name)[0]))
+
+            dir2_start_id = int(np.squeeze(self.physical_network.stop_ids.get(dir2_start_name)[0]))
+            dir2_end_id = int(np.squeeze(self.physical_network.stop_ids.get(dir2_end_name)[0]))
+
+            if dir1_start_id == None or dir1_end_id == None or dir2_start_id == None or dir2_end_id == None:
                 logging.error(f'line {line["number"]} has no start or end stop')
                 continue
 
@@ -64,22 +71,22 @@ class LogicalNetwork:
                 "number": line.number,
                 "direction1": {
                     "name": line.direction1.name,
-                    "start_id": start_id,
-                    "start_name": start_name,
-                    "end_id": end_id,
-                    "end_name": end_name,
+                    "start_id": dir1_start_id,
+                    "start_name": dir1_start_name,
+                    "end_id": dir1_end_id,
+                    "end_name": dir1_end_name,
                 },
                 "direction2": {
                     "name": line.direction2.name,
-                    "start_id": end_id,
-                    "start_name": end_name,
-                    "end_id": start_id,
-                    "end_name": start_name,
+                    "start_id": dir2_start_id,
+                    "start_name": dir2_start_name,
+                    "end_id": dir2_end_id,
+                    "end_name": dir2_end_name,
                 }
             }
 
-            route1 = self.process_route(line.direction1, start_id, end_id)
-            route2 = self.process_route(line.direction2, end_id, start_id)
+            route1 = self.process_route(line.direction1, dir1_start_id, dir1_end_id)
+            route2 = self.process_route(line.direction2, dir2_start_id, dir2_end_id)
 
             if route1 != None:
                 self.routes.append(route1)
@@ -93,7 +100,6 @@ class LogicalNetwork:
         
         route.nodes.append(init_node.id)
         route.stops.append(init_node.id)
-
 
         for idx in range(1, len(direction.stops)):
             next_stop = direction.stops[idx].name
@@ -162,7 +168,7 @@ class LogicalNetwork:
     def schedule_create_trips(self):
         # TODO: additionally consider using calendar for weekends, holidays
         for route in self.routes:
-        
+
             # firstly we want to combine all the schedules into one big schedule, 
             # each stop will have a list of times in minutes
             time_table = []
@@ -282,21 +288,30 @@ class LogicalNetwork:
                 passanger_edge.lines.append(route.id)
                 
                 if self.passanger_nodes.get(curr_stop_name) == None:
-                    stops = self.physical_network.stop_ids.get(curr_stop_name)
-                    stop_nodes = [self.physical_network.nodes.get(id) for id in stops]
+                    self.passanger_nodes[curr_stop_name] = self.create_passanger_node(curr_stop_name)
 
-                    if len(stops) != 1:
-                        logging.error(f'len(stops) != 1, {curr_stop_name}')
-                        continue
-
-                    passanger_node = PassangerNode(
-                        name=curr_stop_name, 
-                        ids=stops,
-                        x=sum(node.x for node in stop_nodes) / len(stop_nodes),
-                        y=sum(node.y for node in stop_nodes) / len(stop_nodes)
-                    )
-                    self.passanger_nodes[curr_stop_name] = passanger_node
+            if self.passanger_nodes.get(next_stop_name) == None:
+                self.passanger_nodes[next_stop_name] = self.create_passanger_node(next_stop_name)
                     
+
+    def create_passanger_node(self, name : str) -> PassangerNode:
+        stops = self.physical_network.stop_ids.get(name)
+        stop_nodes = [self.physical_network.nodes.get(id) for id in stops]
+
+        if len(stops) > 1:
+            logging.error(f'len(stops) > 1, {name}: {stops}')
+
+            
+        passanger_node = PassangerNode(
+            name=name, 
+            ids=stops,
+            x=sum(node.x for node in stop_nodes) / len(stop_nodes),
+            y=sum(node.y for node in stop_nodes) / len(stop_nodes)
+        )
+
+        return passanger_node
+
+
     def set_passanger_nodes_properties(self):
         residential = self.__generate_passanger_properties(
             generation_rate=[0, 100, 400, 120, 400, 100, 0],
@@ -428,8 +443,8 @@ class LogicalNetwork:
             "TeatrSłowackiego02",
             "TeatrBagatela01",
             "TeatrBagatela02",
-            "PlacWszystkichŚwiętych01",
-            "PlacWszystkichŚwiętych02",
+            "PocztaGłówna01",
+            "PocztaGłówna02",
             "RondoGrzegórzeckie01",
             "RondoGrzegórzeckie02",
             "RondoMogilskie01",
@@ -454,6 +469,47 @@ class LogicalNetwork:
 
         return high_interest_nodes
 
+    def cumulative_properties(self):
+        temp_cumulative_generation_rate = {}
+        temp_cumulative_absorption_rate = {}
+        curr_route = None
+
+        for trip in self.trips:
+            if trip.route in [9, 13, 15, 27, 33, 39]:
+                pass
+            if curr_route == None or curr_route.id != trip.route:
+                curr_route = self.routes[trip.route - 1]
+                temp_cumulative_generation_rate = []
+                temp_cumulative_absorption_rate = []
+
+                for stop_id in curr_route.stops:
+                    # node passanger node where stop is in .ids
+                    node = self.passanger_nodes.get(self.physical_network.nodes.get(stop_id).tags['name'])
+                    if node == None:
+                        logging.error(f'node is None, {stop_id}')
+                        continue
+
+                    temp_cumulative_absorption_rate.append(node.properties['absorption_rate'])
+                    temp_cumulative_generation_rate.append(node.properties['generation_rate']) 
+
+            generation_left = [0] * len(trip.time_table)
+            absorption_left = [0] * len(trip.time_table)
+
+            for i in range(len(trip.time_table), 0, -1):
+                curr_time = trip.time_table[i - 1]
+                if curr_time == -1:
+                    continue
+
+                curr_hour = curr_time // 60
+                
+                for j in range(i, len(trip.time_table) - 1):
+                    generation_left[i - 1] += temp_cumulative_generation_rate[j][curr_hour - 1]
+                    absorption_left[i - 1] += temp_cumulative_absorption_rate[j][curr_hour - 1]
+
+            trip.generation_left = generation_left
+            trip.absorption_left = absorption_left
+            
+ 
     def to_json(self) -> dict:
         export_network = {
             'nodes': [node.to_json() for node in self.physical_network.nodes.values() if node.is_special],

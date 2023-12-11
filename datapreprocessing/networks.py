@@ -86,4 +86,5 @@ def process_logical_network(raw_schedule : dict, physical_network : PhysicalNetw
     ln.schedule_create_trips()
     ln.create_passanger_nodes()
     ln.set_passanger_nodes_properties()
+    ln.cumulative_properties()
     return ln
