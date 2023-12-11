@@ -19,6 +19,7 @@ import heapq
 
 curr_dir = os.path.dirname(os.path.abspath(__file__))
 
+
 class Simulation:
     def __init__(self, network_model_logical: dict, network_model_physical: dict, is_first_run: bool = False) -> None:
         self.network_model_logical = network_model_logical
@@ -149,11 +150,11 @@ class Simulation:
                 id=route["id"],
                 start=route["name"].split("-")[0],
                 stop=route["name"].split("-")[1],
-                stops=route["stops"]
+                stops=route["stops"],
             ) 
             for route in routes
         ]
-        #FIXME: lack of this stop in the data (Cienist02)
+        #FIXME: lack of this stop in the data (Cienista02)
         # self.routes_list[1].stops.insert(len(self.routes_list[1].stops) - 1, 1769087786)
         # self.routes_list[7].stops.insert(len(self.routes_list[7].stops) - 1, 1769087786)
         self.routes_dict = {route.id: route for route in self.routes_list}
@@ -165,7 +166,9 @@ class Simulation:
         self.trips_list = [
             Trip(
                 route_id=trip["route"],
-                time_table=trip["time_table"]
+                time_table=trip["time_table"],
+                generation_left=trip["generation_left"],
+                absorption_left=trip["absorption_left"]
             ) 
             for trip in trips
         ]
@@ -601,10 +604,9 @@ class Simulation:
 
         return previous_time
 
-    def use_result_trams(self, current_time: int) -> None:
+    def use_result_trams(self, current_time: int) -> float:
         # Go through all the routes
         for route_id in range(1, 45):
-        # route_id = 1
 
             # Go through all the trips/trams of the current route
             for i, tram in enumerate(self.result_trams[route_id]):
@@ -755,33 +757,33 @@ class Simulation:
             passengers = tram.passengers
             if 0 <= passengers <= 15:
                 return tram_images[14]
-            elif 16 <= passengers <= 30:
+            elif passengers <= 30:
                 return tram_images[13]
-            elif 31 <= passengers <= 45:
+            elif passengers <= 45:
                 return tram_images[12]
-            elif 46 <= passengers <= 60:
+            elif passengers <= 60:
                 return tram_images[11]
-            elif 61 <= passengers <= 75:
+            elif passengers <= 75:
                 return tram_images[10]
-            elif 76 <= passengers <= 90:
+            elif passengers <= 90:
                 return tram_images[9]
-            elif 91 <= passengers <= 105:
+            elif passengers <= 105:
                 return tram_images[8]
-            elif 106 <= passengers <= 140:
+            elif passengers <= 140:
                 return tram_images[7]
-            elif 141 <= passengers <= 175:
+            elif passengers <= 175:
                 return tram_images[6]
-            elif 176 <= passengers <= 180:
+            elif passengers <= 180:
                 return tram_images[5]
-            elif 181 <= passengers <= 210:
+            elif passengers <= 210:
                 return tram_images[4]
-            elif 211 <= passengers <= 230:
+            elif passengers <= 230:
                 return tram_images[3]
-            elif 231 <= passengers <= 250:
+            elif passengers <= 250:
                 return tram_images[2]
-            elif 251 <= passengers <= 270:
+            elif passengers <= 270:
                 return tram_images[1]
-            elif 271 <= passengers <= 300:
+            elif passengers <= 300:
                 return tram_images[0]
             
 
