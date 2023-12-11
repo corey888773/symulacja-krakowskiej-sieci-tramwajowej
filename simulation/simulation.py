@@ -14,6 +14,9 @@ from collections import defaultdict
 import random
 import pygame
 import json
+import os
+
+curr_dir = os.path.dirname(os.path.abspath(__file__))
 
 class Simulation:
     def __init__(self, network_model_logical: dict, network_model_physical: dict) -> None:
@@ -33,6 +36,7 @@ class Simulation:
         self.trips_list: list[Trip] = []
 
         self.edges_list: list[Edge] = []
+        self.edges_dict: dict[int, Edge] = {}
 
         self.result: dict[int, list[list[tuple[int, int]]]] = {}
         """
@@ -114,6 +118,8 @@ class Simulation:
             ) 
             for i, edge in enumerate(self.network_model_physical["edges"])
         ]
+
+        self.edges_dict = {edge.id: edge for edge in self.edges_list}
         #################### EDGES ####################
 
         self.tram_stops_list = self.normalize_coords(self.tram_stops_list)
@@ -178,6 +184,7 @@ class Simulation:
         self._trips_list_to_json()
         self._trips_dict_to_json()
         self._edges_list_to_json()
+        self._edges_dict_to_json()
         self._result_to_json()
         self._result_trams_to_json()
 
@@ -217,16 +224,130 @@ class Simulation:
         self._history_2 = {route_id: defaultdict(list) for route_id in range(1, 45)}
 
         self.route_and_nodes = defaultdict(list)
-        route = self.routes_list[0]
-        for stop in route.stops:
+        with open(f"{curr_dir}/data/usable/route_and_nodes.json", "r", encoding="utf8") as f:
+            self.route_and_nodes = json.load(f)
 
-            for edge in self.network_model_physical["edges"]:
-                if stop in edge["nodes"]:
-                    self.route_and_nodes[route.id] += edge["nodes"]
+        self.route_and_nodes = {int(key): value for key, value in self.route_and_nodes.items()}
 
-            
+    # def leave_first_occurrences(self, lst):
+    #     seen = set()
+    #     return [x for x in lst if not (x in seen or seen.add(x))]
+        # for route in self.routes_list:
+        #     for i, stop in enumerate(route.stops):
+
+        #         if i >= len(route.stops) - 1:
+        #             break
+
+        #         start_edge = [edge for edge in self.edges_list if edge.head == stop] # [Edge(head=1, tail=2)]
+        #         curr_edge = start_edge
+
+        #         if curr_edge[0].tail == route.stops[i + 1]:
+        #             self.route_and_nodes[route.id] += self.network_model_physical["edges"][curr_edge[0].id]["nodes"]
+        #             curr_edge.clear()
+
+        #         while len(curr_edge) != 0 and curr_edge[0].tail != route.stops[i + 1]:
+
+        #             if len(curr_edge) > 1: # [Edge(head=2, tail=3), Edge(head=2, tail=4)]
+        #                 distances = []
+        #                 for edge in curr_edge:
+        #                     tail_node = self.nodes_dict[edge.tail]
+        #                     next_tram_stop = self.nodes_dict[route.stops[i + 1]]
+        #                     distances.append(tail_node.distance_to(next_tram_stop))
+        #                 min_distance = min(distances)
+        #                 min_distance_index = distances.index(min_distance)
+        #                 curr_edge = [curr_edge[min_distance_index]]
+
+                    
+        #             self.route_and_nodes[route.id] += self.network_model_physical["edges"][curr_edge[0].id]["nodes"]
+        #             curr_edge = [edge for edge in self.edges_list if edge.head == curr_edge[0].tail and edge.tail == route.stops[i + 1]]
+                    
+
+        #             if len(curr_edge) == 1:
+        #                 self.route_and_nodes[route.id] += self.network_model_physical["edges"][curr_edge[0].id]["nodes"]
+
+        #                 if curr_edge[0].tail == route.stops[-1]:
+        #                     curr_edge.clear()
 
 
+        # for route in self.routes_list:
+        #     visited_nodes = set()
+        #     for i in range(len(route.stops) - 1):
+        #         start_stop = route.stops[i]
+        #         next_stop = route.stops[i + 1]
+        #         while start_stop != next_stop:
+        #             # Find all edges starting from the current stop
+        #             start_edges = [edge for edge in self.edges_list if edge.head == start_stop and edge.tail not in visited_nodes]
+        #             if not start_edges:
+        #                 break
+
+        #             next_distances = []
+        #             if len(start_edges) > 1:
+        #                 for edge in start_edges:
+        #                     second_edge = [e for e in self.edges_list if e.head == edge.tail]
+        #                     if second_edge:
+        #                         next_distances.append(self.nodes_dict[second_edge[0].tail].distance_to(self.nodes_dict[next_stop]))
+
+
+        #             # Find the one that leads to the next stop with the shortest distance
+        #             distances = [self.nodes_dict[edge.tail].distance_to(self.nodes_dict[next_stop]) for edge in start_edges]
+        #             if len(next_distances) > 0:
+        #                 distances = next_distances
+
+        #             curr_edge = start_edges[distances.index(min(distances))]
+        #             # Add the nodes of the current edge to the route and nodes dictionary
+        #             self.route_and_nodes[route.id] += self.network_model_physical["edges"][curr_edge.id]["nodes"]
+        #             visited_nodes.add(curr_edge.tail)
+        #             start_stop = curr_edge.tail
+
+    #     for route in self.routes_list:
+    #         visited_nodes = set()
+    #         for i in range(len(route.stops) - 1):
+    #             start_stop = route.stops[i]
+    #             next_stop = route.stops[i + 1]
+    #             while start_stop != next_stop:
+    #                 # Find all edges starting from the current stop
+    #                 start_edges = [edge for edge in self.edges_list if edge.head == start_stop and edge.tail not in visited_nodes]
+    #                 if not start_edges:
+    #                     break
+
+    #                 # Create a graph for Dijkstra's algorithm
+    #                 graph = {}
+    #                 for edge in self.edges_list:
+    #                     if edge.head not in graph:
+    #                         graph[edge.head] = []
+    #                     graph[edge.head].append((edge.tail, self.nodes_dict[edge.tail].distance_to(self.nodes_dict[edge.head])))
+
+    #                 # Use Dijkstra's algorithm to find the shortest path to the next stop
+    #                 _, path = self.dijkstra(graph, start_stop, next_stop)
+
+    #                 if not path:
+    #                     break
+
+    #                 # Add the nodes of the current edge to the route and nodes dictionary
+    #                 for j in range(len(path) - 1):
+    #                     curr_node = path[j]
+    #                     next_node = path[j + 1]
+    #                     edge = next(edge for edge in self.edges_list if edge.head == curr_node and edge.tail == next_node)
+    #                     self.route_and_nodes[route.id] += self.network_model_physical["edges"][edge.id]["nodes"]
+    #                     visited_nodes.add(curr_node)
+    #                     start_stop = next_node
+
+
+    # def dijkstra(self, graph, start, end):
+    #     queue = [(0, start, [])]
+    #     seen = set()
+    #     while queue:
+    #         (dist, node, path) = heapq.heappop(queue)
+    #         if node not in seen:
+    #             seen.add(node)
+    #             path = path + [node]
+    #             if node == end:
+    #                 return (dist, path)
+    #             if node in graph:
+    #                 for (next_node, next_dist) in graph[node]:
+    #                     if next_node not in seen:
+    #                         heapq.heappush(queue, (dist + next_dist, next_node, path))
+    #     return float("inf"), []
 
     def run(self) -> None:
         pygame.init()
@@ -719,17 +840,17 @@ class Simulation:
                 tram_stop = self.tram_stops_dict[stop]
                 pygame.draw.circle(WINDOW, Color.GREEN.value, (tram_stop.x, tram_stop.y), 4)
 
-            route = self.routes_dict[route_id]
-            for i in range(len(route.stops) - 1):
-                head_node_id = route.stops[i]
-                tail_node_id = route.stops[i + 1]
-                head_node = self.tram_stops_dict.get(head_node_id, None)
-                tail_node = self.tram_stops_dict.get(tail_node_id, None)
+            # route = self.routes_dict[route_id]
+            # for i in range(len(route.stops) - 1):
+            #     head_node_id = route.stops[i]
+            #     tail_node_id = route.stops[i + 1]
+            #     head_node = self.tram_stops_dict.get(head_node_id, None)
+            #     tail_node = self.tram_stops_dict.get(tail_node_id, None)
 
-                if None not in [head_node, tail_node]:
-                    pygame.draw.line(WINDOW, Color.GREEN.value, (head_node.x, head_node.y), (tail_node.x, tail_node.y), 3)
+            #     if None not in [head_node, tail_node]:
+            #         pygame.draw.line(WINDOW, Color.GREEN.value, (head_node.x, head_node.y), (tail_node.x, tail_node.y), 3)
 
-        # edges = self.edges_list[:10]
+        # edges = self.edges_list
         # for edge in edges:
         #     for i in range(len(self.network_model_physical["edges"][edge.id]["nodes"]) - 1):
         #         head_node_id = self.network_model_physical["edges"][edge.id]["nodes"][i]
@@ -740,18 +861,18 @@ class Simulation:
         #         if None not in [head_node, tail_node]:
         #             pygame.draw.line(WINDOW, Color.GREEN.value, (head_node.x, head_node.y), (tail_node.x, tail_node.y), 3)
 
-        # for route_id in selected_route_ids:
-        #     if route_id is None:
-        #         continue
-        #     for i, node in enumerate(self.route_and_nodes[1]):
-        #         if i < len(self.route_and_nodes[1]) - 1:
-        #             head_node_id = self.route_and_nodes[1][i]
-        #             tail_node_id = self.route_and_nodes[1][i + 1]
-        #             head_node = self.nodes_dict.get(head_node_id, None)
-        #             tail_node = self.nodes_dict.get(tail_node_id, None)
+        for route_id in selected_route_ids:
+            if route_id is None:
+                continue
+            for i, node in enumerate(self.route_and_nodes[route_id]):
+                if i < len(self.route_and_nodes[route_id]) - 1:
+                    head_node_id = self.route_and_nodes[route_id][i]
+                    tail_node_id = self.route_and_nodes[route_id][i + 1]
+                    head_node = self.nodes_dict.get(head_node_id, None)
+                    tail_node = self.nodes_dict.get(tail_node_id, None)
 
-        #             if None not in [head_node, tail_node]:
-        #                 pygame.draw.line(WINDOW, Color.GREEN.value, (head_node.x, head_node.y), (tail_node.x, tail_node.y), 3)
+                    if None not in [head_node, tail_node]:
+                        pygame.draw.line(WINDOW, Color.GREEN.value, (head_node.x, head_node.y), (tail_node.x, tail_node.y), 3)
 
 
     def display_trams(self, WINDOW: pygame.Surface, selected_route_ids: list[int], tram_images: list[pygame.Surface], tram_image_clicked: pygame.Surface, clicked_tram: Tram) -> None:
@@ -904,47 +1025,52 @@ class Simulation:
 
     def _tram_stops_list_to_json(self) -> None:
         tram_stops_copy = [str(tram_stop) for tram_stop in self.tram_stops_list]
-        with open('./data/list/tram_stops_list.json', 'w', encoding='utf8') as f:
+        with open(f'{curr_dir}/data/list/tram_stops_list.json', 'w', encoding='utf8') as f:
             json.dump(tram_stops_copy, f, ensure_ascii=False, indent=4)
 
     def _tram_stops_dict_to_json(self) -> None:
         tram_stops_copy = {id: str(tram_stop) for id, tram_stop in self.tram_stops_dict.items()}
-        with open('./data/dict/tram_stops_dict.json', 'w', encoding='utf8') as f:
+        with open(f'{curr_dir}/data/dict/tram_stops_dict.json', 'w', encoding='utf8') as f:
             json.dump(tram_stops_copy, f, ensure_ascii=False, indent=4)
 
     def _nodes_list_to_json(self) -> None:
         nodes_copy = [str(node) for node in self.nodes_list]
-        with open('./data/list/nodes_list.json', 'w', encoding='utf8') as f:
+        with open(f'{curr_dir}/data/list/nodes_list.json', 'w', encoding='utf8') as f:
             json.dump(nodes_copy, f, ensure_ascii=False, indent=4)
 
     def _nodes_dict_to_json(self) -> None:
         nodes_copy = {id: str(node) for id, node in self.nodes_dict.items()}
-        with open('./data/dict/nodes_dict.json', 'w', encoding='utf8') as f:
+        with open(f'{curr_dir}/data/dict/nodes_dict.json', 'w', encoding='utf8') as f:
             json.dump(nodes_copy, f, ensure_ascii=False, indent=4)
 
     def _routes_list_to_json(self) -> None:
         routes_copy = [str(route) for route in self.routes_list]
-        with open('./data/list/routes_list.json', 'w', encoding='utf8') as f:
+        with open(f'{curr_dir}/data/list/routes_list.json', 'w', encoding='utf8') as f:
             json.dump(routes_copy, f, ensure_ascii=False, indent=4)
 
     def _routes_dict_to_json(self) -> None:
         routes_copy = {id: str(route) for id, route in self.routes_dict.items()}
-        with open('./data/dict/routes_dict.json', 'w', encoding='utf8') as f:
+        with open(f'{curr_dir}/data/dict/routes_dict.json', 'w', encoding='utf8') as f:
             json.dump(routes_copy, f, ensure_ascii=False, indent=4)
 
     def _trips_list_to_json(self) -> None:
         trips_copy = [str(trip) for trip in self.trips_list]
-        with open('./data/list/trips_list.json', 'w', encoding='utf8') as f:
+        with open(f'{curr_dir}/data/list/trips_list.json', 'w', encoding='utf8') as f:
             json.dump(trips_copy, f, ensure_ascii=False, indent=4)
 
     def _trips_dict_to_json(self) -> None:
         trips_copy = {id: [str(trip) for trip in trips] for id, trips in self.trips_dict.items()}
-        with open('./data/dict/trips_dict.json', 'w', encoding='utf8') as f:
+        with open(f'{curr_dir}/data/dict/trips_dict.json', 'w', encoding='utf8') as f:
             json.dump(trips_copy, f, ensure_ascii=False, indent=4)
 
     def _edges_list_to_json(self) -> None:
         edges_copy = [str(edge) for edge in self.edges_list]
-        with open('./data/list/edges_list.json', 'w', encoding='utf8') as f:
+        with open(f'{curr_dir}/data/list/edges_list.json', 'w', encoding='utf8') as f:
+            json.dump(edges_copy, f, ensure_ascii=False, indent=4)
+
+    def _edges_dict_to_json(self) -> None:
+        edges_copy = {id: str(edge) for id, edge in self.edges_dict.items()}
+        with open(f'{curr_dir}/data/dict/edges_dict.json', 'w', encoding='utf8') as f:
             json.dump(edges_copy, f, ensure_ascii=False, indent=4)
 
     def _result_to_json(self) -> None:
@@ -952,7 +1078,7 @@ class Simulation:
         for route_id, stops in self.result.items():
             result_copy[route_id] = [[str(item) for item in stop] for stop in stops] 
                     
-        with open('./data/usable/result.json', 'w', encoding='utf8') as f:
+        with open(f'{curr_dir}/data/usable/result.json', 'w', encoding='utf8') as f:
             json.dump(dict(result_copy), f, ensure_ascii=False, indent=4)
 
     def _result_trams_to_json(self) -> None:
@@ -960,7 +1086,7 @@ class Simulation:
         for route_id, trams in self.result_trams.items():
             result_copy[route_id] = [str(tram) for tram in trams] 
                     
-        with open('./data/usable/result_trams.json', 'w', encoding='utf8') as f:
+        with open(f'{curr_dir}/data/usable/result_trams.json', 'w', encoding='utf8') as f:
             json.dump(dict(result_copy), f, ensure_ascii=False, indent=4)
 
     def _current_stops_to_json(self) -> None:
@@ -980,15 +1106,15 @@ class Simulation:
             json.dump(dict(current_stops_copy), f, ensure_ascii=False, indent=4)
 
     def _tram_counts_to_json(self) -> None:
-        with open('./data/usable/tram_counts.json', 'w', encoding='utf8') as f:
+        with open(f'{curr_dir}/data/usable/tram_counts.json', 'w', encoding='utf8') as f:
             json.dump(self._tram_counts, f, ensure_ascii=False, indent=4)
 
     def _people_rate_to_json(self) -> None:
-        with open('./data/usable/people_rate.json', 'w', encoding='utf8') as f:
+        with open(f'{curr_dir}/data/usable/people_rate.json', 'w', encoding='utf8') as f:
             json.dump(self.people_rate, f, ensure_ascii=False, indent=4)
 
     def _history_to_json(self) -> None:
-        with open('./data/usable/history.json', 'w', encoding='utf8') as f:
+        with open(f'{curr_dir}/data/usable/history.json', 'w', encoding='utf8') as f:
             json.dump(self._history, f, ensure_ascii=False, indent=4)
 
     def _history2_to_json(self) -> None:
@@ -996,9 +1122,9 @@ class Simulation:
         for route_id, trams in self._history_2.items():
             history2_copy[route_id] = {tram_id: [str(tram) for tram in trams] for tram_id, trams in trams.items()}
 
-        with open('./data/usable/history2.json', 'w', encoding='utf8') as f:
+        with open(f'{curr_dir}/data/usable/history2.json', 'w', encoding='utf8') as f:
             json.dump(history2_copy, f, ensure_ascii=False, indent=4)
 
     def _route_and_nodes_to_json(self) -> None:
-        with open('./data/usable/route_and_nodes.json', 'w', encoding='utf8') as f:
+        with open(f'{curr_dir}/data/usable/route_and_nodes.json', 'w', encoding='utf8') as f:
             json.dump(self.route_and_nodes, f, ensure_ascii=False, indent=4)
