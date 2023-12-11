@@ -11,7 +11,7 @@ def main() -> None:
     with open(f"{curr_dir}/../datapreprocessing/data/logical_network.json", "r", encoding="utf8") as f:
         network_model_logical = json.load(f)
 
-    simulation = Simulation(network_model_logical, network_model_physical)
+    simulation = Simulation(network_model_logical, network_model_physical, is_first_run=False)
     simulation.run()
 
 
