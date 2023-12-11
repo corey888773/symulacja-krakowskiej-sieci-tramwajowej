@@ -45,8 +45,8 @@ class PyGameConfig():
 
     # Tram image settings
     TRAM_IMAGE_PATH = './resources/Train.png'
-    TRAM_IMAGE_PATHS = ['./resources/l1.png', './resources/l2.png', './resources/l3.png', './resources/l4.png', './resources/l5.png', './resources/l6.png', './resources/l7.png', './resources/l8.png', './resources/l9.png', './resources/l10.png']
-    TRAM_IMAGE_SIZE = (20, 20)  # This might not need scaling
+    TRAM_IMAGE_PATHS = ['./resources/l1.png', './resources/l2.png', './resources/l3.png', './resources/l4.png', './resources/l5.png', './resources/l6.png', './resources/l7.png', './resources/l8.png', './resources/l9.png', './resources/l10.png', './resources/g5.png', './resources/g4.png', './resources/g3.png', './resources/g2.png', './resources/g1.png']
+    TRAM_IMAGE_SIZE = (18, 18)  # This might not need scaling
 
     # Node and tram stop scaling factors
     NODE_SCALE_FACTOR_X = WIDTH * 0.95833
