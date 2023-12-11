@@ -40,3 +40,4 @@ class Schedule:
     def __init__(self, main_schedule : dict):
         self.lines = [Line(raw_line) for raw_line in main_schedule['lines']]
 
+
