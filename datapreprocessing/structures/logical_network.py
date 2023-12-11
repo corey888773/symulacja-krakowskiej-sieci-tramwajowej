@@ -46,10 +46,10 @@ class LogicalNetwork:
                     continue
 
     END_STOPS = { 
-        '1' : ['CichyKącik01', 'Wańkowicza01'],
+        '1' : ['CichyKącik01', 'Wańkowicza02'],
         '3' : ['KrowodrzaGórkaP+R02', 'NowyBieżanówP+R'],
         '4' : ['ZajezdniaNowaHuta02', 'BronowiceMałe'],
-        '5' : ['KrowodrzaGórkaP+R02', 'Wańkowicza01'],
+        '5' : ['KrowodrzaGórkaP+R02', 'Wańkowicza02'],
         '8' : ['BronowiceMałe', 'BorekFałęcki'],
         '9' : ['NowyBieżanówP+R', 'Mistrzejowice'],
         '10' : ['KurdwanówP+R01', 'Pleszów'],
@@ -107,7 +107,7 @@ class LogicalNetwork:
                     "end_name": dir2_end_name,
                 }
             }
-
+            
             route1 = self.process_route(line.direction1, dir1_start_id, dir1_end_id)
             route2 = self.process_route(line.direction2, dir2_start_id, dir2_end_id)
 
@@ -179,7 +179,11 @@ class LogicalNetwork:
 
             route.stops.append(curr_stop.id)
 
-        route.stops.append(end_node_id)
+        if curr_stop.id != end_node_id and curr_stop.id not in route.nodes:
+            route.nodes.append(end_node_id)
+
+        if end_node_id not in route.nodes:
+            route.stops.append(end_node_id)
         return route
 
 
