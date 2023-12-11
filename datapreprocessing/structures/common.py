@@ -140,6 +140,8 @@ class Trip:
         self.route = route
         self.route_name = route_name
         self.time_table = []
+        self.generation_left = []
+        self.absorption_left = []
         self.start = 0
         self.end = 0
         self.duration = 0
@@ -148,4 +150,6 @@ class Trip:
         return {
             'route': self.route,
             'time_table': self.time_table,
+            'generation_left': self.generation_left,
+            'absorption_left': self.absorption_left,
         }
