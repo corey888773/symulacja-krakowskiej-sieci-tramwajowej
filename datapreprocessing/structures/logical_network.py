@@ -45,17 +45,40 @@ class LogicalNetwork:
                     logging.error(f'stop {stop.name} not found')
                     continue
 
+    END_STOPS = { 
+        '1' : ['CichyKącik01', 'Wańkowicza01'],
+        '3' : ['KrowodrzaGórkaP+R02', 'NowyBieżanówP+R'],
+        '4' : ['ZajezdniaNowaHuta02', 'BronowiceMałe'],
+        '5' : ['KrowodrzaGórkaP+R02', 'Wańkowicza01'],
+        '8' : ['BronowiceMałe', 'BorekFałęcki'],
+        '9' : ['NowyBieżanówP+R', 'Mistrzejowice'],
+        '10' : ['KurdwanówP+R01', 'Pleszów'],
+        '11' : ['CzerwoneMakiP+R', 'MałyPłaszówP+R'],
+        '13' : ['Bronowice01', 'NowyBieżanówP+R'],
+        '14' : ['Bronowice01', 'Mistrzejowice'],
+        '16' : ['Bardosa02', 'Mistrzejowice'],
+        '17' : ['DworzecTowarowy', 'CzerwoneMakiP+R'],
+        '18' : ['PapierniPrądnickich02', 'CzerwoneMakiP+R'],
+        '19' : ['KrowodrzaGórkaP+R02', 'BorekFałęcki'],
+        '20' : ['CichyKącik01', 'MałyPłaszówP+R'],
+        '21' : ['Os.Piastów01', 'Pleszów'],
+        '22' : ['KopiecWandy', 'BorekFałęcki'],
+        '24' : ['BronowiceMałe', 'KurdwanówP+R01'],
+        '44' : ['DworzecTowarowy', 'KopiecWandy'],
+        '49' : ['TAURONArenaKrakówWieczysta01', 'NowyBieżanówP+R'],
+        '50' : ['BorekFałęcki', 'PapierniPrądnickich02'],
+        '52' : ['Os.Piastów01', 'CzerwoneMakiP+R'],
+    }
 
     def schedule_create_routes(self):
         for line in self.schedule.lines:
             dir1_start_name = line.direction1.stops[0].name
-            dir1_end_name = line.direction1.stops[-1].name
+            dir1_end_name = self.END_STOPS.get(line.number)[0]
 
             dir2_start_name = line.direction2.stops[0].name
-            dir2_end_name = line.direction2.stops[-1].name
+            dir2_end_name = self.END_STOPS.get(line.number)[1]
 
             logging.info(f'{line.number} {dir1_start_name}-{dir1_end_name} / {dir2_start_name}-{dir2_end_name}')
-
 
             dir1_start_id = int(np.squeeze(self.physical_network.stop_ids.get(dir1_start_name)[0]))
             dir1_end_id = int(np.squeeze(self.physical_network.stop_ids.get(dir1_end_name)[0]))
