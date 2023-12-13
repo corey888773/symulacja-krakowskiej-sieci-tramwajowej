@@ -48,7 +48,7 @@ class LogicalNetwork:
     END_STOPS = { 
         '1' : ['CichyKącik01', 'Wańkowicza02'],
         '3' : ['KrowodrzaGórkaP+R02', 'NowyBieżanówP+R'],
-        '4' : ['ZajezdniaNowaHuta02', 'BronowiceMałe'],
+        '4' : ['BronowiceMałe', 'ZajezdniaNowaHuta02'],
         '5' : ['KrowodrzaGórkaP+R02', 'Wańkowicza02'],
         '8' : ['BronowiceMałe', 'BorekFałęcki'],
         '9' : ['NowyBieżanówP+R', 'Mistrzejowice'],
@@ -89,27 +89,11 @@ class LogicalNetwork:
             if dir1_start_id == None or dir1_end_id == None or dir2_start_id == None or dir2_end_id == None:
                 logging.error(f'line {line["number"]} has no start or end stop')
                 continue
-
-            line_data = {
-                "number": line.number,
-                "direction1": {
-                    "name": line.direction1.name,
-                    "start_id": dir1_start_id,
-                    "start_name": dir1_start_name,
-                    "end_id": dir1_end_id,
-                    "end_name": dir1_end_name,
-                },
-                "direction2": {
-                    "name": line.direction2.name,
-                    "start_id": dir2_start_id,
-                    "start_name": dir2_start_name,
-                    "end_id": dir2_end_id,
-                    "end_name": dir2_end_name,
-                }
-            }
             
             route1 = self.process_route(line.direction1, dir1_start_id, dir1_end_id)
             route2 = self.process_route(line.direction2, dir2_start_id, dir2_end_id)
+
+            route1.line = route2.line = int(line.number)
 
             if route1 != None:
                 self.routes.append(route1)
