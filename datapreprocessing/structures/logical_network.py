@@ -340,23 +340,26 @@ class LogicalNetwork:
 
     def set_passanger_nodes_properties(self):
         residential = self.__generate_passanger_properties(
-            generation_rate=[0, 100, 400, 120, 400, 100, 0],
+            name='residential',
+            generation_rate=[0, 150, 400, 144, 260, 80, 0],
 			generation_time=[0, 4, 7, 9, 16, 18, 23],
-			absorption_rate=[0, 25, 100, 120, 100, 100, 0],
+            absorption_rate=[0, 80, 260, 144, 300, 120, 0],
 			absorption_time=[0, 4, 7, 9, 16, 18, 23],
         )
-        
+
         central = self.__generate_passanger_properties(
-            generation_rate=[0, 25, 100, 120, 100, 100, 0],
+            name='central',
+            generation_rate=[0, 100, 360, 240, 515, 180, 0],
 			generation_time=[0, 4, 7, 9, 16, 18, 23],
-			absorption_rate=[0, 100, 400, 120, 400, 100, 0],
+			absorption_rate=[0, 100, 200, 120, 400, 100, 0],
 			absorption_time=[0, 4, 7, 9, 16, 18, 23],
         )
 
         high_interest = self.__generate_passanger_properties(
-            generation_rate=[0, 125, 500, 600, 500, 500, 0],
+            name='high_interest',
+            generation_rate=[0, 125, 500, 400, 1000, 220, 0],
 			generation_time=[0, 4, 7, 9, 16, 18, 23],
-			absorption_rate=[0, 500, 2000, 600, 2000, 500, 0],
+			absorption_rate=[0, 500, 2000, 600, 1500, 500, 0],
 			absorption_time=[0, 4, 7, 9, 16, 18, 23],
         )
 
@@ -371,6 +374,10 @@ class LogicalNetwork:
         for node in high_interest_nodes:
             node.properties = high_interest
 
+
+        # adjustments
+        self.__update_passanger_nodes_properties()
+
         # Validation if passangers are generated and absorbed equally
         for h in range(24):
             generation_sum, absorption_sum = 0, 0
@@ -382,9 +389,45 @@ class LogicalNetwork:
                 logging.error(f'{node.name} - {h}: generation_sum != absorption_sum {generation_sum} != {absorption_sum}')
 
 
-    def __generate_passanger_properties(self, generation_rate : list, generation_time : list,
+    def __update_passanger_nodes_properties(self):
+        residential_in = self.__generate_passanger_properties(
+            name='residential_in',
+            generation_rate=[0, 250, 700, 250, 450, 100, 0],
+            generation_time=[0, 4, 7, 9, 16, 18, 23],
+			absorption_rate=[0, 16, 60, 80, 80, 50, 0],
+            absorption_time=[0, 4, 7, 9, 16, 18, 23],
+        )   
+
+        residential_out = self.__generate_passanger_properties(
+            name='residential_out',
+            generation_rate=[0, 16, 60, 80, 80, 50, 0],
+            generation_time=[0, 4, 7, 9, 16, 18, 23],
+            absorption_rate=[0, 150, 500, 320, 350, 100, 0],
+            absorption_time=[0, 4, 7, 9, 16, 18, 23],
+        )
+
+        for route in self.routes:
+            for idx, stop in enumerate(route.stops):
+                passanger_node = self.passanger_nodes.get(self.physical_network.nodes.get(stop).tags['name'])
+                if passanger_node == None:
+                    logging.error(f'passanger_node is None, {stop}')
+                    continue
+                
+                if passanger_node.properties['name'] != 'residential':
+                    continue
+
+                if idx < 4:
+                    passanger_node.properties = residential_in
+
+                elif idx > len(route.stops) - 7:
+                    logging.info(f'{passanger_node.name} {passanger_node.properties["name"]}')
+                    passanger_node.properties = residential_out
+        
+
+    def __generate_passanger_properties(self, name : str, generation_rate : list, generation_time : list,
                                          absorption_rate : list, absorption_time : list) -> dict:
         properties = {
+            'name': name,
             'generation_rate': [],
             'generation_distribution': [],
             'absorption_rate': [],
