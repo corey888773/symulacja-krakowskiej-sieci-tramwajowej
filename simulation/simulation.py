@@ -281,8 +281,8 @@ class Simulation:
 
         tram_image = pygame.image.load(self.pgc.TRAM_IMAGE_PATH)
         tram_image = pygame.transform.scale(tram_image, self.pgc.TRAM_IMAGE_SIZE)
-        tram_image_green = pygame.image.load("./resources/g2.png")
-        tram_image_green = pygame.transform.scale(tram_image_green, self.pgc.TRAM_IMAGE_SIZE)
+        # tram_image_green = pygame.image.load("./resources/g2.png")
+        # tram_image_green = pygame.transform.scale(tram_image_green, self.pgc.TRAM_IMAGE_SIZE)
 
         # BUTTONS
         buttons = self.create_buttons()
@@ -426,7 +426,7 @@ class Simulation:
                     self.show_time_table(WINDOW, clicked_tram, scroll_y, content_height, panel_height)
 
             if simulation_running and not dragging:
-                handle_x += 1 / 1200
+                handle_x += 1 / 120
 
             pygame.display.update()
             # pygame.display.flip()
@@ -861,19 +861,19 @@ class Simulation:
                         total_time = tram.time_table[next_stop_index] - arrival_time - stop_duration
                         proportion = time_elapsed / total_time
 
-                    # # Calculate the new position of the tram
-                    # current_node_index = min(int(len(nodes_between) * proportion), len(nodes_between) - 1)
-                    # current_node = nodes_between[current_node_index]
-                    # new_x = self.nodes_dict[current_node].x
-                    # new_y = self.nodes_dict[current_node].y
+                    # Calculate the new position of the tram
+                    current_node_index = min(int(len(nodes_between) * proportion), len(nodes_between) - 1)
+                    current_node = nodes_between[current_node_index]
+                    new_x = self.nodes_dict[current_node].x
+                    new_y = self.nodes_dict[current_node].y
 
                     import math
                     speed = 1 / (1 + math.exp(-10 * (proportion - 0.5)))
 
 
 
-                    new_x = current_stop.x + speed * (next_stop.x - current_stop.x)
-                    new_y = current_stop.y + speed * (next_stop.y - current_stop.y)
+                    # new_x = current_stop.x + speed * (next_stop.x - current_stop.x)
+                    # new_y = current_stop.y + speed * (next_stop.y - current_stop.y)
 
                     if tram == clicked_tram and tram.current_stop == clicked_tram.current_stop:
                         WINDOW.blit(pygame.transform.scale(tram_image, (30, 30)), (new_x - 10, new_y - 10))

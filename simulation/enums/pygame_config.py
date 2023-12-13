@@ -1,7 +1,9 @@
 from enum import Enum
 from .colors import Color
 
-import pygame
+import pygame, os
+
+curr_dir = os.path.dirname(os.path.abspath(__file__))
 
 #TODO where should i put these?
 pygame.init()
@@ -44,8 +46,8 @@ class PyGameConfig():
     BUTTON_BASE_Y = HEIGHT * 0.43
 
     # Tram image settings
-    TRAM_IMAGE_PATH = './resources/Train.png'
-    TRAM_IMAGE_PATHS = ['./resources/l1.png', './resources/l2.png', './resources/l3.png', './resources/l4.png', './resources/l5.png', './resources/l6.png', './resources/l7.png', './resources/l8.png', './resources/l9.png', './resources/l10.png', './resources/g5.png', './resources/g4.png', './resources/g3.png', './resources/g2.png', './resources/g1.png']
+    TRAM_IMAGE_PATH = f'{curr_dir}/../resources/Train.png'
+    TRAM_IMAGE_PATHS = [f'{curr_dir}/../resources/l1.png', f'{curr_dir}/../resources/l2.png', f'{curr_dir}/../resources/l3.png', f'{curr_dir}/../resources/l4.png', f'{curr_dir}/../resources/l5.png', f'{curr_dir}/../resources/l6.png', f'{curr_dir}/../resources/l7.png', f'{curr_dir}/../resources/l8.png', f'{curr_dir}/../resources/l9.png', f'{curr_dir}/../resources/l10.png', f'{curr_dir}/../resources/g5.png', f'{curr_dir}/../resources/g4.png', f'{curr_dir}/../resources/g3.png', f'{curr_dir}/../resources/g2.png', f'{curr_dir}/../resources/g1.png']
     TRAM_IMAGE_SIZE = (18, 18)  # This might not need scaling
 
     # Node and tram stop scaling factors

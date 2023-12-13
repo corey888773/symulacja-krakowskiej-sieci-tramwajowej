@@ -10,8 +10,11 @@ osm:
 data:
 	python datapreprocessing/main.py
 
+simulation:
+	python simulation/main.py
+
 all:
 	make scrape osm data
 
 .PHONY:
-	requirements scrape osm data all
+	requirements scrape osm data all simulation

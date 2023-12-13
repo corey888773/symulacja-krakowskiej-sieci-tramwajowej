@@ -99,6 +99,7 @@ class PassangerNode:
         return {
             'name': self.name,
             'ids': self.ids,
+            'node_character': self.properties['name'],
             'generation_rate': self.properties['generation_rate'],
             'absorption_rate': self.properties['absorption_rate'],
             'expected_generated_count': self.properties['expected_generated_count'],
@@ -127,13 +128,16 @@ class Route:
         self.schedule_route = schedule_route
         self.nodes = []
         self.stops = []
+        self.length = 0
 
     def to_json(self) -> dict:
         return {
             'id': self.id,
             'name': self.name,
-            'stops': self.stops,
             'line': self.line,
+            'length': self.length,
+            'stops': self.stops,
+            'nodes': self.nodes
         }
 
 
