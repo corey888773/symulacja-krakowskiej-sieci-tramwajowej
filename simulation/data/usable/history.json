@@ -1,1 +1,2970 @@
-{}
+{
+    "1": [
+        {
+            "tram_id": 13,
+            "stop_id": 2028510896,
+            "time": "7:48",
+            "people_in": 14,
+            "people_out": 41,
+            "passengers_added": -27,
+            "passengers": 14
+        },
+        {
+            "tram_id": 15,
+            "stop_id": 2420246141,
+            "time": "7:48",
+            "people_in": 51,
+            "people_out": 204,
+            "passengers_added": -153,
+            "passengers": 51
+        },
+        {
+            "tram_id": 16,
+            "stop_id": 638606061,
+            "time": "7:48",
+            "people_in": 11,
+            "people_out": 44,
+            "passengers_added": -33,
+            "passengers": 11
+        },
+        {
+            "tram_id": 17,
+            "stop_id": 3629965037,
+            "time": "7:48",
+            "people_in": 46,
+            "people_out": 15,
+            "passengers_added": 31,
+            "passengers": 46
+        },
+        {
+            "tram_id": 18,
+            "stop_id": 213585864,
+            "time": "7:48",
+            "people_in": 42,
+            "people_out": 15,
+            "passengers_added": 27,
+            "passengers": 42
+        },
+        {
+            "tram_id": 13,
+            "stop_id": 2419831875,
+            "time": "7:49",
+            "people_in": 43,
+            "people_out": 13,
+            "passengers_added": 30,
+            "passengers": 44
+        },
+        {
+            "tram_id": 14,
+            "stop_id": 2419768561,
+            "time": "7:49",
+            "people_in": 11,
+            "people_out": 44,
+            "passengers_added": -33,
+            "passengers": 11
+        },
+        {
+            "tram_id": 16,
+            "stop_id": 213593804,
+            "time": "7:49",
+            "people_in": 14,
+            "people_out": 43,
+            "passengers_added": -29,
+            "passengers": 14
+        },
+        {
+            "tram_id": 17,
+            "stop_id": 638606093,
+            "time": "7:49",
+            "people_in": 42,
+            "people_out": 14,
+            "passengers_added": 28,
+            "passengers": 74
+        },
+        {
+            "tram_id": 13,
+            "stop_id": 2419831874,
+            "time": "7:50",
+            "people_in": 41,
+            "people_out": 13,
+            "passengers_added": 28,
+            "passengers": 72
+        },
+        {
+            "tram_id": 15,
+            "stop_id": 2424088456,
+            "time": "7:50",
+            "people_in": 13,
+            "people_out": 45,
+            "passengers_added": -32,
+            "passengers": 19
+        },
+        {
+            "tram_id": 16,
+            "stop_id": 638606056,
+            "time": "7:50",
+            "people_in": 13,
+            "people_out": 42,
+            "passengers_added": -29,
+            "passengers": 13
+        }
+    ],
+    "2": [
+        {
+            "tram_id": 16,
+            "stop_id": 1769087786,
+            "time": "7:48",
+            "people_in": 43,
+            "people_out": 13,
+            "passengers_added": 30,
+            "passengers": 43
+        },
+        {
+            "tram_id": 21,
+            "stop_id": 1316407567,
+            "time": "7:48",
+            "people_in": 11,
+            "people_out": 45,
+            "passengers_added": -34,
+            "passengers": 11
+        },
+        {
+            "tram_id": 16,
+            "stop_id": 1769088034,
+            "time": "7:49",
+            "people_in": 46,
+            "people_out": 12,
+            "passengers_added": 34,
+            "passengers": 77
+        },
+        {
+            "tram_id": 17,
+            "stop_id": 3629965034,
+            "time": "7:49",
+            "people_in": 41,
+            "people_out": 14,
+            "passengers_added": 27,
+            "passengers": 41
+        },
+        {
+            "tram_id": 18,
+            "stop_id": 3623688656,
+            "time": "7:49",
+            "people_in": 42,
+            "people_out": 14,
+            "passengers_added": 28,
+            "passengers": 42
+        },
+        {
+            "tram_id": 19,
+            "stop_id": 2424076384,
+            "time": "7:49",
+            "people_in": 53,
+            "people_out": 205,
+            "passengers_added": -152,
+            "passengers": 53
+        },
+        {
+            "tram_id": 20,
+            "stop_id": 2419768564,
+            "time": "7:49",
+            "people_in": 16,
+            "people_out": 41,
+            "passengers_added": -25,
+            "passengers": 16
+        },
+        {
+            "tram_id": 17,
+            "stop_id": 2426068335,
+            "time": "7:50",
+            "people_in": 46,
+            "people_out": 11,
+            "passengers_added": 35,
+            "passengers": 76
+        },
+        {
+            "tram_id": 19,
+            "stop_id": 2426058893,
+            "time": "7:50",
+            "people_in": 11,
+            "people_out": 45,
+            "passengers_added": -34,
+            "passengers": 19
+        },
+        {
+            "tram_id": 21,
+            "stop_id": 1316407578,
+            "time": "7:50",
+            "people_in": 11,
+            "people_out": 45,
+            "passengers_added": -34,
+            "passengers": 11
+        }
+    ],
+    "3": [
+        {
+            "tram_id": 16,
+            "stop_id": 2419064241,
+            "time": "7:48",
+            "people_in": 14,
+            "people_out": 45,
+            "passengers_added": -31,
+            "passengers": 14
+        },
+        {
+            "tram_id": 17,
+            "stop_id": 3204607912,
+            "time": "7:48",
+            "people_in": 45,
+            "people_out": 11,
+            "passengers_added": 34,
+            "passengers": 45
+        },
+        {
+            "tram_id": 18,
+            "stop_id": 1310458632,
+            "time": "7:48",
+            "people_in": 43,
+            "people_out": 14,
+            "passengers_added": 29,
+            "passengers": 43
+        },
+        {
+            "tram_id": 14,
+            "stop_id": 2420286330,
+            "time": "7:49",
+            "people_in": 16,
+            "people_out": 42,
+            "passengers_added": -26,
+            "passengers": 16
+        },
+        {
+            "tram_id": 15,
+            "stop_id": 2420216111,
+            "time": "7:49",
+            "people_in": 14,
+            "people_out": 44,
+            "passengers_added": -30,
+            "passengers": 14
+        },
+        {
+            "tram_id": 16,
+            "stop_id": 2423056677,
+            "time": "7:50",
+            "people_in": 15,
+            "people_out": 43,
+            "passengers_added": -28,
+            "passengers": 15
+        },
+        {
+            "tram_id": 17,
+            "stop_id": 622594630,
+            "time": "7:50",
+            "people_in": 43,
+            "people_out": 13,
+            "passengers_added": 30,
+            "passengers": 75
+        },
+        {
+            "tram_id": 18,
+            "stop_id": 1310458614,
+            "time": "7:50",
+            "people_in": 43,
+            "people_out": 13,
+            "passengers_added": 30,
+            "passengers": 73
+        }
+    ],
+    "4": [
+        {
+            "tram_id": 16,
+            "stop_id": 623520694,
+            "time": "7:48",
+            "people_in": 42,
+            "people_out": 11,
+            "passengers_added": 31,
+            "passengers": 42
+        },
+        {
+            "tram_id": 19,
+            "stop_id": 1518864572,
+            "time": "7:48",
+            "people_in": 52,
+            "people_out": 204,
+            "passengers_added": -152,
+            "passengers": 52
+        },
+        {
+            "tram_id": 16,
+            "stop_id": 623520704,
+            "time": "7:49",
+            "people_in": 45,
+            "people_out": 15,
+            "passengers_added": 30,
+            "passengers": 72
+        },
+        {
+            "tram_id": 18,
+            "stop_id": 2419775591,
+            "time": "7:49",
+            "people_in": 13,
+            "people_out": 42,
+            "passengers_added": -29,
+            "passengers": 13
+        },
+        {
+            "tram_id": 20,
+            "stop_id": 2429438683,
+            "time": "7:49",
+            "people_in": 51,
+            "people_out": 202,
+            "passengers_added": -151,
+            "passengers": 51
+        },
+        {
+            "tram_id": 16,
+            "stop_id": 623562103,
+            "time": "7:50",
+            "people_in": 46,
+            "people_out": 14,
+            "passengers_added": 32,
+            "passengers": 104
+        },
+        {
+            "tram_id": 17,
+            "stop_id": 1890503289,
+            "time": "7:50",
+            "people_in": 45,
+            "people_out": 11,
+            "passengers_added": 34,
+            "passengers": 45
+        },
+        {
+            "tram_id": 18,
+            "stop_id": 1890503349,
+            "time": "7:50",
+            "people_in": 45,
+            "people_out": 13,
+            "passengers_added": 32,
+            "passengers": 45
+        },
+        {
+            "tram_id": 19,
+            "stop_id": 2419039772,
+            "time": "7:50",
+            "people_in": 11,
+            "people_out": 41,
+            "passengers_added": -30,
+            "passengers": 22
+        },
+        {
+            "tram_id": 21,
+            "stop_id": 10180183264,
+            "time": "7:50",
+            "people_in": 46,
+            "people_out": 11,
+            "passengers_added": 35,
+            "passengers": 46
+        }
+    ],
+    "5": [
+        {
+            "tram_id": 11,
+            "stop_id": 2419959763,
+            "time": "7:48",
+            "people_in": 14,
+            "people_out": 45,
+            "passengers_added": -31,
+            "passengers": 14
+        },
+        {
+            "tram_id": 12,
+            "stop_id": 639603980,
+            "time": "7:49",
+            "people_in": 44,
+            "people_out": 14,
+            "passengers_added": 30,
+            "passengers": 44
+        },
+        {
+            "tram_id": 11,
+            "stop_id": 2419959766,
+            "time": "7:50",
+            "people_in": 14,
+            "people_out": 45,
+            "passengers_added": -31,
+            "passengers": 14
+        },
+        {
+            "tram_id": 12,
+            "stop_id": 1768224703,
+            "time": "7:50",
+            "people_in": 15,
+            "people_out": 42,
+            "passengers_added": -27,
+            "passengers": 17
+        },
+        {
+            "tram_id": 13,
+            "stop_id": 2163355810,
+            "time": "7:50",
+            "people_in": 41,
+            "people_out": 11,
+            "passengers_added": 30,
+            "passengers": 41
+        }
+    ],
+    "6": [
+        {
+            "tram_id": 9,
+            "stop_id": 1768224723,
+            "time": "7:48",
+            "people_in": 44,
+            "people_out": 14,
+            "passengers_added": 30,
+            "passengers": 44
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 2427903882,
+            "time": "7:48",
+            "people_in": 11,
+            "people_out": 43,
+            "passengers_added": -32,
+            "passengers": 11
+        },
+        {
+            "tram_id": 8,
+            "stop_id": 213605085,
+            "time": "7:49",
+            "people_in": 43,
+            "people_out": 11,
+            "passengers_added": 32,
+            "passengers": 43
+        },
+        {
+            "tram_id": 9,
+            "stop_id": 4068126774,
+            "time": "7:49",
+            "people_in": 41,
+            "people_out": 11,
+            "passengers_added": 30,
+            "passengers": 74
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 2419959769,
+            "time": "7:50",
+            "people_in": 16,
+            "people_out": 42,
+            "passengers_added": -26,
+            "passengers": 16
+        }
+    ],
+    "7": [
+        {
+            "tram_id": 8,
+            "stop_id": 10180183264,
+            "time": "7:48",
+            "people_in": 43,
+            "people_out": 14,
+            "passengers_added": 29,
+            "passengers": 43
+        },
+        {
+            "tram_id": 9,
+            "stop_id": 639603980,
+            "time": "7:48",
+            "people_in": 46,
+            "people_out": 14,
+            "passengers_added": 32,
+            "passengers": 46
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 213585855,
+            "time": "7:48",
+            "people_in": 41,
+            "people_out": 12,
+            "passengers_added": 29,
+            "passengers": 41
+        },
+        {
+            "tram_id": 9,
+            "stop_id": 1768224703,
+            "time": "7:49",
+            "people_in": 13,
+            "people_out": 42,
+            "passengers_added": -29,
+            "passengers": 17
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 213585864,
+            "time": "7:50",
+            "people_in": 44,
+            "people_out": 14,
+            "passengers_added": 30,
+            "passengers": 71
+        }
+    ],
+    "9": [
+        {
+            "tram_id": 19,
+            "stop_id": 2419959766,
+            "time": "7:48",
+            "people_in": 12,
+            "people_out": 44,
+            "passengers_added": -32,
+            "passengers": 12
+        },
+        {
+            "tram_id": 20,
+            "stop_id": 2419768565,
+            "time": "7:48",
+            "people_in": 11,
+            "people_out": 43,
+            "passengers_added": -32,
+            "passengers": 11
+        },
+        {
+            "tram_id": 21,
+            "stop_id": 2065560164,
+            "time": "7:48",
+            "people_in": 14,
+            "people_out": 41,
+            "passengers_added": -27,
+            "passengers": 14
+        },
+        {
+            "tram_id": 18,
+            "stop_id": 2419986537,
+            "time": "7:49",
+            "people_in": 44,
+            "people_out": 11,
+            "passengers_added": 33,
+            "passengers": 44
+        },
+        {
+            "tram_id": 19,
+            "stop_id": 2419986545,
+            "time": "7:49",
+            "people_in": 14,
+            "people_out": 44,
+            "passengers_added": -30,
+            "passengers": 14
+        },
+        {
+            "tram_id": 21,
+            "stop_id": 2419768563,
+            "time": "7:49",
+            "people_in": 13,
+            "people_out": 42,
+            "passengers_added": -29,
+            "passengers": 13
+        },
+        {
+            "tram_id": 22,
+            "stop_id": 2421489794,
+            "time": "7:49",
+            "people_in": 11,
+            "people_out": 42,
+            "passengers_added": -31,
+            "passengers": 11
+        },
+        {
+            "tram_id": 18,
+            "stop_id": 2419986541,
+            "time": "7:50",
+            "people_in": 44,
+            "people_out": 15,
+            "passengers_added": 29,
+            "passengers": 73
+        },
+        {
+            "tram_id": 19,
+            "stop_id": 2419986538,
+            "time": "7:50",
+            "people_in": 14,
+            "people_out": 42,
+            "passengers_added": -28,
+            "passengers": 14
+        },
+        {
+            "tram_id": 20,
+            "stop_id": 2419768561,
+            "time": "7:50",
+            "people_in": 13,
+            "people_out": 42,
+            "passengers_added": -29,
+            "passengers": 13
+        },
+        {
+            "tram_id": 22,
+            "stop_id": 2421547630,
+            "time": "7:50",
+            "people_in": 16,
+            "people_out": 45,
+            "passengers_added": -29,
+            "passengers": 16
+        },
+        {
+            "tram_id": 23,
+            "stop_id": 321429867,
+            "time": "7:50",
+            "people_in": 42,
+            "people_out": 14,
+            "passengers_added": 28,
+            "passengers": 42
+        }
+    ],
+    "10": [
+        {
+            "tram_id": 13,
+            "stop_id": 629106146,
+            "time": "7:48",
+            "people_in": 46,
+            "people_out": 13,
+            "passengers_added": 33,
+            "passengers": 46
+        },
+        {
+            "tram_id": 15,
+            "stop_id": 2418596862,
+            "time": "7:48",
+            "people_in": 12,
+            "people_out": 43,
+            "passengers_added": -31,
+            "passengers": 12
+        },
+        {
+            "tram_id": 16,
+            "stop_id": 2419959769,
+            "time": "7:48",
+            "people_in": 14,
+            "people_out": 45,
+            "passengers_added": -31,
+            "passengers": 14
+        },
+        {
+            "tram_id": 17,
+            "stop_id": 2419986544,
+            "time": "7:48",
+            "people_in": 43,
+            "people_out": 14,
+            "passengers_added": 29,
+            "passengers": 43
+        },
+        {
+            "tram_id": 13,
+            "stop_id": 629106144,
+            "time": "7:49",
+            "people_in": 41,
+            "people_out": 11,
+            "passengers_added": 30,
+            "passengers": 76
+        },
+        {
+            "tram_id": 14,
+            "stop_id": 2419790520,
+            "time": "7:49",
+            "people_in": 55,
+            "people_out": 201,
+            "passengers_added": -146,
+            "passengers": 55
+        },
+        {
+            "tram_id": 17,
+            "stop_id": 2419986539,
+            "time": "7:49",
+            "people_in": 44,
+            "people_out": 13,
+            "passengers_added": 31,
+            "passengers": 74
+        },
+        {
+            "tram_id": 18,
+            "stop_id": 2419986540,
+            "time": "7:49",
+            "people_in": 43,
+            "people_out": 15,
+            "passengers_added": 28,
+            "passengers": 43
+        },
+        {
+            "tram_id": 13,
+            "stop_id": 321429856,
+            "time": "7:50",
+            "people_in": 42,
+            "people_out": 15,
+            "passengers_added": 27,
+            "passengers": 103
+        },
+        {
+            "tram_id": 14,
+            "stop_id": 629106157,
+            "time": "7:50",
+            "people_in": 16,
+            "people_out": 45,
+            "passengers_added": -29,
+            "passengers": 26
+        },
+        {
+            "tram_id": 15,
+            "stop_id": 2419768562,
+            "time": "7:50",
+            "people_in": 11,
+            "people_out": 42,
+            "passengers_added": -31,
+            "passengers": 11
+        },
+        {
+            "tram_id": 16,
+            "stop_id": 2419367401,
+            "time": "7:50",
+            "people_in": 11,
+            "people_out": 45,
+            "passengers_added": -34,
+            "passengers": 11
+        },
+        {
+            "tram_id": 17,
+            "stop_id": 2419986546,
+            "time": "7:50",
+            "people_in": 13,
+            "people_out": 42,
+            "passengers_added": -29,
+            "passengers": 45
+        },
+        {
+            "tram_id": 18,
+            "stop_id": 2427984132,
+            "time": "7:50",
+            "people_in": 41,
+            "people_out": 15,
+            "passengers_added": 26,
+            "passengers": 69
+        }
+    ],
+    "11": [
+        {
+            "tram_id": 10,
+            "stop_id": 1418995562,
+            "time": "7:48",
+            "people_in": 41,
+            "people_out": 11,
+            "passengers_added": 30,
+            "passengers": 41
+        },
+        {
+            "tram_id": 11,
+            "stop_id": 213585931,
+            "time": "7:48",
+            "people_in": 42,
+            "people_out": 13,
+            "passengers_added": 29,
+            "passengers": 42
+        },
+        {
+            "tram_id": 12,
+            "stop_id": 1301798253,
+            "time": "7:48",
+            "people_in": 44,
+            "people_out": 11,
+            "passengers_added": 33,
+            "passengers": 44
+        },
+        {
+            "tram_id": 9,
+            "stop_id": 623520694,
+            "time": "7:49",
+            "people_in": 45,
+            "people_out": 12,
+            "passengers_added": 33,
+            "passengers": 45
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 2255627362,
+            "time": "7:49",
+            "people_in": 41,
+            "people_out": 13,
+            "passengers_added": 28,
+            "passengers": 69
+        },
+        {
+            "tram_id": 11,
+            "stop_id": 4068126775,
+            "time": "7:49",
+            "people_in": 43,
+            "people_out": 13,
+            "passengers_added": 30,
+            "passengers": 72
+        },
+        {
+            "tram_id": 9,
+            "stop_id": 623520704,
+            "time": "7:50",
+            "people_in": 41,
+            "people_out": 14,
+            "passengers_added": 27,
+            "passengers": 72
+        },
+        {
+            "tram_id": 12,
+            "stop_id": 1770978367,
+            "time": "7:50",
+            "people_in": 45,
+            "people_out": 12,
+            "passengers_added": 33,
+            "passengers": 77
+        }
+    ],
+    "12": [
+        {
+            "tram_id": 9,
+            "stop_id": 213644494,
+            "time": "7:48",
+            "people_in": 42,
+            "people_out": 12,
+            "passengers_added": 30,
+            "passengers": 42
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 639603957,
+            "time": "7:48",
+            "people_in": 41,
+            "people_out": 14,
+            "passengers_added": 27,
+            "passengers": 41
+        },
+        {
+            "tram_id": 9,
+            "stop_id": 213643707,
+            "time": "7:49",
+            "people_in": 46,
+            "people_out": 11,
+            "passengers_added": 35,
+            "passengers": 77
+        },
+        {
+            "tram_id": 11,
+            "stop_id": 1611745642,
+            "time": "7:49",
+            "people_in": 46,
+            "people_out": 14,
+            "passengers_added": 32,
+            "passengers": 46
+        },
+        {
+            "tram_id": 12,
+            "stop_id": 287586332,
+            "time": "7:49",
+            "people_in": 41,
+            "people_out": 15,
+            "passengers_added": 26,
+            "passengers": 41
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 1768224723,
+            "time": "7:50",
+            "people_in": 44,
+            "people_out": 13,
+            "passengers_added": 31,
+            "passengers": 72
+        },
+        {
+            "tram_id": 11,
+            "stop_id": 1418995540,
+            "time": "7:50",
+            "people_in": 41,
+            "people_out": 14,
+            "passengers_added": 27,
+            "passengers": 73
+        },
+        {
+            "tram_id": 12,
+            "stop_id": 1951264400,
+            "time": "7:50",
+            "people_in": 42,
+            "people_out": 15,
+            "passengers_added": 27,
+            "passengers": 68
+        }
+    ],
+    "13": [
+        {
+            "tram_id": 7,
+            "stop_id": 5446809570,
+            "time": "7:48",
+            "people_in": 46,
+            "people_out": 15,
+            "passengers_added": 31,
+            "passengers": 46
+        },
+        {
+            "tram_id": 9,
+            "stop_id": 1768224703,
+            "time": "7:48",
+            "people_in": 11,
+            "people_out": 43,
+            "passengers_added": -32,
+            "passengers": 11
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 773635866,
+            "time": "7:48",
+            "people_in": 42,
+            "people_out": 15,
+            "passengers_added": 27,
+            "passengers": 42
+        },
+        {
+            "tram_id": 7,
+            "stop_id": 9944270972,
+            "time": "7:49",
+            "people_in": 46,
+            "people_out": 13,
+            "passengers_added": 33,
+            "passengers": 79
+        },
+        {
+            "tram_id": 8,
+            "stop_id": 2419768562,
+            "time": "7:49",
+            "people_in": 15,
+            "people_out": 45,
+            "passengers_added": -30,
+            "passengers": 15
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 773635778,
+            "time": "7:49",
+            "people_in": 43,
+            "people_out": 11,
+            "passengers_added": 32,
+            "passengers": 74
+        },
+        {
+            "tram_id": 9,
+            "stop_id": 1768224656,
+            "time": "7:50",
+            "people_in": 15,
+            "people_out": 43,
+            "passengers_added": -28,
+            "passengers": 15
+        }
+    ],
+    "14": [
+        {
+            "tram_id": 7,
+            "stop_id": 321436944,
+            "time": "7:48",
+            "people_in": 41,
+            "people_out": 12,
+            "passengers_added": 29,
+            "passengers": 41
+        },
+        {
+            "tram_id": 8,
+            "stop_id": 3629965036,
+            "time": "7:48",
+            "people_in": 46,
+            "people_out": 15,
+            "passengers_added": 31,
+            "passengers": 46
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 2419790519,
+            "time": "7:48",
+            "people_in": 55,
+            "people_out": 201,
+            "passengers_added": -146,
+            "passengers": 55
+        },
+        {
+            "tram_id": 7,
+            "stop_id": 1764757751,
+            "time": "7:49",
+            "people_in": 41,
+            "people_out": 15,
+            "passengers_added": 26,
+            "passengers": 67
+        },
+        {
+            "tram_id": 9,
+            "stop_id": 1887812661,
+            "time": "7:49",
+            "people_in": 56,
+            "people_out": 202,
+            "passengers_added": -146,
+            "passengers": 56
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 2419790522,
+            "time": "7:49",
+            "people_in": 13,
+            "people_out": 43,
+            "passengers_added": -30,
+            "passengers": 25
+        },
+        {
+            "tram_id": 7,
+            "stop_id": 321436933,
+            "time": "7:50",
+            "people_in": 46,
+            "people_out": 14,
+            "passengers_added": 32,
+            "passengers": 99
+        },
+        {
+            "tram_id": 8,
+            "stop_id": 2163355807,
+            "time": "7:50",
+            "people_in": 42,
+            "people_out": 13,
+            "passengers_added": 29,
+            "passengers": 75
+        },
+        {
+            "tram_id": 9,
+            "stop_id": 1768224650,
+            "time": "7:50",
+            "people_in": 14,
+            "people_out": 42,
+            "passengers_added": -28,
+            "passengers": 28
+        }
+    ],
+    "15": [
+        {
+            "tram_id": 9,
+            "stop_id": 629106151,
+            "time": "7:48",
+            "people_in": 46,
+            "people_out": 12,
+            "passengers_added": 34,
+            "passengers": 46
+        },
+        {
+            "tram_id": 9,
+            "stop_id": 1882247981,
+            "time": "7:49",
+            "people_in": 45,
+            "people_out": 11,
+            "passengers_added": 34,
+            "passengers": 80
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 2134334915,
+            "time": "7:49",
+            "people_in": 45,
+            "people_out": 15,
+            "passengers_added": 30,
+            "passengers": 45
+        },
+        {
+            "tram_id": 9,
+            "stop_id": 2421481611,
+            "time": "7:50",
+            "people_in": 44,
+            "people_out": 13,
+            "passengers_added": 31,
+            "passengers": 111
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 624406882,
+            "time": "7:50",
+            "people_in": 41,
+            "people_out": 14,
+            "passengers_added": 27,
+            "passengers": 72
+        },
+        {
+            "tram_id": 11,
+            "stop_id": 1889519517,
+            "time": "7:50",
+            "people_in": 46,
+            "people_out": 15,
+            "passengers_added": 31,
+            "passengers": 46
+        }
+    ],
+    "16": [
+        {
+            "tram_id": 8,
+            "stop_id": 2431520659,
+            "time": "7:48",
+            "people_in": 45,
+            "people_out": 13,
+            "passengers_added": 32,
+            "passengers": 45
+        },
+        {
+            "tram_id": 9,
+            "stop_id": 2424534762,
+            "time": "7:48",
+            "people_in": 43,
+            "people_out": 11,
+            "passengers_added": 32,
+            "passengers": 43
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 2421317346,
+            "time": "7:48",
+            "people_in": 43,
+            "people_out": 15,
+            "passengers_added": 28,
+            "passengers": 43
+        },
+        {
+            "tram_id": 9,
+            "stop_id": 2134334914,
+            "time": "7:49",
+            "people_in": 44,
+            "people_out": 15,
+            "passengers_added": 29,
+            "passengers": 72
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 2421481610,
+            "time": "7:49",
+            "people_in": 41,
+            "people_out": 12,
+            "passengers_added": 29,
+            "passengers": 72
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 2421485635,
+            "time": "7:50",
+            "people_in": 46,
+            "people_out": 13,
+            "passengers_added": 33,
+            "passengers": 105
+        }
+    ],
+    "17": [
+        {
+            "tram_id": 14,
+            "stop_id": 2419986543,
+            "time": "7:48",
+            "people_in": 42,
+            "people_out": 15,
+            "passengers_added": 27,
+            "passengers": 42
+        },
+        {
+            "tram_id": 16,
+            "stop_id": 2419768567,
+            "time": "7:48",
+            "people_in": 15,
+            "people_out": 41,
+            "passengers_added": -26,
+            "passengers": 15
+        },
+        {
+            "tram_id": 17,
+            "stop_id": 288916414,
+            "time": "7:48",
+            "people_in": 45,
+            "people_out": 13,
+            "passengers_added": 32,
+            "passengers": 45
+        },
+        {
+            "tram_id": 19,
+            "stop_id": 1951264400,
+            "time": "7:48",
+            "people_in": 42,
+            "people_out": 12,
+            "passengers_added": 30,
+            "passengers": 42
+        },
+        {
+            "tram_id": 14,
+            "stop_id": 6751743712,
+            "time": "7:49",
+            "people_in": 44,
+            "people_out": 15,
+            "passengers_added": 29,
+            "passengers": 71
+        },
+        {
+            "tram_id": 15,
+            "stop_id": 2419894822,
+            "time": "7:49",
+            "people_in": 55,
+            "people_out": 204,
+            "passengers_added": -149,
+            "passengers": 55
+        },
+        {
+            "tram_id": 17,
+            "stop_id": 602156574,
+            "time": "7:49",
+            "people_in": 12,
+            "people_out": 45,
+            "passengers_added": -33,
+            "passengers": 12
+        },
+        {
+            "tram_id": 18,
+            "stop_id": 622594618,
+            "time": "7:49",
+            "people_in": 43,
+            "people_out": 15,
+            "passengers_added": 28,
+            "passengers": 43
+        },
+        {
+            "tram_id": 19,
+            "stop_id": 1310458610,
+            "time": "7:49",
+            "people_in": 42,
+            "people_out": 12,
+            "passengers_added": 30,
+            "passengers": 72
+        },
+        {
+            "tram_id": 14,
+            "stop_id": 6527877110,
+            "time": "7:50",
+            "people_in": 44,
+            "people_out": 12,
+            "passengers_added": 32,
+            "passengers": 103
+        },
+        {
+            "tram_id": 15,
+            "stop_id": 2419959763,
+            "time": "7:50",
+            "people_in": 12,
+            "people_out": 44,
+            "passengers_added": -32,
+            "passengers": 23
+        },
+        {
+            "tram_id": 16,
+            "stop_id": 2992273250,
+            "time": "7:50",
+            "people_in": 14,
+            "people_out": 42,
+            "passengers_added": -28,
+            "passengers": 14
+        },
+        {
+            "tram_id": 18,
+            "stop_id": 622594619,
+            "time": "7:50",
+            "people_in": 44,
+            "people_out": 13,
+            "passengers_added": 31,
+            "passengers": 74
+        },
+        {
+            "tram_id": 19,
+            "stop_id": 1310458642,
+            "time": "7:50",
+            "people_in": 43,
+            "people_out": 12,
+            "passengers_added": 31,
+            "passengers": 103
+        }
+    ],
+    "18": [
+        {
+            "tram_id": 13,
+            "stop_id": 622594610,
+            "time": "7:48",
+            "people_in": 44,
+            "people_out": 14,
+            "passengers_added": 30,
+            "passengers": 44
+        },
+        {
+            "tram_id": 14,
+            "stop_id": 1890503312,
+            "time": "7:48",
+            "people_in": 44,
+            "people_out": 12,
+            "passengers_added": 32,
+            "passengers": 44
+        },
+        {
+            "tram_id": 15,
+            "stop_id": 1345322499,
+            "time": "7:49",
+            "people_in": 16,
+            "people_out": 41,
+            "passengers_added": -25,
+            "passengers": 16
+        },
+        {
+            "tram_id": 16,
+            "stop_id": 2422880689,
+            "time": "7:49",
+            "people_in": 12,
+            "people_out": 45,
+            "passengers_added": -33,
+            "passengers": 12
+        },
+        {
+            "tram_id": 17,
+            "stop_id": 2419959767,
+            "time": "7:49",
+            "people_in": 13,
+            "people_out": 44,
+            "passengers_added": -31,
+            "passengers": 13
+        },
+        {
+            "tram_id": 13,
+            "stop_id": 623520640,
+            "time": "7:50",
+            "people_in": 43,
+            "people_out": 11,
+            "passengers_added": 32,
+            "passengers": 76
+        },
+        {
+            "tram_id": 14,
+            "stop_id": 1890503305,
+            "time": "7:50",
+            "people_in": 41,
+            "people_out": 13,
+            "passengers_added": 28,
+            "passengers": 72
+        },
+        {
+            "tram_id": 16,
+            "stop_id": 2418766215,
+            "time": "7:50",
+            "people_in": 14,
+            "people_out": 41,
+            "passengers_added": -27,
+            "passengers": 14
+        },
+        {
+            "tram_id": 17,
+            "stop_id": 2427903882,
+            "time": "7:50",
+            "people_in": 11,
+            "people_out": 42,
+            "passengers_added": -31,
+            "passengers": 11
+        },
+        {
+            "tram_id": 18,
+            "stop_id": 6527877110,
+            "time": "7:50",
+            "people_in": 45,
+            "people_out": 15,
+            "passengers_added": 30,
+            "passengers": 45
+        }
+    ],
+    "19": [
+        {
+            "tram_id": 9,
+            "stop_id": 2419986545,
+            "time": "7:48",
+            "people_in": 13,
+            "people_out": 41,
+            "passengers_added": -28,
+            "passengers": 13
+        },
+        {
+            "tram_id": 9,
+            "stop_id": 2419986538,
+            "time": "7:49",
+            "people_in": 14,
+            "people_out": 44,
+            "passengers_added": -30,
+            "passengers": 14
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 2431530708,
+            "time": "7:49",
+            "people_in": 14,
+            "people_out": 45,
+            "passengers_added": -31,
+            "passengers": 14
+        },
+        {
+            "tram_id": 9,
+            "stop_id": 2419986543,
+            "time": "7:50",
+            "people_in": 44,
+            "people_out": 11,
+            "passengers_added": 33,
+            "passengers": 47
+        },
+        {
+            "tram_id": 11,
+            "stop_id": 3629965037,
+            "time": "7:50",
+            "people_in": 46,
+            "people_out": 12,
+            "passengers_added": 34,
+            "passengers": 46
+        },
+        {
+            "tram_id": 12,
+            "stop_id": 213648443,
+            "time": "7:50",
+            "people_in": 41,
+            "people_out": 13,
+            "passengers_added": 28,
+            "passengers": 41
+        }
+    ],
+    "20": [
+        {
+            "tram_id": 7,
+            "stop_id": 213648409,
+            "time": "7:48",
+            "people_in": 44,
+            "people_out": 13,
+            "passengers_added": 31,
+            "passengers": 44
+        },
+        {
+            "tram_id": 8,
+            "stop_id": 1811875207,
+            "time": "7:48",
+            "people_in": 44,
+            "people_out": 13,
+            "passengers_added": 31,
+            "passengers": 44
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 2419986542,
+            "time": "7:48",
+            "people_in": 42,
+            "people_out": 13,
+            "passengers_added": 29,
+            "passengers": 42
+        },
+        {
+            "tram_id": 7,
+            "stop_id": 213648418,
+            "time": "7:49",
+            "people_in": 45,
+            "people_out": 14,
+            "passengers_added": 31,
+            "passengers": 75
+        },
+        {
+            "tram_id": 8,
+            "stop_id": 2426068337,
+            "time": "7:49",
+            "people_in": 44,
+            "people_out": 14,
+            "passengers_added": 30,
+            "passengers": 74
+        },
+        {
+            "tram_id": 9,
+            "stop_id": 1887802513,
+            "time": "7:49",
+            "people_in": 15,
+            "people_out": 43,
+            "passengers_added": -28,
+            "passengers": 15
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 2419986544,
+            "time": "7:49",
+            "people_in": 44,
+            "people_out": 13,
+            "passengers_added": 31,
+            "passengers": 73
+        },
+        {
+            "tram_id": 7,
+            "stop_id": 2427246145,
+            "time": "7:50",
+            "people_in": 42,
+            "people_out": 11,
+            "passengers_added": 31,
+            "passengers": 106
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 2419986539,
+            "time": "7:50",
+            "people_in": 42,
+            "people_out": 14,
+            "passengers_added": 28,
+            "passengers": 101
+        }
+    ],
+    "21": [
+        {
+            "tram_id": 6,
+            "stop_id": 1770978365,
+            "time": "7:48",
+            "people_in": 46,
+            "people_out": 14,
+            "passengers_added": 32,
+            "passengers": 46
+        }
+    ],
+    "23": [
+        {
+            "tram_id": 10,
+            "stop_id": 2419790522,
+            "time": "7:48",
+            "people_in": 11,
+            "people_out": 42,
+            "passengers_added": -31,
+            "passengers": 11
+        },
+        {
+            "tram_id": 11,
+            "stop_id": 2420979795,
+            "time": "7:48",
+            "people_in": 42,
+            "people_out": 14,
+            "passengers_added": 28,
+            "passengers": 42
+        },
+        {
+            "tram_id": 9,
+            "stop_id": 651848336,
+            "time": "7:49",
+            "people_in": 16,
+            "people_out": 41,
+            "passengers_added": -25,
+            "passengers": 16
+        },
+        {
+            "tram_id": 11,
+            "stop_id": 2421242341,
+            "time": "7:49",
+            "people_in": 46,
+            "people_out": 14,
+            "passengers_added": 32,
+            "passengers": 74
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 2065560164,
+            "time": "7:50",
+            "people_in": 16,
+            "people_out": 45,
+            "passengers_added": -29,
+            "passengers": 16
+        },
+        {
+            "tram_id": 11,
+            "stop_id": 2418723932,
+            "time": "7:50",
+            "people_in": 53,
+            "people_out": 205,
+            "passengers_added": -152,
+            "passengers": 53
+        }
+    ],
+    "24": [
+        {
+            "tram_id": 8,
+            "stop_id": 2421261471,
+            "time": "7:48",
+            "people_in": 53,
+            "people_out": 202,
+            "passengers_added": -149,
+            "passengers": 53
+        },
+        {
+            "tram_id": 9,
+            "stop_id": 2067123479,
+            "time": "7:48",
+            "people_in": 14,
+            "people_out": 44,
+            "passengers_added": -30,
+            "passengers": 14
+        },
+        {
+            "tram_id": 9,
+            "stop_id": 2419790521,
+            "time": "7:49",
+            "people_in": 14,
+            "people_out": 42,
+            "passengers_added": -28,
+            "passengers": 14
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 1887802513,
+            "time": "7:49",
+            "people_in": 14,
+            "people_out": 42,
+            "passengers_added": -28,
+            "passengers": 14
+        },
+        {
+            "tram_id": 8,
+            "stop_id": 2421242332,
+            "time": "7:50",
+            "people_in": 46,
+            "people_out": 13,
+            "passengers_added": 33,
+            "passengers": 86
+        }
+    ],
+    "25": [
+        {
+            "tram_id": 14,
+            "stop_id": 11155917993,
+            "time": "7:48",
+            "people_in": 41,
+            "people_out": 12,
+            "passengers_added": 29,
+            "passengers": 41
+        },
+        {
+            "tram_id": 15,
+            "stop_id": 1951264398,
+            "time": "7:48",
+            "people_in": 13,
+            "people_out": 41,
+            "passengers_added": -28,
+            "passengers": 13
+        },
+        {
+            "tram_id": 16,
+            "stop_id": 2420069703,
+            "time": "7:48",
+            "people_in": 16,
+            "people_out": 43,
+            "passengers_added": -27,
+            "passengers": 16
+        },
+        {
+            "tram_id": 14,
+            "stop_id": 7832518761,
+            "time": "7:49",
+            "people_in": 46,
+            "people_out": 13,
+            "passengers_added": 33,
+            "passengers": 74
+        },
+        {
+            "tram_id": 15,
+            "stop_id": 10172286936,
+            "time": "7:49",
+            "people_in": 45,
+            "people_out": 12,
+            "passengers_added": 33,
+            "passengers": 46
+        },
+        {
+            "tram_id": 16,
+            "stop_id": 2423789754,
+            "time": "7:49",
+            "people_in": 11,
+            "people_out": 44,
+            "passengers_added": -33,
+            "passengers": 11
+        },
+        {
+            "tram_id": 17,
+            "stop_id": 2419768565,
+            "time": "7:49",
+            "people_in": 14,
+            "people_out": 42,
+            "passengers_added": -28,
+            "passengers": 14
+        },
+        {
+            "tram_id": 18,
+            "stop_id": 630945148,
+            "time": "7:49",
+            "people_in": 12,
+            "people_out": 44,
+            "passengers_added": -32,
+            "passengers": 12
+        },
+        {
+            "tram_id": 19,
+            "stop_id": 2421317346,
+            "time": "7:49",
+            "people_in": 43,
+            "people_out": 13,
+            "passengers_added": 30,
+            "passengers": 43
+        },
+        {
+            "tram_id": 20,
+            "stop_id": 2017955951,
+            "time": "7:49",
+            "people_in": 55,
+            "people_out": 205,
+            "passengers_added": -150,
+            "passengers": 55
+        },
+        {
+            "tram_id": 14,
+            "stop_id": 7832518761,
+            "time": "7:50",
+            "people_in": 44,
+            "people_out": 11,
+            "passengers_added": 33,
+            "passengers": 107
+        },
+        {
+            "tram_id": 15,
+            "stop_id": 10180183263,
+            "time": "7:50",
+            "people_in": 45,
+            "people_out": 14,
+            "passengers_added": 31,
+            "passengers": 77
+        },
+        {
+            "tram_id": 18,
+            "stop_id": 630945156,
+            "time": "7:50",
+            "people_in": 16,
+            "people_out": 41,
+            "passengers_added": -25,
+            "passengers": 16
+        },
+        {
+            "tram_id": 19,
+            "stop_id": 2052183690,
+            "time": "7:50",
+            "people_in": 15,
+            "people_out": 41,
+            "passengers_added": -26,
+            "passengers": 17
+        },
+        {
+            "tram_id": 20,
+            "stop_id": 2017952988,
+            "time": "7:50",
+            "people_in": 41,
+            "people_out": 14,
+            "passengers_added": 27,
+            "passengers": 82
+        }
+    ],
+    "26": [
+        {
+            "tram_id": 15,
+            "stop_id": 2421317351,
+            "time": "7:48",
+            "people_in": 44,
+            "people_out": 13,
+            "passengers_added": 31,
+            "passengers": 44
+        },
+        {
+            "tram_id": 16,
+            "stop_id": 957085219,
+            "time": "7:48",
+            "people_in": 14,
+            "people_out": 42,
+            "passengers_added": -28,
+            "passengers": 14
+        },
+        {
+            "tram_id": 17,
+            "stop_id": 2422880689,
+            "time": "7:48",
+            "people_in": 14,
+            "people_out": 44,
+            "passengers_added": -30,
+            "passengers": 14
+        },
+        {
+            "tram_id": 18,
+            "stop_id": 2420153433,
+            "time": "7:48",
+            "people_in": 13,
+            "people_out": 41,
+            "passengers_added": -28,
+            "passengers": 13
+        },
+        {
+            "tram_id": 20,
+            "stop_id": 11155918003,
+            "time": "7:48",
+            "people_in": 43,
+            "people_out": 11,
+            "passengers_added": 32,
+            "passengers": 43
+        },
+        {
+            "tram_id": 15,
+            "stop_id": 2846212108,
+            "time": "7:49",
+            "people_in": 45,
+            "people_out": 13,
+            "passengers_added": 32,
+            "passengers": 76
+        },
+        {
+            "tram_id": 17,
+            "stop_id": 2418766215,
+            "time": "7:49",
+            "people_in": 12,
+            "people_out": 41,
+            "passengers_added": -29,
+            "passengers": 12
+        },
+        {
+            "tram_id": 20,
+            "stop_id": 11155961810,
+            "time": "7:49",
+            "people_in": 43,
+            "people_out": 11,
+            "passengers_added": 32,
+            "passengers": 75
+        },
+        {
+            "tram_id": 15,
+            "stop_id": 2421261471,
+            "time": "7:50",
+            "people_in": 51,
+            "people_out": 201,
+            "passengers_added": -150,
+            "passengers": 51
+        },
+        {
+            "tram_id": 16,
+            "stop_id": 2422272345,
+            "time": "7:50",
+            "people_in": 15,
+            "people_out": 44,
+            "passengers_added": -29,
+            "passengers": 15
+        },
+        {
+            "tram_id": 18,
+            "stop_id": 470643346,
+            "time": "7:50",
+            "people_in": 55,
+            "people_out": 205,
+            "passengers_added": -150,
+            "passengers": 55
+        },
+        {
+            "tram_id": 19,
+            "stop_id": 2423804378,
+            "time": "7:50",
+            "people_in": 15,
+            "people_out": 41,
+            "passengers_added": -26,
+            "passengers": 15
+        }
+    ],
+    "27": [
+        {
+            "tram_id": 8,
+            "stop_id": 2423056677,
+            "time": "7:48",
+            "people_in": 16,
+            "people_out": 41,
+            "passengers_added": -25,
+            "passengers": 16
+        },
+        {
+            "tram_id": 7,
+            "stop_id": 1951264398,
+            "time": "7:49",
+            "people_in": 13,
+            "people_out": 44,
+            "passengers_added": -31,
+            "passengers": 13
+        },
+        {
+            "tram_id": 8,
+            "stop_id": 2419106061,
+            "time": "7:49",
+            "people_in": 11,
+            "people_out": 41,
+            "passengers_added": -30,
+            "passengers": 11
+        },
+        {
+            "tram_id": 9,
+            "stop_id": 3150646518,
+            "time": "7:49",
+            "people_in": 42,
+            "people_out": 11,
+            "passengers_added": 31,
+            "passengers": 42
+        },
+        {
+            "tram_id": 7,
+            "stop_id": 1951264398,
+            "time": "7:50",
+            "people_in": 13,
+            "people_out": 42,
+            "passengers_added": -29,
+            "passengers": 13
+        }
+    ],
+    "28": [
+        {
+            "tram_id": 8,
+            "stop_id": 2419106062,
+            "time": "7:48",
+            "people_in": 13,
+            "people_out": 44,
+            "passengers_added": -31,
+            "passengers": 13
+        },
+        {
+            "tram_id": 9,
+            "stop_id": 652730395,
+            "time": "7:48",
+            "people_in": 15,
+            "people_out": 45,
+            "passengers_added": -30,
+            "passengers": 15
+        },
+        {
+            "tram_id": 7,
+            "stop_id": 3661984748,
+            "time": "7:49",
+            "people_in": 41,
+            "people_out": 14,
+            "passengers_added": 27,
+            "passengers": 41
+        },
+        {
+            "tram_id": 8,
+            "stop_id": 2419106073,
+            "time": "7:49",
+            "people_in": 13,
+            "people_out": 42,
+            "passengers_added": -29,
+            "passengers": 13
+        },
+        {
+            "tram_id": 7,
+            "stop_id": 9961675623,
+            "time": "7:50",
+            "people_in": 41,
+            "people_out": 12,
+            "passengers_added": 29,
+            "passengers": 70
+        }
+    ],
+    "29": [
+        {
+            "tram_id": 17,
+            "stop_id": 2420200262,
+            "time": "7:48",
+            "people_in": 11,
+            "people_out": 43,
+            "passengers_added": -32,
+            "passengers": 11
+        },
+        {
+            "tram_id": 18,
+            "stop_id": 1418989432,
+            "time": "7:48",
+            "people_in": 15,
+            "people_out": 43,
+            "passengers_added": -28,
+            "passengers": 15
+        },
+        {
+            "tram_id": 16,
+            "stop_id": 2419821166,
+            "time": "7:49",
+            "people_in": 12,
+            "people_out": 42,
+            "passengers_added": -30,
+            "passengers": 12
+        },
+        {
+            "tram_id": 18,
+            "stop_id": 1418989418,
+            "time": "7:49",
+            "people_in": 11,
+            "people_out": 44,
+            "passengers_added": -33,
+            "passengers": 11
+        },
+        {
+            "tram_id": 19,
+            "stop_id": 1611745646,
+            "time": "7:49",
+            "people_in": 43,
+            "people_out": 12,
+            "passengers_added": 31,
+            "passengers": 43
+        },
+        {
+            "tram_id": 17,
+            "stop_id": 2420200260,
+            "time": "7:50",
+            "people_in": 52,
+            "people_out": 201,
+            "passengers_added": -149,
+            "passengers": 52
+        },
+        {
+            "tram_id": 19,
+            "stop_id": 1611745642,
+            "time": "7:50",
+            "people_in": 46,
+            "people_out": 15,
+            "passengers_added": 31,
+            "passengers": 74
+        }
+    ],
+    "30": [
+        {
+            "tram_id": 14,
+            "stop_id": 2420200261,
+            "time": "7:48",
+            "people_in": 12,
+            "people_out": 45,
+            "passengers_added": -33,
+            "passengers": 12
+        },
+        {
+            "tram_id": 16,
+            "stop_id": 2419831874,
+            "time": "7:48",
+            "people_in": 42,
+            "people_out": 15,
+            "passengers_added": 27,
+            "passengers": 42
+        },
+        {
+            "tram_id": 13,
+            "stop_id": 1418995562,
+            "time": "7:49",
+            "people_in": 44,
+            "people_out": 13,
+            "passengers_added": 31,
+            "passengers": 44
+        },
+        {
+            "tram_id": 15,
+            "stop_id": 2419894822,
+            "time": "7:49",
+            "people_in": 55,
+            "people_out": 201,
+            "passengers_added": -146,
+            "passengers": 55
+        },
+        {
+            "tram_id": 16,
+            "stop_id": 632417956,
+            "time": "7:49",
+            "people_in": 45,
+            "people_out": 14,
+            "passengers_added": 31,
+            "passengers": 73
+        },
+        {
+            "tram_id": 13,
+            "stop_id": 2255627362,
+            "time": "7:50",
+            "people_in": 42,
+            "people_out": 11,
+            "passengers_added": 31,
+            "passengers": 75
+        },
+        {
+            "tram_id": 14,
+            "stop_id": 1887802513,
+            "time": "7:50",
+            "people_in": 14,
+            "people_out": 44,
+            "passengers_added": -30,
+            "passengers": 14
+        },
+        {
+            "tram_id": 16,
+            "stop_id": 2028510897,
+            "time": "7:50",
+            "people_in": 11,
+            "people_out": 42,
+            "passengers_added": -31,
+            "passengers": 42
+        }
+    ],
+    "31": [
+        {
+            "tram_id": 9,
+            "stop_id": 213646624,
+            "time": "7:48",
+            "people_in": 41,
+            "people_out": 14,
+            "passengers_added": 27,
+            "passengers": 41
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 2163355810,
+            "time": "7:48",
+            "people_in": 43,
+            "people_out": 15,
+            "passengers_added": 28,
+            "passengers": 43
+        },
+        {
+            "tram_id": 11,
+            "stop_id": 1764757832,
+            "time": "7:49",
+            "people_in": 42,
+            "people_out": 14,
+            "passengers_added": 28,
+            "passengers": 42
+        },
+        {
+            "tram_id": 11,
+            "stop_id": 2194801621,
+            "time": "7:50",
+            "people_in": 43,
+            "people_out": 14,
+            "passengers_added": 29,
+            "passengers": 71
+        }
+    ],
+    "32": [
+        {
+            "tram_id": 11,
+            "stop_id": 321436933,
+            "time": "7:48",
+            "people_in": 44,
+            "people_out": 14,
+            "passengers_added": 30,
+            "passengers": 44
+        },
+        {
+            "tram_id": 11,
+            "stop_id": 2427003514,
+            "time": "7:49",
+            "people_in": 41,
+            "people_out": 11,
+            "passengers_added": 30,
+            "passengers": 74
+        },
+        {
+            "tram_id": 12,
+            "stop_id": 321437262,
+            "time": "7:49",
+            "people_in": 44,
+            "people_out": 13,
+            "passengers_added": 31,
+            "passengers": 44
+        },
+        {
+            "tram_id": 13,
+            "stop_id": 213646624,
+            "time": "7:50",
+            "people_in": 44,
+            "people_out": 12,
+            "passengers_added": 32,
+            "passengers": 44
+        }
+    ],
+    "33": [
+        {
+            "tram_id": 7,
+            "stop_id": 2163355807,
+            "time": "7:48",
+            "people_in": 44,
+            "people_out": 14,
+            "passengers_added": 30,
+            "passengers": 44
+        },
+        {
+            "tram_id": 8,
+            "stop_id": 2426058892,
+            "time": "7:48",
+            "people_in": 16,
+            "people_out": 44,
+            "passengers_added": -28,
+            "passengers": 16
+        },
+        {
+            "tram_id": 9,
+            "stop_id": 2418596863,
+            "time": "7:48",
+            "people_in": 11,
+            "people_out": 43,
+            "passengers_added": -32,
+            "passengers": 11
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 321429867,
+            "time": "7:48",
+            "people_in": 42,
+            "people_out": 11,
+            "passengers_added": 31,
+            "passengers": 42
+        },
+        {
+            "tram_id": 8,
+            "stop_id": 1764579350,
+            "time": "7:49",
+            "people_in": 15,
+            "people_out": 44,
+            "passengers_added": -29,
+            "passengers": 15
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 2422538507,
+            "time": "7:49",
+            "people_in": 44,
+            "people_out": 12,
+            "passengers_added": 32,
+            "passengers": 74
+        },
+        {
+            "tram_id": 8,
+            "stop_id": 2426058898,
+            "time": "7:50",
+            "people_in": 13,
+            "people_out": 43,
+            "passengers_added": -30,
+            "passengers": 13
+        },
+        {
+            "tram_id": 9,
+            "stop_id": 630945148,
+            "time": "7:50",
+            "people_in": 14,
+            "people_out": 41,
+            "passengers_added": -27,
+            "passengers": 14
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 2422550518,
+            "time": "7:50",
+            "people_in": 45,
+            "people_out": 11,
+            "passengers_added": 34,
+            "passengers": 108
+        }
+    ],
+    "34": [
+        {
+            "tram_id": 3,
+            "stop_id": 2421485635,
+            "time": "7:48",
+            "people_in": 46,
+            "people_out": 11,
+            "passengers_added": 35,
+            "passengers": 46
+        },
+        {
+            "tram_id": 4,
+            "stop_id": 2423003234,
+            "time": "7:48",
+            "people_in": 11,
+            "people_out": 41,
+            "passengers_added": -30,
+            "passengers": 11
+        },
+        {
+            "tram_id": 5,
+            "stop_id": 213597071,
+            "time": "7:48",
+            "people_in": 43,
+            "people_out": 15,
+            "passengers_added": 28,
+            "passengers": 43
+        },
+        {
+            "tram_id": 6,
+            "stop_id": 2163355806,
+            "time": "7:48",
+            "people_in": 42,
+            "people_out": 14,
+            "passengers_added": 28,
+            "passengers": 42
+        },
+        {
+            "tram_id": 3,
+            "stop_id": 2421493335,
+            "time": "7:49",
+            "people_in": 46,
+            "people_out": 13,
+            "passengers_added": 33,
+            "passengers": 79
+        },
+        {
+            "tram_id": 5,
+            "stop_id": 2426058896,
+            "time": "7:49",
+            "people_in": 44,
+            "people_out": 12,
+            "passengers_added": 32,
+            "passengers": 75
+        },
+        {
+            "tram_id": 4,
+            "stop_id": 2418610054,
+            "time": "7:50",
+            "people_in": 14,
+            "people_out": 44,
+            "passengers_added": -30,
+            "passengers": 14
+        },
+        {
+            "tram_id": 5,
+            "stop_id": 3623688655,
+            "time": "7:50",
+            "people_in": 41,
+            "people_out": 11,
+            "passengers_added": 30,
+            "passengers": 105
+        }
+    ],
+    "35": [
+        {
+            "tram_id": 10,
+            "stop_id": 6751743712,
+            "time": "7:48",
+            "people_in": 44,
+            "people_out": 12,
+            "passengers_added": 32,
+            "passengers": 44
+        },
+        {
+            "tram_id": 11,
+            "stop_id": 2423003235,
+            "time": "7:49",
+            "people_in": 11,
+            "people_out": 45,
+            "passengers_added": -34,
+            "passengers": 11
+        },
+        {
+            "tram_id": 12,
+            "stop_id": 622594619,
+            "time": "7:49",
+            "people_in": 44,
+            "people_out": 11,
+            "passengers_added": 33,
+            "passengers": 44
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 2419959765,
+            "time": "7:50",
+            "people_in": 44,
+            "people_out": 14,
+            "passengers_added": 30,
+            "passengers": 74
+        },
+        {
+            "tram_id": 11,
+            "stop_id": 2424015724,
+            "time": "7:50",
+            "people_in": 54,
+            "people_out": 204,
+            "passengers_added": -150,
+            "passengers": 54
+        }
+    ],
+    "36": [
+        {
+            "tram_id": 8,
+            "stop_id": 1890503305,
+            "time": "7:48",
+            "people_in": 44,
+            "people_out": 14,
+            "passengers_added": 30,
+            "passengers": 44
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 2428077846,
+            "time": "7:48",
+            "people_in": 44,
+            "people_out": 11,
+            "passengers_added": 33,
+            "passengers": 44
+        },
+        {
+            "tram_id": 9,
+            "stop_id": 1518864572,
+            "time": "7:49",
+            "people_in": 51,
+            "people_out": 204,
+            "passengers_added": -153,
+            "passengers": 51
+        },
+        {
+            "tram_id": 8,
+            "stop_id": 2134334911,
+            "time": "7:50",
+            "people_in": 43,
+            "people_out": 14,
+            "passengers_added": 29,
+            "passengers": 73
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 2419986542,
+            "time": "7:50",
+            "people_in": 42,
+            "people_out": 12,
+            "passengers_added": 30,
+            "passengers": 74
+        }
+    ],
+    "37": [
+        {
+            "tram_id": 2,
+            "stop_id": 213602155,
+            "time": "7:48",
+            "people_in": 45,
+            "people_out": 15,
+            "passengers_added": 30,
+            "passengers": 45
+        },
+        {
+            "tram_id": 1,
+            "stop_id": 2420200262,
+            "time": "7:49",
+            "people_in": 11,
+            "people_out": 43,
+            "passengers_added": -32,
+            "passengers": 11
+        }
+    ],
+    "39": [
+        {
+            "tram_id": 8,
+            "stop_id": 622594608,
+            "time": "7:48",
+            "people_in": 44,
+            "people_out": 14,
+            "passengers_added": 30,
+            "passengers": 44
+        },
+        {
+            "tram_id": 7,
+            "stop_id": 2431530708,
+            "time": "7:50",
+            "people_in": 15,
+            "people_out": 45,
+            "passengers_added": -30,
+            "passengers": 15
+        },
+        {
+            "tram_id": 8,
+            "stop_id": 622594618,
+            "time": "7:50",
+            "people_in": 45,
+            "people_out": 13,
+            "passengers_added": 32,
+            "passengers": 76
+        }
+    ],
+    "40": [
+        {
+            "tram_id": 4,
+            "stop_id": 1890503305,
+            "time": "7:48",
+            "people_in": 42,
+            "people_out": 12,
+            "passengers_added": 30,
+            "passengers": 42
+        },
+        {
+            "tram_id": 5,
+            "stop_id": 1887802513,
+            "time": "7:49",
+            "people_in": 15,
+            "people_out": 45,
+            "passengers_added": -30,
+            "passengers": 15
+        }
+    ],
+    "41": [
+        {
+            "tram_id": 11,
+            "stop_id": 1887802513,
+            "time": "7:48",
+            "people_in": 11,
+            "people_out": 43,
+            "passengers_added": -32,
+            "passengers": 11
+        },
+        {
+            "tram_id": 12,
+            "stop_id": 11155917998,
+            "time": "7:48",
+            "people_in": 43,
+            "people_out": 13,
+            "passengers_added": 30,
+            "passengers": 43
+        },
+        {
+            "tram_id": 9,
+            "stop_id": 9740014630,
+            "time": "7:49",
+            "people_in": 42,
+            "people_out": 12,
+            "passengers_added": 30,
+            "passengers": 42
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 2134334911,
+            "time": "7:49",
+            "people_in": 46,
+            "people_out": 11,
+            "passengers_added": 35,
+            "passengers": 46
+        },
+        {
+            "tram_id": 12,
+            "stop_id": 11155918003,
+            "time": "7:49",
+            "people_in": 46,
+            "people_out": 14,
+            "passengers_added": 32,
+            "passengers": 75
+        },
+        {
+            "tram_id": 9,
+            "stop_id": 629106146,
+            "time": "7:50",
+            "people_in": 41,
+            "people_out": 15,
+            "passengers_added": 26,
+            "passengers": 68
+        },
+        {
+            "tram_id": 12,
+            "stop_id": 11155961810,
+            "time": "7:50",
+            "people_in": 46,
+            "people_out": 14,
+            "passengers_added": 32,
+            "passengers": 107
+        }
+    ],
+    "42": [
+        {
+            "tram_id": 9,
+            "stop_id": 2420286330,
+            "time": "7:48",
+            "people_in": 14,
+            "people_out": 43,
+            "passengers_added": -29,
+            "passengers": 14
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 1418995540,
+            "time": "7:48",
+            "people_in": 45,
+            "people_out": 15,
+            "passengers_added": 30,
+            "passengers": 45
+        },
+        {
+            "tram_id": 11,
+            "stop_id": 5728702340,
+            "time": "7:48",
+            "people_in": 45,
+            "people_out": 15,
+            "passengers_added": 30,
+            "passengers": 45
+        },
+        {
+            "tram_id": 11,
+            "stop_id": 2424655425,
+            "time": "7:49",
+            "people_in": 43,
+            "people_out": 15,
+            "passengers_added": 28,
+            "passengers": 73
+        },
+        {
+            "tram_id": 9,
+            "stop_id": 1951264398,
+            "time": "7:50",
+            "people_in": 16,
+            "people_out": 43,
+            "passengers_added": -27,
+            "passengers": 16
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 1418995542,
+            "time": "7:50",
+            "people_in": 46,
+            "people_out": 12,
+            "passengers_added": 34,
+            "passengers": 79
+        },
+        {
+            "tram_id": 11,
+            "stop_id": 2424534762,
+            "time": "7:50",
+            "people_in": 46,
+            "people_out": 12,
+            "passengers_added": 34,
+            "passengers": 107
+        }
+    ],
+    "43": [
+        {
+            "tram_id": 14,
+            "stop_id": 213645106,
+            "time": "7:48",
+            "people_in": 43,
+            "people_out": 14,
+            "passengers_added": 29,
+            "passengers": 43
+        },
+        {
+            "tram_id": 16,
+            "stop_id": 4068126774,
+            "time": "7:48",
+            "people_in": 45,
+            "people_out": 12,
+            "passengers_added": 33,
+            "passengers": 45
+        },
+        {
+            "tram_id": 17,
+            "stop_id": 2420200261,
+            "time": "7:48",
+            "people_in": 12,
+            "people_out": 44,
+            "passengers_added": -32,
+            "passengers": 12
+        },
+        {
+            "tram_id": 19,
+            "stop_id": 2052183691,
+            "time": "7:48",
+            "people_in": 14,
+            "people_out": 45,
+            "passengers_added": -31,
+            "passengers": 14
+        },
+        {
+            "tram_id": 20,
+            "stop_id": 2418723932,
+            "time": "7:48",
+            "people_in": 54,
+            "people_out": 204,
+            "passengers_added": -150,
+            "passengers": 54
+        },
+        {
+            "tram_id": 14,
+            "stop_id": 840467680,
+            "time": "7:49",
+            "people_in": 42,
+            "people_out": 15,
+            "passengers_added": 27,
+            "passengers": 70
+        },
+        {
+            "tram_id": 15,
+            "stop_id": 3629965034,
+            "time": "7:49",
+            "people_in": 43,
+            "people_out": 13,
+            "passengers_added": 30,
+            "passengers": 43
+        },
+        {
+            "tram_id": 19,
+            "stop_id": 2052183688,
+            "time": "7:49",
+            "people_in": 12,
+            "people_out": 43,
+            "passengers_added": -31,
+            "passengers": 12
+        },
+        {
+            "tram_id": 15,
+            "stop_id": 2426068335,
+            "time": "7:50",
+            "people_in": 45,
+            "people_out": 11,
+            "passengers_added": 34,
+            "passengers": 77
+        },
+        {
+            "tram_id": 16,
+            "stop_id": 2163355802,
+            "time": "7:50",
+            "people_in": 44,
+            "people_out": 14,
+            "passengers_added": 30,
+            "passengers": 75
+        },
+        {
+            "tram_id": 17,
+            "stop_id": 1887812661,
+            "time": "7:50",
+            "people_in": 52,
+            "people_out": 201,
+            "passengers_added": -149,
+            "passengers": 52
+        },
+        {
+            "tram_id": 18,
+            "stop_id": 2423003235,
+            "time": "7:50",
+            "people_in": 15,
+            "people_out": 42,
+            "passengers_added": -27,
+            "passengers": 15
+        },
+        {
+            "tram_id": 19,
+            "stop_id": 2418596863,
+            "time": "7:50",
+            "people_in": 11,
+            "people_out": 43,
+            "passengers_added": -32,
+            "passengers": 11
+        },
+        {
+            "tram_id": 20,
+            "stop_id": 2846212107,
+            "time": "7:50",
+            "people_in": 42,
+            "people_out": 14,
+            "passengers_added": 28,
+            "passengers": 82
+        }
+    ],
+    "44": [
+        {
+            "tram_id": 15,
+            "stop_id": 2017952992,
+            "time": "7:48",
+            "people_in": 44,
+            "people_out": 15,
+            "passengers_added": 29,
+            "passengers": 44
+        },
+        {
+            "tram_id": 16,
+            "stop_id": 2052183689,
+            "time": "7:48",
+            "people_in": 42,
+            "people_out": 13,
+            "passengers_added": 29,
+            "passengers": 42
+        },
+        {
+            "tram_id": 19,
+            "stop_id": 1768224656,
+            "time": "7:48",
+            "people_in": 15,
+            "people_out": 42,
+            "passengers_added": -27,
+            "passengers": 15
+        },
+        {
+            "tram_id": 20,
+            "stop_id": 2163355803,
+            "time": "7:48",
+            "people_in": 41,
+            "people_out": 11,
+            "passengers_added": 30,
+            "passengers": 41
+        },
+        {
+            "tram_id": 22,
+            "stop_id": 213646624,
+            "time": "7:48",
+            "people_in": 42,
+            "people_out": 13,
+            "passengers_added": 29,
+            "passengers": 42
+        },
+        {
+            "tram_id": 15,
+            "stop_id": 2017955948,
+            "time": "7:49",
+            "people_in": 45,
+            "people_out": 15,
+            "passengers_added": 30,
+            "passengers": 74
+        },
+        {
+            "tram_id": 17,
+            "stop_id": 2422656435,
+            "time": "7:49",
+            "people_in": 12,
+            "people_out": 45,
+            "passengers_added": -33,
+            "passengers": 12
+        },
+        {
+            "tram_id": 18,
+            "stop_id": 1518864572,
+            "time": "7:49",
+            "people_in": 53,
+            "people_out": 203,
+            "passengers_added": -150,
+            "passengers": 53
+        },
+        {
+            "tram_id": 20,
+            "stop_id": 213585922,
+            "time": "7:49",
+            "people_in": 41,
+            "people_out": 14,
+            "passengers_added": 27,
+            "passengers": 68
+        },
+        {
+            "tram_id": 22,
+            "stop_id": 2427215149,
+            "time": "7:49",
+            "people_in": 42,
+            "people_out": 13,
+            "passengers_added": 29,
+            "passengers": 71
+        },
+        {
+            "tram_id": 16,
+            "stop_id": 2421317351,
+            "time": "7:50",
+            "people_in": 46,
+            "people_out": 15,
+            "passengers_added": 31,
+            "passengers": 73
+        },
+        {
+            "tram_id": 17,
+            "stop_id": 957085219,
+            "time": "7:50",
+            "people_in": 12,
+            "people_out": 44,
+            "passengers_added": -32,
+            "passengers": 12
+        },
+        {
+            "tram_id": 19,
+            "stop_id": 1995730500,
+            "time": "7:50",
+            "people_in": 53,
+            "people_out": 205,
+            "passengers_added": -152,
+            "passengers": 53
+        },
+        {
+            "tram_id": 20,
+            "stop_id": 213585931,
+            "time": "7:50",
+            "people_in": 44,
+            "people_out": 14,
+            "passengers_added": 30,
+            "passengers": 98
+        },
+        {
+            "tram_id": 21,
+            "stop_id": 213585881,
+            "time": "7:50",
+            "people_in": 46,
+            "people_out": 12,
+            "passengers_added": 34,
+            "passengers": 46
+        },
+        {
+            "tram_id": 22,
+            "stop_id": 2427200899,
+            "time": "7:50",
+            "people_in": 41,
+            "people_out": 11,
+            "passengers_added": 30,
+            "passengers": 101
+        }
+    ],
+    "8": [
+        {
+            "tram_id": 10,
+            "stop_id": 2386355261,
+            "time": "7:49",
+            "people_in": 45,
+            "people_out": 12,
+            "passengers_added": 33,
+            "passengers": 45
+        },
+        {
+            "tram_id": 11,
+            "stop_id": 639603957,
+            "time": "7:49",
+            "people_in": 43,
+            "people_out": 11,
+            "passengers_added": 32,
+            "passengers": 43
+        },
+        {
+            "tram_id": 10,
+            "stop_id": 1769087965,
+            "time": "7:50",
+            "people_in": 41,
+            "people_out": 12,
+            "passengers_added": 29,
+            "passengers": 74
+        }
+    ],
+    "38": [
+        {
+            "tram_id": 6,
+            "stop_id": 2420200261,
+            "time": "7:49",
+            "people_in": 15,
+            "people_out": 42,
+            "passengers_added": -27,
+            "passengers": 15
+        },
+        {
+            "tram_id": 5,
+            "stop_id": 3629965036,
+            "time": "7:50",
+            "people_in": 45,
+            "people_out": 11,
+            "passengers_added": 34,
+            "passengers": 45
+        }
+    ],
+    "22": [
+        {
+            "tram_id": 7,
+            "stop_id": 213644494,
+            "time": "7:50",
+            "people_in": 43,
+            "people_out": 15,
+            "passengers_added": 28,
+            "passengers": 43
+        }
+    ]
+}

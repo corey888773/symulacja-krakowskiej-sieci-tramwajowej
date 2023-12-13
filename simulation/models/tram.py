@@ -1,7 +1,8 @@
 from .tram_stop import TramStop
 
+
 class Tram:
-    def __init__(self, id: int, current_stop: TramStop, stops: list[TramStop], time_table: list[int], delay: int = 0, route_id: int = 0, passengers: int = 0) -> None:
+    def __init__(self, id: int, current_stop: int, stops: list[int], time_table: list[int], delay: int = 0, route_id: int = 0, passengers: int = 0) -> None:
         self.id = id
         self.current_stop = current_stop
         self.stops = stops
