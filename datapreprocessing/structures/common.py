@@ -122,6 +122,7 @@ class PassangerEdge:
 class Route:
     def __init__(self, id : int, name : str, schedule_route : dict):
         self.id = id
+        self.line = None
         self.name = name
         self.schedule_route = schedule_route
         self.nodes = []
@@ -132,6 +133,7 @@ class Route:
             'id': self.id,
             'name': self.name,
             'stops': self.stops,
+            'line': self.line,
         }
 
 
