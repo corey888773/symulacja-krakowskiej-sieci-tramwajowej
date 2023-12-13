@@ -171,6 +171,21 @@ class LogicalNetwork:
         return route
 
 
+    def update_route_lengths(self):
+        for route in self.routes:
+            route.length = self.__get_route_length(route)
+
+
+    def __get_route_length(self, route : Route) -> float:
+        length = 0
+        for i in range(len(route.nodes) - 1):
+            length += self.physical_network.nodes.get(route.nodes[i]).distance_to(
+                self.physical_network.nodes.get(route.nodes[i + 1])
+            )
+
+        return length
+
+
     def __get_next_available_id(self):
         self.avaialbe_id += 1
         return self.avaialbe_id

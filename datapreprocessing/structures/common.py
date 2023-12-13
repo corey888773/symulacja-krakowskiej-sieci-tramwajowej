@@ -127,13 +127,16 @@ class Route:
         self.schedule_route = schedule_route
         self.nodes = []
         self.stops = []
+        self.length = 0
 
     def to_json(self) -> dict:
         return {
             'id': self.id,
             'name': self.name,
-            'stops': self.stops,
             'line': self.line,
+            'length': self.length,
+            'stops': self.stops,
+            'nodes': self.nodes
         }
 
 
