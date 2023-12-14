@@ -16,6 +16,7 @@ import pygame
 import json
 import os
 import heapq
+import math
 
 curr_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -269,6 +270,30 @@ class Simulation:
         play_button_width = self.pgc.PLAY_BUTTON_WIDTH
         play_button_height = self.pgc.PLAY_BUTTON_HEIGHT
 
+        # DOUBLE TIME BUTTON
+        double_time_button_x = self.pgc.DOUBLE_TIME_BUTTON_X
+        double_time_button_y = self.pgc.DOUBLE_TIME_BUTTON_Y
+        double_time_button_width = self.pgc.DOUBLE_TIME_BUTTON_WIDTH
+        double_time_button_height = self.pgc.DOUBLE_TIME_BUTTON_HEIGHT
+
+        button_2x_clicked = False
+
+        # QUADRUPLE TIME BUTTON
+        quadruple_time_button_x = self.pgc.QUADRUPLE_TIME_BUTTON_X
+        quadruple_time_button_y = self.pgc.QUADRUPLE_TIME_BUTTON_Y
+        quadruple_time_button_width = self.pgc.QUADRUPLE_TIME_BUTTON_WIDTH
+        quadruple_time_button_height = self.pgc.QUADRUPLE_TIME_BUTTON_HEIGHT
+
+        button_4x_clicked = False
+
+        # 1/2 TIME BUTTON
+        half_time_button_x = self.pgc.HALF_TIME_BUTTON_X
+        half_time_button_y = self.pgc.HALF_TIME_BUTTON_Y
+        half_time_button_width = self.pgc.HALF_TIME_BUTTON_WIDTH
+        half_time_button_height = self.pgc.HALF_TIME_BUTTON_HEIGHT
+
+        button_half_clicked = False
+
         # SIMULATION
         simulation_running = False
 
@@ -281,8 +306,6 @@ class Simulation:
 
         tram_image = pygame.image.load(self.pgc.TRAM_IMAGE_PATH)
         tram_image = pygame.transform.scale(tram_image, self.pgc.TRAM_IMAGE_SIZE)
-        # tram_image_green = pygame.image.load("./resources/g2.png")
-        # tram_image_green = pygame.transform.scale(tram_image_green, self.pgc.TRAM_IMAGE_SIZE)
 
         # BUTTONS
         buttons = self.create_buttons()
@@ -339,6 +362,34 @@ class Simulation:
                                                 play_button_width,
                                                 play_button_height,
                                                 simulation_running
+                                            )
+                        button_2x_clicked = self.click_time_button(
+                                                mouse_position,
+                                                double_time_button_x,
+                                                double_time_button_y,
+                                                double_time_button_width,
+                                                double_time_button_height,
+                                                button_2x_clicked,
+                                                [button_4x_clicked, button_half_clicked]
+                                            )
+                        button_4x_clicked = self.click_time_button(
+                                                mouse_position,
+                                                quadruple_time_button_x,
+                                                quadruple_time_button_y,
+                                                quadruple_time_button_width,
+                                                quadruple_time_button_height,
+                                                button_4x_clicked,
+                                                [button_2x_clicked, button_half_clicked]
+                                            )
+                        
+                        button_half_clicked = self.click_time_button(
+                                                mouse_position,
+                                                half_time_button_x,
+                                                half_time_button_y,
+                                                half_time_button_width,
+                                                half_time_button_height,
+                                                button_half_clicked,
+                                                [button_2x_clicked, button_4x_clicked]
                                             )
                         selected_route_ids, update_trams, buttons = self.button_actions(
                                                                         mouse_position,
@@ -400,7 +451,20 @@ class Simulation:
 
             self.draw_slider(WINDOW, slider_x, slider_y, slider_width, slider_height, handle_x, handle_width)
             self.draw_current_time(WINDOW, slider_x, slider_y, slider_width, hours, minutes)
-            self.draw_play_button(WINDOW, play_button_x, play_button_y, play_button_width, play_button_height)
+            self.draw_button(WINDOW, play_button_x, play_button_y, play_button_width, play_button_height, None, False)
+
+            if button_2x_clicked:
+                self.pgc.TIME_PROPORTION = 30
+            elif button_4x_clicked:
+                self.pgc.TIME_PROPORTION = 15
+            elif button_half_clicked:
+                self.pgc.TIME_PROPORTION = 120
+            else:
+                self.pgc.TIME_PROPORTION = 60
+
+            self.draw_button(WINDOW, double_time_button_x, double_time_button_y, double_time_button_width, double_time_button_height, "2x", button_2x_clicked)
+            self.draw_button(WINDOW, quadruple_time_button_x, quadruple_time_button_y, quadruple_time_button_width, quadruple_time_button_height, "4x", button_4x_clicked)
+            self.draw_button(WINDOW, half_time_button_x, half_time_button_y, half_time_button_width, half_time_button_height, "1/2x", button_half_clicked)
             self.draw_buttons(WINDOW, buttons)
 
             # Draw the play symbol (a triangle) inside the button or the pause symbol (two rectangles)
@@ -422,11 +486,11 @@ class Simulation:
                 except ValueError:
                     skip = True
 
-                if not skip:
+                if not skip and (clicked_tram.route_id in selected_route_ids or None in selected_route_ids):
                     self.show_time_table(WINDOW, clicked_tram, scroll_y, content_height, panel_height)
 
             if simulation_running and not dragging:
-                handle_x += 1 / 120
+                handle_x += 1 / self.pgc.TIME_PROPORTION
 
             pygame.display.update()
             # pygame.display.flip()
@@ -443,8 +507,7 @@ class Simulation:
 
         for trams in self.current_stops_trams.values():
             for tram in trams:
-                if ((mouse_position[0] - tram.current_stop.x) ** 2 + (
-                        mouse_position[1] - tram.current_stop.y) ** 2) ** 0.5 <= 8:
+                if ((mouse_position[0] - tram.current_stop.x) ** 2 + (mouse_position[1] - tram.current_stop.y) ** 2) ** 0.5 <= 10:
                     clicked_tram = tram
                     break
 
@@ -543,6 +606,22 @@ class Simulation:
             simulation_running = not simulation_running
 
         return simulation_running
+    
+    def click_time_button(self,
+                          mouse_position: tuple[int, int],
+                          button_x: int,
+                          button_y: int,
+                          button_width: int,
+                          button_height: int,
+                          button_clicked: bool,
+                          other_button_clicked: list[bool]
+                          ) -> bool:
+        if (button_x <= mouse_position[0] <= button_x + button_width and 
+           button_y <= mouse_position[1] <= button_y + button_height and 
+           not any(other_button_clicked)):
+            button_clicked = not button_clicked
+        
+        return button_clicked
 
     def change_cursor(self,
                       mouse_position: tuple[int, int],
@@ -652,6 +731,7 @@ class Simulation:
                                 tram.passengers += people_in
                             else:
                                 tram.passengers = tram.max_passengers
+                            tram.passengers -= random.randint(0, 3)
 
                             self._history[route_id].append({
                                 "tram_id": tram.id,
@@ -793,7 +873,7 @@ class Simulation:
             elif passengers <= 60:
                 return tram_images[11]
             elif passengers <= 75:
-                return tram_images[10]
+                return tram_images[11]
             elif passengers <= 90:
                 return tram_images[9]
             elif passengers <= 105:
@@ -841,15 +921,15 @@ class Simulation:
                     next_stop = self.tram_stops_dict[tram.stops[next_stop_index]]
 
                     # Get the current node index and the next node index
-                    current_node_index = self.route_and_nodes[route_id].index(current_stop.id)
-                    next_node_index = (self.route_and_nodes[route_id].index(next_stop.id) + 1) % len(self.route_and_nodes[route_id])
+                    # current_node_index = self.route_and_nodes[route_id].index(current_stop.id)
+                    # next_node_index = (self.route_and_nodes[route_id].index(next_stop.id) + 1) % len(self.route_and_nodes[route_id])
 
-                    # If the next node is before the current node in the list, add the length of the list to the next node index
-                    if next_node_index <= current_node_index:
-                        next_node_index += len(self.route_and_nodes[route_id])
+                    # # If the next node is before the current node in the list, add the length of the list to the next node index
+                    # if next_node_index <= current_node_index:
+                    #     next_node_index += len(self.route_and_nodes[route_id])
 
                     # Get the nodes between the current node and the next node
-                    nodes_between = self.route_and_nodes[route_id][current_node_index:next_node_index]
+                    # nodes_between = self.route_and_nodes[route_id][current_node_index:next_node_index]
 
                     # # Calculate the proportion of the time elapsed
                     arrival_time = tram.time_table[tram.stops.index(current_stop.id)]
@@ -862,18 +942,16 @@ class Simulation:
                         proportion = time_elapsed / total_time
 
                     # Calculate the new position of the tram
-                    current_node_index = min(int(len(nodes_between) * proportion), len(nodes_between) - 1)
-                    current_node = nodes_between[current_node_index]
-                    new_x = self.nodes_dict[current_node].x
-                    new_y = self.nodes_dict[current_node].y
+                    # current_node_index = min(int(len(nodes_between) * proportion), len(nodes_between) - 1)
+                    # current_node = nodes_between[current_node_index]
+                    # new_x = self.nodes_dict[current_node].x
+                    # new_y = self.nodes_dict[current_node].y
 
-                    import math
+                    
                     speed = 1 / (1 + math.exp(-10 * (proportion - 0.5)))
 
-
-
-                    # new_x = current_stop.x + speed * (next_stop.x - current_stop.x)
-                    # new_y = current_stop.y + speed * (next_stop.y - current_stop.y)
+                    new_x = current_stop.x + speed * (next_stop.x - current_stop.x)
+                    new_y = current_stop.y + speed * (next_stop.y - current_stop.y)
 
                     if tram == clicked_tram and tram.current_stop == clicked_tram.current_stop:
                         WINDOW.blit(pygame.transform.scale(tram_image, (30, 30)), (new_x - 10, new_y - 10))
@@ -895,7 +973,8 @@ class Simulation:
         start = self.tram_stops_dict[tram.stops[0]].stop_name
         end = self.tram_stops_dict[tram.stops[-1]].stop_name
         length = len(start) + len(end)
-        directions = f"Tram {tram.id} - {start} -> {end}, ({tram.passengers})"
+        line = self.routes_dict[tram.route_id].line
+        directions = f"Tram {line} - {start} -> {end}, ({tram.passengers})"
         directions_length = self.pgc.FONT.size(directions)[0]
         content_surface = pygame.Surface((directions_length + 40, content_height), pygame.SRCALPHA)
 
@@ -971,14 +1050,22 @@ class Simulation:
             text_rect = text_surface.get_rect(center=button['rect'].center)
             WINDOW.blit(text_surface, text_rect)
 
-    def draw_play_button(self,
+    def draw_button(self,
                          WINDOW: pygame.Surface,
                          button_x: int,
                          button_y: int,
                          button_width: int,
-                         button_height: int
+                         button_height: int,
+                         button_text: str,
+                         button_clicked: bool = False
                          ) -> None:
-        pygame.draw.rect(WINDOW, Color.GRAY.value, (button_x, button_y, button_width, button_height))
+        button_color = Color.RED.value if button_clicked else Color.GRAY.value
+        button_rect = pygame.Rect(button_x, button_y, button_width, button_height)
+        pygame.draw.rect(WINDOW, button_color, button_rect)
+        if button_text:
+            text_surface = self.pgc.FONT.render(button_text, True, Color.BLACK.value)
+            text_rect = text_surface.get_rect(center=button_rect.center)
+            WINDOW.blit(text_surface, text_rect)
 
     def draw_symbol(self,
                     WINDOW: pygame.Surface,
