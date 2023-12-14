@@ -1,5 +1,7 @@
 # TRAM NETWORK SIMULATION IN CRACOW
-
+The application is written in Python language, using Pygame library for visualization. 
+The simulation allows you to track the movement of trams in Cracow based on previously prepared data in JSON format. 
+Detailed information on how the program works is presented below.
 
 
 ## Built With
