@@ -6,12 +6,12 @@ query = '''
   <union>
     <query type="node">
       <has-kv k="railway" v="tram_stop"/>
-      <bbox-query {BORDERBOX}/>
+      <bbox-query w="19.88" s="50.01" e="20.13" n="50.11"/>
       </query>
     
     <query type="way">
       <has-kv k="railway" v="tram"/>
-      <bbox-query {BORDERBOX}/>
+      <bbox-query w="19.88" s="50.01" e="20.13" n="50.11"/>
       </query>
   </union>
 

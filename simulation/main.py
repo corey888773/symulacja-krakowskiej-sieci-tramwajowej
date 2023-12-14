@@ -6,7 +6,7 @@ import argparse
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--first_run", action="store_true")
+    parser.add_argument("--first-run", action="store_true")
     args = parser.parse_args()
 
     curr_dir = os.path.dirname(os.path.abspath(__file__))
