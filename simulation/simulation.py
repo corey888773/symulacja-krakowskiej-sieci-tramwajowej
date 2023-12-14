@@ -729,7 +729,9 @@ class Simulation:
                                 tram.passengers += people_in
                             else:
                                 tram.passengers = tram.max_passengers
-                            tram.passengers -= random.randint(0, 3)
+
+                            randomizer = random.randint(0, 3)
+                            tram.passengers -= randomizer
 
                             self._history[route_id].append({
                                 "tram_id": tram.id,
@@ -737,7 +739,7 @@ class Simulation:
                                 "time": f"{hours}:{minutes:02}",
                                 "people_in": people_in,
                                 "people_out": people_out,
-                                "passengers_added": people_in - people_out,
+                                "passengers_added": people_in - people_out - randomizer,
                                 "passengers": tram.passengers
                             })
 
@@ -1127,8 +1129,7 @@ class Simulation:
                     next_stop = route.stops[i + 1]
                     while start_stop != next_stop:
                         # Find all edges starting from the current stop
-                        start_edges = [edge for edge in self.edges_list if
-                                       edge.head == start_stop and edge.tail not in visited_nodes]
+                        start_edges = [edge for edge in self.edges_list if edge.head == start_stop and edge.tail not in visited_nodes]
                         if not start_edges:
                             break
 
