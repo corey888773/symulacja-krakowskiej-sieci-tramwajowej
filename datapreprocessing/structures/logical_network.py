@@ -11,7 +11,6 @@ from .schedule import Schedule, Line, Direction, Stop
 REMOVED_STOPS = [
     'KrowodrzaGórkaP+R03'
 ]
-
 class LogicalNetwork:
     def __init__(self, schedule : Schedule, physical_network : PhysicalNetwork):
         self.schedule = schedule
@@ -102,6 +101,8 @@ class LogicalNetwork:
 
 
     def process_route(self, direction : Direction, start_node_id : int, end_node_id : int):
+        BUGGY_STOPS = ['PocztaGłówna03', 'NowyKleparz01']
+
         route = Route(self.__get_next_available_id(), name=direction.name, schedule_route=direction)
         init_node = curr_stop = self.physical_network.nodes.get(start_node_id)
         
@@ -110,6 +111,8 @@ class LogicalNetwork:
 
         for idx in range(1, len(direction.stops)):
             next_stop = direction.stops[idx].name
+            if next_stop in BUGGY_STOPS:
+                pass
 
             second_next_stop = self.physical_network.nodes.get(end_node_id).tags['name']
             if idx < len(direction.stops) - 1:
@@ -145,8 +148,8 @@ class LogicalNetwork:
                 straight_line_distance = intermediate_platform.distance_to(end_platform)
 
                 # logging.info((dist1, dist2, straight_line_distance))
-
-                if dist2 <  2 * straight_line_distance:
+ 
+                if dist2 <  2 * straight_line_distance or next_stop in BUGGY_STOPS:
                     path = path1
                     break
                 else:
@@ -179,9 +182,13 @@ class LogicalNetwork:
     def __get_route_length(self, route : Route) -> float:
         length = 0
         for i in range(len(route.nodes) - 1):
-            length += self.physical_network.nodes.get(route.nodes[i]).distance_to(
-                self.physical_network.nodes.get(route.nodes[i + 1])
-            )
+            try:
+                length += self.physical_network.nodes.get(route.nodes[i]).distance_to(
+                    self.physical_network.nodes.get(route.nodes[i + 1])
+                )
+            except:
+                logging.error(f'route.nodes[i] or route.nodes[i + 1] is None, {route.nodes[i]} or {route.nodes[i + 1]}')
+                continue
 
         return length
 
@@ -282,22 +289,6 @@ class LogicalNetwork:
 
             if error == True:
                 logging.error(f'invalid trip {route} \n\n\n')
-                
-                # TODO: fix this
-                # INFO - logical_network.py:379, message: Starowiślna 02 4
-                # ERROR - logical_network.py:380, message: generation_sum != absorption_sum 24750 != 6375
-                # INFO - logical_network.py:379, message: Starowiślna 02 5
-                # ERROR - logical_network.py:380, message: generation_sum != absorption_sum 24750 != 6375
-                # INFO - logical_network.py:379, message: Starowiślna 02 6
-                # ERROR - logical_network.py:380, message: generation_sum != absorption_sum 24750 != 6375
-                # INFO - logical_network.py:379, message: Starowiślna 02 7
-                # ERROR - logical_network.py:380, message: generation_sum != absorption_sum 99000 != 25500
-                # INFO - logical_network.py:379, message: Starowiślna 02 8
-                # ERROR - logical_network.py:380, message: generation_sum != absorption_sum 99000 != 25500
-                # INFO - logical_network.py:379, message: Starowiślna 02 16
-                # ERROR - logical_network.py:380, message: generation_sum != absorption_sum 99000 != 25500
-                # INFO - logical_network.py:379, message: Starowiślna 02 17
-                # ERROR - logical_network.py:380, message: generation_sum != absorption_sum 99000 != 25500
 
 
     def create_passanger_nodes(self):
@@ -341,26 +332,42 @@ class LogicalNetwork:
     def set_passanger_nodes_properties(self):
         residential = self.__generate_passanger_properties(
             name='residential',
-            generation_rate=[0, 150, 400, 144, 260, 80, 0],
-			generation_time=[0, 4, 7, 9, 16, 18, 23],
-            absorption_rate=[0, 80, 260, 144, 300, 120, 0],
-			absorption_time=[0, 4, 7, 9, 16, 18, 23],
+            generation_rate=[0, 16, 128, 256, 115, 160, 208, 105, 64, 0],
+            generation_time=[0, 4, 6, 7, 9, 13, 16, 18, 20, 23],
+            absorption_rate=[0, 1, 83, 166, 80, 160, 240, 128, 96, 0],
+            absorption_time=[0, 4, 6, 7, 9, 13, 16, 18, 20, 23],
+        )
+
+        residential_in = self.__generate_passanger_properties(
+            name='residential_in',
+            generation_rate=[0, 28, 224, 448, 160, 240, 360, 128, 80, 0],
+            generation_time=[0, 4, 6, 7, 9, 13, 16, 18, 20, 23],
+            absorption_rate=[0, 6, 19, 38, 64, 112, 51, 64, 40, 0],
+            absorption_time=[0, 4, 6, 7, 9, 13, 16, 18, 20, 23],
+        )
+
+        residential_out = self.__generate_passanger_properties(
+            name='residential_out',
+            generation_rate=[0, 6, 19, 38, 64, 72, 64, 38, 40, 0],
+            generation_time=[0, 4, 6, 7, 9, 13, 16, 18, 20, 23],
+            absorption_rate=[0, 24, 160, 320, 256, 272, 280, 128, 80, 0],
+            absorption_time=[0, 4, 6, 7, 9, 13, 16, 18, 20, 23],
         )
 
         central = self.__generate_passanger_properties(
             name='central',
-            generation_rate=[0, 100, 360, 240, 515, 180, 0],
-			generation_time=[0, 4, 7, 9, 16, 18, 23],
-			absorption_rate=[0, 100, 200, 120, 400, 100, 0],
-			absorption_time=[0, 4, 7, 9, 16, 18, 23],
+            generation_rate=[0, 16, 115, 230, 192, 320, 412, 230, 144, 0],
+            generation_time=[0, 4, 6, 7, 9, 13, 16, 18, 20, 23],
+            absorption_rate=[0, 16, 64, 128, 96, 208, 320, 128, 80, 0],
+            absorption_time=[0, 4, 6, 7, 9, 13, 16, 18, 20, 23],
         )
 
         high_interest = self.__generate_passanger_properties(
             name='high_interest',
-            generation_rate=[0, 125, 500, 400, 1000, 220, 0],
-			generation_time=[0, 4, 7, 9, 16, 18, 23],
-			absorption_rate=[0, 500, 2000, 600, 1500, 500, 0],
-			absorption_time=[0, 4, 7, 9, 16, 18, 23],
+            generation_rate=[0, 20, 176, 352, 400, 600, 840, 320, 200, 0],
+            generation_time=[0, 4, 6, 7, 9, 13, 16, 18, 20, 23],
+            absorption_rate=[0, 40, 640, 1280, 480, 720, 1200, 640, 400, 0],
+            absorption_time=[0, 4, 6, 7, 9, 13, 16, 18, 20, 23],
         )
 
         for node in self.passanger_nodes.values():
@@ -374,9 +381,8 @@ class LogicalNetwork:
         for node in high_interest_nodes:
             node.properties = high_interest
 
-
         # adjustments
-        self.__update_passanger_nodes_properties()
+        self.__update_passanger_nodes_properties(residential_in, residential_out)
 
         # Validation if passangers are generated and absorbed equally
         for h in range(24):
@@ -386,26 +392,10 @@ class LogicalNetwork:
                 absorption_sum += node.properties['absorption_rate'][h]
 
             if generation_sum != absorption_sum:
-                logging.error(f'{node.name} - {h}: generation_sum != absorption_sum {generation_sum} != {absorption_sum}')
+                logging.warning(f'{node.name} - {h}: generation_sum != absorption_sum {generation_sum} != {absorption_sum}')
 
 
-    def __update_passanger_nodes_properties(self):
-        residential_in = self.__generate_passanger_properties(
-            name='residential_in',
-            generation_rate=[0, 250, 700, 250, 450, 100, 0],
-            generation_time=[0, 4, 7, 9, 16, 18, 23],
-			absorption_rate=[0, 16, 60, 80, 80, 50, 0],
-            absorption_time=[0, 4, 7, 9, 16, 18, 23],
-        )   
-
-        residential_out = self.__generate_passanger_properties(
-            name='residential_out',
-            generation_rate=[0, 16, 60, 80, 80, 50, 0],
-            generation_time=[0, 4, 7, 9, 16, 18, 23],
-            absorption_rate=[0, 150, 500, 320, 350, 100, 0],
-            absorption_time=[0, 4, 7, 9, 16, 18, 23],
-        )
-
+    def __update_passanger_nodes_properties(self, residential_in, residential_out):
         for route in self.routes:
             for idx, stop in enumerate(route.stops):
                 passanger_node = self.passanger_nodes.get(self.physical_network.nodes.get(stop).tags['name'])
@@ -514,6 +504,7 @@ class LogicalNetwork:
             "TeatrBagatela02",
             "PocztaGłówna01",
             "PocztaGłówna02",
+            "PocztaGłówna03",
             "RondoGrzegórzeckie01",
             "RondoGrzegórzeckie02",
             "RondoMogilskie01",
@@ -579,6 +570,9 @@ class LogicalNetwork:
             trip.absorption_left = absorption_left
             
  
+    def cumulative_properties_gauss(self):
+        pass
+
     def to_json(self) -> dict:
         export_network = {
             'nodes': [node.to_json() for node in self.physical_network.nodes.values() if node.is_special],

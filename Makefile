@@ -10,11 +10,16 @@ osm:
 data:
 	python datapreprocessing/main.py
 
+.PHONY: simulation
 simulation:
 	python simulation/main.py
 
+.PHONY: simulation_first
+simulation_first:
+	python simulation/main.py --first-run
+
 all:
-	make scrape osm data
+	make scrape osm data simulation 
 
 .PHONY:
-	requirements scrape osm data all simulation
+	requirements simulation scrape osm data all
