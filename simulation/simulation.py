@@ -100,9 +100,7 @@ class Simulation:
                 y=node["y"],
                 stop_name=node["stop_name"],
                 generation_rate=self.passenger_nodes.get(node["id"], {}).get("generation_rate", []),
-                # FIXME: this is a temporary solution
                 absorption_rate=self.passenger_nodes.get(node["id"], {}).get("absorption_rate", [])
-                # FIXME: this is a temporary solution
             )
             for node in self.network_model_logical["nodes"] if "stop_name" in node
         ]
@@ -190,7 +188,6 @@ class Simulation:
         #################### RESULT ####################
 
         #################### TRAM_COUNTS ####################
-        # FIXME: temporary solution
         for route_id, trams in self.result_trams.items():
 
             if route_id not in self._tram_counts:
@@ -211,7 +208,6 @@ class Simulation:
         #################### TRAM_COUNTS ####################
 
         #################### PEOPLE_RATE ####################
-        # FIXME: temporary solution
         for route_id in range(1, 45):
             self.people_rate[route_id] = {}
             for stop_id in self.routes_dict[route_id].stops:
@@ -361,7 +357,7 @@ class Simulation:
                                                 play_button_y,
                                                 play_button_width,
                                                 play_button_height,
-                                                simulation_running
+                                                simulation_running,
                                             )
                         button_2x_clicked = self.click_time_button(
                                                 mouse_position,
@@ -600,9 +596,11 @@ class Simulation:
                           simulation_running: bool
                           ) -> bool:
         if play_button_x <= mouse_position[0] <= play_button_x + play_button_width and play_button_y <= mouse_position[1] <= play_button_y + play_button_height:
+
             if not simulation_running:
                 self.current_stops.clear()
                 self.current_stops_trams.clear()
+
             simulation_running = not simulation_running
 
         return simulation_running
@@ -810,7 +808,8 @@ class Simulation:
         return nodes_to_normalize
 
     def display_lines(self, lines_surface: pygame.Surface) -> None:
-        lines_surface.fill(Color.WHITE.value)
+        # lines_surface.fill(Color.WHITE.value)
+        lines_surface.fill((210,210,210))
         for edge in self.edges_list:
             for i, node_id in enumerate(edge.nodes):
                 if i < len(edge.nodes) - 1:
@@ -827,7 +826,7 @@ class Simulation:
                               lines_surface: pygame.Surface,
                               tram_stops_surface: pygame.Surface
                               ) -> None:
-        WINDOW.fill(Color.WHITE.value)
+        WINDOW.fill((210,210,210))
         WINDOW.blit(lines_surface, (0, 0))
         WINDOW.blit(tram_stops_surface, (0, 0))
 
