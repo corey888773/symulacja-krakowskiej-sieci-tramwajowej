@@ -921,18 +921,7 @@ class Simulation:
                     next_stop_index = (tram.stops.index(current_stop.id) + 1) % len(tram.stops)
                     next_stop = self.tram_stops_dict[tram.stops[next_stop_index]]
 
-                    # Get the current node index and the next node index
-                    # current_node_index = self.route_and_nodes[route_id].index(current_stop.id)
-                    # next_node_index = (self.route_and_nodes[route_id].index(next_stop.id) + 1) % len(self.route_and_nodes[route_id])
-
-                    # # If the next node is before the current node in the list, add the length of the list to the next node index
-                    # if next_node_index <= current_node_index:
-                    #     next_node_index += len(self.route_and_nodes[route_id])
-
-                    # Get the nodes between the current node and the next node
-                    # nodes_between = self.route_and_nodes[route_id][current_node_index:next_node_index]
-
-                    # # Calculate the proportion of the time elapsed
+                    # Calculate the proportion of the time elapsed
                     arrival_time = tram.time_table[tram.stops.index(current_stop.id)]
 
                     if current_time < arrival_time + stop_duration:
@@ -941,13 +930,6 @@ class Simulation:
                         time_elapsed = current_time - (arrival_time + stop_duration)
                         total_time = tram.time_table[next_stop_index] - arrival_time - stop_duration
                         proportion = time_elapsed / total_time
-
-                    # Calculate the new position of the tram
-                    # current_node_index = min(int(len(nodes_between) * proportion), len(nodes_between) - 1)
-                    # current_node = nodes_between[current_node_index]
-                    # new_x = self.nodes_dict[current_node].x
-                    # new_y = self.nodes_dict[current_node].y
-
                     
                     speed = 1 / (1 + math.exp(-10 * (proportion - 0.5)))
 
@@ -1138,8 +1120,7 @@ class Simulation:
                         for edge in self.edges_list:
                             if edge.head not in graph:
                                 graph[edge.head] = []
-                            graph[edge.head].append(
-                                (edge.tail, self.nodes_dict[edge.tail].distance_to(self.nodes_dict[edge.head])))
+                            graph[edge.head].append((edge.tail, self.nodes_dict[edge.tail].distance_to(self.nodes_dict[edge.head])))
 
                         # Use Dijkstra's algorithm to find the shortest path to the next stop
                         _, path = dijkstra(graph, start_stop, next_stop)
@@ -1151,8 +1132,7 @@ class Simulation:
                         for j in range(len(path) - 1):
                             curr_node = path[j]
                             next_node = path[j + 1]
-                            edge = next(
-                                edge for edge in self.edges_list if edge.head == curr_node and edge.tail == next_node)
+                            edge = next(edge for edge in self.edges_list if edge.head == curr_node and edge.tail == next_node)
                             self.route_and_nodes[route.id] += self.network_model_physical["edges"][edge.id]["nodes"]
                             visited_nodes.add(curr_node)
                             start_stop = next_node
